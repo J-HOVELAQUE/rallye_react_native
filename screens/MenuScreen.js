@@ -5,7 +5,8 @@ import { Left, Right, Icon } from 'native-base';
 
 function MenuScreen ({navigation}){
     return(
-    <View styles={styles.container}>
+    <View style={styles.container}>
+        
         <Button title='Home' onPress={() => navigation.navigate('Home')}/>
         <Button title='Teams' onPress={() => navigation.navigate('Team')}/>
         <Button title='Map' onPress={() => navigation.navigate('Map')}/>
@@ -19,7 +20,7 @@ function MenuScreen ({navigation}){
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         alignItems: "center",
         justifyContent: "center"
     }

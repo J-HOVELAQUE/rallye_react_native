@@ -27,8 +27,7 @@ var BottomNavigator = createBottomTabNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: MenuScreen,
-    // Login: {screen: Login, tabBarOptions: {showLabel: true, showIcon: true}}
+    Menu: MenuScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
