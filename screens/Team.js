@@ -4,7 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function TeamScreen() {
   return (
-    <View style={{ flex: 1, backgroundColor:'#e67e22'}}>
+    <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",
+    justifyContent: "center"}}>
         <Text>TeamScreen</Text>  
     </View>
   );
