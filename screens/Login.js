@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements'
+import { connect } from 'react-redux';
 
 
-export default function LoginScreen() {
+function LoginScreen(props) {
 
   const [emailSignIn, setEmailSignIn] = useState(null);
   const [passwordSignIn, setPasswordSignIn] = useState(null);
@@ -30,6 +31,8 @@ export default function LoginScreen() {
       },
       body: JSON.stringify(dataUser)
     })
+
+    props.onRecordUserConnected(user);
   }
 
   async function processSignIn() {
@@ -104,3 +107,19 @@ export default function LoginScreen() {
     </View>
   );
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onRecordUserConnected: function (user) {
+      dispatch({
+        type: 'record',
+        user: user
+      })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginScreen);
