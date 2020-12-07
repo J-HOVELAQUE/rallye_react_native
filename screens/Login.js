@@ -13,6 +13,42 @@ export default function LoginScreen() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
+  async function processSignUp() {
+
+    const dataUser = {
+      name: name,
+      firstname: firstname,
+      email: email,
+      password: password
+    }
+
+    await fetch('http://192.168.1.26:3000/user/sign-up', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataUser)
+    })
+  }
+
+  async function processSignIn() {
+
+    const dataUser = {
+      emailSignIn: email,
+      passwordSignIn: password
+    }
+
+    await fetch('http://192.168.1.26:3000/user/sign-in', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataUser)
+    })
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
       <Text>SIGN IN</Text>
@@ -31,6 +67,7 @@ export default function LoginScreen() {
       <Button
         title="Send"
         type="solid"
+        onPress={() => { processSignIn }}
       />
 
       <Text>SIGN UP</Text>
@@ -62,6 +99,7 @@ export default function LoginScreen() {
       <Button
         title="Send"
         type="solid"
+        onPress={() => { processSignUp() }}
       />
     </View>
   );
