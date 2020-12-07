@@ -21,7 +21,7 @@ var BottomNavigator = createBottomTabNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: {onPress:this.props.navigation.openDrawer(MyDrawerNavigator)},
+    Menu: MapScreen,
     
   },
   {
@@ -56,10 +56,11 @@ var BottomNavigator = createBottomTabNavigator(
 const MyDrawerNavigator = createDrawerNavigator(
   {
     MapBurger: BottomNavigator,
-    
+    Home: HomeScreen,
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
+    Login:Login
   },
   {
     drawerPosition: "right",
