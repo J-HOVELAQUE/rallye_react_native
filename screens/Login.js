@@ -34,25 +34,42 @@ function LoginScreen(props) {
 
     const answer = await rawAnswer.json();
 
-    props.onRecordUserConnected(answer.data);
-    props.navigation.navigate('Map');
+    // console.log('Answer', answer);
+
+    if (answer.recorded === true) {
+      props.onRecordUserConnected(answer.data);
+      props.navigation.navigate('Map');
+    } else {
+      console.log('Access denied', answer.error);
+    }
   }
 
   async function processSignIn() {
 
     const dataUser = {
-      emailSignIn: email,
-      passwordSignIn: password
+      email: emailSignIn,
+      password: passwordSignIn
     }
 
-    await fetch('http://192.168.1.26:3000/user/sign-in', {
+    const rawAnswer = await fetch('http://192.168.1.26:3000/user/sign-in', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(dataUser)
-    })
+    });
+
+    const answer = await rawAnswer.json();
+    // console.log('Answer', answer);
+
+    if (answer.result === true) {
+      props.onRecordUserConnected(answer.user);
+      props.navigation.navigate('Map');
+    } else {
+      console.log('Access denied', answer.error);
+
+    }
   }
 
   return (
@@ -73,7 +90,10 @@ function LoginScreen(props) {
       <Button
         title="Send"
         type="solid"
-        onPress={() => { processSignIn }}
+        onPress={() => {
+          processSignIn(),
+            console.log('pouet');
+        }}
       />
 
       <Text>SIGN UP</Text>
