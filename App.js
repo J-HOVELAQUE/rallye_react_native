@@ -1,8 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
-import {createAppContainer } from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -14,15 +16,18 @@ import ClassementScreen from './screens/Classement';
 import Login from './screens/Login';
 import Header from './Header'
 
+import userConnected from './reducers/userConnected';
+
+const store = createStore(combineReducers({ userConnected }));
 
 var BottomNavigator = createBottomTabNavigator(
   {
-    Home: {screen: HomeScreen, navigationOptions:{headerTitle: ()=> <Header />}},
+    Home: { screen: HomeScreen, navigationOptions: { headerTitle: () => <Header /> } },
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
     Menu: MapScreen,
-    
+
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -32,12 +37,12 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'ios-home';
         } else if (navigation.state.routeName == 'Team') {
           iconName = 'ios-car';
-        }else if (navigation.state.routeName == 'Classement') {
+        } else if (navigation.state.routeName == 'Classement') {
           iconName = 'ios-trophy';
-        }else if (navigation.state.routeName == 'Map') {
+        } else if (navigation.state.routeName == 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName == 'Menu') {
-          iconName="ios-menu";
+        } else if (navigation.state.routeName == 'Menu') {
+          iconName = "ios-menu";
         }
 
         return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -60,7 +65,7 @@ const MyDrawerNavigator = createDrawerNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Login:Login
+    Login: Login
   },
   {
     drawerPosition: "right",
@@ -74,8 +79,10 @@ const MyDrawerNavigator = createDrawerNavigator(
 
 const MyApp = createAppContainer(MyDrawerNavigator);
 
-export default function App(){
+export default function App() {
   return (
-    <MyApp />
+    <Provider store={store}>
+      <MyApp />
+    </Provider>
   )
 }
