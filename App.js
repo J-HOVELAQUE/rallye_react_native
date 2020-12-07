@@ -25,7 +25,7 @@ var BottomNavigator = createBottomTabNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: MapScreen,
+    Menu: Login,
     
     
   },
@@ -33,15 +33,15 @@ var BottomNavigator = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         var iconName;
-        if (navigation.state.routeName == 'Home') {
+        if (navigation.state.routeName === 'Home') {
           iconName = 'ios-home';
-        } else if (navigation.state.routeName == 'Team') {
+        } else if (navigation.state.routeName === 'Team') {
           iconName = 'ios-car';
-        }else if (navigation.state.routeName == 'Classement') {
+        }else if (navigation.state.routeName === 'Classement') {
           iconName = 'ios-trophy';
-        }else if (navigation.state.routeName == 'Map') {
+        }else if (navigation.state.routeName === 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName == 'Menu') {
+        }else if (navigation.state.routeName === 'Menu') {
           iconName="ios-menu";
         }
 
@@ -70,11 +70,6 @@ const MyDrawerNavigator = createDrawerNavigator(
     Hebergement:HebergementScreen,
     Programme:ProgrammeScreen,
     Profil:ProfilScreen
-  },
-  {
-    drawerPosition: "right",
-    drawerType: "front",
-    drawerWidth: "100%"
   }
 );
 
