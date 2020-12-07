@@ -1,5 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
 import {createAppContainer } from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -12,7 +14,7 @@ import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import TeamScreen from './screens/Team';
 import ClassementScreen from './screens/Classement';
-import Login from './screens/Login';
+import LoginScreen from './screens/Login';
 import Header from './Header'
 import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
@@ -20,6 +22,9 @@ import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import MenuScreen from './screens/MenuScreen'
 
+import userConnected from './reducers/userConnected';
+
+const store = createStore(combineReducers({ userConnected }));
 
 var BottomNavigator = createBottomTabNavigator(
   {
@@ -37,12 +42,12 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'ios-home';
         } else if (navigation.state.routeName == 'Team') {
           iconName = 'ios-car';
-        }else if (navigation.state.routeName == 'Classement') {
+        } else if (navigation.state.routeName == 'Classement') {
           iconName = 'ios-trophy';
-        }else if (navigation.state.routeName == 'Map') {
+        } else if (navigation.state.routeName == 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName == 'Menu') {
-          iconName="ios-menu";
+        } else if (navigation.state.routeName == 'Menu') {
+          iconName = "ios-menu";
         }
 
         return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -65,7 +70,7 @@ const MyDrawerNavigator = createDrawerNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Login:Login,
+    Login: LoginScreen,
     Media:MediaScreen,
     Hebergement:HebergementScreen,
     Programme:ProgrammeScreen,
@@ -76,8 +81,10 @@ const MyDrawerNavigator = createDrawerNavigator(
 
 const MyApp = createAppContainer(MyDrawerNavigator);
 
-export default function App(){
+export default function App() {
   return (
-    <MyApp />
+    <Provider store={store}>
+      <MyApp />
+    </Provider>
   )
 }
