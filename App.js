@@ -13,6 +13,10 @@ import TeamScreen from './screens/Team';
 import ClassementScreen from './screens/Classement';
 import Login from './screens/Login';
 import Header from './Header'
+import MediaScreen from './screens/MediaScreen';
+import HebergementScreen from './screens/HebergementScreen';
+import ProgrammeScreen from './screens/ProgrammeScreen';
+import ProfilScreen from './screens/ProfilScreen';
 
 
 var BottomNavigator = createBottomTabNavigator(
@@ -21,7 +25,9 @@ var BottomNavigator = createBottomTabNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: MapScreen
+    Menu: MapScreen,
+    
+    
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -59,7 +65,11 @@ const MyDrawerNavigator = createDrawerNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Login:Login
+    Login:Login,
+    Media:MediaScreen,
+    Hebergement:HebergementScreen,
+    Programme:ProgrammeScreen,
+    Profil:ProfilScreen
   },
   {
     drawerPosition: "right",
