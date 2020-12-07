@@ -23,16 +23,19 @@ function LoginScreen(props) {
       password: password
     }
 
-    await fetch('http://192.168.1.26:3000/user/sign-up', {
+    const rawAnswer = await fetch('http://192.168.1.26:3000/user/sign-up', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(dataUser)
-    })
+    });
 
-    props.onRecordUserConnected(user);
+    const answer = await rawAnswer.json();
+
+    props.onRecordUserConnected(answer.data);
+    props.navigation.navigate('Map');
   }
 
   async function processSignIn() {
