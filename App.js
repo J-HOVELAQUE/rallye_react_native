@@ -3,6 +3,8 @@ import { View } from 'react-native';
 
 import {createAppContainer } from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
@@ -10,16 +12,17 @@ import MapScreen from './screens/MapScreen';
 import TeamScreen from './screens/Team';
 import ClassementScreen from './screens/Classement';
 import Login from './screens/Login';
+import Header from './Header'
+
 
 var BottomNavigator = createBottomTabNavigator(
   {
-    Home: HomeScreen,
+    Home: {screen: HomeScreen, navigationOptions:{headerTitle: ()=> <Header />}},
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: MapScreen,
+    Menu: {onPress:this.props.navigation.openDrawer(MyDrawerNavigator)},
     
-
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -50,5 +53,28 @@ var BottomNavigator = createBottomTabNavigator(
   }
 );
 
-var Navigation = createAppContainer(BottomNavigator);
-export default Navigation;
+const MyDrawerNavigator = createDrawerNavigator(
+  {
+    MapBurger: BottomNavigator,
+    
+    Team: TeamScreen,
+    Classement: ClassementScreen,
+    Map: MapScreen,
+  },
+  {
+    drawerPosition: "right",
+    drawerType: "front",
+    drawerWidth: "100%"
+  }
+);
+
+
+
+
+const MyApp = createAppContainer(MyDrawerNavigator);
+
+export default function App(){
+  return (
+    <MyApp />
+  )
+}
