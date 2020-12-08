@@ -44,8 +44,6 @@ function LoginScreen(props) {
       props.onRecordUserConnected(answer.data);
       const storeData = async () => {
 
-        console.log('DATA TO REC', answer.data.token)
-
         const data = answer.data.token;
 
         try {
@@ -87,11 +85,18 @@ function LoginScreen(props) {
     ///// Recording in reduce store and local storage if answer is ok //////
     if (answer.result === true) {
       props.onRecordUserConnected(answer.data);
-      AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
+
+      const data = answer.data.token;
+
+      try {
+        await AsyncStorage.setItem('token', data)
+      } catch (e) {
+        // saving error
+        console.log('ERROR', e);
+      }
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
-
     }
   }
 
