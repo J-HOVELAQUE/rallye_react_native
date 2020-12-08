@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { Button, Input } from 'react-native-elements'
 import { connect } from 'react-redux';
 
@@ -48,7 +48,15 @@ function LoginScreen(props) {
   }
 
   //////////////////////////////////////////////////////////////////
-  async function processSignIn() {
+  async function processSignIn( ) {
+
+
+    useEffect(() => { 
+      AsyncStorage.getItem("email", 
+              function(err, data){
+                console.log('aze',data);
+                setEmail(data)
+              });
 
     const dataUser = {
       email: emailSignIn,
@@ -94,7 +102,7 @@ function LoginScreen(props) {
       <Button
         title="Send"
         type="solid"
-        onPress={() => {
+        onPress={() => { AsyncStorage.setItem("email", email)
           processSignIn(),
             console.log('pouet');
         }}
