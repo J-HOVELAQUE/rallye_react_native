@@ -58,7 +58,6 @@ function LoginScreen(props) {
 
   //////////////////////////////////////////////////////////////////
   async function processSignIn() {
-    console.log('pouet');
 
     const dataUser = {
       email: emailSignIn,
@@ -95,7 +94,7 @@ function LoginScreen(props) {
       <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
         <View>
 
-          {errors.map(err => { return (<Text>{err}</Text>) })}
+          {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
           <Button
             title="OK"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
