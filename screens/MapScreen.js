@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Header } from 'react-native-elements';
-import { Left, Right, Icon } from 'native-base';
+
+import { Left, Right, Icon, Header, Button, Content } from 'native-base';
 import MapView, { Marker } from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
@@ -21,21 +21,25 @@ export default function MapScreen(props) {
 
     return (
         <View style={styles.container}>
-            <Header
-                leftComponent={<Icon name="menu" onPress={() => props.navigation.openDrawer()} />}
-            />
 
-            <MapView style={{ flex: 1 }}
-                initialRegion={{
-                    latitude: 48.866667,
-                    longitude: 2.333333,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            >
+            <Header>
+                <Button onPress={() => props.navigation.openDrawer()}>
+                    <Icon name='menu' style={{ color: 'white' }} />
 
-            </MapView>
+                </Button>
+            </Header>
+            <Content>
+                <MapView style={{ flex: 1 }}
+                    initialRegion={{
+                        latitude: 48.866667,
+                        longitude: 2.333333,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                >
 
+                </MapView>
+            </Content>
         </View>
     );
 }

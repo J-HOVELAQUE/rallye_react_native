@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
-import { Button, Input, Overlay } from 'react-native-elements'
+import { Input, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Icon } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Icon, Button } from 'native-base';
 
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -117,7 +117,10 @@ function LoginScreen(props) {
   return (
     <Container>
       <Header>
-        <Icon onPress={() => this.props.navigation.openDrawer()} style={{ color: 'white' }} name="home" />
+        <Button onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: 'white' }} />
+
+        </Button>
       </Header>
       <Content>
 
@@ -172,8 +175,12 @@ function LoginScreen(props) {
               containerStyle={{ margin: 10 }}
               onPress={() => {
                 processSignIn();
-              }}
-            />
+              }
+              }
+            >
+              {/* <Icon name='menu' style={{ color: 'white' }} /> */}
+              <Text>Coucou</Text>
+            </Button>
             {/* </KeyboardAvoidingView> */}
           </View>
 
@@ -237,23 +244,23 @@ function LoginScreen(props) {
 
       <Footer>
         <FooterTab style={{ backgroundColor: '#313131', }}>
-          <Button onPress={() => this.props.navigation.navigate('Home')}>
+          <Button onPress={() => props.navigation.navigate('Home')}>
             <Icon style={{ color: 'white' }} name="home" />
             <Text style={{ color: 'white' }}>Home</Text>
           </Button>
-          <Button onPress={() => this.props.navigation.navigate('Team')}>
+          <Button onPress={() => props.navigation.navigate('Team')}>
             <Icon style={{ color: 'white' }} name="car" />
             <Text style={{ color: 'white' }}>Team</Text>
           </Button>
-          <Button onPress={() => this.props.navigation.navigate('Classement')}>
+          <Button onPress={() => props.navigation.navigate('Classement')}>
             <Icon style={{ color: 'white' }} name="add" />
             <Text style={{ color: 'white' }}>Podium</Text>
           </Button >
-          <Button onPress={() => this.props.navigation.navigate('Map')}>
+          <Button onPress={() => props.navigation.navigate('Map')}>
             <Icon style={{ color: 'white' }} name="map" />
             <Text style={{ color: 'white' }}>Map</Text>
           </Button>
-          <Button onPress={() => this.props.navigation.openDrawer()}>
+          <Button onPress={() => props.navigation.openDrawer()}>
             <Icon style={{ color: 'white' }} name="menu" />
             <Text style={{ color: 'white' }}>Menu</Text>
           </Button>

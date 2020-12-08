@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
-import {createAppContainer } from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 import { Left, Right, Icon } from 'native-base';
 
@@ -33,7 +33,7 @@ var BottomNavigator = createBottomTabNavigator(
     Classement: ClassementScreen,
     Map: MapScreen,
     Media: MediaScreen,
-    
+
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -43,12 +43,12 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'ios-home';
         } else if (navigation.state.routeName === 'Team') {
           iconName = 'ios-car';
-        }else if (navigation.state.routeName === 'Classement') {
+        } else if (navigation.state.routeName === 'Classement') {
           iconName = 'ios-trophy';
-        }else if (navigation.state.routeName === 'Map') {
+        } else if (navigation.state.routeName === 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName === 'Media') {
-          iconName='ios-images';
+        } else if (navigation.state.routeName === 'Media') {
+          iconName = 'ios-images';
         }
 
         return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -68,10 +68,10 @@ const MyDrawerNavigator = createDrawerNavigator(
   {
     Menu: BottomNavigator,
     Login: LoginScreen,
-    Media:MediaScreen,
-    Hebergement:HebergementScreen,
-    Programme:ProgrammeScreen,
-    Profil:ProfilScreen
+    Media: MediaScreen,
+    Hebergement: HebergementScreen,
+    Programme: ProgrammeScreen,
+    Profil: ProfilScreen
   }
 );
 

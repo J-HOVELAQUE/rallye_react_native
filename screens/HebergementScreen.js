@@ -15,7 +15,10 @@ export default function HebergementScreen(props) {
     <Container>
 
       <Header>
-        <Icon onPress={() => props.navigation.openDrawer()} style={{ color: 'white' }} name="home" />
+        <Button onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: 'white' }} />
+
+        </Button>
       </Header>
 
 

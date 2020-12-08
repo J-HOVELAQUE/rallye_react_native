@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
+import { Container, Header, Content, Footer, FooterTab, Icon, Accordion, Button } from 'native-base';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -9,7 +10,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
 
-function HomeScreen({ navigation, onRecordUserConnected }) {
+function HomeScreen(props) {
 
   useEffect(() => {
     const getData = async () => {
@@ -26,7 +27,7 @@ function HomeScreen({ navigation, onRecordUserConnected }) {
           console.log('User trouvé en db', answer);
 
           //// Record user connected on the reduce store /////
-          onRecordUserConnected(answer.user)
+          props.onRecordUserConnected(answer.user)
 
         }
       } catch (e) {
@@ -37,7 +38,16 @@ function HomeScreen({ navigation, onRecordUserConnected }) {
   }, [])
 
   return (
+
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+
+      <Header>
+        <Button onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: 'white' }} />
+
+        </Button>
+      </Header>
+
       <View style={styles.container}>
         <Text style={{ color: 'white' }}>HomeScreen</Text>
         <Button
@@ -49,7 +59,9 @@ function HomeScreen({ navigation, onRecordUserConnected }) {
         />
       </View>
 
+
     </ImageBackground>
+
   );
 }
 
