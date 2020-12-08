@@ -1,12 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
-import {createAppContainer } from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
-import { Left, Right, Icon } from 'native-base';
+import { Text } from 'react-native';
+
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -15,14 +15,25 @@ import MapScreen from './screens/MapScreen';
 import TeamScreen from './screens/Team';
 import ClassementScreen from './screens/Classement';
 import LoginScreen from './screens/Login';
-import Header from './Header'
 import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
-import MenuScreen from './screens/MenuScreen'
+import MenuScreen from './screens/MenuScreen';
+import LibraryScreen from './screens/LibraryScreen';
 
 import userConnected from './reducers/userConnected';
+
+// Fonts
+import { AppLoading } from 'expo';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+  Roboto_900Black,
+} from '@expo-google-fonts/roboto';
 
 const store = createStore(combineReducers({ userConnected }));
 
@@ -33,7 +44,7 @@ var BottomNavigator = createBottomTabNavigator(
     Classement: ClassementScreen,
     Map: MapScreen,
     Menu: MenuScreen,
-    
+
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -43,12 +54,12 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'ios-home';
         } else if (navigation.state.routeName === 'Team') {
           iconName = 'ios-car';
-        }else if (navigation.state.routeName === 'Classement') {
+        } else if (navigation.state.routeName === 'Classement') {
           iconName = 'ios-trophy';
-        }else if (navigation.state.routeName === 'Map') {
+        } else if (navigation.state.routeName === 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName === 'Menu') {
-          iconName="ios-menu";
+        } else if (navigation.state.routeName === 'Menu') {
+          iconName = "ios-menu";
         }
 
         return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -72,10 +83,11 @@ const MyDrawerNavigator = createDrawerNavigator(
     Classement: ClassementScreen,
     Map: MapScreen,
     Login: LoginScreen,
-    Media:MediaScreen,
-    Hebergement:HebergementScreen,
-    Programme:ProgrammeScreen,
-    Profil:ProfilScreen
+    Media: MediaScreen,
+    Hebergement: HebergementScreen,
+    Programme: ProgrammeScreen,
+    Profil: ProfilScreen,
+    Librairie: LibraryScreen
   }
 );
 
@@ -83,9 +95,22 @@ const MyDrawerNavigator = createDrawerNavigator(
 const MyApp = createAppContainer(MyDrawerNavigator);
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <MyApp />
-    </Provider>
-  )
+  let [fontsLoaded, error] = useFonts({
+    Roboto_300Light,
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+    Roboto_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+
+    return (
+      <Provider store={store}>
+        <MyApp />
+      </Provider>
+    )
+  }
 }

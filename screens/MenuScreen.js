@@ -16,6 +16,7 @@ function MenuScreen ({navigation}){
         <Button title='Hebergement' onPress={() => navigation.navigate('Hebergement')}/>
         <Button title='Programme' onPress={() => navigation.navigate('Programme')}/>
         <Button title='Profil' onPress={() => navigation.navigate('Profil')}/>
+        <Button title='Librairie' onPress={() => navigation.navigate('Librairie')}/>
         </View>
     </View>
     )
