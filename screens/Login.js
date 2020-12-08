@@ -3,6 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements'
 import { connect } from 'react-redux';
 
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com/user/sign-up';
+// const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
+
 
 function LoginScreen(props) {
 
@@ -23,7 +26,7 @@ function LoginScreen(props) {
       password: password
     }
 
-    const rawAnswer = await fetch('http://192.168.1.26:3000/user/sign-up', {
+    const rawAnswer = await fetch(serverUrl, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +54,7 @@ function LoginScreen(props) {
       password: passwordSignIn
     }
 
-    const rawAnswer = await fetch('http://192.168.1.26:3000/user/sign-in', {
+    const rawAnswer = await fetch(serverUrl, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
