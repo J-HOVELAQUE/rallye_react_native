@@ -107,12 +107,9 @@ function LoginScreen(props) {
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
-<<<<<<< HEAD
       setErrors(answer.error);
       toggleOverlay();
 
-=======
->>>>>>> localStorage
     }
   }
 
@@ -150,14 +147,7 @@ function LoginScreen(props) {
       <Button
         title="Send"
         type="solid"
-<<<<<<< HEAD
-        onPress={() => {
-          processSignIn();
-
-        }}
-=======
         onPress={() => { processSignIn() }}
->>>>>>> localStorage
       />
 
       <Text>SIGN UP</Text>
