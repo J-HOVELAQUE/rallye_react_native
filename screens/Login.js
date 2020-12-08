@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements'
 import { connect } from 'react-redux';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
@@ -42,7 +42,23 @@ function LoginScreen(props) {
     ///// Recording in reduce store if answer is ok //////
     if (answer.recorded === true) {
       props.onRecordUserConnected(answer.data);
-      AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
+      const storeData = async () => {
+
+        console.log('DATA TO REC', answer.data.token)
+
+        const data = answer.data.token;
+
+        try {
+          await AsyncStorage.setItem('token', data)
+        } catch (e) {
+          // saving error
+          console.log('ERROR', e);
+        }
+      }
+
+      storeData();
+
+      // AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
