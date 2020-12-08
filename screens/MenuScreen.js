@@ -1,38 +1,23 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,ImageBackground } from 'react-native';
 
-const dataArray = [
-  { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
-  { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
-  { title: "Navette", content: "Lorem ipsum dolor sit amet" }
-];
+
 
 export default class test extends Component {
   render() {
     return (
-      <Container>
-        <Header>
-              <Icon onPress={() => this.props.navigation.openDrawer()}style={{color:'white'}}name="home" />
-        </Header>
-        <Content>
-          <Accordion
-            dataArray={dataArray}
-            icon="add"
-            expandedIcon="remove"
-            iconStyle={{ color: "black" }}
-            expandedIconStyle={{ color: "red" }}
-          />
-
-
-        </Content>
-        <Footer>
-          <FooterTab style={{backgroundColor: '#313131',}}>
-            <Button onPress={() => this.props.navigation.navigate('Home')}>
-              <Icon style={{color:'white'}} name="home" />
-              <Text style={{color:'white'}}>Home</Text>
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      
+        
+        <Content >
+            <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+            <Content>
+            <Button onPress={() => this.props.navigation.navigate('Hebergement')}>
+                <Icon style={{color:'white'}} name="home" />
+                <Text style={{color:'white'}}>Hebergement</Text>
             </Button>
-            <Button onPress={() => this.props.navigation.navigate('Team')}>
+            <Button onPress={() => this.props.navigation.navigate('Media')}>
               <Icon style={{color:'white'}} name="car" />
               <Text style={{color:'white'}}>Team</Text>
             </Button>
@@ -48,11 +33,25 @@ export default class test extends Component {
             <Icon style={{color:'white'}}name="menu"  />
             <Text style={{color:'white'}}>Menu</Text>
             </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+
+        </Content>
+            </View>
+
+        </Content>
+       
+      
+      </ImageBackground>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})
+
 function MenuScreen ({navigation}){}
 
