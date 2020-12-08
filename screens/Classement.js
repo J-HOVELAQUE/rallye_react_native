@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Text } from 'native-base';
 
-
-
-export default class test extends Component {
+export default class SegmentOutsideHeaderExample extends Component {
   render() {
     return (
       <Container>
         
-        <Content>
-          
-
-
+        <Segment>
+          <Button first>
+            <Text>Plateau 1</Text>
+          </Button>
+          <Button>
+            <Text>Plateau 2</Text>
+          </Button>
+          <Button last active>
+            <Text>Plateau 3</Text>
+          </Button>
+        </Segment>
+        <Content padder>
+          <Text>Awesome segment</Text>
         </Content>
-        
       </Container>
     );
   }
 }
-function MenuScreen ({navigation}){}
-

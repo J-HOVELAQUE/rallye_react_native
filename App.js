@@ -32,7 +32,7 @@ var BottomNavigator = createBottomTabNavigator(
     Team: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Menu: MenuScreen,
+    Media: MediaScreen,
     
   },
   {
@@ -47,8 +47,8 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'ios-trophy';
         }else if (navigation.state.routeName === 'Map') {
           iconName = 'ios-map';
-        }else if (navigation.state.routeName === 'Menu') {
-          iconName="ios-menu";
+        }else if (navigation.state.routeName === 'Media') {
+          iconName='ios-images';
         }
 
         return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -66,11 +66,7 @@ var BottomNavigator = createBottomTabNavigator(
 
 const MyDrawerNavigator = createDrawerNavigator(
   {
-    MapBurger: BottomNavigator,
-    Home: HomeScreen,
-    Team: TeamScreen,
-    Classement: ClassementScreen,
-    Map: MapScreen,
+    Menu: BottomNavigator,
     Login: LoginScreen,
     Media:MediaScreen,
     Hebergement:HebergementScreen,
