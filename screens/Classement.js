@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Text } from 'native-base';
+import React from 'react';
+import { Container, Header, Button, Icon, Segment, Content, Text } from 'native-base';
 
 export default function Classement(props) {
 
@@ -8,7 +8,6 @@ export default function Classement(props) {
       <Header>
         <Button onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: 'white' }} />
-
         </Button>
       </Header>
 

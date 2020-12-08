@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
-
+import React from 'react';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+import { View, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default function ProgrammeScreen(props) {
@@ -11,37 +11,36 @@ export default function ProgrammeScreen(props) {
       <Header>
         <Button onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: 'white' }} />
-
         </Button>
       </Header>
-      <Content>
 
+      <Content>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ color: "red" }}>Page Programme</Text>
         </View>
-
       </Content>
+      
       <Footer>
         <FooterTab style={{ backgroundColor: '#313131', }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Icon name='ios-home' style={{ color: 'white' }} />
-            <Text style={{ color: 'white', fontSize: 11 }}>Home</Text>
+            <Ionicons name='ios-home' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize:10}}>Home</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Team')}>
-            <Icon name='ios-car' style={{ color: 'white' }} />
-            <Text style={{ color: 'white', fontSize: 11 }}>Team</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')}>
+            <Ionicons name='ios-car' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize:10 }}>Teams</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Icon name='ios-trophy' style={{ color: 'white' }} />
-            <Text style={{ color: 'white', fontSize: 11 }}>Classement</Text>
+            <Ionicons name='ios-trophy' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize:10 }}>Classement</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Icon name='ios-map' style={{ color: 'white' }} />
-            <Text style={{ color: 'white', fontSize: 11 }}>Map</Text>
+            <Ionicons name='ios-map' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize:10 }}>Map</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Media')}>
-            <Icon name='images' style={{ color: 'white' }} />
-            <Text style={{ color: 'white', fontSize: 11 }}>Media</Text>
+          <Button onPress={() => props.navigation.navigate('Medias')}>
+            <Ionicons name='ios-images' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize:10 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>

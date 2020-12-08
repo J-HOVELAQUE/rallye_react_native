@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import React from 'react';
+import { Header, Content, Button, Icon } from 'native-base';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
 export default function MediaScreen(props) {
@@ -9,7 +9,6 @@ export default function MediaScreen(props) {
       <Header>
         <Button onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: 'white' }} />
-
         </Button>
       </Header>
 
@@ -17,9 +16,7 @@ export default function MediaScreen(props) {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ color: "white" }}>Page Media</Text>
         </View>
-
       </Content>
-
 
     </ImageBackground>
   );

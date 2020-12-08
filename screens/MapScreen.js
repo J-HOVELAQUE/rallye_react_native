@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import { Left, Right, Icon, Header, Button, Content } from 'native-base';
-import MapView, { Marker } from 'react-native-maps';
+import { Icon, Header, Button, Content } from 'native-base';
+import MapView from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
 
@@ -25,7 +25,6 @@ export default function MapScreen(props) {
             <Header>
                 <Button onPress={() => props.navigation.openDrawer()}>
                     <Icon name='menu' style={{ color: 'white' }} />
-
                 </Button>
             </Header>
             <Content>

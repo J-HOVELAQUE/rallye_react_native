@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { Input, Overlay } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Footer, FooterTab, Icon, Button } from 'native-base';
 
@@ -26,7 +27,7 @@ function LoginScreen(props) {
     setVisible(!visible);
   };
 
-  //////////////////////////////////////////////////////////////////
+  // SIGN UP
   async function processSignUp() {
 
     const dataUser = {
@@ -52,10 +53,18 @@ function LoginScreen(props) {
       props.onRecordUserConnected(answer.data);
       const storeData = async () => {
 
-        const data = answer.data.token;
+        const dataToken = answer.data.token;
 
         try {
-          await AsyncStorage.setItem('token', data)
+          await AsyncStorage.setItem('token', dataToken)
+        } catch (e) {
+          // saving error
+          console.log('ERROR', e);
+        }
+
+        const dataStatus = answer.data.status
+        try {
+          await AsyncStorage.setItem('status', dataStatus)
         } catch (e) {
           // saving error
           console.log('ERROR', e);
@@ -73,7 +82,7 @@ function LoginScreen(props) {
     }
   }
 
-  //////////////////////////////////////////////////////////////////
+  // SIGN IN
   async function processSignIn() {
 
     const dataUser = {
@@ -105,7 +114,7 @@ function LoginScreen(props) {
         // saving error
         console.log('ERROR', e);
       }
-      props.navigation.navigate('Map');
+      props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
@@ -119,16 +128,14 @@ function LoginScreen(props) {
       <Header>
         <Button onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: 'white' }} />
-
         </Button>
       </Header>
+
       <Content>
-
-
         <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
-              {errors.map(err => { return (<Text>{err}</Text>) })}
+              {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
               <Button
                 title="OK"
                 buttonStyle={{ backgroundColor: "#eb4d4b" }}
@@ -169,17 +176,8 @@ function LoginScreen(props) {
               onChangeText={(val) => setPasswordSignIn(val)}
             />
 
-            <Button
-              title="Send"
-              type="solid"
-              containerStyle={{ margin: 10 }}
-              onPress={() => {
-                processSignIn();
-              }
-              }
-            >
-              {/* <Icon name='menu' style={{ color: 'white' }} /> */}
-              <Text>Coucou</Text>
+            <Button onPress={() => { processSignIn() }}>
+              <Text> Send </Text>
             </Button>
             {/* </KeyboardAvoidingView> */}
           </View>
@@ -230,11 +228,9 @@ function LoginScreen(props) {
               />
             </View>
 
-            <Button
-              title="Send"
-              type="solid"
-              onPress={() => { processSignUp() }}
-            />
+            <Button onPress={() => { processSignUp() }}>
+              <Text> Send </Text>
+            </Button>
             {/* </KeyboardAvoidingView> */}
           </View>
 
@@ -245,24 +241,24 @@ function LoginScreen(props) {
       <Footer>
         <FooterTab style={{ backgroundColor: '#313131', }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Icon style={{ color: 'white' }} name="home" />
-            <Text style={{ color: 'white' }}>Home</Text>
+            <Ionicons name='ios-home' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Home</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Team')}>
-            <Icon style={{ color: 'white' }} name="car" />
-            <Text style={{ color: 'white' }}>Team</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')}>
+            <Ionicons name='ios-car' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Teams</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Icon style={{ color: 'white' }} name="add" />
-            <Text style={{ color: 'white' }}>Podium</Text>
+            <Ionicons name='ios-trophy' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Classement</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Icon style={{ color: 'white' }} name="map" />
-            <Text style={{ color: 'white' }}>Map</Text>
+            <Ionicons name='ios-map' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Map</Text>
           </Button>
-          <Button onPress={() => props.navigation.openDrawer()}>
-            <Icon style={{ color: 'white' }} name="menu" />
-            <Text style={{ color: 'white' }}>Menu</Text>
+          <Button onPress={() => props.navigation.navigate('Medias')}>
+            <Ionicons name='ios-images' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>
