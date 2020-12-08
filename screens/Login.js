@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button, Input } from 'react-native-elements'
+import { Button, Input, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -16,6 +16,13 @@ function LoginScreen(props) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const [visible, setVisible] = useState(false);
+  const [errors, setErrors] = useState([]);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
 
   //////////////////////////////////////////////////////////////////
   async function processSignUp() {
@@ -44,11 +51,14 @@ function LoginScreen(props) {
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
+      setErrors(answer.error);
+      toggleOverlay();
     }
   }
 
   //////////////////////////////////////////////////////////////////
   async function processSignIn() {
+    console.log('pouet');
 
     const dataUser = {
       email: emailSignIn,
@@ -65,6 +75,7 @@ function LoginScreen(props) {
       body: JSON.stringify(dataUser)
     });
     const answer = await rawAnswer.json();
+    console.log('ANSWER', answer);
 
     ///// Recording in reduce store if answer is ok //////
     if (answer.result === true) {
@@ -72,12 +83,30 @@ function LoginScreen(props) {
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
+      setErrors(answer.error);
+      toggleOverlay();
 
     }
   }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
+
+      <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
+        <View>
+
+          {errors.map(err => { return (<Text>{err}</Text>) })}
+          <Button
+            title="OK"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            type="solid"
+            onPress={() => { toggleOverlay() }}
+
+          />
+        </View>
+      </Overlay>
+
+
       <Text>SIGN IN</Text>
       <Input
         containerStyle={{ marginBottom: 25, width: '70%' }}
@@ -95,8 +124,8 @@ function LoginScreen(props) {
         title="Send"
         type="solid"
         onPress={() => {
-          processSignIn(),
-            console.log('pouet');
+          processSignIn();
+
         }}
       />
 
