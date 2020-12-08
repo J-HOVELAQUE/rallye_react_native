@@ -1,23 +1,57 @@
 import React, { Component } from 'react';
-import { View,Button, Text, StyleSheet } from 'react-native';
-import { Left, Right, Icon } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import { View, Text, StyleSheet,ImageBackground } from 'react-native';
 
 
-function MenuScreen ({navigation}){
-    return(
-        <View >
-            <View style={{justifyContent:'space-between'}}>
-        <View style={{margin:10}}><Button title='Teams' onPress={() => navigation.navigate('Team')}/></View>
-        <Button title='Home' onPress={() => navigation.navigate('Home')}><Icon name="home"/></Button>
-        <Button title='Teams' onPress={() => navigation.navigate('Team')}/>
-        <Button title='Map' onPress={() => navigation.navigate('Map')}/>
-        <Button title='Login' onPress={() => navigation.navigate('Login')}/>
-        <Button title='Média' onPress={() => navigation.navigate('Media')}/>
-        <Button title='Hebergement' onPress={() => navigation.navigate('Hebergement')}/>
-        <Button title='Programme' onPress={() => navigation.navigate('Programme')}/>
-        <Button title='Profil' onPress={() => navigation.navigate('Profil')}/>
-        </View>
-    </View>
-    )
+
+export default class test extends Component {
+  render() {
+    return (
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      
+        
+        <Content >
+            <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+            <Content>
+            <Button onPress={() => this.props.navigation.navigate('Hebergement')}>
+                <Icon style={{color:'white'}} name="home" />
+                <Text style={{color:'white'}}>Hebergement</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.navigate('Media')}>
+              <Icon style={{color:'white'}} name="car" />
+              <Text style={{color:'white'}}>Team</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.navigate('Classement')}>
+              <Icon style={{color:'white'}} name="add" />
+              <Text style={{color:'white'}}>Podium</Text>
+            </Button >
+            <Button onPress={() => this.props.navigation.navigate('Map')}>
+              <Icon style={{color:'white'}}name="map" />
+              <Text style={{color:'white'}}>Map</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.openDrawer()}>
+            <Icon style={{color:'white'}}name="menu"  />
+            <Text style={{color:'white'}}>Menu</Text>
+            </Button>
+
+        </Content>
+            </View>
+
+        </Content>
+       
+      
+      </ImageBackground>
+    );
+  }
 }
-export default MenuScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})
+
+function MenuScreen ({navigation}){}
+

@@ -13,10 +13,14 @@ export default function HebergementScreen(props) {
 
   return (
     <Container>
+
       <Header>
         <Icon onPress={() => props.navigation.openDrawer()} style={{ color: 'white' }} name="home" />
       </Header>
+
+
       <Content>
+
         <Accordion
           dataArray={dataArray}
           icon="add"
@@ -24,9 +28,9 @@ export default function HebergementScreen(props) {
           iconStyle={{ color: "black" }}
           expandedIconStyle={{ color: "red" }}
         />
-
-
       </Content>
+
+
       <Footer>
         <FooterTab style={{ backgroundColor: '#313131', }}>
           <Button onPress={() => props.navigation.navigate('Home')}>

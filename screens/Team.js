@@ -1,24 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import { View, Text, StyleSheet,ImageBackground } from 'react-native';
 
-import { connect } from 'react-redux';
 
 
-function TeamScreen(props) {
+export default class test extends Component {
+  render() {
+    return (
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      
+        
+        <Content >
+            <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                <Text style={{color:"white"}}>Page TEAM</Text>
+            </View>
 
-  console.log('Utilisateur connecté', props.userConnected);
-
-  return (
-     <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Page TEAM</Text>
-    </View>
-  );
+        </Content>
+       
+      
+      </ImageBackground>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-  return { userConnected: state.userConnected }
-}
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})
 
-export default connect(
-  mapStateToProps,
-  null
-)(TeamScreen);
+function MenuScreen ({navigation}){}
+

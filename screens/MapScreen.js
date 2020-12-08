@@ -11,7 +11,7 @@ const serverUrl = 'http://192.168.1.26:3000';
 
 const socket = socketIOClient(serverUrl);
 
-function MapScreen(props) {
+export default function MapScreen(props) {
 
     useEffect(() => {
         socket.on('sendMessageToAll', (msg) => {
@@ -40,12 +40,11 @@ function MapScreen(props) {
     );
 }
 
-
-
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
     }
-});
-export default MapScreen;
+})
+

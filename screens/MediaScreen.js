@@ -1,10 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import { View, Text, StyleSheet,ImageBackground } from 'react-native';
 
+export default class test extends Component {
+  render() {
+    return (
+        <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      
+        
+        <Content >
+            <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                <Text style={{color:"white"}}>Page Media</Text>
+            </View>
 
-export default function TeamScreen() {
-  return (
-     <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Page Media</Text>
-    </View>
-  );
+        </Content>
+       
+      
+      </ImageBackground>
+    );
+  }
 }
+const styles = StyleSheet.create({
+    container: {
+      flex:1,
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  })
+function MenuScreen ({navigation}){}
+
