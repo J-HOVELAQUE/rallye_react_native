@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
 import { View, Text, StyleSheet } from 'react-native';
-import { Header } from 'react-native-elements';
-import { Left, Right, Icon } from 'native-base';
 
-class MapScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Header
-                    leftComponent={<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />}
-                />
-                <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}>
-                    <Text>test menu page Map</Text>
-                </View>
-            </View>
-        );
-    }
+const dataArray = [
+  { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
+  { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
+  { title: "Navette", content: "Lorem ipsum dolor sit amet" }
+];
+
+export default class test extends Component {
+  render() {
+    return (
+      <Container>
+        <Header>
+              <Icon onPress={() => this.props.navigation.openDrawer()}style={{color:'white'}}name="home" />
+        </Header>
+        <Content>
+          <Accordion
+            dataArray={dataArray}
+            icon="add"
+            expandedIcon="remove"
+            iconStyle={{ color: "black" }}
+            expandedIconStyle={{ color: "red" }}
+          />
+
+
+        </Content>
+        <Footer>
+        </Footer>
+      </Container>
+    );
+  }
 }
+function MenuScreen ({navigation}){}
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-});
-export default MapScreen;

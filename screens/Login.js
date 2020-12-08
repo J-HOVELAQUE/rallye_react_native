@@ -90,6 +90,10 @@ function LoginScreen(props) {
   }
 
   return (
+
+
+
+
     <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
 
       <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
@@ -161,6 +165,7 @@ function LoginScreen(props) {
         onPress={() => { processSignUp() }}
       />
     </View>
+    
   );
 }
 

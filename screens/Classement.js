@@ -1,12 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
 
 
-export default function ClassementScreen() {
-  return (
-    <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Classement</Text> 
-    </View>
-  );
+
+export default class test extends Component {
+  render() {
+    return (
+      <Container>
+        
+        <Content>
+          
+
+
+        </Content>
+        
+      </Container>
+    );
+  }
 }
-
+function MenuScreen ({navigation}){}
 

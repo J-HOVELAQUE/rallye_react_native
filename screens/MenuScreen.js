@@ -1,23 +1,58 @@
 import React, { Component } from 'react';
-import { View,Button, Text, StyleSheet } from 'react-native';
-import { Left, Right, Icon } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
+
+const dataArray = [
+  { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
+  { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
+  { title: "Navette", content: "Lorem ipsum dolor sit amet" }
+];
+
+export default class test extends Component {
+  render() {
+    return (
+      <Container>
+        <Header>
+              <Icon onPress={() => this.props.navigation.openDrawer()}style={{color:'white'}}name="home" />
+        </Header>
+        <Content>
+          <Accordion
+            dataArray={dataArray}
+            icon="add"
+            expandedIcon="remove"
+            iconStyle={{ color: "black" }}
+            expandedIconStyle={{ color: "red" }}
+          />
 
 
-function MenuScreen ({navigation}){
-    return(
-        <View >
-            <View style={{justifyContent:'space-between'}}>
-        <View style={{margin:10}}><Button title='Teams' onPress={() => navigation.navigate('Team')}/></View>
-        <Button title='Home' onPress={() => navigation.navigate('Home')}><Icon name="home"/></Button>
-        <Button title='Teams' onPress={() => navigation.navigate('Team')}/>
-        <Button title='Map' onPress={() => navigation.navigate('Map')}/>
-        <Button title='Login' onPress={() => navigation.navigate('Login')}/>
-        <Button title='Média' onPress={() => navigation.navigate('Media')}/>
-        <Button title='Hebergement' onPress={() => navigation.navigate('Hebergement')}/>
-        <Button title='Programme' onPress={() => navigation.navigate('Programme')}/>
-        <Button title='Profil' onPress={() => navigation.navigate('Profil')}/>
-        </View>
-    </View>
-    )
+        </Content>
+        <Footer>
+          <FooterTab style={{backgroundColor: '#313131',}}>
+            <Button onPress={() => this.props.navigation.navigate('Home')}>
+              <Icon style={{color:'white'}} name="home" />
+              <Text style={{color:'white'}}>Home</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.navigate('Team')}>
+              <Icon style={{color:'white'}} name="car" />
+              <Text style={{color:'white'}}>Team</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.navigate('Classement')}>
+              <Icon style={{color:'white'}} name="add" />
+              <Text style={{color:'white'}}>Podium</Text>
+            </Button >
+            <Button onPress={() => this.props.navigation.navigate('Map')}>
+              <Icon style={{color:'white'}}name="map" />
+              <Text style={{color:'white'}}>Map</Text>
+            </Button>
+            <Button onPress={() => this.props.navigation.openDrawer()}>
+            <Icon style={{color:'white'}}name="menu"  />
+            <Text style={{color:'white'}}>Menu</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+    );
+  }
 }
-export default MenuScreen;
+function MenuScreen ({navigation}){}
+
