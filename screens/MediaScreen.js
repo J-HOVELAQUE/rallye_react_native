@@ -1,10 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Header, Content, Button, Icon } from 'native-base';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
+export default function MediaScreen(props) {
 
-export default function TeamScreen() {
   return (
-     <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Page Media</Text>
-    </View>
+    <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      <Header>
+        <Button onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: 'white' }} />
+        </Button>
+      </Header>
+
+      <Content >
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ color: "white" }}>Page Media</Text>
+        </View>
+      </Content>
+
+    </ImageBackground>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})

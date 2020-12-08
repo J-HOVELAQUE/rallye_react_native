@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, Input, Overlay } from 'react-native-elements'
+import React, { useState } from 'react';
+import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage } from 'react-native';
+import { Input, Overlay } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
+import { Container, Header, Content, Footer, FooterTab, Icon, Button } from 'native-base';
+
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
@@ -25,7 +27,7 @@ function LoginScreen(props) {
     setVisible(!visible);
   };
 
-  //////////////////////////////////////////////////////////////////
+  // SIGN UP
   async function processSignUp() {
 
     const dataUser = {
@@ -51,10 +53,18 @@ function LoginScreen(props) {
       props.onRecordUserConnected(answer.data);
       const storeData = async () => {
 
-        const data = answer.data.token;
+        const dataToken = answer.data.token;
 
         try {
-          await AsyncStorage.setItem('token', data)
+          await AsyncStorage.setItem('token', dataToken)
+        } catch (e) {
+          // saving error
+          console.log('ERROR', e);
+        }
+
+        const dataStatus = answer.data.status
+        try {
+          await AsyncStorage.setItem('status', dataStatus)
         } catch (e) {
           // saving error
           console.log('ERROR', e);
@@ -72,7 +82,7 @@ function LoginScreen(props) {
     }
   }
 
-  //////////////////////////////////////////////////////////////////
+  // SIGN IN
   async function processSignIn() {
 
     const dataUser = {
@@ -104,7 +114,7 @@ function LoginScreen(props) {
         // saving error
         console.log('ERROR', e);
       }
-      props.navigation.navigate('Map');
+      props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
@@ -114,74 +124,145 @@ function LoginScreen(props) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
+    <Container>
+      <Header>
+        <Button onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: 'white' }} />
+        </Button>
+      </Header>
 
-      <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
-        <View>
+      <Content>
+        <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
+          <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
+            <View>
+              {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
+              <Button
+                title="OK"
+                buttonStyle={{ backgroundColor: "#eb4d4b" }}
+                type="solid"
+                onPress={() => { toggleOverlay() }}
+              />
+            </View>
+          </Overlay>
 
-          {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
-          <Button
-            title="OK"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            type="solid"
-            onPress={() => { toggleOverlay() }}
+          {/* <ScrollView> */}
 
-          />
+          <Text style={{ paddingTop: 10 }}>SIGN IN</Text>
+          <View style={{
+            width: '90%',
+            height: 200,
+            backgroundColor: 'gray',
+            marginBottom: '5%',
+            borderColor: 'red',
+            borderRadius: 20,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: 'center',
+            paddingLeft: 10,
+          }}>
+
+            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+            <Input
+              containerStyle={{ width: '90%', height: '25%' }}
+              inputStyle={{ marginLeft: 10 }}
+              inputContainerStyle={{ borderTopColor: 'red' }}
+              placeholder='Email'
+              onChangeText={(val) => setEmailSignIn(val)}
+            />
+            <Input
+              containerStyle={{ width: '90%', height: '25%' }}
+              inputStyle={{ marginLeft: 10 }}
+              placeholder='Password'
+              onChangeText={(val) => setPasswordSignIn(val)}
+            />
+
+            <Button onPress={() => { processSignIn() }}>
+              <Text> Send </Text>
+            </Button>
+            {/* </KeyboardAvoidingView> */}
+          </View>
+
+          <Text>SIGN UP</Text>
+          <View style={{
+            width: '90%',
+            height: 350,
+            backgroundColor: 'white',
+            borderRadius: 20,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: 'center',
+            paddingLeft: 10,
+            marginBottom: 10
+          }}>
+
+            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+            <View style={{
+              width: '80%',
+              height: '80%',
+              justifyContent: 'center'
+            }}>
+
+              <Input
+                containerStyle={{ width: '90%', height: '20%' }}
+                inputStyle={{ marginLeft: 10 }}
+                placeholder='First Name'
+                onChangeText={(val) => setFirstname(val)}
+              />
+              <Input
+                containerStyle={{ width: '90%', height: '20%' }}
+                inputStyle={{ marginLeft: 10 }}
+                placeholder='Name'
+                onChangeText={(val) => setName(val)}
+              />
+              <Input
+                containerStyle={{ width: '90%', height: '20%' }}
+                inputStyle={{ marginLeft: 10 }}
+                placeholder='Email'
+                onChangeText={(val) => setEmail(val)}
+              />
+              <Input
+                containerStyle={{ width: '90%', height: '20%' }}
+                inputStyle={{ marginLeft: 10 }}
+                placeholder='Password'
+                onChangeText={(val) => setPassword(val)}
+              />
+            </View>
+
+            <Button onPress={() => { processSignUp() }}>
+              <Text> Send </Text>
+            </Button>
+            {/* </KeyboardAvoidingView> */}
+          </View>
+
+          {/* </ScrollView > */}
         </View>
-      </Overlay>
+      </Content>
 
-
-      <Text>SIGN IN</Text>
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='Email'
-        onChangeText={(val) => setEmailSignIn(val)}
-      />
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='Password'
-        onChangeText={(val) => setPasswordSignIn(val)}
-      />
-      <Button
-        title="Send"
-        type="solid"
-        onPress={() => { processSignIn() }}
-      />
-
-      <Text>SIGN UP</Text>
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='First Name'
-        onChangeText={(val) => setFirstname(val)}
-      />
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='Name'
-        onChangeText={(val) => setName(val)}
-      />
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='Email'
-        onChangeText={(val) => setEmail(val)}
-      />
-      <Input
-        containerStyle={{ marginBottom: 25, width: '70%' }}
-        inputStyle={{ marginLeft: 10 }}
-        placeholder='Password'
-        onChangeText={(val) => setPassword(val)}
-      />
-
-      <Button
-        title="Send"
-        type="solid"
-        onPress={() => { processSignUp() }}
-      />
-    </View>
+      <Footer>
+        <FooterTab style={{ backgroundColor: '#313131', }}>
+          <Button onPress={() => props.navigation.navigate('Home')}>
+            <Ionicons name='ios-home' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Home</Text>
+          </Button>
+          <Button onPress={() => props.navigation.navigate('Teams')}>
+            <Ionicons name='ios-car' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Teams</Text>
+          </Button>
+          <Button onPress={() => props.navigation.navigate('Classement')}>
+            <Ionicons name='ios-trophy' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Classement</Text>
+          </Button >
+          <Button onPress={() => props.navigation.navigate('Map')}>
+            <Ionicons name='ios-map' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Map</Text>
+          </Button>
+          <Button onPress={() => props.navigation.navigate('Medias')}>
+            <Ionicons name='ios-images' size={25} color='white' />
+            <Text style={{ color: 'white', fontSize: 10 }}>Medias</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
   );
 }
 
