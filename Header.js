@@ -1,14 +1,17 @@
 import React from 'react'
 import { View , Text, StyleSheet } from 'react-native'
+import { Header } from 'react-native-elements';
+import { Left, Right, Icon } from 'native-base';
 
-export default function Hearder(){
+export default function Hearder({navigation}){
+    console.log(navigation)
     return (
-        <View style={styles.header}>
-            <View>
-                <Text style={styles.headerText}>Hola</Text>
-            </View>
+        <View style={styles.container}>
+            <Header
+                rightComponent={<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />}
+            />
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
