@@ -17,6 +17,7 @@ function LoginScreen(props) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
+  //////////////////////////////////////////////////////////////////
   async function processSignUp() {
 
     const dataUser = {
@@ -26,6 +27,7 @@ function LoginScreen(props) {
       password: password
     }
 
+    ///// Sending request to server //////
     const rawAnswer = await fetch(serverUrl, {
       method: 'POST',
       headers: {
@@ -34,11 +36,9 @@ function LoginScreen(props) {
       },
       body: JSON.stringify(dataUser)
     });
-
     const answer = await rawAnswer.json();
 
-    // console.log('Answer', answer);
-
+    ///// Recording in reduce store if answer is ok //////
     if (answer.recorded === true) {
       props.onRecordUserConnected(answer.data);
       props.navigation.navigate('Map');
@@ -47,6 +47,7 @@ function LoginScreen(props) {
     }
   }
 
+  //////////////////////////////////////////////////////////////////
   async function processSignIn() {
 
     const dataUser = {
@@ -54,6 +55,7 @@ function LoginScreen(props) {
       password: passwordSignIn
     }
 
+    ///// Sending request to server //////
     const rawAnswer = await fetch(serverUrl, {
       method: 'POST',
       headers: {
@@ -62,10 +64,9 @@ function LoginScreen(props) {
       },
       body: JSON.stringify(dataUser)
     });
-
     const answer = await rawAnswer.json();
-    // console.log('Answer', answer);
 
+    ///// Recording in reduce store if answer is ok //////
     if (answer.result === true) {
       props.onRecordUserConnected(answer.user);
       props.navigation.navigate('Map');
