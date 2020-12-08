@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements'
 import { connect } from 'react-redux';
 
-const serverUrl = 'https://powerful-earth-91256.herokuapp.com/user/sign-up';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
 
 
@@ -28,7 +28,7 @@ function LoginScreen(props) {
     }
 
     ///// Sending request to server //////
-    const rawAnswer = await fetch(serverUrl, {
+    const rawAnswer = await fetch(serverUrl + '/user/sign-up', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -56,7 +56,7 @@ function LoginScreen(props) {
     }
 
     ///// Sending request to server //////
-    const rawAnswer = await fetch(serverUrl, {
+    const rawAnswer = await fetch(serverUrl + '/user/sign-in', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -68,7 +68,7 @@ function LoginScreen(props) {
 
     ///// Recording in reduce store if answer is ok //////
     if (answer.result === true) {
-      props.onRecordUserConnected(answer.user);
+      props.onRecordUserConnected(answer.data);
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
