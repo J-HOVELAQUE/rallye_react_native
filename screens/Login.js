@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements'
 import { connect } from 'react-redux';
+import { AsyncStorage } from '@react-native-community/async-storage';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
