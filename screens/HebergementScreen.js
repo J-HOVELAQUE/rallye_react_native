@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-
-export default function HebergementScreen() {
-  return (
-    <View style={{ flex: 1, backgroundColor:'pink', alignItems: "center",justifyContent: "center"}}><Text>Page Hebergement</Text>
-    </View>
-  );
-}
-=======
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion } from 'native-base';
 import { View, Text, StyleSheet } from 'react-native';
@@ -68,4 +56,3 @@ export default class test extends Component {
 }
 function MenuScreen ({navigation}){}
 
->>>>>>> 9ce780df011af3166bd958d5b0906be502d48a05
