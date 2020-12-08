@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function MediaScreen() {
+export default function TeamScreen() {
   return (
-    <View style={{ flex: 1, backgroundColor:'green', alignItems: "center",justifyContent: "center"}}><Text>Media</Text>
+     <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Page Media</Text>
     </View>
   );
 }

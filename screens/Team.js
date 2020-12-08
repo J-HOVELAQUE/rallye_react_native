@@ -9,11 +9,7 @@ function TeamScreen(props) {
   console.log('Utilisateur connecté', props.userConnected);
 
   return (
-    <View style={{
-      flex: 1, backgroundColor: '#e67e22', alignItems: "center",
-      justifyContent: "center"
-    }}>
-      <Text>TeamScreen</Text>
+     <View style={{ flex: 1, backgroundColor:'#e67e22', alignItems: "center",justifyContent: "center"}}><Text>Page TEAM</Text>
     </View>
   );
 }

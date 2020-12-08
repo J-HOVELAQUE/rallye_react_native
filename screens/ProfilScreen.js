@@ -4,7 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function ProfilScreen() {
   return (
-    <View style={{ flex: 1, backgroundColor:'blue', alignItems: "center",justifyContent: "center"}}><Text>Page Profil</Text>
+    <View style={{ flex: 1, backgroundColor:'', alignItems: "center",justifyContent: "center"}}><Text>Page Profil</Text>
     </View>
   );
 }
+
