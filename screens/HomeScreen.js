@@ -9,17 +9,15 @@ import { createStackNavigator } from 'react-navigation-stack';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
 
-export default function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, onRecordUserConnected }) {
 
   useEffect(() => {
     const getData = async () => {
 
-      console.log('pouet');
+      //// Getting data in local storage if existing ////
       try {
         const value = await AsyncStorage.getItem('token')
         if (value !== null) {
-          // value previously stored
-          console.log('TOKEN', value);
 
           const rawAnswer = await fetch(`${serverUrl}/user/get-user?token=${value}`, {
             method: 'GET',
@@ -27,9 +25,11 @@ export default function HomeScreen({ navigation }) {
           const answer = await rawAnswer.json();
           console.log('User trouvé en db', answer);
 
+          //// Record user connected on the reduce store /////
+          onRecordUserConnected(answer.user)
+
         }
       } catch (e) {
-        // error reading value
         console.log('ERROR', e);
       }
     }
@@ -64,18 +64,18 @@ const styles = StyleSheet.create({
   }
 })
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     onRecordUserConnected: function (user) {
-//       dispatch({
-//         type: 'record',
-//         user: user
-//       })
-//     }
-//   }
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    onRecordUserConnected: function (user) {
+      dispatch({
+        type: 'record',
+        user: user
+      })
+    }
+  }
+}
 
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(LoginScreen);
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);
