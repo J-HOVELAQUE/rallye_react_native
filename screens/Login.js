@@ -41,6 +41,7 @@ function LoginScreen(props) {
     ///// Recording in reduce store if answer is ok //////
     if (answer.recorded === true) {
       props.onRecordUserConnected(answer.data);
+      AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
@@ -48,15 +49,7 @@ function LoginScreen(props) {
   }
 
   //////////////////////////////////////////////////////////////////
-  async function processSignIn( ) {
-
-
-    useEffect(() => { 
-      AsyncStorage.getItem("email", 
-              function(err, data){
-                console.log('aze',data);
-                setEmail(data)
-              });
+  async function processSignIn() {
 
     const dataUser = {
       email: emailSignIn,
@@ -74,9 +67,10 @@ function LoginScreen(props) {
     });
     const answer = await rawAnswer.json();
 
-    ///// Recording in reduce store if answer is ok //////
+    ///// Recording in reduce store and local storage if answer is ok //////
     if (answer.result === true) {
       props.onRecordUserConnected(answer.data);
+      AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
       props.navigation.navigate('Map');
     } else {
       console.log('Access denied', answer.error);
@@ -102,10 +96,7 @@ function LoginScreen(props) {
       <Button
         title="Send"
         type="solid"
-        onPress={() => { AsyncStorage.setItem("email", email)
-          processSignIn(),
-            console.log('pouet');
-        }}
+        onPress={() => { processSignIn() }}
       />
 
       <Text>SIGN UP</Text>
