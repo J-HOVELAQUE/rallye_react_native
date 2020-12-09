@@ -6,44 +6,30 @@ import MapView, { Marker } from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
 
 const socket = socketIOClient(serverUrl);
 
 export default function MapScreen(props) {
 
-    const [vehiculeToDisplay, setVehiculeToDisplay] = useState({});
-
-    // console.log('VEHICULES', vehiculeToDisplay);
+    const [vehiculeToDisplay, setVehiculeToDisplay] = useState([]);
 
     useEffect(() => {
         socket.on('sendPositionToAll', (msg) => {
-            setVehiculeToDisplay(msg.positions)
-
-            // let newDisplayedVehicules = [...vehiculeToDisplay];
-
-            // let alreadyDisplayed = false;
-            // newDisplayedVehicules.forEach((car, i) => {
-
-            //     if (msg.positions.idVehicule === car.positions.idVehicule) {
-            //         newDisplayedVehicules[i] = car;
-            //         alreadyDisplayed = true;
-
-            //     }
-            // })
-            // if (!alreadyDisplayed) {
-            //     newDisplayedVehicules.push(msg);
-            // };
-            // // console.log('TO DISPLAY', newDisplayedVehicules);
-
-            // setVehiculeToDisplay(newDisplayedVehicules);
+            setVehiculeToDisplay(msg.allPosition)
 
         }), []
-
     })
 
-    console.log('Message received', vehiculeToDisplay);
+    const markerVehicules = vehiculeToDisplay.map((car, i) => {
+        return <Marker
+            coordinate={{ latitude: car.lat, longitude: car.long }}
+            title={car.idVehicule}
+            key={i}
+        />
+    })
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -62,29 +48,9 @@ export default function MapScreen(props) {
                     longitudeDelta: 0.0421,
                 }}
             >
-
-                {vehiculeToDisplay !== undefined ?
-
-                    <Marker
-                        coordinate={{ latitude: vehiculeToDisplay.lat, longitude: vehiculeToDisplay.long }}
-                        title={vehiculeToDisplay.idvehicle}
-                        pinColor="blue"
-
-                    />
-                    : null
-                }
-
+                {markerVehicules}
             </MapView >
 
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
-
