@@ -18,6 +18,7 @@ import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
+import TeamPilot from './screens/TeamPilot';
 
 import userConnected from './reducers/userConnected';
 
@@ -80,7 +81,8 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Login: LoginScreen,
     Hebergement: HebergementScreen,
     Programme: ProgrammeScreen,
-    Profil: ProfilScreen
+    Profil: ProfilScreen,
+    Team: TeamPilot
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);

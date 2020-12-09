@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,ImageBackground } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
 import MapView from 'react-native-maps';
@@ -20,7 +20,7 @@ export default function MapScreen(props) {
     }, [])
 
     return (
-        <View style={styles.container}>
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
             <Header>
                 <Button onPress={() => props.navigation.openDrawer()}>
@@ -39,7 +39,7 @@ export default function MapScreen(props) {
 
                 </MapView>
             </Content>
-        </View>
+            </ImageBackground>
     );
 }
 
