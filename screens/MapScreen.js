@@ -25,7 +25,7 @@ export default function MapScreen(props) {
     const markerVehicules = vehiculeToDisplay.map((car, i) => {
         return <Marker
             coordinate={{ latitude: car.lat, longitude: car.long }}
-            title={car.idVehicule}
+            title={car.idVehicule.toString()}
             key={i}
         />
     })
