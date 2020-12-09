@@ -21,8 +21,9 @@ import ProfilScreen from './screens/ProfilScreen';
 import TeamPilot from './screens/TeamPilot';
 
 import userConnected from './reducers/userConnected';
+import userFavorites from './reducers/userFavorites';
 
-const store = createStore(combineReducers({ userConnected }));
+const store = createStore(combineReducers({ userConnected, userFavorites }));
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 var BottomNavigator = createBottomTabNavigator(
@@ -103,7 +104,7 @@ export default function App() {
   const [userStatus, setUserStatus] = useState('unknown')
 
   useEffect(() => {
-    // AsyncStorage.clear()
+    AsyncStorage.clear()
     const getData = async () => {
 
       //// Getting data in local storage if existing ////
