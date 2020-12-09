@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage, Divider } from 'react-native';
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Footer, FooterTab, Icon, Button } from 'native-base';
 
+// Importer la librairie de composants
+import {
+  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput
+} from '../components/rallye-lib';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
-
 
 function LoginScreen(props) {
 
@@ -47,6 +50,7 @@ function LoginScreen(props) {
       body: JSON.stringify(dataUser)
     });
     const answer = await rawAnswer.json();
+    console.log(answer);
 
     ///// Recording in reduce store if answer is ok //////
     if (answer.recorded === true) {
@@ -125,14 +129,14 @@ function LoginScreen(props) {
 
   return (
     <Container>
-      <Header>
-        <Button onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
+      <Header style={{ backgroundColor: '#263238', width: 50 }}>
+        <Button style={{ backgroundColor: '#263238' }} onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: '#FFFFFF' }} />
         </Button>
       </Header>
 
       <Content>
-        <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
+        <View style={{ flex: 1, backgroundColor: '#FFFFFF', alignItems: "center", justifyContent: "center" }}>
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
               {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
@@ -143,96 +147,73 @@ function LoginScreen(props) {
                 onPress={() => { toggleOverlay() }}
               />
             </View>
+
           </Overlay>
 
           {/* <ScrollView> */}
+<Content>
+          <View style={{
+            flex: 1,
+            width: '90%',
+            height: '100%',
+            borderStyle: 'solid',
+            borderColor: greyDarkTa,
+            marginBottom: '5%',
+            borderColor: greyDarkTa,
+            borderRadius: 5,
+            borderWidth: 1,
+            alignItems: "center",
+            justifyContent: 'center',
+            paddingLeft: 10,
+          }}>
 
-          <Text style={{ paddingTop: 10 }}>SIGN IN</Text>
+            <RallyeH3 text="SE CONNECTER" />
+
+            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+
+            <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
+
+            <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
+
+            <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
+
+            {/* </KeyboardAvoidingView> */}
+
+          </View>
+          </Content>
+
           <View style={{
             width: '90%',
             height: 200,
-            backgroundColor: 'gray',
+            borderStyle: 'solid',
+            borderColor: greyDarkTa,
             marginBottom: '5%',
-            borderColor: 'red',
-            borderRadius: 20,
+            borderColor: greyDarkTa,
+            borderRadius: 5,
+            borderWidth: 1,
             flex: 1,
             alignItems: "center",
             justifyContent: 'center',
             paddingLeft: 10,
           }}>
 
-            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
-            <Input
-              containerStyle={{ width: '90%', height: '25%' }}
-              inputStyle={{ marginLeft: 10 }}
-              inputContainerStyle={{ borderTopColor: 'red' }}
-              placeholder='Email'
-              onChangeText={(val) => setEmailSignIn(val)}
-            />
-            <Input
-              containerStyle={{ width: '90%', height: '25%' }}
-              inputStyle={{ marginLeft: 10 }}
-              placeholder='Password'
-              onChangeText={(val) => setPasswordSignIn(val)}
-            />
+            <RallyeH3 text="CREER UN COMPTE" />
 
-            <Button onPress={() => { processSignIn() }}>
-              <Text> Send </Text>
-            </Button>
+            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+
+              <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
+
+              <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
+
+              <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
+
+              <PasswordInput onChangeText={(val) => setPassword(val)} />
+
+            <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
+
             {/* </KeyboardAvoidingView> */}
           </View>
 
-          <Text>SIGN UP</Text>
-          <View style={{
-            width: '90%',
-            height: 350,
-            backgroundColor: 'white',
-            borderRadius: 20,
-            flex: 1,
-            alignItems: "center",
-            justifyContent: 'center',
-            paddingLeft: 10,
-            marginBottom: 10
-          }}>
-
-            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
-            <View style={{
-              width: '80%',
-              height: '80%',
-              justifyContent: 'center'
-            }}>
-
-              <Input
-                containerStyle={{ width: '90%', height: '20%' }}
-                inputStyle={{ marginLeft: 10 }}
-                placeholder='First Name'
-                onChangeText={(val) => setFirstname(val)}
-              />
-              <Input
-                containerStyle={{ width: '90%', height: '20%' }}
-                inputStyle={{ marginLeft: 10 }}
-                placeholder='Name'
-                onChangeText={(val) => setName(val)}
-              />
-              <Input
-                containerStyle={{ width: '90%', height: '20%' }}
-                inputStyle={{ marginLeft: 10 }}
-                placeholder='Email'
-                onChangeText={(val) => setEmail(val)}
-              />
-              <Input
-                containerStyle={{ width: '90%', height: '20%' }}
-                inputStyle={{ marginLeft: 10 }}
-                placeholder='Password'
-                onChangeText={(val) => setPassword(val)}
-              />
-            </View>
-
-            <Button onPress={() => { processSignUp() }}>
-              <Text> Send </Text>
-            </Button>
-            {/* </KeyboardAvoidingView> */}
-          </View>
 
           {/* </ScrollView > */}
         </View>
