@@ -82,7 +82,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Hebergement: HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
-    Team: TeamPilot
+    TeamPilot: TeamPilot
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
