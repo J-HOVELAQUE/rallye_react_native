@@ -22,9 +22,11 @@ export default function MapScreen(props) {
             let newDisplayedVehicules = [...vehiculeToDisplay];
             let alreadyDisplayed = false;
 
-            // newDisplayedVehicules.forEach((car, i) => {
-            //     if(msg.position.idVehicule === )
-            // });
+            newDisplayedVehicules.forEach((car, i) => {
+                if (msg.position.idVehicule === car.position.idVehicule) {
+                    console.log(msg);
+                }
+            });
 
         })
     }, [])
