@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,ImageBackground } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
 import MapView from 'react-native-maps';
@@ -37,19 +37,18 @@ export default function MapScreen(props) {
                     <Icon name='menu' style={{ color: 'white' }} />
                 </Button>
             </Header>
+            <Content>
+                <MapView style={{ flex: 1 }}
+                    initialRegion={{
+                        latitude: 48.866667,
+                        longitude: 2.333333,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                >
 
-            < MapView style={{ flex: 1 }
-            }
-                initialRegion={{
-                    latitude: 48.866667,
-                    longitude: 2.333333,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            >
-
-            </MapView >
-
+                </MapView>
+            </Content>
         </View>
     );
 }

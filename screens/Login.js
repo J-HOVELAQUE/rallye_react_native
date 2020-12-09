@@ -132,7 +132,7 @@ function LoginScreen(props) {
       </Header>
 
       <Content>
-        <View style={{ flex: 1, backgroundColor: '#e67e22', alignItems: "center", justifyContent: "center" }}>
+        <View style={{ flex: 1, backgroundColor: 'black', alignItems: "center", justifyContent: "center" }}>
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
               {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
