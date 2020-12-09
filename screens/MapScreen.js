@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
 
 const socket = socketIOClient(serverUrl);
 
@@ -17,17 +17,18 @@ export default function MapScreen(props) {
 
     useEffect(() => {
         socket.on('sendPositionToAll', (msg) => {
-            console.log('Message received', msg);
+            setVehiculeToDisplay(msg.allPosition)
 
-            let newDisplayedVehicules = [...vehiculeToDisplay];
-            let alreadyDisplayed = false;
+        }), []
+    })
 
-            // newDisplayedVehicules.forEach((car, i) => {
-            //     if(msg.position.idVehicule === )
-            // });
-
-        })
-    }, [])
+    const markerVehicules = vehiculeToDisplay.map((car, i) => {
+        return <Marker
+            coordinate={{ latitude: car.lat, longitude: car.long }}
+            title={car.idVehicule}
+            key={i}
+        />
+    })
 
     return (
         <View style={{ flex: 1 }}>
@@ -47,18 +48,9 @@ export default function MapScreen(props) {
                     longitudeDelta: 0.0421,
                 }}
             >
-
+                {markerVehicules}
             </MapView >
 
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
-

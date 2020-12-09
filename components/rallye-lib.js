@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, TextInput, } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, Header, View } from 'react-native';
 import { Avatar, Accessory, SocialIcon, Input, Icon } from 'react-native-elements';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -13,54 +13,55 @@ var greyLightTa = '#B1B6B7'
 
 /* ^^^^^^^^^^^^^^^^^^^^ BOUTONS ^^^^^^^^^^^^^^^^^^^^ */
 // Bouton inactif
-const RedButton = ({ onPress, title, backgroundColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.redButtonContainer, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
+const RedButton = ({ onPress, title, backgroundColor }) => {
+  return <TouchableOpacity onPress={onPress} style={[styles.redButtonContainer, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
     <Text style={styles.redButtonText}>{title}</Text>
-  </TouchableOpacity>
-)
+  </TouchableOpacity>;
+}
 // Bouton actif
-const RedButtonOutline = ({ onPress, title, backgroundColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.redButtonContainerOutline, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
+const RedButtonOutline = ({ onPress, title, backgroundColor }) => {
+  return <TouchableOpacity onPress={onPress} style={[styles.redButtonContainerOutline, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
     <Text style={styles.redButtonTextOutline}>{title}</Text>
-  </TouchableOpacity>
-)
+  </TouchableOpacity>;
+}
 // Bouton inactif
-const GreyButton = ({ onPress, title, backgroundColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.greyButtonContainer, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
+const GreyButton = ({ onPress, title, backgroundColor }) => {
+  return <TouchableOpacity onPress={onPress} style={[styles.greyButtonContainer, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
     <Text style={styles.greyButtonText}>{title}</Text>
-  </TouchableOpacity>
-)
+  </TouchableOpacity>;
+}
 // Bouton actif
-const GreyButtonOutline = ({ onPress, title, backgroundColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.greyButtonContainerOutline, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
+const GreyButtonOutline = ({ onPress, title, backgroundColor }) => {
+  return <TouchableOpacity onPress={onPress} style={[styles.greyButtonContainerOutline, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
     <Text style={styles.greyButtonTextOutline}>{title}</Text>
   </TouchableOpacity>
-)
+}
 
 /* ^^^^^^^^^^^^^^^^^^^^ INPUTS ^^^^^^^^^^^^^^^^^^^^ */
-const UserInput = ({ value, onChange, placeholder }) => (
-    <Input 
-    value={value} 
-    placeholder={placeholder} 
+const UserInput = ({ placeholder, onChangeText }) => {
+  return <Input
+    placeholder={placeholder}
     leftIcon={<FontAwesome name="user" size={16} color={greyLightTa} />}
-    />
-    //onChangeText={value => this.setState({ comment: value })}
-)
-const EmailInput = ({ }) => (
-  <Input
+    onChangeText={onChangeText}
+  />;
+}
+const EmailInput = ({onChangeText }) => {
+  return <Input
     placeholder='Votre adresse email'
     leftIcon={
       <FontAwesome name="envelope" size={16} color={greyLightTa} />
     }
-    //onChangeText={value => this.setState({ comment: value })}
-  />
-)
-const PasswordInput = ({ }) => (
-  <Input
+    onChangeText= {onChangeText}
+  />;
+}
+const PasswordInput = ({onChangeText}) => {
+  return <Input
+    secureTextEntry={true}
     placeholder='Mot de passe'
     leftIcon={
       <FontAwesome name="unlock-alt" size={16} color={greyLightTa} />
     }
+    onChangeText= {onChangeText}
     //onChangeText={value => this.setState({ comment: value })}
     // Activer ou désactiver l'oeil pour voir le mot de passe tapé
     rightIcon={
@@ -70,12 +71,12 @@ const PasswordInput = ({ }) => (
       // Mot de passe visble. Cliquer sur l'oeil fermé pr le rendre invisible
       // <FontAwesome name="eye-slash" size={16} color="greyLightTa" />
     }
-  />
-)
+  />;
+}
 
-/* ^^^^^^^^^^^^^^^^^^^^ TITRES ^^^^^^^^^^^^^^^^^^^^ */
-const RallyeH1 = ({ text }) => (
-  <Text style={{
+/* ^^^^^^^^^^^^^^^^^^^^ TITLES ^^^^^^^^^^^^^^^^^^^^ */
+const RallyeH1 = ({ text }) => {
+  return <Text style={{
     fontFamily: 'Roboto_700Bold',
     fontSize: 30,
     color: greyDarkTa,
@@ -83,10 +84,10 @@ const RallyeH1 = ({ text }) => (
     letterSpacing: 0.6
   }}>
     {text}
-  </Text>
-)
-const RallyeH2 = ({ text }) => (
-  <Text style={{
+  </Text>;
+}
+const RallyeH2 = ({ text }) => {
+  return <Text style={{
     fontFamily: 'Roboto_700Bold',
     fontSize: 25,
     color: greyDarkTa,
@@ -94,10 +95,10 @@ const RallyeH2 = ({ text }) => (
     letterSpacing: 0.6
   }}>
     {text}
-  </Text>
-)
-const RallyeH3 = ({ text }) => (
-  <Text style={{
+  </Text>;
+}
+const RallyeH3 = ({ text }) => {
+  return <Text style={{
     fontFamily: 'Roboto_700Bold',
     fontSize: 20,
     color: greyDarkTa,
@@ -105,69 +106,67 @@ const RallyeH3 = ({ text }) => (
     letterSpacing: 0.6
   }}>
     {text}
-  </Text>
-)
+  </Text>;
+}
 
 /* ^^^^^^^^^^^^^^^^^^^^ AVATARS ^^^^^^^^^^^^^^^^^^^^ */
 // Afficher le profil ou activer le burger menu
-const ProfilAvatar = ({ }) => (
-  <Avatar
+const ProfilAvatar = () => {
+  return <Avatar
     rounded
     size="medium"
     source={{
-      uri:
-        'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
+      uri: 'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
     }}
     onPress={() => console.log("Afficher mon profil")}
     activeOpacity={0.7}
-    containerStyle={{ alignSelf: 'left', marginHorizontal: 20 }}
-  />
-)
+    containerStyle={{ marginHorizontal: 20 }}
+  />;
+}
 
 // Modifier le profil
-const EditProfilAvatar = ({ }) => (
-  <Avatar
+const EditProfilAvatar = () => {
+  return <Avatar
     rounded
     source={{
-      uri:
-        'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
+      uri: 'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
     }}
     onPress={() => console.log("Modifier mon profil")}
-    containerStyle={{ alignSelf: 'left', marginHorizontal: 20, backgroundColor: redTa, borderColor: greyLightTa, borderRadius: 50 }}
+    containerStyle={{ marginHorizontal: 20, backgroundColor: redTa, borderColor: greyLightTa, borderRadius: 50 }}
   >
     <Accessory
       containerStyle={{ backgroundColor: redTa, borderColor: greyLightTa, borderRadius: 50 }}
     />
-  </Avatar>
-)
+  </Avatar>;
+}
 
 /* ^^^^^^^^^^^^^^^^^^^^ SOCIAL NETWORKS ^^^^^^^^^^^^^^^^^^^^ */
 
-const FacebookSocialIco = ({ }) => (
-  <SocialIcon
+const FacebookSocialIco = () => {
+  return <SocialIcon
     type='facebook'
-  />
-)
-const TwitterSocialIco = ({ }) => (
-  <SocialIcon
+  />;
+}
+const TwitterSocialIco = () => {
+  return <SocialIcon
     type='twitter'
-  />
-)
-const InstagramSocialIco = ({ }) => (
-  <SocialIcon
+  />;
+}
+const InstagramSocialIco = () => {
+  return <SocialIcon
     type='instagram'
-  />
-)
-const YouTubeSocialIco = ({ }) => (
-  <SocialIcon
+  />;
+}
+const YouTubeSocialIco = () => {
+  return <SocialIcon
     type='youtube'
-  />
-)
-const LinkedinSocialIco = ({ }) => (
-  <SocialIcon
+  />;
+}
+const LinkedinSocialIco = () => {
+  return <SocialIcon
     type='linkedin'
-  />
-)
+  />;
+}
 
 /* ^^^^^^^^^^^^^^^^^^^^ STYLES ^^^^^^^^^^^^^^^^^^^^ */
 const styles = StyleSheet.create({
@@ -229,15 +228,24 @@ const styles = StyleSheet.create({
   },
   rallyeInput: {
     backgroundColor: whiteTa,
-    borderRadius: 32,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    marginVertical: 14,
-    marginHorizontal: 36
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderColor: greyLightTa,
+    borderWidth: 1,
+    paddingHorizontal: 8,
+    alignItems: 'center',
+  },
+  legend: {
+    position: 'absolute',
+    top: -10,
+    left: 10,
+    fontWeight: 'bold',
+    backgroundColor: '#FFFFFF'
   }
 })
 
 export {
+  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa,
   RedButton, RedButtonOutline,
   GreyButton, GreyButtonOutline,
   RallyeH1, RallyeH2, RallyeH3,

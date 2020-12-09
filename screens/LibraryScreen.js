@@ -13,8 +13,11 @@ import {
     UserInput, EmailInput, PasswordInput
 } from '../components/rallye-lib';
 
+
 export default function LibraryScreen() {
-    var nom;
+    var nom = () => {
+        console.log("HELLO");
+    };
 
     return (
 
@@ -56,10 +59,8 @@ export default function LibraryScreen() {
                     <LinkedinSocialIco />
                 </View>
 
-
-
                 <UserInput />
-                <EmailInput /> 
+                <EmailInput />
                 <PasswordInput />
 
             </ScrollView>
