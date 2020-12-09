@@ -1,30 +1,53 @@
-import React from 'react';
-import { Container, Header, Button, Icon, Segment, Content, Text } from 'native-base';
+import React, { useEffect } from 'react';
+import { View, StyleSheet,ImageBackground } from 'react-native';
 
-export default function Classement(props) {
+import { Icon, Header, Button, Content } from 'native-base';
+import MapView from 'react-native-maps';
 
-  return (
-    <Container>
-      <Header>
-        <Button onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
-        </Button>
-      </Header>
+import socketIOClient from "socket.io-client";
 
-      <Segment>
-        <Button first>
-          <Text>Plateau 1</Text>
-        </Button>
-        <Button>
-          <Text>Plateau 2</Text>
-        </Button>
-        <Button last active>
-          <Text>Plateau 3</Text>
-        </Button>
-      </Segment>
-      <Content padder>
-        <Text>Awesome segment</Text>
-      </Content>
-    </Container>
-  );
+// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+const serverUrl = 'http://192.168.1.26:3000';
+
+const socket = socketIOClient(serverUrl);
+
+export default function MapScreen(props) {
+
+    useEffect(() => {
+        socket.on('sendMessageToAll', (msg) => {
+            console.log('Message received', msg)
+        })
+    }, [])
+
+    return (
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+
+            <Header>
+                <Button onPress={() => props.navigation.openDrawer()}>
+                    <Icon name='menu' style={{ color: 'white' }} />
+                </Button>
+            </Header>
+            <Content>
+                <MapView style={{ flex: 1 }}
+                    initialRegion={{
+                        latitude: 48.866667,
+                        longitude: 2.333333,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                >
+
+                </MapView>
+            </Content>
+            </ImageBackground>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
+
