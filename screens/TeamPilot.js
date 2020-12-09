@@ -45,7 +45,7 @@ export default function Team(props) {
             </Left>
               
             <Right>
-              <Icon name="locate" />
+            <Icon name="locate" onPress={() => props.navigation.navigate('Map')}/>
             </Right>
           </CardItem>
         </Card>

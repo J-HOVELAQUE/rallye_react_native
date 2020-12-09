@@ -124,9 +124,10 @@ function LoginScreen(props) {
   }
 
   return (
-    <Container>
-      <Header>
-        <Button onPress={() => props.navigation.openDrawer()}>
+    
+      <Container style={{ backgroundColor: 'black' }}>
+      <Header style={{ backgroundColor: '#313131' }}>
+        <Button style={{ backgroundColor: '#313131' }} onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: 'white' }} />
         </Button>
       </Header>
