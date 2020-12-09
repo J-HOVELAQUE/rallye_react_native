@@ -20,25 +20,26 @@ export default function MapScreen(props) {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View style={{ flex: 1 }}>
 
             <Header>
                 <Button onPress={() => props.navigation.openDrawer()}>
                     <Icon name='menu' style={{ color: 'white' }} />
                 </Button>
             </Header>
-            <Content>
-                <MapView style={{ flex: 1 }}
-                    initialRegion={{
-                        latitude: 48.866667,
-                        longitude: 2.333333,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                >
 
-                </MapView>
-            </Content>
+            < MapView style={{ flex: 1 }
+            }
+                initialRegion={{
+                    latitude: 48.866667,
+                    longitude: 2.333333,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            >
+
+            </MapView >
+
         </View>
     );
 }
