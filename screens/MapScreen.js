@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
@@ -13,9 +13,19 @@ const socket = socketIOClient(serverUrl);
 
 export default function MapScreen(props) {
 
+    const [vehiculeToDisplay, setVehiculeToDisplay] = useState([]);
+
     useEffect(() => {
         socket.on('sendPositionToAll', (msg) => {
-            console.log('Message received', msg)
+            console.log('Message received', msg);
+
+            let newDisplayedVehicules = [...vehiculeToDisplay];
+            let alreadyDisplayed = false;
+
+            // newDisplayedVehicules.forEach((car, i) => {
+            //     if(msg.position.idVehicule === )
+            // });
+
         })
     }, [])
 
