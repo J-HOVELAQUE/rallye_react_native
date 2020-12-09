@@ -38,10 +38,9 @@ function HomeScreen(props) {
 
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
-      <Header>
-        <Button onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
-
+<Header style={{ backgroundColor: '#313131',width: 500}}>
+        <Button style={{ backgroundColor: '#313131'}}>
+        <Icon name='menu' style={{ color: 'white' }}  onPress={() => props.navigation.openDrawer()}/>
         </Button>
       </Header>
 

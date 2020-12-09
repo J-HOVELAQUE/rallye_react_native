@@ -1,53 +1,77 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet,ImageBackground } from 'react-native';
+import React, { useState } from "react";
+import { Header, Content, Button, Icon, Card, CardItem, Text, Right,Left,Body } from 'native-base';
+import { View, StyleSheet, ImageBackground,Image,Picker } from 'react-native';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { Input, Overlay } from 'react-native-elements'
 
-import { Icon, Header, Button, Content } from 'native-base';
-import MapView from 'react-native-maps';
+      const HeadTable = ['N°', 'Voiture', 'Nat1', 'Pilote 1', 'Temps'];
+      const DataTable =  [
+        ['1', '2', '3', '4', '5'],
+        ['a', 'b', 'c', 'd', 'e'],
+        ['1', '2', '3', '4', '5'],
+        ['a', 'b', 'c', 'd', 'e'],
+        ['1', '2', '3', '4', '5'],
+        ['1', '2', '3', '4', '5'],
+        ['a', 'b', 'c', 'd', 'e'],
+        ['1', '2', '3', '4', '5'],
+        ['a', 'b', 'c', 'd', 'e'],
+      ];
 
-import socketIOClient from "socket.io-client";
+export default function Team(props) {
+  const [selectedValue, setSelectedValue] = useState("General");
+  return (
+    <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+<Header style={{ backgroundColor: '#313131'}}>
+        <Button style={{ backgroundColor: '#313131'}}>
+        <Icon name='menu' style={{ color: 'white' }}  onPress={() => props.navigation.openDrawer()}/>
+        </Button>
+      </Header>
 
-const socket = socketIOClient(serverUrl);
 
-export default function MapScreen(props) {
+      <Text style={{color:"white"}}>Page Classement</Text>
 
-    useEffect(() => {
-        socket.on('sendMessageToAll', (msg) => {
-            console.log('Message received', msg)
-        })
-    }, [])
+      <Content >
 
-    return (
-      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150, backgroundColor:"#E4E4E4"}}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="General" value="General" />
+        <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
+        <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
+        <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
+      </Picker>
 
-            <Header>
-                <Button onPress={() => props.navigation.openDrawer()}>
-                    <Icon name='menu' style={{ color: 'white' }} />
-                </Button>
-            </Header>
-            <Content>
-                <MapView style={{ flex: 1 }}
-                    initialRegion={{
-                        latitude: 48.866667,
-                        longitude: 2.333333,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                >
+      <Input placeholder='Rechercher' style={{backgroundColor:"#E4E4E4"}}></Input>
+      <View style={styles.container}>
+        <Table borderStyle={{borderWidth: 1, borderColor: 'grey'}}>
+          <Row data={HeadTable} style={styles.HeadStyle} textStyle={styles.TableText}/>
+          <Rows data={DataTable} textStyle={styles.TableText}/>
+        </Table>
+      </View>
 
-                </MapView>
-            </Content>
-            </ImageBackground>
-    );
+      </Content>
+
+    </ImageBackground>
+  );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
 
+const styles = StyleSheet.create({
+  container: { 
+    flex: 1,
+    
+    
+    backgroundColor: '#ffffff' 
+  },
+  HeadStyle: { 
+    height: 50,
+    alignContent: "center",
+    backgroundColor: '#E4E4E4'
+  },
+  TableText: { 
+    margin: 10
+  }
+});
