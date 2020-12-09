@@ -14,7 +14,7 @@ const socket = socketIOClient(serverUrl);
 export default function MapScreen(props) {
 
     useEffect(() => {
-        socket.on('sendMessageToAll', (msg) => {
+        socket.on('sendPositionToAll', (msg) => {
             console.log('Message received', msg)
         })
     }, [])
