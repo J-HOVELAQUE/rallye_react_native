@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
 
@@ -13,24 +13,37 @@ const socket = socketIOClient(serverUrl);
 
 export default function MapScreen(props) {
 
-    const [vehiculeToDisplay, setVehiculeToDisplay] = useState([]);
+    const [vehiculeToDisplay, setVehiculeToDisplay] = useState({});
+
+    // console.log('VEHICULES', vehiculeToDisplay);
 
     useEffect(() => {
         socket.on('sendPositionToAll', (msg) => {
-            console.log('Message received', msg);
+            setVehiculeToDisplay(msg.positions)
 
-            let newDisplayedVehicules = [...vehiculeToDisplay];
-            let alreadyDisplayed = false;
+            // let newDisplayedVehicules = [...vehiculeToDisplay];
 
-            newDisplayedVehicules.forEach((car, i) => {
-                if (msg.position.idVehicule === car.position.idVehicule) {
-                    console.log(msg);
-                }
-            });
+            // let alreadyDisplayed = false;
+            // newDisplayedVehicules.forEach((car, i) => {
 
-        })
-    }, [])
+            //     if (msg.positions.idVehicule === car.positions.idVehicule) {
+            //         newDisplayedVehicules[i] = car;
+            //         alreadyDisplayed = true;
 
+            //     }
+            // })
+            // if (!alreadyDisplayed) {
+            //     newDisplayedVehicules.push(msg);
+            // };
+            // // console.log('TO DISPLAY', newDisplayedVehicules);
+
+            // setVehiculeToDisplay(newDisplayedVehicules);
+
+        }), []
+
+    })
+
+    console.log('Message received', vehiculeToDisplay);
     return (
         <View style={{ flex: 1 }}>
 
@@ -49,6 +62,17 @@ export default function MapScreen(props) {
                     longitudeDelta: 0.0421,
                 }}
             >
+
+                {vehiculeToDisplay !== undefined ?
+
+                    <Marker
+                        coordinate={{ latitude: vehiculeToDisplay.lat, longitude: vehiculeToDisplay.long }}
+                        title={vehiculeToDisplay.idvehicle}
+                        pinColor="blue"
+
+                    />
+                    : null
+                }
 
             </MapView >
 
