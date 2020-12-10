@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react';
-import { View, StyleSheet,ImageBackground } from 'react-native';
-
-import { Icon, Header, Button, Content , Text} from 'native-base';
-import MapView from 'react-native-maps';
-=======
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { Icon, Header, Button, Content } from 'native-base';
 import MapView, { Marker } from 'react-native-maps';
->>>>>>> dev
 
 import socketIOClient from "socket.io-client";
 
@@ -39,29 +31,6 @@ export default function MapScreen(props) {
     })
 
     return (
-<<<<<<< HEAD
-      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
-
-<Header style={{ backgroundColor: '#313131',width: 500}}>
-        <Button style={{ backgroundColor: '#313131'}}>
-        <Icon name='menu' style={{ color: 'white' }}  onPress={() => props.navigation.openDrawer()}/>
-        </Button>
-      </Header>
-      <Text style={{color:"white"}}>Page map</Text>
-            <Content>
-                <MapView style={{ flex: 1 }}
-                    initialRegion={{
-                        latitude: 48.866667,
-                        longitude: 2.333333,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                >
-
-                </MapView>
-            </Content>
-            </ImageBackground>
-=======
         <View style={{ flex: 1 }}>
 
             <Header>
@@ -83,6 +52,5 @@ export default function MapScreen(props) {
             </MapView >
 
         </View>
->>>>>>> dev
     );
 }

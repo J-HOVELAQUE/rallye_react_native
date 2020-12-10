@@ -128,27 +128,15 @@ function LoginScreen(props) {
   }
 
   return (
-<<<<<<< HEAD
-    
-      <Container style={{ backgroundColor: 'black' }}>
-      <Header style={{ backgroundColor: '#313131' }}>
-        <Button style={{ backgroundColor: '#313131' }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
-=======
     <Container>
       <Header style={{ backgroundColor: '#263238' }}>
         <Button style={{ backgroundColor: '#263238', width: 50 }} onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: '#FFFFFF' }} />
->>>>>>> dev
         </Button>
       </Header>
 
       <Content>
-<<<<<<< HEAD
-        <View style={{ flex: 1, backgroundColor: 'black', alignItems: "center", justifyContent: "center" }}>
-=======
         <View style={{ flex: 1, backgroundColor: '#FFFFFF', alignItems: "center", justifyContent: "center" }}>
->>>>>>> dev
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
               {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}

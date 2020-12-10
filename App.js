@@ -18,11 +18,8 @@ import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
-<<<<<<< HEAD
 import TeamPilot from './screens/TeamPilot';
-=======
 import LibraryScreen from './screens/LibraryScreen';
->>>>>>> dev
 
 import userConnected from './reducers/userConnected';
 
@@ -85,11 +82,8 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
-<<<<<<< HEAD
-    TeamPilot: TeamPilot
-=======
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
->>>>>>> dev
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -102,11 +96,8 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Hebergement: HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
-<<<<<<< HEAD
-    TeamPilot: TeamPilot
-=======
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
->>>>>>> dev
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
@@ -117,11 +108,8 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
-<<<<<<< HEAD
-    TeamPilot: TeamPilot
-=======
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
->>>>>>> dev
   }
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
