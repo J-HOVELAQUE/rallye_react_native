@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Text } from 'react-native';
 
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -18,9 +18,24 @@ import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
+<<<<<<< HEAD
 import TeamPilot from './screens/TeamPilot';
+=======
+import LibraryScreen from './screens/LibraryScreen';
+>>>>>>> dev
 
 import userConnected from './reducers/userConnected';
+
+// Fonts
+import { AppLoading } from 'expo';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+  Roboto_900Black,
+} from '@expo-google-fonts/roboto';
 
 const store = createStore(combineReducers({ userConnected }));
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -70,7 +85,11 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+<<<<<<< HEAD
     TeamPilot: TeamPilot
+=======
+    Librairie: LibraryScreen
+>>>>>>> dev
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -83,7 +102,11 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Hebergement: HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+<<<<<<< HEAD
     TeamPilot: TeamPilot
+=======
+    Librairie: LibraryScreen
+>>>>>>> dev
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
@@ -94,7 +117,11 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
+<<<<<<< HEAD
     TeamPilot: TeamPilot
+=======
+    Librairie: LibraryScreen
+>>>>>>> dev
   }
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
@@ -103,6 +130,14 @@ const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
 export default function App() {
 
   const [userStatus, setUserStatus] = useState('unknown')
+
+  let [fontsLoaded, error] = useFonts({
+    Roboto_300Light,
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+    Roboto_900Black,
+  });
 
   useEffect(() => {
     // AsyncStorage.clear()
@@ -128,14 +163,20 @@ export default function App() {
   }, [userStatus])
 
   // Return the drawer navigation for the right status
-  return (
-    <Provider store={store}>
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
 
-      {userStatus === 'fan' ? <AppFan /> :
-        userStatus === 'pilot' ? <AppPilot /> :
-          <AppUnknown />}
+    return (
+      <Provider store={store}>
 
-    </Provider>
-  )
+        {userStatus === 'fan' ? <AppFan /> :
+          userStatus === 'pilot' ? <AppPilot /> :
+            <AppUnknown />}
+
+      </Provider>
+    )
+  }
+
 }
 
