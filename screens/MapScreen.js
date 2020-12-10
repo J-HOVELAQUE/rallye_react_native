@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { Icon, Header, Button, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title,Card,CardItem,Content } from 'native-base';
 import MapView, { Marker } from 'react-native-maps';
 
 import socketIOClient from "socket.io-client";
@@ -33,11 +33,21 @@ export default function MapScreen(props) {
     return (
         <View style={{ flex: 1 }}>
 
-            <Header>
-                <Button onPress={() => props.navigation.openDrawer()}>
-                    <Icon name='menu' style={{ color: 'white' }} />
-                </Button>
-            </Header>
+        <Header style={{ backgroundColor: '#313131'}}>
+          <Left>
+            <Button transparent>
+              <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Map</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
 
             < MapView style={{ flex: 1 }
             }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Content, Button, Icon, Card, CardItem, Text, Right,Left,Body } from 'native-base';
+import { Header, Content, Button, Icon, Card, CardItem, Text, Right,Left,Body,Title } from 'native-base';
 import { View, StyleSheet, ImageBackground,Image,Picker } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { Input, Overlay } from 'react-native-elements'
@@ -23,17 +23,30 @@ export default function Team(props) {
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
 <Header style={{ backgroundColor: '#313131'}}>
-        <Button style={{ backgroundColor: '#313131'}}>
-        <Icon name='menu' style={{ color: 'white' }}  onPress={() => props.navigation.openDrawer()}/>
-        </Button>
-      </Header>
+          <Left>
+            <Button transparent>
+              <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Classement</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
 
 
-      <Text style={{color:"white"}}>Page Classement</Text>
+      
 
       <Content >
-
+      <View style={{ width: "100%", backgroundColor:"#E4E4E4"}}>
+      
       <Picker
+        mode="dropdown"
+        
         selectedValue={selectedValue}
         style={{ height: 50, width: 150, backgroundColor:"#E4E4E4"}}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
@@ -43,8 +56,9 @@ export default function Team(props) {
         <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
         <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
       </Picker>
-
       <Input placeholder='Rechercher' style={{backgroundColor:"#E4E4E4"}}></Input>
+      </View>
+      
       <View style={styles.container}>
         <Table borderStyle={{borderWidth: 1, borderColor: 'grey'}}>
           <Row data={HeadTable} style={styles.HeadStyle} textStyle={styles.TableText}/>

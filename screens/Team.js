@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body } from 'native-base';
+import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body ,Title, Container} from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux'
 
@@ -31,32 +31,38 @@ function Team(props) {
   })
 
   return (
-    <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+    <Container>
+    
 
-      <Header style={{ backgroundColor: '#313131', width: 500, }}>
-        <Button style={{ backgroundColor: '#313131' }}>
-          <Icon name='menu' style={{ color: 'white' }} onPress={() => props.navigation.openDrawer()} />
-        </Button>
-      </Header>
+<Header style={{ backgroundColor: '#313131'}}>
+          <Left>
+            <Button transparent>
+              <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Les Equipes</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
 
-      <Content >
+      <Content style={{backgroundColor:"black"}}>
         {/* <CardTeam navigation={props.navigation} /> */}
         {teams}
 
       </Content>
 
-    </ImageBackground>
+    
+    </Container>
   );
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})
+
 
 
 function mapDispatchToProps(dispatch) {

@@ -1,20 +1,30 @@
 import React from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Text, Right,Left,Body } from 'native-base';
+import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body ,Title, Container} from 'native-base';
 import { View, StyleSheet, ImageBackground,Image } from 'react-native';
 
 
 export default function Team(props) {
 
   return (
-    <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
-
-<Header style={{ backgroundColor: '#313131',width: 500}}>
-        <Button style={{ backgroundColor: '#313131'}}>
-          <Icon name='arrow-back' style={{ color: 'white' }}  onPress={() => props.navigation.navigate('Teams')}/>
-        </Button>
-      </Header>
-
-      <Content >
+    
+<Container>
+<Header style={{ backgroundColor: '#313131'}}>
+          <Left>
+            <Button transparent>
+            <Icon name='arrow-back' style={{ color: 'white' }}  onPress={() => props.navigation.navigate('Teams')}/>
+            </Button>
+          </Left>
+          <Body>
+            <Title>Les Equipes</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
+        
+      <Content>
 
         <Card style={{width:350,flex:1}}>
         <CardItem > 
@@ -52,16 +62,10 @@ export default function Team(props) {
 
 
       </Content>
-
-    </ImageBackground>
+      
+      </Container>
+    
   );
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})

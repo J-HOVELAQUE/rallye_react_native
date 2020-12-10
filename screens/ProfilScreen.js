@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Right,Left,Body,Container,Footer,FooterTab } from 'native-base';
+import { Header, Content, Button, Icon, Card, CardItem, Right,Left,Body,Container,Footer,FooterTab,Title } from 'native-base';
 import { View,Image,Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,11 +8,21 @@ export default function ProfilScreen(props) {
 
   return (
     <Container style={{ backgroundColor: 'black' }}>
-      <Header style={{ backgroundColor: '#313131' }}>
-        <Button style={{ backgroundColor: '#313131' }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
-        </Button>
-      </Header>
+      <Header style={{ backgroundColor: '#313131'}}>
+          <Left>
+            <Button transparent>
+            <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Hebergement</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
 
       
 

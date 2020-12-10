@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon } from 'native-base';
-import { View, Text } from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon ,Left,Body,Title,Right, Image  } from 'native-base';
+import { View, Text ,ImageBackground,StyleSheet} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -8,17 +8,31 @@ export default function ProgrammeScreen(props) {
 
   return (
     <Container >
-      <Header style={{ backgroundColor: '#313131' }}>
-        <Button style={{ backgroundColor: '#313131' }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: 'white' }} />
-        </Button>
-      </Header>
-
+      
+      <Header style={{ backgroundColor: '#313131'}}>
+        
+          <Left>
+            <Button transparent>
+            <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Programme</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
+<ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
       <Content>
+      
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ color: "red" }}>Page Programme</Text>
         </View>
       </Content>
+      </ImageBackground>
       
       <Footer>
         <FooterTab style={{ backgroundColor: '#313131', }}>
@@ -47,4 +61,10 @@ export default function ProgrammeScreen(props) {
     </Container>
   );
 }
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})

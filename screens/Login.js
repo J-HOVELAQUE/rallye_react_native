@@ -3,7 +3,7 @@ import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage, Divider } f
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Icon, Button } from 'native-base';
+import { Header, Content, Button, Icon, Card, CardItem,Footer,FooterTab, Right, Left, Body ,Title, Container} from 'native-base';
 
 // Importer la librairie de composants
 import {
@@ -129,11 +129,21 @@ function LoginScreen(props) {
 
   return (
     <Container>
-      <Header style={{ backgroundColor: 'white' }}>
-        <Button style={{ backgroundColor: '#263238', width: 50 }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: '#FFFFFF' }} />
-        </Button>
-      </Header>
+    <Header style={{ backgroundColor: '#313131'}}>
+              <Left>
+                <Button transparent>
+                <Icon name='arrow-back' style={{ color: 'white' }}  onPress={() => props.navigation.navigate('Home')}/>
+                </Button>
+              </Left>
+              <Body>
+                <Title>Login</Title>
+              </Body>
+              <Right>
+                <Button transparent onPress={() => props.navigation.openDrawer()}>
+                  <Icon name='menu' />
+                </Button>
+              </Right>
+            </Header>
 
       <Content>
         <View style={{ flex: 1, backgroundColor: '#FFFFFF', alignItems: "center", justifyContent: "center" }}>

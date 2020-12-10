@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Header, Icon, Button } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right } from 'native-base';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -35,39 +35,42 @@ function HomeScreen(props) {
   }, [])
 
   return (
+<Container>
+    
+<Header style={{ backgroundColor: '#313131'}}>
+          <Left>
+            <Button transparent>
+              <Icon name='ios-people' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Home</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => props.navigation.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
+        <ImageBackground source={require('../assets/fondCarbon.jpg')} style={{flex:1}}>
 
-    <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
-
-<Header style={{ backgroundColor: '#313131',width: 500}}>
-        <Button style={{ backgroundColor: '#313131'}}>
-        <Icon name='menu' style={{ color: 'white' }}  onPress={() => props.navigation.openDrawer()}/>
-        </Button>
-      </Header>
-
-      <View style={styles.container}>
-        <Text style={{ color: 'white' }}>HomeScreen</Text>
-        <Button
-          title=" login "
-          color='red'
-          type="solid"
-
-          onPress={() => navigation.navigate('Login')}
-        />
-      </View>
-
+      <Content >
+      
+      <View style={{ flex: 1, alignItems:"center" ,flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
+        <Button style={{ flex:1 ,alignItems:"center",justifyContent:"center",backgroundColor:"red",width:"40%"}} onPress={() => props.navigation.navigate('Login')}>
+            <Icon name='home' />
+            <Text >Login</Text>
+          </Button>
+       </View>   
+      
+      </Content>
 
     </ImageBackground>
-
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})
+
 
 function mapDispatchToProps(dispatch) {
   return {
