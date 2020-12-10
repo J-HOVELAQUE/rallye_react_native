@@ -4,13 +4,16 @@ import { View, StyleSheet, ImageBackground, Image, TouchableHighlight } from 're
 import { connect } from 'react-redux'
 
 
+// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+const serverUrl = 'http://192.168.1.9:3000/user/sign-up';
+
 function CardTeam(props) {
 
     console.log('COMPONENT : ', props.userConnected.status)
     const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
     console.log("my favoris : ", props.userFavorites)
 
-    const handleFavorite = (numTeam) => {
+    const handleFavorite = async (numTeam) => {
         console.log('team cliquée', numTeam)
         let index = props.userFavorites.indexOf(numTeam)
 
@@ -18,9 +21,18 @@ function CardTeam(props) {
         if (index < 0) {
             props.addFavoriteTeam(numTeam)
             setStyleHeart({ color: 'red' })
+            // fetch addFavorite
+            const rawAnswer = await fetch(`${serverUrl}/user/add-favorite`,{
+                method: 'PUT',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                body: `token=${props.userConnected.token}&newValue=${numTeam}`
+            })
+            const answer = await rawAnswer.json();
+            console.log(answer)
         } else {
             props.removeFavoriteTeam(numTeam)
             setStyleHeart({ color: 'gray' })
+            // fetch removeFavorite
         }
     }
 
@@ -44,7 +56,7 @@ function CardTeam(props) {
                     <Image source={require('../assets/206.jpg')} style={{ height: 60, width: 90, flex: 1 }} />
                 </TouchableHighlight>
                 <Right>
-                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite('001') }} />}
+                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite('5fd1eb2066dec526180125d1') }} />}
                     <Text></Text>
                     <Icon name="locate" onPress={() => props.navigation.navigate('Map')} />
                 </Right>

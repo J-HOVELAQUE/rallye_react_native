@@ -10,8 +10,8 @@ import {
   redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput
 } from '../components/rallye-lib';
 
-const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
+// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+const serverUrl = 'http://192.168.1.9:3000/user/sign-up';
 
 function LoginScreen(props) {
 

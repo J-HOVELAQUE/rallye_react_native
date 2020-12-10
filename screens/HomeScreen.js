@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { Header, Icon, Button } from 'native-base';
 
-const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.26:3000/user/sign-up';
+// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+const serverUrl = 'http://192.168.1.9:3000/user/sign-up';
 
 function HomeScreen(props) {
 
@@ -26,7 +26,6 @@ function HomeScreen(props) {
           //// Record user connected on the reduce store /////
           props.onRecordUserConnected(answer.user)
           props.retrieveFavoriteTeam(answer.user.favorite)
-          console.log(answer.user.favorite)
         }
       } catch (e) {
         console.log('ERROR', e);
@@ -35,7 +34,6 @@ function HomeScreen(props) {
     getData();
   }, [])
 
-  console.log('HOME STORE : ', props.favorites)
   return (
 
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
