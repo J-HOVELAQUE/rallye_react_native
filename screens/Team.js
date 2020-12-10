@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body } from 'native-base';
-import { View, StyleSheet, ImageBackground, Image ,TouchableHighlight} from 'react-native';
+import { View, StyleSheet, ImageBackground, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux'
 
 import CardTeam from '../components/CardTeam'
 
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.9:3000';
 
 function Team(props) {
 
-  // console.log('TEAM : ', props.userConnected.status)
-  // console.log('TEAM FAVORITES : ', props.userFavorites)
-  // const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
-  // console.log("my favoris : ", props.userFavorites)
+  const [allTeams, setAllTeams] = useState([])
 
-  // const handleFavorite = (numTeam) => {
-  //   console.log('team cliquée', numTeam)
-  //   let index = props.userFavorites.indexOf(numTeam)
+  useEffect(() => {
 
-  //   // Add or Remove this team from my favorites
-  //   if (index < 0) {
-  //     props.addFavoriteTeam(numTeam)
-  //     setStyleHeart({ color: 'red' })
-  //   } else {
-  //     props.removeFavoriteTeam(numTeam)
-  //     setStyleHeart({ color: 'gray' })
-  //   }
-  // }
+    async function getTeams() {
+      const rawAnswer = await fetch(`${serverUrl}/teams/get-teams`, {
+        method: 'GET',
+      });
+      let allTeamsInfos = await rawAnswer.json();
+      setAllTeams(allTeamsInfos.teams)
+    }
+    getTeams()
+  }, [])
 
+  console.log('TEAMS : ', allTeams.length)
+
+  let teams = allTeams.map((team, i) => {
+    return <CardTeam key={i} infoTeam={team} navigation={props.navigation} />
+  })
 
   return (
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
@@ -38,9 +40,8 @@ function Team(props) {
       </Header>
 
       <Content >
-        <CardTeam navigation= {props.navigation} />
-        <CardTeam navigation= {props.navigation} />
-        <CardTeam navigation= {props.navigation} />
+        {/* <CardTeam navigation={props.navigation} /> */}
+        {teams}
 
       </Content>
 

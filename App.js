@@ -36,8 +36,8 @@ import {
 } from '@expo-google-fonts/roboto';
 
 const store = createStore(combineReducers({ userConnected, userFavorites }));
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.9:3000/user/sign-up';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.9:3000';
 
 var BottomNavigator = createBottomTabNavigator(
   {
@@ -130,7 +130,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    AsyncStorage.clear()
+    // AsyncStorage.clear()
     const getData = async () => {
 
       //// Getting data in local storage if existing ////
