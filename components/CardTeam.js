@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 function CardTeam(props) {
 
-    // console.log(props.userConnected.status)
+    console.log('COMPONENT : ', props.userConnected.status)
     const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
     console.log("my favoris : ", props.userFavorites)
 

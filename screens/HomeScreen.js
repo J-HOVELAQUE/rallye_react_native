@@ -25,7 +25,8 @@ function HomeScreen(props) {
 
           //// Record user connected on the reduce store /////
           props.onRecordUserConnected(answer.user)
-
+          props.retrieveFavoriteTeam(answer.user.favorite)
+          console.log(answer.user.favorite)
         }
       } catch (e) {
         console.log('ERROR', e);
@@ -34,6 +35,7 @@ function HomeScreen(props) {
     getData();
   }, [])
 
+  console.log('HOME STORE : ', props.favorites)
   return (
 
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
@@ -76,11 +78,23 @@ function mapDispatchToProps(dispatch) {
         type: 'record',
         user: user
       })
+    },
+    retrieveFavoriteTeam: function(listFavorites){
+      dispatch({
+        type: 'retrieveFavoriteTeam',
+        listFavorites: listFavorites
+      })
     }
   }
 }
 
+function mapStateToProps(state){
+  return {
+    favorites: state.userFavorites
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);

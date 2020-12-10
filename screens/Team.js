@@ -8,7 +8,8 @@ import CardTeam from '../components/CardTeam'
 
 function Team(props) {
 
-  // // console.log(props.userConnected.status)
+  // console.log('TEAM : ', props.userConnected.status)
+  // console.log('TEAM FAVORITES : ', props.userFavorites)
   // const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
   // console.log("my favoris : ", props.userFavorites)
 

@@ -20,6 +20,9 @@ export default function (userFavorites = [], action) {
         newFavorites.splice(index, 1)
         return newFavorites
         
+    } else if(action.type === 'retrieveFavoriteTeam'){
+        console.log('REDUCE : ', action.listFavorites)
+        return action.listFavorites
     } else {
         return userFavorites
     }
