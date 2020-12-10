@@ -22,6 +22,7 @@ import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
 
 import userConnected from './reducers/userConnected';
+import userFavorites from './reducers/userFavorites';
 
 // Fonts
 import { AppLoading } from 'expo';
@@ -128,7 +129,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    // AsyncStorage.clear()
+    AsyncStorage.clear()
     const getData = async () => {
 
       //// Getting data in local storage if existing ////
