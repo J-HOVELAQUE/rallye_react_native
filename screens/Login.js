@@ -129,8 +129,8 @@ function LoginScreen(props) {
 
   return (
     <Container>
-      <Header style={{ backgroundColor: '#263238', width: 50 }}>
-        <Button style={{ backgroundColor: '#263238' }} onPress={() => props.navigation.openDrawer()}>
+      <Header style={{ backgroundColor: '#263238' }}>
+        <Button style={{ backgroundColor: '#263238', width: 50 }} onPress={() => props.navigation.openDrawer()}>
           <Icon name='menu' style={{ color: '#FFFFFF' }} />
         </Button>
       </Header>
@@ -151,63 +151,62 @@ function LoginScreen(props) {
           </Overlay>
 
           {/* <ScrollView> */}
-<Content>
-          <View style={{
-            flex: 1,
-            width: '90%',
-            height: '100%',
-            borderStyle: 'solid',
-            borderColor: greyDarkTa,
-            marginBottom: '5%',
-            borderColor: greyDarkTa,
-            borderRadius: 5,
-            borderWidth: 1,
-            alignItems: "center",
-            justifyContent: 'center',
-            paddingLeft: 10,
-          }}>
+          <RallyeH3 text="SE CONNECTER" />
 
-            <RallyeH3 text="SE CONNECTER" />
+            <View 
+             style={{
+              width: '90%',
+              alignItems: "center",
+              justifyContent: "center",
+              paddingBottom: 15,
+              borderRadius: 5,
+              borderColor: greyDarkTa,
+              borderStyle: 'solid',
+              borderWidth: 1,
+              paddingLeft: 10,
+              // backgroundColor: redTa,
+            }}>
 
-            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+             
 
-            <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
+              {/* <KeyboardAvoidingView behavior="padding" enabled> */}
 
-            <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
+              <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
 
-            <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
+              <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
 
-            {/* </KeyboardAvoidingView> */}
+              <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
 
-          </View>
-          </Content>
+              {/* </KeyboardAvoidingView> */}
 
-          <View style={{
-            width: '90%',
-            height: 200,
-            borderStyle: 'solid',
-            borderColor: greyDarkTa,
-            marginBottom: '5%',
-            borderColor: greyDarkTa,
-            borderRadius: 5,
-            borderWidth: 1,
-            flex: 1,
-            alignItems: "center",
-            justifyContent: 'center',
-            paddingLeft: 10,
-          }}>
+            </View>
 
             <RallyeH3 text="CREER UN COMPTE" />
 
+          <View style={{
+            width: '90%',
+            borderStyle: 'solid',
+            borderColor: greyDarkTa,
+            marginTop: 10,
+            marginBottom: '5%',
+            borderColor: greyDarkTa,
+            borderRadius: 5,
+            borderWidth: 1,
+            alignItems: "center",
+            justifyContent: 'center',
+            paddingTop: 15,
+            paddingLeft: 10,
+          }}>
+
             {/* <KeyboardAvoidingView behavior="padding" enabled> */}
 
-              <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
+            <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
 
-              <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
+            <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
 
-              <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
+            <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
 
-              <PasswordInput onChangeText={(val) => setPassword(val)} />
+            <PasswordInput onChangeText={(val) => setPassword(val)} />
 
             <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
 
