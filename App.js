@@ -18,9 +18,11 @@ import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
+import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
 
 import userConnected from './reducers/userConnected';
+import userFavorites from './reducers/userFavorites';
 
 // Fonts
 import { AppLoading } from 'expo';
@@ -33,7 +35,7 @@ import {
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
 
-const store = createStore(combineReducers({ userConnected }));
+const store = createStore(combineReducers({ userConnected, userFavorites }));
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 var BottomNavigator = createBottomTabNavigator(
@@ -81,6 +83,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
   }
 );
@@ -94,6 +97,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Hebergement: HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
   }
 );
@@ -105,6 +109,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
+    TeamPilot: TeamPilot,
     Librairie: LibraryScreen
   }
 );

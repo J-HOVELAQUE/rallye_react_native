@@ -152,18 +152,52 @@ function LoginScreen(props) {
 
           {/* <ScrollView> */}
 <Content>
+          <RallyeH3 text="SE CONNECTER" />
+
+            <View 
+             style={{
+              width: '90%',
+              alignItems: "center",
+              justifyContent: "center",
+              paddingBottom: 15,
+              borderRadius: 5,
+              borderColor: greyDarkTa,
+              borderStyle: 'solid',
+              borderWidth: 1,
+              paddingLeft: 10,
+              // backgroundColor: redTa,
+            }}>
+
+             
+
+              {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+
+              <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
+
+              <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
+
+              <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
+
+              {/* </KeyboardAvoidingView> */}
+
+            </View>
+
+            <RallyeH3 text="CREER UN COMPTE" />
+
           <View style={{
             flex: 1,
             width: '90%',
             height: '100%',
             borderStyle: 'solid',
             borderColor: greyDarkTa,
+            marginTop: 10,
             marginBottom: '5%',
             borderColor: greyDarkTa,
             borderRadius: 5,
             borderWidth: 1,
             alignItems: "center",
             justifyContent: 'center',
+            paddingTop: 15,
             paddingLeft: 10,
           }}>
 
@@ -208,6 +242,17 @@ function LoginScreen(props) {
               <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
 
               <PasswordInput onChangeText={(val) => setPassword(val)} />
+
+            <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
+
+
+            <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
+
+            <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
+
+            <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
+
+            <PasswordInput onChangeText={(val) => setPassword(val)} />
 
             <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
 
