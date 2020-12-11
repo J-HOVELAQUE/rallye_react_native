@@ -118,7 +118,7 @@ function HomeScreen(props) {
         </Card>
         <View style={{ flex: 1, alignItems:"center" ,flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
         <Button style={{ flex:1 ,alignItems:"center",justifyContent:"center",backgroundColor:"red",width:"40%"}} onPress={() => props.navigation.navigate('Map')}>
-            <Icon name='locate' />
+            <Icon name='ios-map'/>
             <Text >Live Map</Text>
           </Button>
        </View>
