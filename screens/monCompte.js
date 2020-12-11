@@ -1,14 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Left, Body, Title, Right, Image } from 'native-base';
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 
 
 function monCompteScreen(props) {
 
-  console.log("COMPTE ///// :", props.userConnected)
+  // console.log("COMPTE ///// :", props.userConnected)
   const user = props.userConnected
+
+  const [visible, setVisible] = useState(false);
+
+  const [overlayProfile, setOverlayProfile] = useState(() => 
+  x => (
+        <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
+          <View>
+            <Text>{x}</Text>
+            <Button onPress={() => { toggleOverlay() }} >
+              <Text>OK</Text>
+            </Button>
+          </View>
+  
+        </Overlay>
+      )
+  )
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
+  // const handleEditProfil = () => {
+  //   toggleOverlay()
+  // }
+
+  // const overlayProfile = () => {
+
+  //   return (
+  //     <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
+  //       <View>
+  //         <Text>OKProfile</Text>
+  //         <Button onPress={() => { toggleOverlay() }} >
+  //           <Text>OK</Text>
+  //         </Button>
+  //       </View>
+
+  //     </Overlay>
+  //   )
+  // }
 
   return (
     <Container >
@@ -32,9 +72,10 @@ function monCompteScreen(props) {
       <ImageBackground style={styles.container}>
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>{overlayProfile(10)}</Text>
 
-          <Text>Avatar: {user.avatar !== undefined ? user.nationality : 'non renseignée' }</Text>
-          <Button><Text>Changer mon avatar</Text></Button>
+          <Text>Avatar: {user.avatar !== undefined ? user.nationality : 'non renseignée'}</Text>
+          <Button onPress={() => { toggleOverlay() }}><Text>Changer mon avatar</Text></Button>
 
           <Text>Prenom: {user.firstName}</Text>
           <Button><Text>Editer mon prénom</Text></Button>
@@ -42,7 +83,7 @@ function monCompteScreen(props) {
           <Text>Nom: {user.lastName}</Text>
           <Button><Text>Editer mon nom de famille</Text></Button>
 
-          <Text>Nationalité: {user.nationality !== undefined ? user.nationality : 'non renseignée' }</Text>
+          <Text>Nationalité: {user.nationality !== undefined ? user.nationality : 'non renseignée'}</Text>
           <Button><Text>Changer ma nationalité</Text></Button>
 
           <Text>Email: {user.email}</Text>
