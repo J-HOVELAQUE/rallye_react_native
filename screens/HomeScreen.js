@@ -83,7 +83,7 @@ function HomeScreen(props) {
           </View>
           <View style={{ alignItems: "center" }}>
             <Card style={{ width: "97%", flex: 1 }}>
-              <CardItem style={{ flexDirection: "column", alignItems: "left", flex: 1 }}>
+              <CardItem style={{ flexDirection: "column", alignItems: "flex-start", flex: 1 }}>
                 <RallyeH2 text="Programme du jour : 11/12/2020" />
 
                 <RallyeH3 text="Etape 1 : Paris / Orléans" />
@@ -94,7 +94,7 @@ function HomeScreen(props) {
 
           <View style={{ alignItems: "center" }}>
             <Card style={{ width: "97%", flex: 1 }}>
-              <CardItem style={{ flexDirection: "column", alignItems: "left", flex: 1 }}>
+              <CardItem style={{ flexDirection: "column", alignItems: "flex-start", flex: 1 }}>
 
                 <Text>Aujourd'hui trajet de Paris Grand Palais à la ville d'Orléans.</Text>
               </CardItem>
