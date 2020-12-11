@@ -27,7 +27,6 @@ function HomeScreen(props) {
           props.onRecordUserConnected(answer.user);
 
           const favorite = answer.user.favorite.map(fav => {
-
             const returnOb = {};
             returnOb._id = fav._id;
             returnOb.car_id = fav.car_id;

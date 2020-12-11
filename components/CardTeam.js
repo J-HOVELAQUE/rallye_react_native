@@ -14,10 +14,11 @@ function CardTeam(props) {
 
     const handleFavorite = async (numTeam, bib) => {
         console.log('team cliquée', numTeam)
-        let index = props.userFavorites.indexOf(numTeam)
+
+        const filteredFav = props.userFavorites.filter(fav => fav._id === numTeam);
 
         // Add or Remove this team from my favorites
-        if (index < 0) {
+        if (filteredFav.length < 1) {
             props.addFavoriteTeam({
                 _id: numTeam,
                 car_id: bib
