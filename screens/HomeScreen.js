@@ -86,27 +86,22 @@ function HomeScreen(props) {
         </Card>
         </View>
 
+        <View style={{alignItems:"center"}}>      
+        <Card style={{width:"99%",flex:1,}}>
 
-        <Card>
-        <Text>Itinéraire</Text>
-        </Card>
-
-        <Card style={{width:350,flex:1}}>
-        <CardItem > 
-
-        </CardItem>
         <CardItem>
-        <Image source={require('../assets/testmap.jpg')} style={{height: 180,  flex: 1}}/>
+        <Image source={require('../assets/testmap.jpg')} style={{height: 180,  flex: 1, borderColor: 'black'}}/>
         </CardItem> 
-        <CardItem>
-        <Body>
-
-        </Body>
-        </CardItem>
-        <CardItem>
-        <Text h4 style={{textAlign: 'center'}}>LIVE MAP</Text>
-        </CardItem>
+       
+        
         </Card>
+        <View style={{ flex: 1, alignItems:"center" ,flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
+        <Button style={{ flex:1 ,alignItems:"center",justifyContent:"center",backgroundColor:"red",width:"40%"}} onPress={() => props.navigation.navigate('Map')}>
+            <Icon name='locate' />
+            <Text >Live Map</Text>
+          </Button>
+       </View>
+        </View>
 
        
       
