@@ -6,20 +6,36 @@ import { Ionicons } from '@expo/vector-icons';
 // Importer la librairie de composants
 import { redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 
+const serverUrl = 'http://192.168.1.14:3000';
+
 export default function NewsScreen(props) {
 
   const [newsList, setNewsList] = useState([])
 
-  useEffect(() => {
-    const findNews = async () => {
-      const data = await fetch('/get-news')
-      const body = await data.json()
-      console.log(body)
-      setNewsList(body.title)
-    }
+  // useEffect(() => {
+  //   const rawAnswer = async fetch () => {
+  //     const data = await fetch('/get-news')
+  //     const body = await data.json()
+  //     console.log(body)
+  //     setNewsList(body.title)
+  //   }
 
-    findNews()
+  //   findNews()
+  // }, [])
+
+  useEffect(() => {
+
+    async function getNews() {
+      const rawAnswer = await fetch(`${serverUrl}/news/get-news`, {
+        method: 'GET',
+      });
+      let allNews = await rawAnswer.json();
+      setNewsList(allNews.news)
+    }
+    getNews()
   }, [])
+
+  console.log('NEWS : ', newsList.length)
 
 
   return (
