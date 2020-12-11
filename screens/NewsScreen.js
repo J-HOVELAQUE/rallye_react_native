@@ -12,17 +12,6 @@ export default function NewsScreen(props) {
 
   const [newsList, setNewsList] = useState([])
 
-  // useEffect(() => {
-  //   const rawAnswer = async fetch () => {
-  //     const data = await fetch('/get-news')
-  //     const body = await data.json()
-  //     console.log(body)
-  //     setNewsList(body.title)
-  //   }
-
-  //   findNews()
-  // }, [])
-
   useEffect(() => {
 
     async function getNews() {
