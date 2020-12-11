@@ -84,6 +84,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+    News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen
   }

@@ -1,126 +1,165 @@
-import React from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text,  } from 'native-base';
-import { View, Image,  } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Header, Content, Button, Icon, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text, } from 'native-base';
+import { View, Image, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
+// Importer la librairie de composants
+import { redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 
 export default function NewsScreen(props) {
 
-  return (
-    
+  const [newsList, setNewsList] = useState([])
 
+  useEffect(() => {
+    const findNews = async () => {
+      const data = await fetch('/get-news')
+      const body = await data.json()
+      console.log(body)
+      setNewsList(body.title)
+    }
+
+    findNews()
+  }, [])
+
+
+  return (
     <Container>
 
-<Header style={{ backgroundColor: '#313131' }}>
-    <Button style={{ backgroundColor: '#313131' }} onPress={() => props.navigation.openDrawer()}>
-      <Icon name='menu' style={{ color: 'white' }} />
-    </Button>
-  </Header>
+      <Header style={{ backgroundColor: greyDarkTa }}>
+        <Button style={{ backgroundColor: greyDarkTa }} onPress={() => props.navigation.openDrawer()}>
+          <Icon name='menu' style={{ color: whiteTa }} />
+        </Button>
+      </Header>
 
-        <Content>
+      <Content>
+        {newsList.map((news, i) => (
           <Card>
-            <CardItem>
+            <CardItem cardBody>
               <Left>
-                <Thumbnail source={{uri: '../assets/seb.jpeg'}} />
                 <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>GeekyAnts</Text>
+                  <Text>
+                    <RallyeH1 text={news.title} />
+                  </Text>
+                  <Image 
+                  source={news.image} 
+                  style={{ height: 200, width: null, flex: 1 }} 
+                  />
+                  <Text note>{news.description}</Text>
+                  <Text note style={{ color: redTa }} a href="#">Lire la suite <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
                 </Body>
               </Left>
             </CardItem>
-            <CardItem cardBody>
-              <Image source={{uri: 'Image URL'}} style={{height: 200, width: null, flex: 1}}/>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>12 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>4 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
           </Card>
-        </Content>
-      {/* </Container>
+        ))}
 
-    <Container style={{ backgroundColor: 'black' }}> */}
-     
-
-
-
-      <Content >
-
-        <Card style={{ width: '100%', flex: 1 }}>
-          <CardItem >
-            <Text>Date du jour</Text>
-          </CardItem>
-          <CardItem>
-            <Image 
-            source={require('../assets/seb.jpeg')} 
-            style={{ width: '100%', height: 380, flex: 1 }} 
-
-          />
-
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                <Image source={require('../assets/flag-french.png')} style={{ height: 10, width: 10, flex: 1 }} />
-          Pilote 1</Text>
-              <Text></Text>
-              <Text >
-                <Image source={require('../assets/flag-french.png')} style={{ height: 10, width: 10, flex: 1 }} />
-          Pilote 2</Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ullamcorper lectus turpis, et lacinia arisi, in congue metus tincidunt vel. Fusce ullamcorper ligula mi. Praesent placerat, nibh non posuere eleifende maximus nunc at interdt sodales purus.</Text>
-          </CardItem>
+        <Card style={{ flex: 0 }}>
           <CardItem>
             <Left>
-              <Icon name="heart" />
+              <Thumbnail square large source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607604492/260_ezshu6.jpg' }} />
+              <Body>
+                <Text><RallyeH3 text="Titre de la news" /></Text>
+                <Text note>NativeBase Toast can be used to display quick warning or error messages... <Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
+              </Body>
             </Left>
-
-            <Right>
-              <Icon name="locate" />
-            </Right>
           </CardItem>
         </Card>
+
       </Content>
 
       <Footer>
-        <FooterTab style={{ backgroundColor: '#313131', }}>
+        <FooterTab style={{ backgroundColor: greyDarkTa }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
             <Ionicons name='ios-home' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Home</Text>
+            <Text style={{ color: whiteTa, fontSize: 10 }}>Home</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Teams')}>
             <Ionicons name='ios-car' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Teams</Text>
+            <Text style={{ color: whiteTa, fontSize: 10 }}>Teams</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
             <Ionicons name='ios-trophy' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Classement</Text>
+            <Text style={{ color: whiteTa, fontSize: 10 }}>Classement</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
             <Ionicons name='ios-map' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Map</Text>
+            <Text style={{ color: whiteTa, fontSize: 10 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
             <Ionicons name='ios-images' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Medias</Text>
+            <Text style={{ color: whiteTa, fontSize: 10 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>
-      
+
     </Container>
-  );
+  )
+
 }
+
+//   return (
+
+//     <Container>
+
+//       <Header style={{ backgroundColor: greyDarkTa }}>
+//         <Button style={{ backgroundColor: greyDarkTa }} onPress={() => props.navigation.openDrawer()}>
+//           <Icon name='menu' style={{ color: whiteTa }} />
+//         </Button>
+//       </Header>
+
+
+
+//       <Content>
+//         <Card>
+//           <CardItem cardBody>
+//             <Left>
+//               <Body>
+//                 <Text><RallyeH1 text="Titre de la news" /></Text>
+//                 <Image source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607604492/260_ezshu6.jpg' }} style={{ height: 200, width: null, flex: 1 }}  />
+//                 <Text note>NativeBase Toast can be used to display quick warning or error messages Toast can be used to display quick warning or error messages... </Text>
+//                 <Text note style={{color: redTa}} a href="#">Lire la suite <Ionicons style={{color: redTa}} name='ios-arrow-dropright-circle'/></Text>
+//               </Body>
+//             </Left>
+//           </CardItem>
+//         </Card>
+
+//         <Card style={{flex: 0}}>
+//             <CardItem>
+//               <Left>
+//                 <Thumbnail square large source={{uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607604492/260_ezshu6.jpg'}} />
+//                 <Body>
+//                   <Text><RallyeH3 text="Titre de la news" /></Text>
+//                   <Text note>NativeBase Toast can be used to display quick warning or error messages... <Text note style={{color: redTa}} a href="#">Lire la suite </Text><Ionicons style={{color: redTa}} name='ios-arrow-dropright-circle'/></Text>
+//                 </Body>
+//               </Left>
+//             </CardItem>
+//           </Card>
+//       </Content>
+
+//       <Footer>
+//         <FooterTab style={{ backgroundColor: greyDarkTa }}>
+//           <Button onPress={() => props.navigation.navigate('Home')}>
+//             <Ionicons name='ios-home' size={25} color= 'white' />
+//             <Text style={{ color: whiteTa, fontSize: 10 }}>Home</Text>
+//           </Button>
+//           <Button onPress={() => props.navigation.navigate('Teams')}>
+//             <Ionicons name='ios-car' size={25} color='white' />
+//             <Text style={{ color: whiteTa, fontSize: 10 }}>Teams</Text>
+//           </Button>
+//           <Button onPress={() => props.navigation.navigate('Classement')}>
+//             <Ionicons name='ios-trophy' size={25} color='white' />
+//             <Text style={{ color: whiteTa, fontSize: 10 }}>Classement</Text>
+//           </Button >
+//           <Button onPress={() => props.navigation.navigate('Map')}>
+//             <Ionicons name='ios-map' size={25} color='white' />
+//             <Text style={{ color: whiteTa, fontSize: 10 }}>Map</Text>
+//           </Button>
+//           <Button onPress={() => props.navigation.navigate('Medias')}>
+//             <Ionicons name='ios-images' size={25} color='white' />
+//             <Text style={{ color: whiteTa, fontSize: 10 }}>Medias</Text>
+//           </Button>
+//         </FooterTab>
+//       </Footer>
+
+//     </Container>
+//   );
+// }
