@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, ScrollView, ScrollViewComponent, ScrollViewBase } from 'react-native';
 import { Overlay } from 'react-native-elements';
@@ -21,6 +21,13 @@ function CardTeam(props) {
     const urlFlagFR = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
     const team = props.infoTeam
+
+    useEffect(()=>{
+        const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
+        if(inFavorites.length > 0){
+            setStyleHeart({ color: 'red' })
+        }
+    }, [])
 
     const handleFavorite = async (numTeam, bib) => {
         console.log('team cliquée', numTeam)
