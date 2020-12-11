@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body ,Title, Container} from 'native-base';
-import { View, StyleSheet, ImageBackground, Image, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, ImageBackground, Image, TouchableHighlight,Picker } from 'react-native';
 import { connect } from 'react-redux'
+import { Input, Overlay } from 'react-native-elements'
 
 import CardTeam from '../components/CardTeam'
 
@@ -9,7 +10,7 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
 function Team(props) {
-
+  const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([])
 
   useEffect(() => {
@@ -51,6 +52,25 @@ function Team(props) {
         </Header>
 
       <Content style={{backgroundColor:"black"}}>
+      <View style={{ width: "100%", backgroundColor:"#E4E4E4"}}>
+      
+      <Picker
+        mode="dropdown"
+        
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150, backgroundColor:"#E4E4E4"}}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="General" value="General" />
+        <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
+        <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
+        <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
+      </Picker>
+      <Input placeholder='Rechercher' style={{backgroundColor:"#E4E4E4"}}></Input>
+      </View>
+
+
+
         {/* <CardTeam navigation={props.navigation} /> */}
         {teams}
 

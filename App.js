@@ -20,6 +20,8 @@ import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
+import monCompte from './screens/monCompte';
+
 
 import userConnected from './reducers/userConnected';
 import userFavorites from './reducers/userFavorites';
@@ -85,7 +87,8 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
     TeamPilot: TeamPilot,
-    Librairie: LibraryScreen
+    Librairie: LibraryScreen,
+    Mon_compte: monCompte
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -99,7 +102,8 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
     TeamPilot: TeamPilot,
-    Librairie: LibraryScreen
+    Librairie: LibraryScreen,
+    Mon_compte: monCompte
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
