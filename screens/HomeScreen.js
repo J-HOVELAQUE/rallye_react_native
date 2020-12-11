@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right } from 'native-base';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -21,11 +21,19 @@ function HomeScreen(props) {
             method: 'GET',
           });
           const answer = await rawAnswer.json();
-          // console.log('User trouvé en db', answer);
+
 
           //// Record user connected on the reduce store /////
-          props.onRecordUserConnected(answer.user)
-          props.retrieveFavoriteTeam(answer.user.favorite)
+          props.onRecordUserConnected(answer.user);
+
+          const favorite = answer.user.favorite.map(fav => {
+            const returnOb = {};
+            returnOb._id = fav._id;
+            returnOb.car_id = fav.car_id;
+            return returnOb;
+          })
+
+          props.retrieveFavoriteTeam(favorite);
         }
       } catch (e) {
         console.log('ERROR', e);
@@ -35,42 +43,40 @@ function HomeScreen(props) {
   }, [])
 
   return (
-<Container>
-    
-<Header style={{ backgroundColor: '#313131'}}>
-          <Left>
-            <Button transparent>
-              <Icon name='ios-people' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Home</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={() => props.navigation.openDrawer()}>
-              <Icon name='menu' />
-            </Button>
-          </Right>
-        </Header>
-        <ImageBackground source={require('../assets/fondCarbon.jpg')} style={{flex:1}}>
+    <Container>
 
-      <Content >
-      
-      <View style={{ flex: 1, alignItems:"center" ,flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-        <Button style={{ flex:1 ,alignItems:"center",justifyContent:"center",backgroundColor:"red",width:"40%"}} onPress={() => props.navigation.navigate('Login')}>
-            <Icon name='home' />
-            <Text >Login</Text>
+      <Header style={{ backgroundColor: '#313131' }}>
+        <Left>
+          <Button transparent>
+            <Icon name='ios-people' />
           </Button>
-       </View>   
-      
-      </Content>
+        </Left>
+        <Body>
+          <Title>Home</Title>
+        </Body>
+        <Right>
+          <Button transparent onPress={() => props.navigation.openDrawer()}>
+            <Icon name='menu' />
+          </Button>
+        </Right>
+      </Header>
+      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={{ flex: 1 }}>
 
-    </ImageBackground>
+        <Content >
+
+          <View style={{ flex: 1, alignItems: "center", flexDirection: 'row', justifyContent: 'space-between', margin: 5 }}>
+            <Button style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "red", width: "40%" }} onPress={() => props.navigation.navigate('Login')}>
+              <Icon name='home' />
+              <Text >Login</Text>
+            </Button>
+          </View>
+
+        </Content>
+
+      </ImageBackground>
     </Container>
   );
 }
-
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -80,7 +86,7 @@ function mapDispatchToProps(dispatch) {
         user: user
       })
     },
-    retrieveFavoriteTeam: function(listFavorites){
+    retrieveFavoriteTeam: function (listFavorites) {
       dispatch({
         type: 'retrieveFavoriteTeam',
         listFavorites: listFavorites
@@ -89,7 +95,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     favorites: state.userFavorites
   }

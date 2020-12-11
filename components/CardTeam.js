@@ -11,7 +11,6 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function CardTeam(props) {
 
-    // console.log('COMPONENT : ', props.userConnected.status)
     const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
     const [visible, setVisible] = useState(false);
 
@@ -22,15 +21,18 @@ function CardTeam(props) {
     const urlFlagFR = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
     const team = props.infoTeam
-    // console.log("my favoris : ", props.userFavorites)
 
-    const handleFavorite = async (numTeam) => {
+    const handleFavorite = async (numTeam, bib) => {
         console.log('team cliquée', numTeam)
-        let index = props.userFavorites.indexOf(numTeam)
+
+        const filteredFav = props.userFavorites.filter(fav => fav._id === numTeam);
 
         // Add or Remove this team from my favorites
-        if (index < 0) {
-            props.addFavoriteTeam(numTeam)
+        if (filteredFav.length < 1) {
+            props.addFavoriteTeam({
+                _id: numTeam,
+                car_id: bib
+            })
             setStyleHeart({ color: 'red' })
 
             // Add new favorite in BDD
@@ -120,7 +122,7 @@ function CardTeam(props) {
                     <Image source={{ uri: team.car.image }} style={{ height: 60, width: 90, flex: 1 }} />
                 </TouchableHighlight>
                 <Right>
-                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}
+                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
                     <Text></Text>
                     <Icon name="locate" onPress={() => {props.navigation.navigate('Map')}} />
                 </Right>
@@ -129,7 +131,6 @@ function CardTeam(props) {
 
     );
 }
-
 
 
 function mapDispatchToProps(dispatch) {
