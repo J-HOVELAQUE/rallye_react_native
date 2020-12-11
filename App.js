@@ -88,7 +88,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Profil: ProfilScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    Mon_compte: monCompte
+    'Mon compte': monCompte
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -98,12 +98,12 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
   {
     Menu: BottomNavigator,
     Login: LoginScreen,
-    Hebergement: HebergementScreen,
+    'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    Mon_compte: monCompte
+    'Mon compte': monCompte
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
