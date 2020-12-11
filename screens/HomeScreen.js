@@ -96,7 +96,7 @@ function HomeScreen(props) {
 
         </CardItem>
         <CardItem>
-        <Image source={require('../assets/flag-french.png')} style={{height: 180,  flex: 1}}/>
+        <Image source={require('../assets/testmap.jpg')} style={{height: 180,  flex: 1}}/>
         </CardItem> 
         <CardItem>
         <Body>
