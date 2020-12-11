@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground,Image } from 'react-native';
+import { StyleSheet, View, ImageBackground,Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right,Card,CardItem } from 'native-base';
+import { Text, Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right,Card,CardItem } from 'native-base';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
@@ -75,10 +75,31 @@ function HomeScreen(props) {
        </View>
 
 
+       <View style={{alignItems:"center"}}>  
+       <Card style={{width:"97%",flex:1}}>
+       <CardItem style= {{flexDirection:"column", alignItems:"left", flex:1}}>
+       <Title>Programme du jour : 11/12/2020 </Title>
+       <Title>Etape 1 : Paris / Orléans</Title>
+       </CardItem> 
+       </Card>
+       </View>
+
+       <View style={{alignItems:"center"}}>  
+       <Card style={{width:"97%",flex:1}}>
+       <CardItem style= {{flexDirection:"column", alignItems:"left", flex:1}}>
        
-        <View >
-        <Card>
-        <Text>Timetable</Text>
+       <Text>Aujourd'hui trajet de Paris Grand Palais à la ville d'Orléans.</Text>
+       </CardItem> 
+       </Card>
+       </View>
+
+
+
+
+
+        <View style={{alignItems:"center"}}>   
+        <Card style={{width:"97%",flex:1,}}>
+        <Title style={{alignItems:"left"}}>Etapes</Title>
         <Table borderStyle={{borderWidth: 1, borderColor: 'grey'}}>
           <Row data={HeadTable} />
           <Rows data={DataTable} />
@@ -87,7 +108,7 @@ function HomeScreen(props) {
         </View>
 
         <View style={{alignItems:"center"}}>      
-        <Card style={{width:"99%",flex:1,}}>
+        <Card style={{width:"97%",flex:1,}}>
 
         <CardItem>
         <Image source={require('../assets/testmap.jpg')} style={{height: 180,  flex: 1, borderColor: 'black'}}/>
