@@ -20,12 +20,6 @@ function MapScreen(props) {
   const [vehiculeToDisplay, setVehiculeToDisplay] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
 
-  // if (props.isFocused) {
-  //   const favList = props.userFavorites.map(fav => fav.car_id);
-  //   setUserFavorites(favList);
-  // }
-
-
   useEffect(() => {
     socket.on('sendPositionToAll', (msg) => {
       setVehiculeToDisplay(msg.allPosition)
@@ -47,6 +41,7 @@ function MapScreen(props) {
     return <Marker
       coordinate={{ latitude: car.lat, longitude: car.long }}
       title={car.idVehicule.toString()}
+      pinColor={car.color}
       key={i}
     />
   })
