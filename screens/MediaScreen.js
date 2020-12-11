@@ -1,8 +1,11 @@
 import React from 'react';
 
-import { View, Text, StyleSheet, ImageBackground , Image} from 'react-native';
+import { View, Text, StyleSheet, ImageBackground , Image,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Card,CardItem,Content } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+
+import Lightbox from 'react-native-lightbox';
+
+
 
 export default function MediaScreen(props) {
   return (
@@ -24,37 +27,41 @@ export default function MediaScreen(props) {
           </Right>
         </Header>
         <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
+
+
+
+
+
+
         <Content>
           <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
+            <ScrollView style={styles.container}>
+     <Lightbox underlayColor="white">
+      <Image
+        style={styles.contain}
+        resizeMode="contain"
+        source={{ uri: 'https://www.yayomg.com/wp-content/uploads/2014/04/yayomg-pig-wearing-party-hat.jpg' }}/>
+    </Lightbox>
+    </ScrollView>
+    <ScrollView style={styles.container}>
+     <Lightbox underlayColor="white">
+      <Image
+        style={styles.contain}
+        resizeMode="contain"
+        source={{ uri: 'https://www.yayomg.com/wp-content/uploads/2014/04/yayomg-pig-wearing-party-hat.jpg' }}/>
+    </Lightbox>
+    </ScrollView>
+    <ScrollView style={styles.container}>
+     <Lightbox underlayColor="white">
+      <Image
+        style={styles.contain}
+        resizeMode="contain"
+        source={{ uri: 'https://www.yayomg.com/wp-content/uploads/2014/04/yayomg-pig-wearing-party-hat.jpg' }}/>
+    </Lightbox>
+    </ScrollView>
+            
           </View>
-          <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row',justifyContent: 'space-between',margin:5}}>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-            <Image source={require('../assets/206.jpg')} style={{height: 90, width: 110}}/>
-          </View>
+          
           
 
 
@@ -63,8 +70,5 @@ export default function MediaScreen(props) {
       </Container>
       
   )}
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    }
-  })
+  const styles = StyleSheet.create({contain: {flex: 1,height: 150,}, container: {flex: 1,}});
+  
