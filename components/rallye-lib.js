@@ -45,23 +45,23 @@ const UserInput = ({ placeholder, onChangeText }) => {
     onChangeText={onChangeText}
   />;
 }
-const EmailInput = ({onChangeText }) => {
+const EmailInput = ({ onChangeText }) => {
   return <Input
     placeholder='Votre adresse email'
     leftIcon={
       <FontAwesome name="envelope" size={16} color={greyLightTa} />
     }
-    onChangeText= {onChangeText}
+    onChangeText={onChangeText}
   />;
 }
-const PasswordInput = ({onChangeText}) => {
+const PasswordInput = ({ onChangeText }) => {
   return <Input
     secureTextEntry={true}
     placeholder='Mot de passe'
     leftIcon={
       <FontAwesome name="unlock-alt" size={16} color={greyLightTa} />
     }
-    onChangeText= {onChangeText}
+    onChangeText={onChangeText}
     //onChangeText={value => this.setState({ comment: value })}
     // Activer ou désactiver l'oeil pour voir le mot de passe tapé
     rightIcon={
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     color: whiteTa,
-    alignSelf: 'center',
+
   },
   redButtonContainerOutline: {
     borderWidth: 1,
@@ -196,7 +196,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     color: redTa,
-    alignSelf: 'center',
   },
   greyButtonContainer: {
     backgroundColor: greyDarkTa,
@@ -209,7 +208,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     color: whiteTa,
-    alignSelf: 'center',
   },
   greyButtonContainerOutline: {
     borderWidth: 1,
@@ -224,7 +222,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     color: greyDarkTa,
-    alignSelf: 'center',
   },
   rallyeInput: {
     backgroundColor: whiteTa,
