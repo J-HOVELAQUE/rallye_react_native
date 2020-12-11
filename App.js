@@ -22,6 +22,7 @@ import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
 import monCompte from './screens/monCompte';
 
+import NewsScreen from './screens/NewsScreen';
 
 import userConnected from './reducers/userConnected';
 import userFavorites from './reducers/userFavorites';
@@ -86,6 +87,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+    News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
     'Mon compte': monCompte
@@ -101,6 +103,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
+    News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
     'Mon compte': monCompte
@@ -114,6 +117,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
+    News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen
   }

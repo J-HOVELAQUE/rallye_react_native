@@ -78,7 +78,6 @@ function Team(props) {
         </View>
       </Content>
 
-
     </Container>
   );
 }

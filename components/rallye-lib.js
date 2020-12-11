@@ -232,6 +232,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     alignItems: 'center',
   },
+  legend: {
+    position: 'absolute',
+    top: -10,
+    left: 10,
+    fontWeight: 'bold',
+    backgroundColor: '#FFFFFF'
+  }
 })
 
 export {
