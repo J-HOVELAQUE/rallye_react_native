@@ -70,9 +70,6 @@ function Team(props) {
         </View>
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
-
-
-          {/* <CardTeam navigation={props.navigation} /> */}
           {teams}
 
         </View>
