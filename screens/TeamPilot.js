@@ -26,7 +26,8 @@ export default function Team(props) {
         
       <Content>
 
-        <Card style={{width:350,flex:1}}>
+      <View style={{alignItems:"center"}}>       
+      <Card style={{width:"90%",flex:1,}}>
         <CardItem > 
             
               <Text>#001</Text>
@@ -59,6 +60,7 @@ export default function Team(props) {
             </Right>
           </CardItem>
         </Card>
+        </View>
 
 
       </Content>

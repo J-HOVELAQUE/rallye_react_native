@@ -68,12 +68,14 @@ function Team(props) {
           </Picker>
           <Input placeholder='Rechercher' style={{ backgroundColor: "#E4E4E4" }}></Input>
         </View>
+        <View style={{ marginTop: 10, alignItems: "center" }}>
 
 
 
-        {/* <CardTeam navigation={props.navigation} /> */}
-        {teams}
+          {/* <CardTeam navigation={props.navigation} /> */}
+          {teams}
 
+        </View>
       </Content>
 
 

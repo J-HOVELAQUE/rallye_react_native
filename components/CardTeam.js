@@ -52,9 +52,9 @@ function CardTeam(props) {
     }
 
     return (
-        <Card style={{ width: 350, flex: 1 }}>
+        <Card style={{ width: "90%", flex: 1 }}>
             <CardItem >
-                <Left style={{ marginRight: -20, marginLeft: -15 }}>
+                <Left >
                     <Text>#{team.car_id}</Text>
                 </Left>
                 <Body>
