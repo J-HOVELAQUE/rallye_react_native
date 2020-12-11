@@ -1,8 +1,19 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground,Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right,Card,CardItem } from 'native-base';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+
+
+const HeadTable = ['Horaires', 'Itinéraires'];
+const DataTable =  [
+    ['09H00', 'Paris / Nemours'],
+    ['10H30', 'Pause Nemours'],
+    ['10H45', 'Nemours / Orléans'],
+  ];
+
+
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -61,7 +72,43 @@ function HomeScreen(props) {
             <Icon name='home' />
             <Text >Login</Text>
           </Button>
-       </View>   
+       </View>
+
+
+       
+        <View >
+        <Card>
+        <Text>Timetable</Text>
+        <Table borderStyle={{borderWidth: 1, borderColor: 'grey'}}>
+          <Row data={HeadTable} />
+          <Rows data={DataTable} />
+        </Table>
+        </Card>
+        </View>
+
+
+        <Card>
+        <Text>Itinéraire</Text>
+        </Card>
+
+        <Card style={{width:350,flex:1}}>
+        <CardItem > 
+
+        </CardItem>
+        <CardItem>
+        <Image source={require('../assets/flag-french.png')} style={{height: 180,  flex: 1}}/>
+        </CardItem> 
+        <CardItem>
+        <Body>
+
+        </Body>
+        </CardItem>
+        <CardItem>
+        <Text h4 style={{textAlign: 'center'}}>LIVE MAP</Text>
+        </CardItem>
+        </Card>
+
+       
       
       </Content>
 
