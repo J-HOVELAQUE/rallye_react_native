@@ -145,7 +145,7 @@ export default function App() {
             method: 'GET',
           });
           const answer = await rawAnswer.json();
-          console.log('User trouvé en db : ', answer);
+
           setUserStatus(answer.user.status)
         }
 

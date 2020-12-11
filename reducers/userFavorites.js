@@ -9,6 +9,7 @@ export default function (userFavorites = [], action) {
     //         newFavorites.splice(index, 1)
     //     }
     //     return newFavorites
+
     if (action.type === 'addFavoriteTeam') {
         let newFavorites = [...userFavorites]
         newFavorites.push(action.numTeam)
@@ -19,8 +20,8 @@ export default function (userFavorites = [], action) {
         let index = newFavorites.indexOf(action.numTeam)
         newFavorites.splice(index, 1)
         return newFavorites
-        
-    } else if(action.type === 'retrieveFavoriteTeam'){
+
+    } else if (action.type === 'retrieveFavoriteTeam') {
         return action.listFavorites
     } else {
         return userFavorites

@@ -9,18 +9,19 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function CardTeam(props) {
 
-    // console.log('COMPONENT : ', props.userConnected.status)
     const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
     const team = props.infoTeam
-    // console.log("my favoris : ", props.userFavorites)
 
-    const handleFavorite = async (numTeam) => {
+    const handleFavorite = async (numTeam, bib) => {
         console.log('team cliquée', numTeam)
         let index = props.userFavorites.indexOf(numTeam)
 
         // Add or Remove this team from my favorites
         if (index < 0) {
-            props.addFavoriteTeam(numTeam)
+            props.addFavoriteTeam({
+                _id: numTeam,
+                car_id: bib
+            })
             setStyleHeart({ color: 'red' })
 
             // Add new favorite in BDD
@@ -48,12 +49,11 @@ function CardTeam(props) {
     function namePilot(firstName, lastName) {
         return (firstName.substr(0, 1).toUpperCase() + '. ' + lastName.toUpperCase())
     }
-    // console.log('INFO //// : ', team)
-    // console.log('RETOUR : ', namePilot(team.pilot_2.firstname, team.pilot_2.name))
+
     return (
         <Card style={{ width: 350, flex: 1 }}>
             <CardItem >
-                <Left style={{marginRight:-20, marginLeft: -15}}>
+                <Left style={{ marginRight: -20, marginLeft: -15 }}>
                     <Text>#{team.car_id}</Text>
                 </Left>
                 <Body>
@@ -66,10 +66,10 @@ function CardTeam(props) {
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
                 <TouchableHighlight onPress={() => props.navigation.navigate('TeamPilot')}>
-                    <Image source={{uri:team.car.image}} style={{ height: 60, width: 90, flex: 1 }} />
+                    <Image source={{ uri: team.car.image }} style={{ height: 60, width: 90, flex: 1 }} />
                 </TouchableHighlight>
                 <Right>
-                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}
+                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
                     <Text></Text>
                     <Icon name="locate" onPress={() => props.navigation.navigate('Map')} />
                 </Right>
@@ -78,7 +78,6 @@ function CardTeam(props) {
 
     );
 }
-
 
 
 function mapDispatchToProps(dispatch) {
