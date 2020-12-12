@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container, Row } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, Picker } from 'react-native';
 import { connect } from 'react-redux'
 import { Input, Overlay } from 'react-native-elements'
 
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CardTeam from '../components/CardTeam'
@@ -15,6 +15,7 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 function Team(props) {
   const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([])
+  const [searchTeam, setSearchTeam] = useState([])
 
   useEffect(() => {
 
@@ -39,7 +40,7 @@ function Team(props) {
 
       <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+          <Icon name='bars' size='25' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
 
         <Body>
@@ -47,16 +48,23 @@ function Team(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          <Icon name='user-circle' size='25' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
-      <Content style={{ backgroundColor: "black" }}>
-        <View style={{ width: "100%", backgroundColor: "#E4E4E4" }}>
+      <Content>
+        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: blackTa, color: whiteTa }}>
+          <SearchInput onChangeText={(val) => setSearchTeam(val)} placeholder='Rechercher...' />
+        </View>
+        <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
-          <Picker
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <RedButton onPress={() => props.navigation.navigate('Regularite')} title="Régularité" />
+            <RedButtonOutline onPress={() => props.navigation.navigate('Competition')} title="Compétition" style={{ marginLeft: 20 }} />
+          </View>
+
+          {/* <Picker
             mode="dropdown"
-
             selectedValue={selectedValue}
             style={{ height: 50, width: 150, backgroundColor: "#E4E4E4" }}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
@@ -65,8 +73,9 @@ function Team(props) {
             <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
             <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
             <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
-          </Picker>
-          <Input placeholder='Rechercher' style={{ backgroundColor: "#E4E4E4" }}></Input>
+          </Picker> */}
+          {/* <searchInput onChangeText="Rechercher" /> */}
+
         </View>
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
@@ -78,9 +87,6 @@ function Team(props) {
     </Container>
   );
 }
-
-
-
 
 
 function mapDispatchToProps(dispatch) {

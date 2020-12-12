@@ -96,7 +96,7 @@ function HomeScreen(props) {
         <View style={{ marginHorizontal: 10 }}>
           <RallyeH1 text="ITINERAIRE" />
           <Image source={require('../assets/testmap.jpg')} style={{ height: 180, borderColor: blackTa }} />
-          <RedButton onPress={() => props.navigation.navigate('Map')} onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
+          <RedButton onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
         </View>
       </Content>
 

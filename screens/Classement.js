@@ -3,6 +3,8 @@ import { Header, Content, Container, Button, Icon, Card, CardItem, Text, Right, 
 import { View, StyleSheet, ImageBackground, Image, Picker } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { Input, Overlay } from 'react-native-elements'
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+
 
 const HeadTable = ['N°', 'Voiture', 'Nat1', 'Pilote 1', 'Temps'];
 const DataTable = [

@@ -156,7 +156,6 @@ function LoginScreen(props) {
                 onPress={() => { toggleOverlay() }}
               />
             </View>
-
           </Overlay>
 
           {/* <ScrollView> */}

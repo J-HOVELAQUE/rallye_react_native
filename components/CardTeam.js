@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, ScrollView, ScrollViewComponent, ScrollViewBase } from 'react-native';
 import { Overlay } from 'react-native-elements';
 import { connect } from 'react-redux'
+
+import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, redTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -11,21 +14,21 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function CardTeam(props) {
 
-    const [styleHeart, setStyleHeart] = useState({ color: 'gray' })
+    const [styleHeart, setStyleHeart] = useState({ color: greyDarkTa })
     const [visible, setVisible] = useState(false);
 
     const toggleOverlay = () => {
         setVisible(!visible);
         console.log(!visible)
     };
-    const urlFlagFR = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
+    const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
     const team = props.infoTeam
 
-    useEffect(()=>{
+    useEffect(() => {
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
-        if(inFavorites.length > 0){
-            setStyleHeart({ color: 'red' })
+        if (inFavorites.length > 0) {
+            setStyleHeart({ color: redTa })
         }
     }, [])
 
@@ -40,7 +43,7 @@ function CardTeam(props) {
                 _id: numTeam,
                 car_id: bib
             })
-            setStyleHeart({ color: 'red' })
+            setStyleHeart({ color: redTa })
 
             // Add new favorite in BDD
             const rawAnswer = await fetch(`${serverUrl}/user/add-favorite`, {
@@ -53,7 +56,7 @@ function CardTeam(props) {
 
         } else {
             props.removeFavoriteTeam(numTeam)
-            setStyleHeart({ color: 'gray' })
+            setStyleHeart({ color: greyDarkTa })
 
             // Remove favorite in BDD
             const rawAnswer = await fetch(`${serverUrl}/user/remove-favorite`, {
@@ -73,65 +76,71 @@ function CardTeam(props) {
         return (firstName.substr(0, 1).toUpperCase() + firstName.substr(1) + ' ' + lastName.toUpperCase())
     }
 
-    function flagNationality(nationality){
-        if(nationality === 'fra'){
-            return urlFlagFR
-        } else if (nationality === 'che'){
+    function flagNationality(nationality) {
+        if (nationality === 'fra') {
+            return urlFlagFRA
+        } else if (nationality === 'che') {
             return urlFlagCHE
         } else {
-            return urlFlagFR // Mettre un drapeau du monde
+            return urlFlagFRA // Mettre un drapeau du monde
         }
     }
     // console.log('INFO //// : ', team)
     // console.log('RETOUR : ', namePilot(team.pilot_2.firstname, team.pilot_2.name))
     return (
-        <Card style={{ width: "90%", flex: 1 }}>
+        <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
-                <Left >
-                    <Text>#{team.car_id}</Text>
+                <Left>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>#{team.car_id}</Text>
                 </Left>
                 <Body>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{uri: flagNationality(team.pilot_1.nationality)}} style={{ height: 10, width: 10, flex: 1 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 5, width: 10, flex: 1 }} />
                         {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
                     <Text></Text>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{uri: flagNationality(team.pilot_1.nationality)}} style={{ height: 10, width: 10, flex: 1 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 5, width: 10, flex: 1 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
 
                 <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
-                    <View style={{ height: '90%', width: '90%', flex: 1 }}>
-                        <Image source={{ uri: team.car.image }} style={{ height: 250, width: null, flex: 1 }} />
-                        <Body><Text>#{team.car_id}</Text>
-                            <Text>
-                                <Image source={{uri: flagNationality(team.pilot_1.nationality)}} style={{ height: 10, width: 10, flex: 1 }} />
+                    <View style={{ width: '100%', flex: 1, marginTop: 20 }}>
+                        <Body>
+                            <Text>{props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size="25x" style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}</Text>
+                            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 35, color: redTa, }}>#{team.car_id}</Text>
+                            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.brand}</Text>
+                            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.model} - {team.car.year}</Text>
+
+                            <Text><Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
                                 {fullNamePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
-                            <Text></Text>
-                            <Text>
-                                <Image source={{uri: flagNationality(team.pilot_1.nationality)}} style={{ height: 10, width: 10, flex: 1 }} />
+
+                            <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                                 {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
+
+                            <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
+
+                            <ScrollView>
+                            <RallyeH2 text='Palmarés' />
+                            <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
+                            <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
+                            <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
+
+                            <Icon name="map-marker" size='25x' onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
+
+                            <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
+                            </ScrollView>
                         </Body>
-                        <ScrollView><Text>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
-                        </ScrollView>
-                            {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}
-                    
-                            <Icon name="locate" onPress={() => {toggleOverlay() ; props.navigation.navigate('Map')}} />
-                        
-                        <Button onPress={() => { toggleOverlay() }} style={{marginTop: 10}} >
-                            <Text>Revenir aux équipes</Text>
-                        </Button>
+
+
                     </View>
                 </Overlay>
 
                 <TouchableHighlight onPress={() => { toggleOverlay() }}>
-
-                    <Image source={{ uri: team.car.image }} style={{ height: 60, width: 90, flex: 1 }} />
+                    <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
                 </TouchableHighlight>
-                <Right>
-                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
-                    <Text></Text>
-                    <Icon name="locate" onPress={() => {props.navigation.navigate('Map')}} />
+                <Right style={{ alignItems: 'center' }}>
+                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size='25x ' style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
+                    <Icon name="map-marker" size='25x' onPress={() => { props.navigation.navigate('Map') }} />
                 </Right>
             </CardItem>
         </Card>
