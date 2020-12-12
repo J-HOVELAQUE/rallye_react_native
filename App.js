@@ -3,13 +3,11 @@ import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { AsyncStorage, Text } from 'react-native';
 
-
-
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
@@ -58,18 +56,18 @@ var BottomNavigator = createBottomTabNavigator(
       tabBarIcon: ({ tintColor }) => {
         var iconName;
         if (navigation.state.routeName === 'Home') {
-          iconName = 'ios-home';
+          iconName = 'tachometer';
         } else if (navigation.state.routeName === 'Teams') {
-          iconName = 'ios-car';
+          iconName = 'car';
         } else if (navigation.state.routeName === 'Classement') {
-          iconName = 'ios-trophy';
+          iconName = 'trophy';
         } else if (navigation.state.routeName === 'Map') {
-          iconName = 'ios-map';
+          iconName = 'map';
         } else if (navigation.state.routeName === 'Medias') {
-          iconName = 'ios-images';
+          iconName = 'image';
         }
 
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        return <Icon name={iconName} size='20x' color={tintColor} />;
       },
     }),
     tabBarOptions: {

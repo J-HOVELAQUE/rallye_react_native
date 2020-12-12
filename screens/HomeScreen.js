@@ -83,7 +83,7 @@ function HomeScreen(props) {
         <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
           <RallyeH1 text="PROGRAMME DU JOUR" />
           <Text style={{ marginBottom: 10, color: greyLightTa }}>Horaires de départ des premières voitures</Text>
-          <Table borderStyle={{ borderWidth: 1, borderColor: 'grey' }}>
+          <Table borderStyle={{ borderWidth: 1, borderColor: greyDarkTa }}>
             <Row data={HeadTable} />
             <Rows data={DataTable} />
           </Table>

@@ -37,7 +37,7 @@ function Team(props) {
   return (
     <Container>
 
-<Header style={{ backgroundColor: greyDarkTa }}>
+      <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
           <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>

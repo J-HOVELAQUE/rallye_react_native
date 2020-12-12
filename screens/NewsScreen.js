@@ -38,7 +38,7 @@ export default function NewsScreen(props) {
         </Left>
 
         <Body>
-          <Text style={{ color: whiteTa }}>HOME</Text>
+          <Text style={{ color: whiteTa }}>NEWS</Text>
         </Body>
 
         <Right>
@@ -85,26 +85,26 @@ export default function NewsScreen(props) {
       </Content>
 
       <Footer>
-        <FooterTab style={{ backgroundColor: greyDarkTa }}>
+        <FooterTab style={{ backgroundColor: greyDarkTa, }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Ionicons name='ios-home' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Home</Text>
+            <Icon name='tachometer' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')}>
-            <Ionicons name='ios-car' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Teams</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')} >
+            <Icon name='car' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Ionicons name='ios-trophy' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Classement</Text>
+            <Icon name='trophy' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Ionicons name='ios-map' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Map</Text>
+            <Icon name='map' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Ionicons name='ios-images' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Medias</Text>
+            <Icon name='image' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>

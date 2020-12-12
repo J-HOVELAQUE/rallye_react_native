@@ -53,11 +53,11 @@ export default function Team(props) {
             </CardItem>
             <CardItem>
               <Left>
-                <Icon name="heart" />
+                <Icon name="heart" size='25x' />
               </Left>
 
               <Right>
-                <Icon name="locate" onPress={() => props.navigation.navigate('Map')} />
+                <Icon name='map-marker' size='25x' onPress={() => props.navigation.navigate('Map')} />
               </Right>
             </CardItem>
           </Card>

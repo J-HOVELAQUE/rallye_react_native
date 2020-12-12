@@ -1,7 +1,9 @@
 import React from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion,Left,Title,Body,Right } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
 import { Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
+import { greyDarkTa, whiteTa, } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const dataArray = [
   { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
@@ -11,12 +13,10 @@ const dataArray = [
 
 export default function HebergementScreen(props) {
 
-
   return (
-    
 
-<Container >
-<Header style={{ backgroundColor: greyDarkTa }}>
+    <Container >
+      <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
           <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
@@ -41,26 +41,26 @@ export default function HebergementScreen(props) {
       </Content>
 
       <Footer>
-        <FooterTab style={{ backgroundColor: '#313131', }}>
+        <FooterTab style={{ backgroundColor: greyDarkTa, }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Ionicons name='ios-home' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize:10}}>Home</Text>
+            <Icon name='tachometer' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')}>
-            <Ionicons name='ios-car' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize:10 }}>Teams</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')} >
+            <Icon name='car' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Ionicons name='ios-trophy' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize:10 }}>Classement</Text>
+            <Icon name='trophy' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Ionicons name='ios-map' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize:10 }}>Map</Text>
+            <Icon name='map' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Ionicons name='ios-images' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize:10 }}>Medias</Text>
+            <Icon name='image' size='20x' style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>
