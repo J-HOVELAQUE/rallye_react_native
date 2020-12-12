@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text, } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text, } from 'native-base';
 import { View, Image, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 // Importer la librairie de composants
-import { redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
+import { RallyeH1, RallyeH3, greyDarkTa, whiteTa, icoWhite, redTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.14:3000';
@@ -32,9 +33,17 @@ export default function NewsScreen(props) {
     <Container>
 
       <Header style={{ backgroundColor: greyDarkTa }}>
-        <Button style={{ backgroundColor: greyDarkTa }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: whiteTa }} />
-        </Button>
+        <Left>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>HOME</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+        </Right>
       </Header>
 
       <Content>
@@ -49,9 +58,9 @@ export default function NewsScreen(props) {
                   <Text>
                     <RallyeH1 text={news.title} />
                   </Text>
-                  <Image 
-                  source={news.image} 
-                  style={{ height: 200, width: null, flex: 1 }} 
+                  <Image
+                    source={news.image}
+                    style={{ height: 200, width: null, flex: 1 }}
                   />
                   <Text note>{news.description}</Text>
                   <Text note style={{ color: redTa }} a href="#">Lire la suite <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>

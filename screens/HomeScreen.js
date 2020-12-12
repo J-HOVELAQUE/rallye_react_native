@@ -56,16 +56,15 @@ function HomeScreen(props) {
 
       <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Button transparent>
-            <Icon name='ios-contact' style={{ color: icoWhite, marginLeft: 10 }} />
-          </Button>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
+
         <Body>
           <Text style={{ color: whiteTa }}>HOME</Text>
         </Body>
 
         <Right>
-          <Icon name='menu' style={{ color: icoWhite }} onPress={() => { props.navigation.navigate('Login') }} />
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 

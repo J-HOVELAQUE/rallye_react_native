@@ -1,25 +1,43 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { Text, Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right, Card, CardItem } from 'native-base';
 import { Divider } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 // Importer la librairie de composants
 import {
+    greyDarkTa, whiteTa, blackTa, redTa, greyLightTa,
     RedButton, RedButtonOutline,
     GreyButton, GreyButtonOutline,
     RallyeH1, RallyeH2, RallyeH3,
     ProfilAvatar, EditProfilAvatar,
     FacebookSocialIco, TwitterSocialIco, InstagramSocialIco, YouTubeSocialIco, LinkedinSocialIco,
-    UserInput, EmailInput, PasswordInput
+    UserInput, EmailInput, PasswordInput, icoWhite
 } from '../components/rallye-lib';
 
 
-export default function LibraryScreen() {
+export default function LibraryScreen(props) {
     var nom = () => {
         console.log("HELLO");
     };
 
     return (
+<Container>
+
+<Header style={{ backgroundColor: greyDarkTa }}>
+        <Left>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>LIBRAIRIE &amp; STYLES</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate() }} />
+        </Right>
+      </Header>
 
         <View style={{ flex: 1, backgroundColor: '', alignItems: "center" }}><Text>Librairie</Text>
             <ScrollView>
@@ -65,6 +83,7 @@ export default function LibraryScreen() {
 
             </ScrollView>
         </View>
+        </Container>
     );
 }
 

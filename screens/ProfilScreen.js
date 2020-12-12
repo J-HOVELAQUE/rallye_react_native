@@ -1,28 +1,29 @@
 import React from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Right,Left,Body,Container,Footer,FooterTab,Title } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Right,Left,Body,Container,Footer,FooterTab,Title } from 'native-base';
 import { View,Image,Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
+import { greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export default function ProfilScreen(props) {
 
   return (
     <Container style={{ backgroundColor: 'black' }}>
-      <Header style={{ backgroundColor: '#313131'}}>
-          <Left>
-            <Button transparent>
-            <Icon name='ios-people' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Hebergement</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={() => props.navigation.openDrawer()}>
-              <Icon name='menu' />
-            </Button>
-          </Right>
-        </Header>
+      <Header style={{ backgroundColor: greyDarkTa }}>
+        <Left>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>MON PROIL</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+        </Right>
+      </Header>
 
       
 
@@ -53,11 +54,11 @@ export default function ProfilScreen(props) {
   </CardItem>
     <CardItem>
     <Left>
-        <Icon name="heart" />
+        <Icon name='heart' size='25x' />
     </Left>
       
-    <Right>
-      <Icon name="locate" />
+    <Right><Text>Gélocolaliser
+      <Icon name='map-marker' size='25x' /></Text>
     </Right>
   </CardItem>
 </Card>

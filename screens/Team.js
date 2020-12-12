@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Text, Right, Left, Body, Title, Container } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, Picker } from 'react-native';
 import { connect } from 'react-redux'
 import { Input, Overlay } from 'react-native-elements'
+
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CardTeam from '../components/CardTeam'
 
@@ -34,20 +37,17 @@ function Team(props) {
   return (
     <Container>
 
-
-      <Header style={{ backgroundColor: '#313131' }}>
+<Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Button transparent>
-            <Icon name='ios-people' />
-          </Button>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
+
         <Body>
-          <Title>Les Equipes</Title>
+          <Text style={{ color: whiteTa }}>LISTE DES ENGAGES</Text>
         </Body>
+
         <Right>
-          <Button transparent onPress={() => props.navigation.openDrawer()}>
-            <Icon name='menu' />
-          </Button>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 

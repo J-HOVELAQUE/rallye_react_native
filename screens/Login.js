@@ -3,12 +3,13 @@ import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage, Divider } f
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { Header, Content, Button, Icon, Card, CardItem,Footer,FooterTab, Right, Left, Body ,Title, Container} from 'native-base';
+import { Header, Content, Button, Card, CardItem, Footer, FooterTab, Right, Left, Body, Title, Container } from 'native-base';
 
 // Importer la librairie de composants
 import {
-  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput
+  redTa, whiteTa, icoWhite, blackTa, greyDarkTa, greyLightTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput
 } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -129,24 +130,22 @@ function LoginScreen(props) {
 
   return (
     <Container>
-    <Header style={{ backgroundColor: '#313131'}}>
-              <Left>
-                <Button transparent>
-                <Icon name='arrow-back' style={{ color: 'white' }}  onPress={() => props.navigation.navigate('Home')}/>
-                </Button>
-              </Left>
-              <Body>
-                <Title>Login</Title>
-              </Body>
-              <Right>
-                <Button transparent onPress={() => props.navigation.openDrawer()}>
-                  <Icon name='menu' />
-                </Button>
-              </Right>
-            </Header>
+      <Header style={{ backgroundColor: greyDarkTa }}>
+        <Left>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>INSCRIPTION / CONNECTION</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+        </Right>
+      </Header>
 
       <Content>
-        <View style={{ flex: 1, backgroundColor: '#FFFFFF', alignItems: "center", justifyContent: "center" }}>
+        <View style={{ flex: 1, backgroundColor: whiteTa, alignItems: "center", justifyContent: "center" }}>
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
               {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
@@ -163,8 +162,8 @@ function LoginScreen(props) {
           {/* <ScrollView> */}
           <RallyeH3 text="SE CONNECTER" />
 
-            <View 
-             style={{
+          <View
+            style={{
               width: '90%',
               alignItems: "center",
               justifyContent: "center",
@@ -177,21 +176,21 @@ function LoginScreen(props) {
               // backgroundColor: redTa,
             }}>
 
-             
 
-              {/* <KeyboardAvoidingView behavior="padding" enabled> */}
 
-              <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
+            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
 
-              <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
+            <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
 
-              <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
+            <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
 
-              {/* </KeyboardAvoidingView> */}
+            <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
 
-            </View>
+            {/* </KeyboardAvoidingView> */}
 
-            <RallyeH3 text="CREER UN COMPTE" />
+          </View>
+
+          <RallyeH3 text="CREER UN COMPTE" />
 
           <View style={{
             width: '90%',

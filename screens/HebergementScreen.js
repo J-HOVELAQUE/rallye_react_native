@@ -16,21 +16,19 @@ export default function HebergementScreen(props) {
     
 
 <Container >
-<Header style={{ backgroundColor: '#313131'}}>
-          <Left>
-            <Button transparent>
-            <Icon name='ios-people' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Hebergement</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={() => props.navigation.openDrawer()}>
-              <Icon name='menu' />
-            </Button>
-          </Right>
-        </Header>
+<Header style={{ backgroundColor: greyDarkTa }}>
+        <Left>
+          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>INFOS PRATIQUES</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+        </Right>
+      </Header>
 
       <Content>
         <Accordion
