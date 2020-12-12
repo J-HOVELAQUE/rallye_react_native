@@ -10,8 +10,15 @@ var whiteTa = '#FFFFFF'
 var blackTa = '#000000'
 var greyDarkTa = '#263238'
 var greyLightTa = '#B1B6B7'
+var icoWhite = '#FFFFFF'
 
 /* ^^^^^^^^^^^^^^^^^^^^ BOUTONS ^^^^^^^^^^^^^^^^^^^^ */
+// Bouton login
+const RedButtonLogin = ({ onPress, title, backgroundColor }) => {
+  return <TouchableOpacity onPress={onPress} style={[styles.redButtonLogin, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
+    <Text style={styles.redButtonText}>{title}</Text>
+  </TouchableOpacity>;
+}
 // Bouton inactif
 const RedButton = ({ onPress, title, backgroundColor }) => {
   return <TouchableOpacity onPress={onPress} style={[styles.redButtonContainer, backgroundColor && { backgroundColor }]} activityOpacity={0.5}>
@@ -78,21 +85,19 @@ const PasswordInput = ({ onChangeText }) => {
 const RallyeH1 = ({ text }) => {
   return <Text style={{
     fontFamily: 'Roboto_700Bold',
-    fontSize: 30,
+    fontSize: 25,
     color: greyDarkTa,
     textAlign: 'left',
-    letterSpacing: 0.6
   }}>
     {text}
   </Text>;
 }
 const RallyeH2 = ({ text }) => {
   return <Text style={{
-    fontFamily: 'Roboto_700Bold',
-    fontSize: 25,
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 20,
     color: greyDarkTa,
     textAlign: 'left',
-    letterSpacing: 0.6
   }}>
     {text}
   </Text>;
@@ -100,10 +105,9 @@ const RallyeH2 = ({ text }) => {
 const RallyeH3 = ({ text }) => {
   return <Text style={{
     fontFamily: 'Roboto_700Bold',
-    fontSize: 20,
+    fontSize: 15,
     color: greyDarkTa,
     textAlign: 'left',
-    letterSpacing: 0.6
   }}>
     {text}
   </Text>;
@@ -114,10 +118,9 @@ const RallyeH3 = ({ text }) => {
 const ProfilAvatar = () => {
   return <Avatar
     rounded
-    size="medium"
-    source={{
-      uri: 'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
-    }}
+    // source={{
+    //   uri: 'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
+    // }}
     onPress={() => console.log("Afficher mon profil")}
     activeOpacity={0.7}
     containerStyle={{ marginHorizontal: 20 }}
@@ -175,13 +178,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 28,
-    marginVertical: 14
+    marginVertical: 14,
+    alignItems: 'center'
+  },
+  redButtonLogin: {
+    backgroundColor: redTa,
+    borderRadius: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 2,
+    marginVertical: 14,
+    marginRight: 10,
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    width: '20%',
   },
   redButtonText: {
     fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     color: whiteTa,
-
   },
   redButtonContainerOutline: {
     borderWidth: 1,
@@ -190,7 +204,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 28,
-    marginVertical: 14
+    marginVertical: 14,
+    alignItems: 'center'
   },
   redButtonTextOutline: {
     fontFamily: 'Roboto_700Bold',
@@ -202,7 +217,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 28,
-    marginVertical: 14
+    marginVertical: 14,
+    alignItems: 'center'
   },
   greyButtonText: {
     fontFamily: 'Roboto_700Bold',
@@ -216,7 +232,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 28,
-    marginVertical: 14
+    marginVertical: 14,
+    alignItems: 'center'
   },
   greyButtonTextOutline: {
     fontFamily: 'Roboto_700Bold',
@@ -238,12 +255,13 @@ const styles = StyleSheet.create({
     left: 10,
     fontWeight: 'bold',
     backgroundColor: '#FFFFFF'
-  }
+  },
+
 })
 
 export {
-  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa,
-  RedButton, RedButtonOutline,
+  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa,icoWhite,
+  RedButtonLogin, RedButton, RedButtonOutline,
   GreyButton, GreyButtonOutline,
   RallyeH1, RallyeH2, RallyeH3,
   ProfilAvatar, EditProfilAvatar,

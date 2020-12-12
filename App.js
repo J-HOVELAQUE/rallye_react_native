@@ -3,6 +3,8 @@ import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { AsyncStorage, Text } from 'react-native';
 
+
+
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -20,7 +22,7 @@ import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
-import monCompte from './screens/monCompte';
+import MonCompte from './screens/MonCompte';
 
 import NewsScreen from './screens/NewsScreen';
 
@@ -33,10 +35,10 @@ import {
   useFonts,
   Roboto_300Light,
   Roboto_400Regular,
-  Roboto_500Medium,
   Roboto_700Bold,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
+import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
 const store = createStore(combineReducers({ userConnected, userFavorites }));
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -71,10 +73,10 @@ var BottomNavigator = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'red',
-      inactiveTintColor: 'white',
+      activeTintColor: redTa,
+      inactiveTintColor: whiteTa,
       style: {
-        backgroundColor: '#313131',
+        backgroundColor: greyDarkTa,
       }
     },
   }
@@ -90,7 +92,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    'Mon compte': monCompte
+    'Mon compte': MonCompte
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -106,7 +108,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    'Mon compte': monCompte
+    'Mon compte': MonCompte
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
@@ -132,7 +134,6 @@ export default function App() {
   let [fontsLoaded, error] = useFonts({
     Roboto_300Light,
     Roboto_400Regular,
-    Roboto_500Medium,
     Roboto_700Bold,
     Roboto_900Black,
   });
