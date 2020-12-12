@@ -130,8 +130,6 @@ function CardTeam(props) {
                             <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
                             </ScrollView>
                         </Body>
-
-
                     </View>
                 </Overlay>
 
