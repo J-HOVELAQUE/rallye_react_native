@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right } from 'native-base';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -6,17 +6,19 @@ import { connect } from 'react-redux';
 
 
 // const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.9:3000';
+const serverUrl = 'http://192.168.1.26:3000';
 
 
 
 function HebergementScreen(props) {
 
-  const dataArray = [
-    { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
-    { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
-    { title: "Navette", content: "Lorem ipsum dolor sit amet" }
-  ];
+
+
+  const [dataArray, setDataArray] = useState([]);
+
+  // { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
+  // { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
+  // { title: "Navette", content: "Lorem ipsum dolor sit amet" }
 
   useEffect(() => {
     const getData = async () => {
@@ -27,10 +29,18 @@ function HebergementScreen(props) {
       //// Getting data of accomodation and catering ////
 
 
-      // const rawAnswer = await fetch(`${serverUrl}/user/get-info?token=${value}`, {
-      //   method: 'GET'
-      // })
-      // const answer = await rawAnswer.json();
+      const rawAnswer = await fetch(`${serverUrl}/user/get-info?token=${props.userConnected.token}`, {
+        method: 'GET'
+      })
+      const answer = await rawAnswer.json();
+
+      const formatedAccomodation = <Text>{answer.accomodation[0].adress}</Text>
+
+      setDataArray([...dataArray, {
+        title: "Hebergement",
+        content: formatedAccomodation
+      }])
+      console.log(answer.accomodation);
 
     }
     getData()
