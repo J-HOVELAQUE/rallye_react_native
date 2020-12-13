@@ -87,11 +87,6 @@ function mapStateToProps(state) {
   }
 }
 
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(MapScreen);
-
 export default withNavigationFocus(connect(
   mapStateToProps,
   null
