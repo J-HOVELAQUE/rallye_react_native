@@ -16,6 +16,8 @@ function Team(props) {
   const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([]);
   const [searchTeam, setSearchTeam] = useState([]);
+  const [teamToDisplay, setTeamToDisplay] = useState([]);
+  const [displayButton, setDisplayButton] = useState('');
 
   useEffect(() => {
 
@@ -24,7 +26,8 @@ function Team(props) {
         method: 'GET',
       });
       let allTeamsInfos = await rawAnswer.json();
-      setAllTeams(allTeamsInfos.teams)
+      setAllTeams(allTeamsInfos.teams);
+      setTeamToDisplay(allTeamsInfos.teams);
     }
     getTeams()
   }, []);
@@ -39,8 +42,34 @@ function Team(props) {
 
   // console.log('FAVORITES', props.userFavorites);
 
-  let teams = allTeams.map((team, i) => {
+  const noFilter = () => {
+    const filteredTeams = allTeams;
+    // console.log("TOUS", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Tous');
+  }
+
+  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+
+  const filterRegularity = () => {
+    const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
+    // console.log("REGULARITY", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Reg');
+  }
+
+  const filterCompetition = () => {
+    const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
+    // console.log("COMPETITION", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Comp');
+  }
+
+  // console.log('FAVORITES', props.userFavorites);
+
+  let teams = teamToDisplay.map((team, i) => {
     return <CardTeam key={i} infoTeam={team} navigation={props.navigation} />
+
   })
 
   return (
@@ -67,8 +96,24 @@ function Team(props) {
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
-            <RedButton onPress={() => filterRegularity()} title="Régularité" />
-            <RedButtonOutline onPress={() => props.navigation.navigate('Competition')} title="Compétition" style={{ marginLeft: 20 }} />
+            {
+              displayButton == 'Tous' ?
+                <RedButton onPress={() => noFilter()} title="Tous" />
+                :
+                <RedButtonOutline onPress={() => noFilter()} title="Tous" />
+            }
+            {
+              displayButton == 'Reg' ?
+                <RedButton onPress={() => filterRegularity()} title="Régularité" />
+                :
+                <RedButtonOutline onPress={() => filterRegularity()} title="Régularité" />
+            }
+            {
+              displayButton == 'Comp' ?
+                <RedButton onPress={() => filterCompetition()} title="Compétition" />
+                :
+                <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
+            }
           </View>
 
           {/* <Picker
