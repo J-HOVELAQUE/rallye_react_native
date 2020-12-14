@@ -32,14 +32,6 @@ function Team(props) {
     getTeams()
   }, []);
 
-  // console.log('TEAMS', allTeams);
-
-  const filterRegularity = () => {
-    const filteredTeams = allTeams.filter(team => (team.category === "Basse" || team.category === "Intermédiaire" || team.category === 'Haute'));
-    console.log("REGULARITY", filteredTeams);
-    setAllTeams(filteredTeams);
-  }
-
   // console.log('FAVORITES', props.userFavorites);
 
   const noFilter = () => {
@@ -68,7 +60,7 @@ function Team(props) {
   // console.log('FAVORITES', props.userFavorites);
 
   let teams = teamToDisplay.map((team, i) => {
-    return <CardTeam key={i} infoTeam={team} navigation={props.navigation} />
+    return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
 
   })
 
