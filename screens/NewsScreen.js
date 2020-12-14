@@ -78,7 +78,7 @@ function NewsScreen(props) {
             <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')} >
+          <Button onPress={() => props.navigation.navigate('Pilotes')} >
             <Icon name='car' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>

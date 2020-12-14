@@ -80,7 +80,7 @@ function LoginScreen(props) {
       storeData();
 
       // AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
-      props.navigation.navigate('Map');
+      props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);

@@ -85,7 +85,7 @@ function CardTeam(props) {
         }
     }
     // console.log('INFO //// : ', team)
-    
+
     return (
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
@@ -115,16 +115,14 @@ function CardTeam(props) {
 
                             <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                                 {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
-
-                            <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
-
                             <ScrollView>
+                                <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
+
+
                                 <RallyeH2 text='Palmarés' />
                                 <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
                                 <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
                                 <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
-
-                                <Icon name="map-marker" size={25} onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
 
                                 <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
                             </ScrollView>
@@ -137,7 +135,6 @@ function CardTeam(props) {
                 </TouchableHighlight>
                 <Right style={{ alignItems: 'center' }}>
                     {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
-                    <Icon name="map-marker" size={25} onPress={() => { props.navigation.navigate('Map') }} />
                 </Right>
             </CardItem>
         </Card>
