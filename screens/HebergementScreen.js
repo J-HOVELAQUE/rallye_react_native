@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right } from 'native-base';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
+
+import { RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
+
 
 
 // const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -34,13 +37,18 @@ function HebergementScreen(props) {
       })
       const answer = await rawAnswer.json();
 
-      const formatedAccomodation = <Text>{answer.accomodation[0].adress}</Text>
+      const formatedAccomodation = <View>
+        <RallyeH3 text={answer.accomodation[0].name} />
+
+        <Text>{answer.accomodation[0].adress}</Text>
+
+      </View>
 
       setDataArray([...dataArray, {
         title: "Hebergement",
         content: formatedAccomodation
       }])
-      console.log(answer.accomodation);
+      console.log("ACCOMODATON", answer.accomodation);
 
     }
     getData()
