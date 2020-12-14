@@ -17,6 +17,7 @@ function Team(props) {
   const [allTeams, setAllTeams] = useState([]);
   const [searchTeam, setSearchTeam] = useState([]);
   const [teamToDisplay, setTeamToDisplay] = useState([]);
+  const [displayButton, setDisplayButton] = useState('');
 
   useEffect(() => {
 
@@ -39,12 +40,14 @@ function Team(props) {
     const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
     // console.log("REGULARITY", filteredTeams);
     setTeamToDisplay(filteredTeams);
+    setDisplayButton('Reg');
   }
 
   const filterCompetition = () => {
     const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
     console.log("COMPETITION", filteredTeams);
     setTeamToDisplay(filteredTeams);
+    setDisplayButton('Comp');
   }
 
   // console.log('FAVORITES', props.userFavorites);
@@ -78,8 +81,24 @@ function Team(props) {
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
-            <RedButton onPress={() => filterRegularity()} title="Régularité" />
-            <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" style={{ marginLeft: 20 }} />
+            {
+              displayButton == 'Tous' ?
+                <RedButton onPress={() => allTeams()} title="Tous" />
+                :
+                <RedButtonOutline onPress={() => allTeams()} title="Tous" />
+            }
+            {
+              displayButton == 'Reg' ?
+                <RedButton onPress={() => filterRegularity()} title="Régularité" />
+                :
+                <RedButtonOutline onPress={() => filterRegularity()} title="Régularité" />
+            }
+            {
+              displayButton == 'Comp' ?
+                <RedButton onPress={() => filterCompetition()} title="Compétition" />
+                :
+                <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
+            }
           </View>
 
           {/* <Picker

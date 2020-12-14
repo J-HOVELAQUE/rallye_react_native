@@ -95,11 +95,11 @@ function CardTeam(props) {
                 </Left>
                 <Body>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 5, width: 10 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
                     <Text></Text>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 5, width: 10 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
 
