@@ -33,6 +33,8 @@ function HebergementScreen(props) {
       })
       const answer = await rawAnswer.json();
 
+      console.log('herbergement //////// : ',answer.catering[0])
+
       //// Format all content field of accordion menu ////
       const formatedAccomodation =
         <View>
