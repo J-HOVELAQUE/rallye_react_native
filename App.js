@@ -90,7 +90,6 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     News: NewsScreen,
-    Librairie: LibraryScreen,
     'Mon compte': MonCompte,
     Video: Video,
     Photos: Photos
@@ -106,7 +105,6 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
     News: NewsScreen,
-    Librairie: LibraryScreen,
     'Mon compte': MonCompte,
     Video: Video,
     Photos: Photos  
@@ -121,7 +119,6 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     News: NewsScreen,
-    Librairie: LibraryScreen,
     Video: Video,
     Photos: Photos
   }

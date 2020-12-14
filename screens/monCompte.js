@@ -3,7 +3,8 @@ import { Container, Header, Content, Footer, FooterTab, Button, Left, Body, Titl
 import { View, Text } from 'react-native';
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, GreyButtonOutline } from '../components/rallye-lib';
@@ -172,7 +173,7 @@ function monCompteScreen(props) {
         </Body>
 
         <Right>
-          {props.user.status === undefined ?
+          {props.userConnected.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
             <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
@@ -219,7 +220,18 @@ function mapStateToProps(state) {
   }
 }
 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(monCompteScreen);

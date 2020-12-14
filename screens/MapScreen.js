@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -89,10 +90,22 @@ function MapScreen(props) {
 function mapStateToProps(state) {
   return {
     userFavorites: state.userFavorites,
+    user: state.userConnected
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
   }
 }
 
 export default withNavigationFocus(connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(MapScreen))

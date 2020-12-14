@@ -3,12 +3,14 @@ import { Container, Header, Content, Footer, FooterTab, Button, Left, Body, Titl
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Video } from 'expo-av';
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 
 import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default function ProgrammeScreen(props) {
+function VideoScreen(props) {
 
   return (
     <Container >
@@ -87,3 +89,25 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    userFavorites: state.userFavorites,
+    user: state.userConnected
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoScreen);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
 // import { Ionicons } from '@expo/vector-icons';
@@ -90,7 +91,7 @@ function HebergementScreen(props) {
         </Body>
 
         <Right>
-          {props.user.status === undefined ?
+          {props.userConnected.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
             <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
@@ -136,6 +137,17 @@ function HebergementScreen(props) {
   );
 }
 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
+  }
+}
+
 function mapStateToProps(state) {
   return {
     userConnected: state.userConnected,
@@ -144,5 +156,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(HebergementScreen);

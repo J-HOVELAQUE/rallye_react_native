@@ -2,6 +2,8 @@ import React, {useEffect,useState} from 'react';
 import {SafeAreaView,StyleSheet,View,FlatList,Image,ImageBackground ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Card,CardItem,Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 const App = () => {
 const [dataSource, setDataSource] = useState([
 

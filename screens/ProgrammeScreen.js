@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, FlatList, Image, ImageBackground, ScrollView } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content } from 'native-base';
 
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
+
 import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default function ProgrammeScreen(props) {
+function ProgrammeScreen(props) {
 
   return (
     <Container>
@@ -36,3 +39,26 @@ export default function ProgrammeScreen(props) {
 
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    userFavorites: state.userFavorites,
+    user: state.userConnected
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgrammeScreen);
