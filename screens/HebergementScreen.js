@@ -10,8 +10,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
 
 
 
@@ -32,6 +32,8 @@ function HebergementScreen(props) {
         method: 'GET'
       })
       const answer = await rawAnswer.json();
+
+      console.log('herbergement //////// : ',answer.catering[0])
 
       //// Format all content field of accordion menu ////
       const formatedAccomodation =

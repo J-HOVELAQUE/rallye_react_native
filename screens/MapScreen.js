@@ -37,7 +37,6 @@ function MapScreen(props) {
 
   const displayWithFavorite = vehiculeToDisplay.filter(car => userFavorites.includes(car.idVehicule.toString()));
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> DATA', displayWithFavorite);
 
   const markerVehicules = displayWithFavorite.map((car, i) => {
     return <Marker

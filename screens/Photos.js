@@ -37,7 +37,6 @@ var dataImage=[ 'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Cors
                 'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Corse-historique.jpeg',
 
 ]
-console.log(dataSource)
 
 var dataImage2 = dataImage.map((image,i)=>(
     
