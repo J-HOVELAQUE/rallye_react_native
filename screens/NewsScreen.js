@@ -54,43 +54,19 @@ function NewsScreen(props) {
 
       <Content>
         {newsList.map((news, i) => (
-          // if(i<50){
-          //   news[i].substr(1, 50)
-          // }
-          <Card>
+          <Card style={{ padding: 10 }} key={news}>
             <CardItem cardBody>
               <Left>
-                <Body>
-                  <Text>
-                    <RallyeH1 text={news.title} />
-                  </Text>
-                  <Image
-                    source={{uri : news.image}}
-                    style={{ height: 200, width: null}}
-                  />
-                  <Image
-  source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607702458/news2_tw7gfo.jpg' }}
-  style={{ width: null, height: 200 }}
-/>
-                  <Text note>{news.description}</Text>
-                  <Text note style={{ color: redTa }} a href="#">Lire la suite <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
-                </Body>
+              <Thumbnail square large source={{ uri: news.image }} />
+              <Body>
+              <Text><RallyeH3 text={news.title} /></Text>
+              <Text note>{news.description.slice(0, 100)} ...</Text>
+              <Text><Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
+              </Body>
               </Left>
             </CardItem>
           </Card>
         ))}
-
-        <Card style={{ flex: 0 }}>
-          <CardItem>
-            <Left>
-              <Thumbnail square large source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607604492/260_ezshu6.jpg' }} />
-              <Body>
-                <Text><RallyeH3 text="Titre de la news" /></Text>
-                <Text note>NativeBase Toast can be used to display quick warning or error messages... <Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
-              </Body>
-            </Left>
-          </CardItem>
-        </Card>
 
       </Content>
 
