@@ -14,8 +14,8 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function Team(props) {
   const [selectedValue, setSelectedValue] = useState("General");
-  const [allTeams, setAllTeams] = useState([])
-  const [searchTeam, setSearchTeam] = useState([])
+  const [allTeams, setAllTeams] = useState([]);
+  const [searchTeam, setSearchTeam] = useState([]);
 
   useEffect(() => {
 
@@ -27,9 +27,17 @@ function Team(props) {
       setAllTeams(allTeamsInfos.teams)
     }
     getTeams()
-  }, [])
+  }, []);
 
-  console.log('FAVORITES', props.userFavorites);
+  // console.log('TEAMS', allTeams);
+
+  const filterRegularity = () => {
+    const filteredTeams = allTeams.filter(team => (team.category === "Basse" || team.category === "Intermédiaire" || team.category === 'Haute'));
+    console.log("REGULARITY", filteredTeams);
+    setAllTeams(filteredTeams);
+  }
+
+  // console.log('FAVORITES', props.userFavorites);
 
   let teams = allTeams.map((team, i) => {
     return <CardTeam key={i} infoTeam={team} navigation={props.navigation} />
@@ -59,7 +67,7 @@ function Team(props) {
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
-            <RedButton onPress={() => props.navigation.navigate('Regularite')} title="Régularité" />
+            <RedButton onPress={() => filterRegularity()} title="Régularité" />
             <RedButtonOutline onPress={() => props.navigation.navigate('Competition')} title="Compétition" style={{ marginLeft: 20 }} />
           </View>
 

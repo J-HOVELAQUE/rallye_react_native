@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right } from 'native-base';
 import { Text, View } from 'react-native';
-=======
-import { Text } from 'react-native';
->>>>>>> styles
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
 // import { Ionicons } from '@expo/vector-icons';
-import { greyDarkTa, whiteTa, icoWhite, RallyeH2 } from '../components/rallye-lib';
+import { greyDarkTa, whiteTa, icoWhite, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 
 
 
@@ -27,10 +21,6 @@ function HebergementScreen(props) {
 
   const [dataArray, setDataArray] = useState([]);
 
-  // { title: "Hebergement", content: "Lorem ipsum dolor sit amet" },
-  // { title: "Restauration", content: "Lorem ipsum dolor sit amet" },
-  // { title: "Navette", content: "Lorem ipsum dolor sit amet" }
-
   useEffect(() => {
     const getData = async () => {
 
@@ -38,23 +28,44 @@ function HebergementScreen(props) {
       console.log('Connected', props.userConnected);
 
       //// Getting data of accomodation and catering ////
-
-
       const rawAnswer = await fetch(`${serverUrl}/user/get-info?token=${props.userConnected.token}`, {
         method: 'GET'
       })
       const answer = await rawAnswer.json();
 
-      const formatedAccomodation = <View>
-        <RallyeH3 text={answer.accomodation[0].name} />
+      //// Format all content field of accordion menu ////
+      const formatedAccomodation =
+        <View>
+          <RallyeH3 text={answer.accomodation[0].name} />
+          <Text>{answer.accomodation[0].adress}</Text>
+        </View>
 
-        <Text>{answer.accomodation[0].adress}</Text>
+      const formatedCatering =
+        <View>
+          <Text>{answer.catering[0].adress}</Text>
+        </View>
 
-      </View>
+      const formatedShuttle =
+        <View>
+          <RallyeH3 text={answer.accomodation[0].shuttle_point} />
+          <View>
+            {answer.accomodation[0].shuttle_hours.map(shuttle => { return <Text key={shuttle}>{shuttle}</Text> })}
 
+          </View>
+        </View >
+
+      //// Building the accordion menu ////
       setDataArray([...dataArray, {
         title: "Hebergement",
         content: formatedAccomodation
+      },
+      {
+        title: "Repas",
+        content: formatedCatering
+      },
+      {
+        title: "Navette",
+        content: formatedShuttle
       }])
       console.log("ACCOMODATON", answer.accomodation);
 
