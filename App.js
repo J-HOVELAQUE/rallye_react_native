@@ -17,7 +17,6 @@ import LoginScreen from './screens/Login';
 import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
-import ProfilScreen from './screens/ProfilScreen';
 import LibraryScreen from './screens/LibraryScreen';
 import MonCompte from './screens/MonCompte';
 import Photos from './screens/Photos';
@@ -53,9 +52,7 @@ var BottomNavigator = createBottomTabNavigator(
     Pilotes: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
-    Medias: MediaScreen,
-
-
+    Medias: MediaScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -90,18 +87,13 @@ var BottomNavigator = createBottomTabNavigator(
 const MyDrawerNavigatorFan = createDrawerNavigator(
   {
     Menu: BottomNavigator,
-    Home: HomeScreen,
-    Pilotes: TeamScreen,
-    Classement: ClassementScreen,
-    Photos: MediaScreen,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
-    Profil: ProfilScreen,
     News: NewsScreen,
     Librairie: LibraryScreen,
     'Mon compte': MonCompte,
     Video: Video,
-    Photos: Photos,
+    Photos: Photos
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -113,12 +105,11 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Login: LoginScreen,
     'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
-    Profil: ProfilScreen,
     News: NewsScreen,
     Librairie: LibraryScreen,
     'Mon compte': MonCompte,
     Video: Video,
-    Photos: Photos,
+    Photos: Photos  
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
@@ -132,7 +123,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     News: NewsScreen,
     Librairie: LibraryScreen,
     Video: Video,
-    Photos: Photos,
+    Photos: Photos
   }
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);

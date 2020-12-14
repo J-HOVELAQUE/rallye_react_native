@@ -57,10 +57,12 @@ var dataImage2 = dataImage.map((image,i)=>(
         <Title>Programme</Title>
       </Body>
       <Right>
-        <Button transparent onPress={() => navigation.openDrawer()}>
-          <Icon name='menu' />
-        </Button>
-      </Right>
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
+        </Right>
     </Header>
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
