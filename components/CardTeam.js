@@ -122,6 +122,10 @@ function CardTeam(props) {
                                 <RallyeH2 text='Palmarés' />
                                 <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
                                 <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
+                                
+                                
+
+                                {/* LIVE MAP UNIQUEMENT SI DANS FAVORIS */}
                                 <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
 
                                 <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />

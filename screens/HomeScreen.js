@@ -73,9 +73,6 @@ function HomeScreen(props) {
       </Header>
 
       <Content >
-        <View>
-          <RedButtonLogin onPress={() => { props.navigation.navigate('Login') }} title="Login" style={{ flex: 1, alignItems: 'flex-end' }} />
-        </View>
 
         <View style={{ marginLeft: 10 }}>
           <RallyeH1 text="ETAPE 1 : MARDI 1 SEPT." />

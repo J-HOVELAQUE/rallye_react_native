@@ -49,23 +49,23 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 var BottomNavigator = createBottomTabNavigator(
   {
-    Home: HomeScreen,
+    Accueil: HomeScreen,
     Pilotes: TeamScreen,
     Classement: ClassementScreen,
-    Map: MapScreen,
+    Live: MapScreen,
     Medias: MediaScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         var iconName;
-        if (navigation.state.routeName === 'Home') {
-          iconName = 'tachometer';
+        if (navigation.state.routeName === 'Accueil') {
+          iconName = 'home';
         } else if (navigation.state.routeName === 'Pilotes') {
           iconName = 'car';
         } else if (navigation.state.routeName === 'Classement') {
           iconName = 'trophy';
-        } else if (navigation.state.routeName === 'Map') {
+        } else if (navigation.state.routeName === 'Live') {
           iconName = 'map';
         } else if (navigation.state.routeName === 'Medias') {
           iconName = 'image';

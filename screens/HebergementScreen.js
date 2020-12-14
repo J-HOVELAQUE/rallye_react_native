@@ -111,9 +111,9 @@ function HebergementScreen(props) {
 
       <Footer>
         <FooterTab style={{ backgroundColor: greyDarkTa, }}>
-          <Button onPress={() => props.navigation.navigate('Home')}>
-            <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
+          <Button onPress={() => props.navigation.navigate('Accueil')}>
+            <Icon name='home' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Accueil</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Pilotes')} >
             <Icon name='car' size={20} style={{ color: whiteTa }} />
@@ -123,7 +123,7 @@ function HebergementScreen(props) {
             <Icon name='trophy' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
-          <Button onPress={() => props.navigation.navigate('Map')}>
+          <Button onPress={() => props.navigation.navigate('Live')}>
             <Icon name='map' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
