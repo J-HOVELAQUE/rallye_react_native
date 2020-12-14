@@ -10,8 +10,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
 
 
 
