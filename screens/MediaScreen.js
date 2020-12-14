@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Card, CardItem, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function MediaScreen(props) {
   return (
@@ -19,10 +21,11 @@ export default function MediaScreen(props) {
           <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
+
       <Content>
+
+
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-
-
           <Button style={{ flex: 1, justifyContent: "center", backgroundColor: "red", width: "40%" }} onPress={() => props.navigation.navigate('Photos')}>
             <Icon name='ios-images' />
             <Text >Photos</Text>
@@ -56,6 +59,7 @@ export default function MediaScreen(props) {
 
         </View>
       </Content>
+
     </View>
 
   )
