@@ -2,10 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 import {greyDarkTa, icoWhite, whiteTa} from '../components/rallye-lib'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function MediaScreen(props) {
+function MediaScreen(props) {
   return (
     <Container>
       <Header style={{ backgroundColor: greyDarkTa }}>
@@ -18,7 +20,11 @@ export default function MediaScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
         </Right>
       </Header>
       <Content>
@@ -63,3 +69,25 @@ export default function MediaScreen(props) {
   )
 }
 const styles = StyleSheet.create({ contain: { flex: 1, height: 150, }, container: { flex: 1, } });
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.userConnected
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MediaScreen);

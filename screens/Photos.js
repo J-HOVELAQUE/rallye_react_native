@@ -2,6 +2,8 @@ import React, {useEffect,useState} from 'react';
 import {SafeAreaView,StyleSheet,View,FlatList,Image,ImageBackground ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Card,CardItem,Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 const App = () => {
 const [dataSource, setDataSource] = useState([
 
@@ -57,10 +59,12 @@ var dataImage2 = dataImage.map((image,i)=>(
         <Title>Programme</Title>
       </Body>
       <Right>
-        <Button transparent onPress={() => navigation.openDrawer()}>
-          <Icon name='menu' />
-        </Button>
-      </Right>
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
+        </Right>
     </Header>
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 

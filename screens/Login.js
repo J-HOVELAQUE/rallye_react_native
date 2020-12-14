@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage, Divider } from 'react-native';
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
+// import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { Header, Content, Button, Card, CardItem, Footer, FooterTab, Right, Left, Body, Title, Container } from 'native-base';
 
@@ -140,7 +141,11 @@ function LoginScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
         </Right>
       </Header>
 
@@ -261,11 +266,22 @@ function mapDispatchToProps(dispatch) {
         type: 'record',
         user: user
       })
+    },
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
     }
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    user: state.userConnected,
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginScreen);

@@ -1,5 +1,5 @@
 export default function (userConnected = {}, action) {
-    if (action.type == 'record') {
+    if (action.type === 'record') {
         return {
             token: action.user.token,
             status: action.user.status,
@@ -9,6 +9,8 @@ export default function (userConnected = {}, action) {
             avatar: action.user.avatar,
             nationality : action.user.nationality
         };
+    } else if(action.type === 'reset'){
+        return {}
     } else {
         return userConnected;
     }

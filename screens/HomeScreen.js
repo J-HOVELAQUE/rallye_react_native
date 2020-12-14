@@ -64,7 +64,11 @@ function HomeScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
         </Right>
       </Header>
 
@@ -123,6 +127,11 @@ function mapDispatchToProps(dispatch) {
         user: user
       })
     },
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    },
     retrieveFavoriteTeam: function (listFavorites) {
       dispatch({
         type: 'retrieveFavoriteTeam',
@@ -134,7 +143,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    favorites: state.userFavorites
+    favorites: state.userFavorites,
+    user: state.userConnected
   }
 }
 

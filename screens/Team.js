@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container, Row } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, Picker } from 'react-native';
-import { connect } from 'react-redux'
+
+import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 import { Input, Overlay } from 'react-native-elements'
 
 import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
@@ -77,7 +79,11 @@ function Team(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          {props.userConnected.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
         </Right>
       </Header>
 
@@ -147,6 +153,11 @@ function mapDispatchToProps(dispatch) {
         type: 'removeFavoriteTeam',
         numTeam
       })
+    },
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
     }
   }
 }
@@ -162,3 +173,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Team);
+

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -61,7 +62,11 @@ function MapScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          {props.user.status === undefined ?
+            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+            :
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+          }
         </Right>
       </Header>
 
@@ -85,10 +90,22 @@ function MapScreen(props) {
 function mapStateToProps(state) {
   return {
     userFavorites: state.userFavorites,
+    user: state.userConnected
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetUserConnected: function () {
+      dispatch({
+        type: 'reset'
+      })
+    }
   }
 }
 
 export default withNavigationFocus(connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(MapScreen))
