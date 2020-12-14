@@ -22,6 +22,7 @@ import LibraryScreen from './screens/LibraryScreen';
 import MonCompte from './screens/MonCompte';
 import Photos from './screens/Photos';
 import Video from './screens/Video';
+import SnapScreen from './screens/SnapScreen';
 
 import NewsScreen from './screens/NewsScreen';
 
@@ -102,6 +103,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     'Mon compte': MonCompte,
     Video: Video,
     Photos: Photos,
+    Snap: SnapScreen
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -119,6 +121,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Mon compte': MonCompte,
     Video: Video,
     Photos: Photos,
+    Snap: SnapScreen
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
