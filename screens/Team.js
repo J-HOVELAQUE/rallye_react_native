@@ -33,7 +33,13 @@ function Team(props) {
 
   const filterRegularity = () => {
     const filteredTeams = allTeams.filter(team => (team.category === "Basse" || team.category === "Intermédiaire" || team.category === 'Haute'));
-    console.log("REGULARITY", filteredTeams);
+   // console.log("REGULARITY", filteredTeams);
+    setAllTeams(filteredTeams);
+  }
+
+  const filterCompetition = () => {
+    const filteredTeams = allTeams.filter(team => (team.category === "VHC" || team.category === "G/H/I"));
+    console.log("COMPETITION", filteredTeams);
     setAllTeams(filteredTeams);
   }
 
@@ -68,7 +74,7 @@ function Team(props) {
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <RedButton onPress={() => filterRegularity()} title="Régularité" />
-            <RedButtonOutline onPress={() => props.navigation.navigate('Competition')} title="Compétition" style={{ marginLeft: 20 }} />
+            <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" style={{ marginLeft: 20 }} />
           </View>
 
           {/* <Picker
