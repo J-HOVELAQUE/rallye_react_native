@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon ,Left,Body,Title,Right, Image  } from 'native-base';
 import { View, Text ,ImageBackground,StyleSheet} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Video } from 'expo-av';
 
 
 export default function ProgrammeScreen(props) {
@@ -13,11 +14,11 @@ export default function ProgrammeScreen(props) {
         
           <Left>
             <Button transparent>
-            <Icon name='ios-people' />
+            <Icon name='arrow-back' style={{ color: 'white' }}  onPress={() => props.navigation.navigate('Media')}/>
             </Button>
           </Left>
           <Body>
-            <Title>Programme</Title>
+            <Title>Video</Title>
           </Body>
           <Right>
             <Button transparent onPress={() => props.navigation.openDrawer()}>
@@ -28,9 +29,17 @@ export default function ProgrammeScreen(props) {
 <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
       <Content>
       
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: "red" }}>Page Programme</Text>
-        </View>
+      <Video
+  source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+  rate={1.0} 
+  volume={1.0}
+  isMuted={false}
+  resizeMode="cover"
+  shouldPlay
+  isLooping
+  style={{ width: 300, height: 300 }}
+/>
+
       </Content>
       </ImageBackground>
       
@@ -66,5 +75,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
-  }
-})
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+});
