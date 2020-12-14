@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right } from 'native-base';
 import { Text, View } from 'react-native';
+=======
+import { Text } from 'react-native';
+>>>>>>> styles
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
+import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
+// import { Ionicons } from '@expo/vector-icons';
+import { greyDarkTa, whiteTa, icoWhite, RallyeH2 } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 
@@ -55,21 +63,21 @@ function HebergementScreen(props) {
   }
     , [])
 
+
   return (
+
     <Container >
-      <Header style={{ backgroundColor: '#313131' }}>
+      <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Button transparent>
-            <Icon name='ios-people' />
-          </Button>
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
+
         <Body>
-          <Title>Hebergement</Title>
+          <Text style={{ color: whiteTa }}>INFOS PRATIQUES</Text>
         </Body>
+
         <Right>
-          <Button transparent onPress={() => props.navigation.openDrawer()}>
-            <Icon name='menu' />
-          </Button>
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
@@ -84,26 +92,26 @@ function HebergementScreen(props) {
       </Content>
 
       <Footer>
-        <FooterTab style={{ backgroundColor: '#313131', }}>
+        <FooterTab style={{ backgroundColor: greyDarkTa, }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Ionicons name='ios-home' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Home</Text>
+            <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')}>
-            <Ionicons name='ios-car' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Teams</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')} >
+            <Icon name='car' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Ionicons name='ios-trophy' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Classement</Text>
+            <Icon name='trophy' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Ionicons name='ios-map' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Map</Text>
+            <Icon name='map' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Ionicons name='ios-images' size={25} color='white' />
-            <Text style={{ color: 'white', fontSize: 10 }}>Medias</Text>
+            <Icon name='image' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>
