@@ -16,6 +16,7 @@ function Team(props) {
   const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([]);
   const [searchTeam, setSearchTeam] = useState([]);
+  const [teamToDisplay, setTeamToDisplay] = useState([]);
 
   useEffect(() => {
 
@@ -24,29 +25,33 @@ function Team(props) {
         method: 'GET',
       });
       let allTeamsInfos = await rawAnswer.json();
-      setAllTeams(allTeamsInfos.teams)
+      setAllTeams(allTeamsInfos.teams);
+      setTeamToDisplay(allTeamsInfos.teams);
     }
     getTeams()
   }, []);
 
   // console.log('TEAMS', allTeams);
 
+  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+
   const filterRegularity = () => {
-    const filteredTeams = allTeams.filter(team => (team.category === "Basse" || team.category === "Intermédiaire" || team.category === 'Haute'));
-   // console.log("REGULARITY", filteredTeams);
-    setAllTeams(filteredTeams);
+    const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
+    // console.log("REGULARITY", filteredTeams);
+    setTeamToDisplay(filteredTeams);
   }
 
   const filterCompetition = () => {
-    const filteredTeams = allTeams.filter(team => (team.category === "VHC" || team.category === "G/H/I"));
+    const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
     console.log("COMPETITION", filteredTeams);
-    setAllTeams(filteredTeams);
+    setTeamToDisplay(filteredTeams);
   }
 
   // console.log('FAVORITES', props.userFavorites);
 
-  let teams = allTeams.map((team, i) => {
+  let teams = teamToDisplay.map((team, i) => {
     return <CardTeam key={i} infoTeam={team} navigation={props.navigation} />
+
   })
 
   return (

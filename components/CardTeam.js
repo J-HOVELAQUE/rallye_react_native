@@ -95,11 +95,11 @@ function CardTeam(props) {
                 </Left>
                 <Body>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 5, width: 10, flex: 1 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 5, width: 10 }} />
                         {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
                     <Text></Text>
                     <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 5, width: 10, flex: 1 }} />
+                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 5, width: 10 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
 
@@ -120,14 +120,14 @@ function CardTeam(props) {
                             <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
 
                             <ScrollView>
-                            <RallyeH2 text='Palmarés' />
-                            <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
-                            <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
-                            <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
+                                <RallyeH2 text='Palmarés' />
+                                <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
+                                <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
+                                <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
 
-                            <Icon name="map-marker" size={25} onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
+                                <Icon name="map-marker" size={25} onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
 
-                            <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
+                                <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
                             </ScrollView>
                         </Body>
                     </View>
