@@ -34,7 +34,7 @@ function HebergementScreen(props) {
       })
       const answer = await rawAnswer.json();
 
-      console.log('herbergement //////// : ',answer.catering[0])
+      console.log('herbergement //////// : ', answer.catering[0])
 
       //// Format all content field of accordion menu ////
       const formatedAccomodation =
@@ -94,7 +94,7 @@ function HebergementScreen(props) {
           {props.userConnected.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
           }
         </Right>
       </Header>
@@ -115,7 +115,7 @@ function HebergementScreen(props) {
             <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')} >
+          <Button onPress={() => props.navigation.navigate('Pilotes')} >
             <Icon name='car' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>

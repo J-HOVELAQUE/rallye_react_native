@@ -30,6 +30,8 @@ function NewsScreen(props) {
 
   console.log('NEWS : ', newsList.length)
 
+  console.log('NEWS >>>>>>>>>>>>>>>>>>>>>>>>>>>', newsList);
+
 
   return (
     <Container>
@@ -47,22 +49,22 @@ function NewsScreen(props) {
           {props.user.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
           }
         </Right>
       </Header>
 
       <Content>
         {newsList.map((news, i) => (
-          <Card style={{ padding: 10 }} key={news}>
+          <Card style={{ padding: 10 }} key={news._id}>
             <CardItem cardBody>
               <Left>
-              <Thumbnail square large source={{ uri: news.image }} />
-              <Body>
-              <Text><RallyeH3 text={news.title} /></Text>
-              <Text note>{news.description.slice(0, 100)} ...</Text>
-              <Text><Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
-              </Body>
+                <Thumbnail square large source={{ uri: news.image }} />
+                <Body>
+                  <Text><RallyeH3 text={news.title} /></Text>
+                  <Text note>{news.description.slice(0, 100)} ...</Text>
+                  <Text><Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
+                </Body>
               </Left>
             </CardItem>
           </Card>
