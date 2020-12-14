@@ -19,7 +19,6 @@ function CardTeam(props) {
 
     const toggleOverlay = () => {
         setVisible(!visible);
-        console.log(!visible)
     };
     const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
@@ -86,7 +85,7 @@ function CardTeam(props) {
         }
     }
     // console.log('INFO //// : ', team)
-    // console.log('RETOUR : ', namePilot(team.pilot_2.firstname, team.pilot_2.name))
+    
     return (
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
