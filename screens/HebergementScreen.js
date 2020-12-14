@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
 // import { Ionicons } from '@expo/vector-icons';
-import { greyDarkTa, whiteTa, } from '../components/rallye-lib';
+import { greyDarkTa, whiteTa, icoWhite, RallyeH2 } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
