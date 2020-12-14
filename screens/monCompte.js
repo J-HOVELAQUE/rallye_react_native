@@ -4,10 +4,9 @@ import { View, Text } from 'react-native';
 import { Input, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux'
-import { greyLightTa, GreyButtonOutline, PasswordInput } from '../components/rallye-lib'
 import { FontAwesome } from '@expo/vector-icons';
 
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, GreyButtonOutline } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -104,18 +103,20 @@ function monCompteScreen(props) {
 
   const overlayPassword = (
     <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
+      <View>
 
-      <Input
-        inputContainerStyle={{ width: '70%' }}
-        secureTextEntry={true}
-        placeholder='Nouveau mot de passe'
-        leftIcon={<FontAwesome name="unlock-alt" size={16} color={greyLightTa} />}
-        value={password}
-        onChangeText={(value) => setPassword(value)}
-        rightIcon={<FontAwesome name="eye" size={16} color={greyLightTa} />}
-      />
-      <GreyButtonOutline onPress={() => handleChangePassword()} title='Valider la modification' backgroundColor={greyLightTa} />
-      <GreyButtonOutline onPress={() => { toggleOverlay(); setPassword('') }} title='Annuler' backgroundColor={greyLightTa} />
+        <Input
+          inputContainerStyle={{ width: '70%' }}
+          secureTextEntry={true}
+          placeholder='Nouveau mot de passe'
+          leftIcon={<FontAwesome name="unlock-alt" size={16} color={greyLightTa} />}
+          value={password}
+          onChangeText={(value) => setPassword(value)}
+          rightIcon={<FontAwesome name="eye" size={16} color={greyLightTa} />}
+        />
+        <GreyButtonOutline onPress={() => handleChangePassword()} title='Valider la modification' backgroundColor={greyLightTa} />
+        <GreyButtonOutline onPress={() => { toggleOverlay(); setPassword('') }} title='Annuler' backgroundColor={greyLightTa} />
+      </View>
 
     </Overlay>
   )
