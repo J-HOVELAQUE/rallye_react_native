@@ -57,7 +57,7 @@ function monCompteScreen(props) {
 
       <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
 
         <Body>
@@ -65,7 +65,7 @@ function monCompteScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
@@ -94,23 +94,23 @@ function monCompteScreen(props) {
       <Footer>
         <FooterTab style={{ backgroundColor: greyDarkTa, }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Icon name='tachometer' size='20x' style={{ color: whiteTa }} />
+            <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Teams')} >
-            <Icon name='car' size='20x' style={{ color: whiteTa }} />
+            <Icon name='car' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Icon name='trophy' size='20x' style={{ color: whiteTa }} />
+            <Icon name='trophy' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Icon name='map' size='20x' style={{ color: whiteTa }} />
+            <Icon name='map' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Icon name='image' size='20x' style={{ color: whiteTa }} />
+            <Icon name='image' size={20} style={{ color: whiteTa }} />
             <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
           </Button>
         </FooterTab>

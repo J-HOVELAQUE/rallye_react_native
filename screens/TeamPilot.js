@@ -13,7 +13,7 @@ export default function Team(props) {
     <Container>
       <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
 
         <Body>
@@ -21,7 +21,7 @@ export default function Team(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
@@ -53,11 +53,11 @@ export default function Team(props) {
             </CardItem>
             <CardItem>
               <Left>
-                <Icon name="heart" size='25x' />
+                <Icon name="heart" size={25} />
               </Left>
 
               <Right>
-                <Icon name='map-marker' size='25x' onPress={() => props.navigation.navigate('Map')} />
+                <Icon name='map-marker' size={25} onPress={() => props.navigation.navigate('Map')} />
               </Right>
             </CardItem>
           </Card>

@@ -67,7 +67,7 @@ var BottomNavigator = createBottomTabNavigator(
           iconName = 'image';
         }
 
-        return <Icon name={iconName} size='20x' color={tintColor} />;
+        return <Icon name={iconName} size={20} color={tintColor} />;
       },
     }),
     tabBarOptions: {

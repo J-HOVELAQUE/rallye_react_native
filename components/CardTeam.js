@@ -106,7 +106,7 @@ function CardTeam(props) {
                 <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
                     <View style={{ width: '100%', flex: 1, marginTop: 20 }}>
                         <Body>
-                            <Text>{props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size="25x" style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}</Text>
+                            <Text>{props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id) }} />}</Text>
                             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 35, color: redTa, }}>#{team.car_id}</Text>
                             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.brand}</Text>
                             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.model} - {team.car.year}</Text>
@@ -125,7 +125,7 @@ function CardTeam(props) {
                             <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
                             <RedButton onPress={() => props.navigation.navigate('Map')} title="Live Map" style={{ flex: 1, alignItems: 'flex-end' }} />
 
-                            <Icon name="map-marker" size='25x' onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
+                            <Icon name="map-marker" size={25} onPress={() => { toggleOverlay(); props.navigation.navigate('Map') }} />
 
                             <RedButton onPress={() => { toggleOverlay() }} title="Revenir à la liste des engagés" style={{ flex: 1, alignItems: 'flex-end' }} />
                             </ScrollView>
@@ -137,8 +137,8 @@ function CardTeam(props) {
                     <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
                 </TouchableHighlight>
                 <Right style={{ alignItems: 'center' }}>
-                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size='25x ' style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
-                    <Icon name="map-marker" size='25x' onPress={() => { props.navigation.navigate('Map') }} />
+                    {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
+                    <Icon name="map-marker" size={25} onPress={() => { props.navigation.navigate('Map') }} />
                 </Right>
             </CardItem>
         </Card>

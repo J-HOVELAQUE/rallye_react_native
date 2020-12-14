@@ -27,7 +27,7 @@ export default function LibraryScreen(props) {
 
 <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Icon name='bars' size='25x' style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
 
         <Body>
@@ -35,7 +35,7 @@ export default function LibraryScreen(props) {
         </Body>
 
         <Right>
-          <Icon name='user-circle' size='25x' style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate() }} />
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate() }} />
         </Right>
       </Header>
 
