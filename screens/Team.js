@@ -34,6 +34,13 @@ function Team(props) {
 
   // console.log('TEAMS', allTeams);
 
+  const noFilter = () => {
+    const filteredTeams = allTeams;
+    // console.log("TOUS", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Tous');
+  }
+
   const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
 
   const filterRegularity = () => {
@@ -45,7 +52,7 @@ function Team(props) {
 
   const filterCompetition = () => {
     const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
-    console.log("COMPETITION", filteredTeams);
+    // console.log("COMPETITION", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Comp');
   }
@@ -60,7 +67,7 @@ function Team(props) {
   return (
     <Container>
 
-      <Header style={{ backgroundColor: greyDarkTa }}>
+      <Header style={{ backgroundColor: greyDarkTa}}>
         <Left>
           <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
@@ -83,9 +90,9 @@ function Team(props) {
           <View style={{ flex: 1, flexDirection: 'row' }}>
             {
               displayButton == 'Tous' ?
-                <RedButton onPress={() => allTeams()} title="Tous" />
+                <RedButton onPress={() => noFilter()} title="Tous" />
                 :
-                <RedButtonOutline onPress={() => allTeams()} title="Tous" />
+                <RedButtonOutline onPress={() => noFilter()} title="Tous" />
             }
             {
               displayButton == 'Reg' ?

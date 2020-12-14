@@ -59,9 +59,13 @@ export default function NewsScreen(props) {
                     <RallyeH1 text={news.title} />
                   </Text>
                   <Image
-                    source={news.image}
-                    style={{ height: 200, width: null, flex: 1 }}
+                    source={{uri : news.image}}
+                    style={{ height: 200, width: null}}
                   />
+                  <Image
+  source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607702458/news2_tw7gfo.jpg' }}
+  style={{ width: null, height: 200 }}
+/>
                   <Text note>{news.description}</Text>
                   <Text note style={{ color: redTa }} a href="#">Lire la suite <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
                 </Body>
