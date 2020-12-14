@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, FlatList, Image, ImageBackground, ScrollView } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content, Footer, FooterTab } from 'native-base';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
