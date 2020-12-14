@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Content, Button, Icon, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text, } from 'native-base';
+import { Header, Content, Button, Card, CardItem, Right, Left, Body, Container, Footer, FooterTab, Thumbnail, Text, } from 'native-base';
 import { View, Image, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 // Importer la librairie de composants
-import { redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
+import { RallyeH1, RallyeH3, greyDarkTa, whiteTa, icoWhite, redTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.14:3000';
@@ -32,9 +33,17 @@ export default function NewsScreen(props) {
     <Container>
 
       <Header style={{ backgroundColor: greyDarkTa }}>
-        <Button style={{ backgroundColor: greyDarkTa }} onPress={() => props.navigation.openDrawer()}>
-          <Icon name='menu' style={{ color: whiteTa }} />
-        </Button>
+        <Left>
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
+        </Left>
+
+        <Body>
+          <Text style={{ color: whiteTa }}>NEWS</Text>
+        </Body>
+
+        <Right>
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
+        </Right>
       </Header>
 
       <Content>
@@ -49,9 +58,9 @@ export default function NewsScreen(props) {
                   <Text>
                     <RallyeH1 text={news.title} />
                   </Text>
-                  <Image 
-                  source={news.image} 
-                  style={{ height: 200, width: null, flex: 1 }} 
+                  <Image
+                    source={news.image}
+                    style={{ height: 200, width: null, flex: 1 }}
                   />
                   <Text note>{news.description}</Text>
                   <Text note style={{ color: redTa }} a href="#">Lire la suite <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
@@ -76,26 +85,26 @@ export default function NewsScreen(props) {
       </Content>
 
       <Footer>
-        <FooterTab style={{ backgroundColor: greyDarkTa }}>
+        <FooterTab style={{ backgroundColor: greyDarkTa, }}>
           <Button onPress={() => props.navigation.navigate('Home')}>
-            <Ionicons name='ios-home' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Home</Text>
+            <Icon name='tachometer' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Rallye</Text>
           </Button>
-          <Button onPress={() => props.navigation.navigate('Teams')}>
-            <Ionicons name='ios-car' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Teams</Text>
+          <Button onPress={() => props.navigation.navigate('Teams')} >
+            <Icon name='car' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Ionicons name='ios-trophy' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Classement</Text>
+            <Icon name='trophy' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
           </Button >
           <Button onPress={() => props.navigation.navigate('Map')}>
-            <Ionicons name='ios-map' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Map</Text>
+            <Icon name='map' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
           </Button>
           <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Ionicons name='ios-images' size={25} color='white' />
-            <Text style={{ color: whiteTa, fontSize: 10 }}>Medias</Text>
+            <Icon name='image' size={20} style={{ color: whiteTa }} />
+            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
           </Button>
         </FooterTab>
       </Footer>

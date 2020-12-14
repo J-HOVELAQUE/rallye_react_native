@@ -2,19 +2,17 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, ImageBackground, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Text, Container, Header, Content, Footer, FooterTab, Button, Icon, Accordion, Left, Title, Body, Right, Card, CardItem } from 'native-base';
+import { Text, Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right, Card, CardItem } from 'native-base';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import { RallyeH1, RallyeH2, RallyeH3 } from '../components/rallye-lib';
-
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HeadTable = ['Horaires', 'Itinéraires'];
 const DataTable = [
-  ['09H00', 'Paris / Nemours'],
-  ['10H30', 'Pause Nemours'],
-  ['10H45', 'Nemours / Orléans'],
+  ['06H15', 'Paris - Grand Palais', 'Cours la Reine, av Versailles'],
+  ['06H30', 'Boulogne Billancourt', 'av E.Vaillant, av G.Leclerc, Pont de Sèvres'],
+  ['07H05', 'Marcoussis', 'N118, N104'],
 ];
-
-
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -33,7 +31,6 @@ function HomeScreen(props) {
             method: 'GET',
           });
           const answer = await rawAnswer.json();
-
 
           //// Record user connected on the reduce store /////
           props.onRecordUserConnected(answer.user);
@@ -57,91 +54,65 @@ function HomeScreen(props) {
   return (
     <Container>
 
-      <Header style={{ backgroundColor: '#313131' }}>
+      <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Button transparent>
-            <Icon name='ios-people' />
-          </Button>
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
+
         <Body>
-          <RallyeH1 text="HOME" />
+          <Text style={{ color: whiteTa }}>HOME</Text>
         </Body>
+
         <Right>
-          <Button transparent onPress={() => props.navigation.openDrawer()}>
-            <Icon name='menu' />
-          </Button>
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
-      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={{ flex: 1 }}>
-        <Content >
-          <View style={{ flex: 1, alignItems: "center", flexDirection: 'row', justifyContent: 'space-between', margin: 5 }}>
-            <Button style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "red", width: "40%" }} onPress={() => props.navigation.navigate('Login')}>
-              <Icon name='home' />
-              <Text >Login</Text>
-            </Button>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "97%", flex: 1 }}>
-              <CardItem style={{ flexDirection: "column", alignItems: "flex-start", flex: 1 }}>
-                <RallyeH2 text="Programme du jour : 11/12/2020" />
+      <Content >
+        <View>
+          <RedButtonLogin onPress={() => { props.navigation.navigate('Login') }} title="Login" style={{ flex: 1, alignItems: 'flex-end' }} />
+        </View>
 
-                <RallyeH3 text="Etape 1 : Paris / Orléans" />
+        <View style={{ marginLeft: 10 }}>
+          <RallyeH1 text="ETAPE 1 : MARDI 1 SEPT." />
+          <Text><Icon name='flag' /><RallyeH2 style={{ margin: 20 }} text="PARIS - GRAND PALAIS" /></Text>
+          <Text><Icon name='flag-checkered' /><RallyeH2 text="CLERMONT-FERRAND" /></Text>
+          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui l'étape partira officiellement de l'autodrome de Linas-Montlhéry et arrivera à la Grande Halle de Clermont-Ferrand. Un parcours de plus de 350 km !</Text>
+        </View>
 
-              </CardItem>
-            </Card>
-          </View>
+        <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
+          <RallyeH1 text="PROGRAMME DU JOUR" />
+          <Text style={{ marginBottom: 10, color: greyLightTa }}>Horaires de départ des premières voitures</Text>
+          <Table borderStyle={{ borderWidth: 1, borderColor: greyDarkTa }}>
+            <Row data={HeadTable} />
+            <Rows data={DataTable} />
+          </Table>
+        </View>
 
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "97%", flex: 1 }}>
-              <CardItem style={{ flexDirection: "column", alignItems: "flex-start", flex: 1 }}>
+        <View style={{ marginHorizontal: 10 }}>
+          <RedButton onPress={() => props.navigation.navigate('Programme')} title="Programme en détail" style={{ flex: 1, alignItems: 'flex-end' }} />
+        </View>
 
-                <Text>Aujourd'hui trajet de Paris Grand Palais à la ville d'Orléans.</Text>
-              </CardItem>
-            </Card>
-          </View>
+        <View style={{ marginHorizontal: 10 }}>
+          <RallyeH1 text="ITINERAIRE" />
+          <Image source={require('../assets/testmap.jpg')} style={{ height: 180, borderColor: blackTa }} />
+          <RedButton onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
+        </View>
+      </Content>
 
-
-
-
-
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "97%", flex: 1, }}>
-              {/* <Title style={{ alignItems: "flex-start" }}>Etapes</Title> */}
-              <RallyeH1 text="Etapes" />
-              <Table borderStyle={{ borderWidth: 1, borderColor: 'grey' }}>
-                <Row data={HeadTable} />
-                <Rows data={DataTable} />
-              </Table>
-            </Card>
-          </View>
-
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "97%", flex: 1, }}>
-
-              <CardItem>
-                <Image source={require('../assets/testmap.jpg')} style={{ height: 180, flex: 1, borderColor: 'black' }} />
-              </CardItem>
-
-
-            </Card>
-            <View style={{ flex: 1, alignItems: "center", flexDirection: 'row', justifyContent: 'space-between', margin: 5 }}>
-              <Button style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "red", width: "40%" }} onPress={() => props.navigation.navigate('Map')}>
-                <Icon name='ios-map' />
-                <Text >Live Map</Text>
-              </Button>
-            </View>
-          </View>
-
-
-
-
-
-        </Content>
-
-      </ImageBackground>
     </Container >
   );
+}
+
+const styles = {
+  container: {
+    borderWidth: 0, // Remove Border
+    shadowColor: 'rgba(0,0,0, 0.0)', // Remove Shadow IOS
+    shadowOffset: { height: 0, width: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0 // This is for Android
+  }
 }
 
 function mapDispatchToProps(dispatch) {

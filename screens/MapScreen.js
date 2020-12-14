@@ -3,9 +3,11 @@ import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
-
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Card, CardItem, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Text } from 'native-base';
 import MapView, { Marker } from 'react-native-maps';
+
+import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import socketIOClient from "socket.io-client";
 
@@ -47,21 +49,20 @@ function MapScreen(props) {
   })
 
   return (
+    <Container>
     <View style={{ flex: 1 }}>
 
-      <Header style={{ backgroundColor: '#313131' }}>
+      <Header style={{ backgroundColor: greyDarkTa }}>
         <Left>
-          <Button transparent>
-            <Icon name='ios-people' />
-          </Button>
+          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
         </Left>
+
         <Body>
-          <Title>Map</Title>
+          <Text style={{ color: whiteTa }}>MAP</Text>
         </Body>
+
         <Right>
-          <Button transparent onPress={() => props.navigation.openDrawer()}>
-            <Icon name='menu' />
-          </Button>
+          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
         </Right>
       </Header>
 
@@ -78,6 +79,7 @@ function MapScreen(props) {
       </MapView >
 
     </View>
+    </Container>
   );
 }
 

@@ -7,7 +7,7 @@ import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
@@ -20,7 +20,7 @@ import ProgrammeScreen from './screens/ProgrammeScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import TeamPilot from './screens/TeamPilot';
 import LibraryScreen from './screens/LibraryScreen';
-import monCompte from './screens/monCompte';
+import MonCompte from './screens/MonCompte';
 
 import NewsScreen from './screens/NewsScreen';
 
@@ -33,10 +33,10 @@ import {
   useFonts,
   Roboto_300Light,
   Roboto_400Regular,
-  Roboto_500Medium,
   Roboto_700Bold,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
+import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
 const store = createStore(combineReducers({ userConnected, userFavorites }));
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -45,7 +45,7 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 var BottomNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Teams: TeamScreen,
+    Pilotes: TeamScreen,
     Classement: ClassementScreen,
     Map: MapScreen,
     Medias: MediaScreen,
@@ -56,25 +56,25 @@ var BottomNavigator = createBottomTabNavigator(
       tabBarIcon: ({ tintColor }) => {
         var iconName;
         if (navigation.state.routeName === 'Home') {
-          iconName = 'ios-home';
-        } else if (navigation.state.routeName === 'Teams') {
-          iconName = 'ios-car';
+          iconName = 'tachometer';
+        } else if (navigation.state.routeName === 'Pilotes') {
+          iconName = 'car';
         } else if (navigation.state.routeName === 'Classement') {
-          iconName = 'ios-trophy';
+          iconName = 'trophy';
         } else if (navigation.state.routeName === 'Map') {
-          iconName = 'ios-map';
+          iconName = 'map';
         } else if (navigation.state.routeName === 'Medias') {
-          iconName = 'ios-images';
+          iconName = 'image';
         }
 
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        return <Icon name={iconName} size={20} color={tintColor} />;
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'red',
-      inactiveTintColor: 'white',
+      activeTintColor: redTa,
+      inactiveTintColor: whiteTa,
       style: {
-        backgroundColor: '#313131',
+        backgroundColor: greyDarkTa,
       }
     },
   }
@@ -84,13 +84,17 @@ var BottomNavigator = createBottomTabNavigator(
 const MyDrawerNavigatorFan = createDrawerNavigator(
   {
     Menu: BottomNavigator,
+    Home: HomeScreen,
+    Pilotes: TeamScreen,
+    Classement: ClassementScreen,
+    Photos: MediaScreen,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
     Profil: ProfilScreen,
     News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    'Mon compte': monCompte
+    'Mon compte': MonCompte
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -106,8 +110,9 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     News: NewsScreen,
     TeamPilot: TeamPilot,
     Librairie: LibraryScreen,
-    'Mon compte': monCompte
-  }
+    'Mon compte': MonCompte
+  },
+
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
 
@@ -132,7 +137,6 @@ export default function App() {
   let [fontsLoaded, error] = useFonts({
     Roboto_300Light,
     Roboto_400Regular,
-    Roboto_500Medium,
     Roboto_700Bold,
     Roboto_900Black,
   });
