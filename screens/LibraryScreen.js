@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
-import { Text, Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right, Card, CardItem } from 'native-base';
+import { Text, Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right, Card, CardItem, } from 'native-base';
 import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 

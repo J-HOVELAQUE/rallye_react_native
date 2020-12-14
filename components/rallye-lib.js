@@ -87,6 +87,13 @@ const SearchInput = ({ placeholder, onChangeText }) => {
     onChangeText={onChangeText}
   />;
 }
+const DefaultInput = ({ placeholder, onChangeText }) => {
+  return <Input
+    placeholder={placeholder}
+    leftIcon={<FontAwesome name="search" size={16} color={greyLightTa} />}
+    onChangeText={onChangeText}
+  />;
+}
 
 /* ^^^^^^^^^^^^^^^^^^^^ TITLES ^^^^^^^^^^^^^^^^^^^^ */
 const RallyeH1 = ({ text }) => {
@@ -273,5 +280,5 @@ export {
   RallyeH1, RallyeH2, RallyeH3,
   ProfilAvatar, EditProfilAvatar,
   FacebookSocialIco, TwitterSocialIco, InstagramSocialIco, YouTubeSocialIco, LinkedinSocialIco,
-  UserInput, EmailInput, PasswordInput, SearchInput
+  UserInput, EmailInput, PasswordInput, SearchInput, DefaultInput
 }
