@@ -105,7 +105,9 @@ const StackForSnapScreen = createStackNavigator({
 const StackForNews = createStackNavigator({
   'News': NewsScreen,
   'Detail': OneNewScreen
-})
+},
+
+)
 
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
