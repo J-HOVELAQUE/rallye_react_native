@@ -17,11 +17,11 @@ import LoginScreen from './screens/Login';
 import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
-import LibraryScreen from './screens/LibraryScreen';
 import MonCompte from './screens/MonCompte';
 import Photos from './screens/Photos';
 import Video from './screens/Video';
 import SnapScreen from './screens/SnapScreen';
+import ChatScreen from './screens/ChatScreen';
 
 import NewsScreen from './screens/NewsScreen';
 
@@ -40,6 +40,7 @@ import {
 import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
 import { LogBox } from 'react-native';
+
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -110,7 +111,8 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Mon compte': MonCompte,
     Video: Video,
     Photos: Photos,
-    Snap: SnapScreen
+    Snap: SnapScreen,
+    Chat: ChatScreen
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
