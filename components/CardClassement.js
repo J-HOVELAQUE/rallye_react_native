@@ -7,8 +7,6 @@ import { connect } from 'react-redux'
 import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, redTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
@@ -85,6 +83,27 @@ function CardTeam(props) {
             return urlFlagWorld
         }
     }
+
+    // function msConversion(millis) {
+    //     let sec = Math.floor(millis / 1000);
+    //     let hrs = Math.floor(sec / 3600);
+    //     sec -= hrs * 3600;
+    //     let min = Math.floor(sec / 60);
+    //     sec -= min * 60;
+
+    //     sec = '' + sec;
+    //     sec = ('00' + sec).substring(sec.length);
+
+    //     if (hrs > 0) {
+    //       min = '' + min;
+    //       min = ('00' + min).substring(min.length);
+    //       return hrs + ":" + min + ":" + sec;
+    //     }
+    //     else {
+    //       return min + ":" + sec;
+    //     }
+    // }
+
     // console.log('INFO //// : ', team)
 
     return (
@@ -119,7 +138,6 @@ function CardTeam(props) {
                             <ScrollView>
                                 <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
 
-
                                 <RallyeH2 text='Palmarés' />
                                 <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
                                 <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
@@ -143,7 +161,6 @@ function CardTeam(props) {
                 </Right>
             </CardItem>
         </Card>
-
     );
 }
 

@@ -1,30 +1,62 @@
-import React, { useState } from "react";
-import { Header, Content, Container, Button, Card, CardItem, Text, Right, Left, Body, Title } from 'native-base';
-import { View, StyleSheet, ImageBackground, Image, Picker } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container, Row } from 'native-base';
+import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, Picker } from 'react-native';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { Input, Overlay } from 'react-native-elements'
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+
+import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import CardTeam from '../components/CardClassement'
 
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://localhost:3000';
 
-const HeadTable = ['N°', 'Voiture', 'Nat1', 'Pilote 1', 'Temps'];
-const DataTable = [
-  ['1', '2', '3', '4', '5'],
-  ['a', 'b', 'c', 'd', 'e'],
-  ['1', '2', '3', '4', '5'],
-  ['a', 'b', 'c', 'd', 'e'],
-  ['1', '2', '3', '4', '5'],
-  ['1', '2', '3', '4', '5'],
-  ['a', 'b', 'c', 'd', 'e'],
-  ['1', '2', '3', '4', '5'],
-  ['a', 'b', 'c', 'd', 'e'],
-];
-
-function Classement(props) {
+function Team(props) {
   const [selectedValue, setSelectedValue] = useState("General");
+  const [allTeams, setAllTeams] = useState([]);
+  const [searchTeam, setSearchTeam] = useState([]);
+  const [teamToDisplay, setTeamToDisplay] = useState([]);
+  const [displayButton, setDisplayButton] = useState('');
+
+  useEffect(() => {
+
+    async function getTeams() {
+      const rawAnswer = await fetch(`${serverUrl}/teams/get-teams`, {
+        method: 'GET',
+      });
+      let allTeamsInfos = await rawAnswer.json();
+      setAllTeams(allTeamsInfos.teams);
+      setTeamToDisplay(allTeamsInfos.teams);
+    }
+    getTeams()
+  }, []);
+
+  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+
+  const filterRegularity = () => {
+    const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
+    // console.log("REGULARITY", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Reg');
+  }
+
+  const filterCompetition = () => {
+    const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
+    // console.log("COMPETITION", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Comp');
+  }
+
+  // console.log('FAVORITES', props.userFavorites);
+
+  let teams = teamToDisplay.map((team, i) => {
+    return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
+
+  })
+
   return (
     <Container>
 
@@ -38,7 +70,7 @@ function Classement(props) {
         </Body>
 
         <Right>
-          {props.user.status === undefined ?
+          {props.userConnected.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
             <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
@@ -46,13 +78,29 @@ function Classement(props) {
         </Right>
       </Header>
 
+      <Content>
+        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: blackTa, color: whiteTa }}>
+          <SearchInput onChangeText={(val) => setSearchTeam(val)} placeholder='Rechercher...' />
+        </View>
+        <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
-      <Content >
-        <View style={{ width: "100%", backgroundColor: "#E4E4E4" }}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            {
+              displayButton == 'Reg' ?
+                <RedButton onPress={() => filterRegularity()} title="Régularité" />
+                :
+                <RedButtonOutline onPress={() => filterRegularity()} title="Régularité" />
+            }
+            {
+              displayButton == 'Comp' ?
+                <RedButton onPress={() => filterCompetition()} title="Compétition" />
+                :
+                <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
+            }
+          </View>
 
-          <Picker
+          {/* <Picker
             mode="dropdown"
-
             selectedValue={selectedValue}
             style={{ height: 50, width: 150, backgroundColor: "#E4E4E4" }}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
@@ -61,60 +109,39 @@ function Classement(props) {
             <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
             <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
             <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
-          </Picker>
-          <Input placeholder='Rechercher' style={{ backgroundColor: "#E4E4E4" }}></Input>
-        </View>
+          </Picker> */}
+          {/* <searchInput onChangeText="Rechercher" /> */}
 
-        <View style={styles.container}>
-          <Table borderStyle={{ borderWidth: 1, borderColor: 'grey' }}>
-            <Row data={HeadTable} style={styles.HeadStyle} textStyle={styles.TableText} />
-            <Rows data={DataTable} textStyle={styles.TableText} />
-          </Table>
         </View>
+        <View style={{ marginTop: 10, alignItems: "center" }}>
 
+          {teams}
+
+        </View>
       </Content>
 
     </Container>
-
   );
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-
-
-    backgroundColor: '#ffffff'
-  },
-  HeadStyle: {
-    height: 50,
-    alignContent: "center",
-    backgroundColor: '#E4E4E4'
-  },
-  TableText: {
-    margin: 10
-  }
-});
-
-
 function mapDispatchToProps(dispatch) {
   return {
-    onRecordUserConnected: function (user) {
+    addFavoriteTeam: function (numTeam) {
       dispatch({
-        type: 'record',
-        user: user
+        type: 'addFavoriteTeam',
+        numTeam
+      })
+    },
+    removeFavoriteTeam: function (numTeam) {
+      dispatch({
+        type: 'removeFavoriteTeam',
+        numTeam
       })
     },
     resetUserConnected: function () {
       dispatch({
         type: 'reset'
-      })
-    },
-    retrieveFavoriteTeam: function (listFavorites) {
-      dispatch({
-        type: 'retrieveFavoriteTeam',
-        listFavorites: listFavorites
       })
     }
   }
@@ -122,12 +149,13 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    favorites: state.userFavorites,
-    user: state.userConnected
+    userFavorites: state.userFavorites,
+    userConnected: state.userConnected
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Classement);
+)(Team);
+
