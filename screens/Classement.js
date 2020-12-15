@@ -14,7 +14,7 @@ import CardTeam from '../components/CardClassement'
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://localhost:3000';
 
-function Team(props) {
+function ClassementScreen(props) {
   const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([]);
   const [searchTeam, setSearchTeam] = useState([]);
@@ -73,7 +73,7 @@ function Team(props) {
           {props.userConnected.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
           }
         </Right>
       </Header>
@@ -157,5 +157,5 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Team);
+)(ClassementScreen);
 
