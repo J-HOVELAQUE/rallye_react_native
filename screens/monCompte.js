@@ -36,7 +36,7 @@ function monCompteScreen(props) {
       {/* <Text onPress={() => props.navigation.navigate('Snap')}>Avatar : {avatar !== undefined ? avatar : 'non renseignée'}</Text> */}
       <TouchableHighlight onPress={() => props.navigation.navigate('Snap')}>
 
-        {(avatar === null || avatar === "" || avatar === undefined) ?
+        {(props.userConnected.avatar === null || props.userConnected.avatar === "" || props.userConnected.avatar === undefined) ?
           <Thumbnail
             onPress={() => props.navigation.navigate('Snap')}
             square large
@@ -51,11 +51,11 @@ function monCompteScreen(props) {
             style={{ marginBottom: 40 }}
 
 
-            source={{ uri: avatar }}
+            source={{ uri: props.userConnected.avatar }}
           />}
       </TouchableHighlight >
 
-      <Text style={{ marginBottom: 20 }}><RallyeH1 text={firstName + lastName} /></Text>
+      <Text style={{ marginBottom: 20 }}><RallyeH1 text={firstName + " " + lastName} /></Text>
 
       {/* <Image source={{ uri: flagNationality(users.nationality) }} style={{ height: 10, width: 15 }} /> */}
       <Text style={{ marginBottom: 20 }}><Icon name='globe' size={15} style={{ color: greyDarkTa, marginRight: 10 }} /> {nationality !== undefined ? nationality : 'non renseignée'}</Text>
@@ -77,7 +77,7 @@ function monCompteScreen(props) {
         paddingLeft: 10,
       }}>
 
-      {avatar !== undefined ?
+      {/* {avatar !== undefined ?
         <Input
           style={{ paddingLeft: 10 }}
           placeholder={avatar}
@@ -88,7 +88,7 @@ function monCompteScreen(props) {
           placeholder='Non renseigné'
           value={avatar}
           onChangeText={(value) => setAvatar(value)}
-        />}
+        />} */}
 
       <Text style={{ paddingLeft: 10 }}>Prenom :</Text>
       <Input

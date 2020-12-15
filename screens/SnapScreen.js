@@ -17,8 +17,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Left, Body, Right, Text } from 'native-base';
 
 
-// const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-const serverUrl = 'http://192.168.1.26:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
 
 function SnapScreen(props) {
 
@@ -88,8 +88,11 @@ function SnapScreen(props) {
                 onPress={async () => {
                     setVisible(true);
                     if (camera) {
+
+                        ///// Take photo  /////
                         let photo = await camera.takePictureAsync({ quality: 0.2 });
 
+                        ///// Send photo and token to backend /////
                         let data = new FormData();
                         data.append('avatar', {
                             uri: photo.uri,
@@ -102,17 +105,9 @@ function SnapScreen(props) {
                             body: data
                         });
                         const answer = await rawAnswer.json();
-                        console.log(answer);
 
+                        ///// Recording new avatar in redux /////
                         props.changeAvatarUrl(answer.avatar_url);
-
-                        props.addPhotoToGalery({
-                            url: answer.info.url,
-                            gender: answer.gender,
-                            age: answer.age,
-                            glasses: answer.glasses,
-                            smile: answer.smile
-                        })
 
                         if (answer.result) {
                             setVisible(false);
