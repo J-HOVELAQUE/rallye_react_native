@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
-import { Overlay, Button } from 'react-native-elements'
+import { View, TouchableOpacity, Button } from 'react-native';
+import { Overlay } from 'react-native-elements';
+// import { Button } from '../components/rallye-lib';
 
 
 import { Camera } from 'expo-camera';
@@ -13,6 +14,8 @@ import IconIonic from 'react-native-vector-icons/Ionicons';
 // import { Button, Overlay } from 'react-native-elements';
 
 import { connect } from 'react-redux';
+import { Container, Header, Left, Body, Right, Text } from 'native-base';
+
 
 // const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 const serverUrl = 'http://192.168.1.26:3000';
@@ -99,12 +102,18 @@ function SnapScreen(props) {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <Container>
+
+            <Header>
+                <Button title="Retour"
+                    onPress={() => props.navigation.navigate('Mon compte')} />
+            </Header>
+
             <Overlay isVisible={visible} width="auto" height="auto">
                 <Text>Loading</Text>
             </Overlay>
 
-            {cameraDisplay}
+            { cameraDisplay}
             <Button
                 icon={
                     <IconFontAwesome
@@ -148,70 +157,9 @@ function SnapScreen(props) {
                     }
                 }}
             />
-
-            {recordingVideo ?
-                <Button
-                    icon={
-                        <IconFontAwesome
-                            name="camera"
-                            size={20}
-                            color="#ffffff"
-                        />
-                    }
-                    title="Video"
-                    buttonStyle={{ backgroundColor: "grey" }}
-                    type="solid"
-                    onPress={async () => {
-                        setRecordingVideo(!recordingVideo);
-                        camera.stopRecording();
-
-                    }}
-                />
-                :
-                <Button
-                    icon={
-                        <IconFontAwesome
-                            name="camera"
-                            size={20}
-                            color="#ffffff"
-                        />
-                    }
-                    title="Video"
-                    buttonStyle={{ backgroundColor: "red" }}
-                    type="solid"
-                    onPress={async () => {
-                        setRecordingVideo(!recordingVideo);
-                        let video = await camera.recordAsync();
-                        const miniature = await VideoThumbnails.getThumbnailAsync(
-                            video.uri
-                        )
-                        console.log('video', video);
-                        console.log('miniature', miniature);
-
-                        let data = new FormData();
-                        data.append('video', {
-                            uri: video.uri,
-                            type: 'video',
-                            name: 'video'
-                        });
-                        data.append('thumbnail', {
-                            uri: miniature.uri,
-                            type: 'image/jpeg',
-                            name: 'photo'
-                        })
-                        const rawAnswer = await fetch("http://192.168.1.26:3000/upload-video", {
-                            method: 'post',
-                            body: data
-                        });
-                        const answer = await rawAnswer.json();
-
-                    }}
-                />
-            }
-        </View>
+        </Container >
     );
 }
-
 
 
 function mapDispatchToProps(dispatch) {

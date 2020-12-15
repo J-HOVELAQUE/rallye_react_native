@@ -40,6 +40,8 @@ import {
 import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
 import { LogBox } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -128,7 +130,13 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
 
+// Stack navigation for the SnapScreen on MonCompte
+const StackForSnapScreen = createStackNavigator({
+  'Mon Compte': MonCompte,
+  'Snap': SnapScreen
+})
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function App() {
 
   const [userStatus, setUserStatus] = useState('unknown')
@@ -170,14 +178,10 @@ export default function App() {
 
     return (
       <Provider store={store}>
-
         {userStatus === 'fan' ? <AppFan /> :
           userStatus === 'pilot' ? <AppPilot /> :
             <AppUnknown />}
-
       </Provider>
     )
   }
-
 }
-
