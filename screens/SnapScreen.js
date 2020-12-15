@@ -23,8 +23,8 @@ const serverUrl = 'http://192.168.1.26:3000';
 function SnapScreen(props) {
 
     const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
-    const [flash, setFlash] = useState(Camera.Constants.FlashMode.torch);
+    const [type, setType] = useState(Camera.Constants.Type.front);
+    const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
 
     const [recordingVideo, setRecordingVideo] = useState(false);
 
@@ -53,48 +53,6 @@ function SnapScreen(props) {
                     backgroundColor: 'transparent',
                     flexDirection: 'row',
                 }}>
-                <TouchableOpacity
-                    style={{
-
-                        alignSelf: 'flex-end',
-                        alignItems: 'center',
-                    }}
-                    onPress={() => {
-                        setType(
-                            type === Camera.Constants.Type.back
-                                ? Camera.Constants.Type.front
-                                : Camera.Constants.Type.back
-                        );
-                    }}
-                >
-                    <IconIonic
-                        name="md-reverse-camera"
-                        size={20}
-                        color="#ffffff"
-                    /><Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={{
-
-                        alignSelf: 'flex-end',
-                        alignItems: 'center',
-                    }}
-                    onPress={() => {
-                        setFlash(
-                            flash === Camera.Constants.FlashMode.torch
-                                ? Camera.Constants.FlashMode.off
-                                : Camera.Constants.FlashMode.torch
-                        );
-                    }}
-                >
-                    <IconFontAwesome
-                        name="flash"
-                        size={20}
-                        color="#ffffff"
-                    /><Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flash </Text>
-                </TouchableOpacity>
-
             </View>
         </Camera>
     } else {
