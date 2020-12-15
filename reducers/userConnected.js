@@ -1,4 +1,5 @@
 export default function (userConnected = {}, action) {
+
     if (action.type === 'record') {
         return {
             token: action.user.token,
@@ -7,10 +8,17 @@ export default function (userConnected = {}, action) {
             lastName: action.user.name,
             email: action.user.email,
             avatar: action.user.avatar,
-            nationality : action.user.nationality
+            nationality: action.user.nationality
         };
-    } else if(action.type === 'reset'){
+
+    } else if (action.type === 'reset') {
         return {}
+
+    } else if (action.type === 'changeAvatar') {
+        updatedUser = { ...userConnected };
+        updatedUser.avatar = action.url;
+        return updatedUser
+
     } else {
         return userConnected;
     }

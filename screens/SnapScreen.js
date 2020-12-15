@@ -104,6 +104,8 @@ function SnapScreen(props) {
                         const answer = await rawAnswer.json();
                         console.log(answer);
 
+                        props.changeAvatarUrl(answer.avatar_url);
+
                         props.addPhotoToGalery({
                             url: answer.info.url,
                             gender: answer.gender,
@@ -130,9 +132,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addPhotoToGalery: function (url) {
+        changeAvatarUrl: function (url) {
             dispatch({
-                type: 'addPhoto',
+                type: 'changeAvatar',
                 url: url
             })
         }
