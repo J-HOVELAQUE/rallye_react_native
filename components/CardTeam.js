@@ -22,6 +22,7 @@ function CardTeam(props) {
     };
     const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
+    const urlFlagWorld = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608020160/world_pxx0mb.png'
     const team = props.infoTeam
 
     useEffect(() => {
@@ -81,7 +82,7 @@ function CardTeam(props) {
         } else if (nationality === 'che') {
             return urlFlagCHE
         } else {
-            return urlFlagFRA // Mettre un drapeau du monde
+            return urlFlagWorld
         }
     }
     // console.log('INFO //// : ', team)
