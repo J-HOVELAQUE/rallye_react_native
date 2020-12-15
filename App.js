@@ -34,6 +34,7 @@ import NewsScreen from './screens/NewsScreen';
 import userConnected from './reducers/userConnected';
 import userFavorites from './reducers/userFavorites';
 import clickedNews from './reducers/clickedNews';
+import chatHistory from './reducers/chatHistory';
 
 
 // Fonts
@@ -53,7 +54,7 @@ import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
-const store = createStore(combineReducers({ userConnected, userFavorites, clickedNews }));
+const store = createStore(combineReducers({ userConnected, userFavorites, clickedNews, chatHistory }));
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';

@@ -27,18 +27,37 @@ function ChatScreen(props) {
 
     useEffect(() => {
         console.log('///// MONTAGE COMPOSANT //////')
+
+        // Function to retrieve chat history
         async function getHistoryChat(roomName) {
             const rawAnswer = await fetch(`${serverUrl}/chat/get-chat?room=${roomName}`, {
                 method: 'GET',
             });
             let chatInfo = (await rawAnswer.json()).roomInfo;
-            console.log(chatInfo)
-            if (roomName === 'Officiel') {
-                setMsgOfficiel(chatInfo.history)
-            } else if (roomName === 'RoomB') {
-                setMsgRoom(chatInfo.history)
-            }
+            console.log('HISTORY : ', chatInfo)
+            // if (roomName === 'Officiel') {
+            //     setMsgOfficiel(chatInfo.history)
+            // } else if (roomName === 'RoomB') {
+            //     setMsgRoom(chatInfo.history)
+            // }
+            props.storeChat(chatInfo.history, chatInfo.roomName)
         }
+
+        // Open socket between front and back
+        socket.on('messageFromChannel', (newMsg) => {
+
+            console.log('CHANNEL : ', newMsg)
+            // if (newMsg.room === 'Officiel') {
+            //     setMsgOfficiel([...msgOfficiel, newMsg.messageInfo])
+            // } else {
+            //     setMsgRoom([...msgRoom, newMsg.messageInfo])
+            // }
+
+            props.storeChat([newMsg.messageInfo], newMsg.room)
+            updateHistoryChat(newMsg.room, newMsg.messageInfo)
+        })
+
+        // Call functions
         getHistoryChat('Officiel')
         getHistoryChat('RoomB')
     }, [])
@@ -53,41 +72,35 @@ function ChatScreen(props) {
         console.log('/////// RETOUR CHAT : ', answer)
     }
 
-    useEffect(() => {
 
-        // When message received
-        socket.on('messageFromChannel', (newMsg) => {
+    var chatOfficiel = props.chatHistory.map((msg, i) => {
+        if (msg.room === 'Officiel') {
+            return (
+                <ListItem key={msg.msg._id} bottomDivider>
+                    {/* <Avatar source={{uri: l.avatar_url}} /> */}
+                    <ListItem.Content>
+                        <ListItem.Title>{msg.msg.msg}</ListItem.Title>
+                        <ListItem.Subtitle>{msg.msg.sender} - {msg.msg.status}</ListItem.Subtitle>
+                    </ListItem.Content>
+                </ListItem>
+            )
+        }
+    })
 
-            console.log('CHANNEL : ', newMsg)
-            if (newMsg.room === 'Officiel') {
-                setMsgOfficiel([...msgOfficiel, newMsg.messageInfo])
-            } else {
-                setMsgRoom([...msgRoom, newMsg.messageInfo])
-            }
-            updateHistoryChat(newMsg.room, newMsg.messageInfo)
-        })
+    var chatRoom = props.chatHistory.map((msg, i) => {
+        if (msg.room === "RoomB") {
+            return (
+                <ListItem key={msg.msg._id} bottomDivider>
+                    {/* <Avatar source={{uri: l.avatar_url}} /> */}
+                    <ListItem.Content>
+                        <ListItem.Title>{msg.msg.msg}</ListItem.Title>
+                        <ListItem.Subtitle>{msg.msg.sender} - {msg.msg.status}</ListItem.Subtitle>
+                    </ListItem.Content>
+                </ListItem>
+            )
+        }
 
-    }, [])
-
-    var chatOfficiel = msgOfficiel.map((msg, i) => (
-        <ListItem key={i} bottomDivider>
-            {/* <Avatar source={{uri: l.avatar_url}} /> */}
-            <ListItem.Content>
-                <ListItem.Title>{msg.msg}</ListItem.Title>
-                <ListItem.Subtitle>{msg.sender} - {msg.status}</ListItem.Subtitle>
-            </ListItem.Content>
-        </ListItem>
-    ))
-
-    var chatRoom = msgRoom.map((msg, i) => (
-        <ListItem key={i} bottomDivider>
-            {/* <Avatar source={{uri: l.avatar_url}} /> */}
-            <ListItem.Content>
-                <ListItem.Title>{msg.msg}</ListItem.Title>
-                <ListItem.Subtitle>{msg.sender} - {msg.status}</ListItem.Subtitle>
-            </ListItem.Content>
-        </ListItem>
-    ))
+    })
 
     var handleChangeRoom = (roomNumber) => {
         console.log('NEW ROOM : ', roomNumber)
@@ -98,8 +111,7 @@ function ChatScreen(props) {
 
     }
     console.log('ROOM : ', room)
-    console.log('MsgOFFICIEL : ', msgOfficiel)
-    console.log('MshROOM : ', msgRoom)
+    
 
     // const room1 = () => { <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} /> }
     // const room2 = () => { <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} /> }
@@ -143,18 +155,18 @@ function ChatScreen(props) {
                     {room === 'Officiel' ? chatOfficiel : chatRoom}
                 </ScrollView >
 
-                {/* <KeyboardAvoidingView behavior="padding" enabled> */}
-                <Input
-                    containerStyle={{ marginBottom: 5 }}
-                    placeholder='Your message'
-                    value={currentMsg}
-                    onChangeText={(value) => setCurrentMsg(value)}
-                />
-                <RedButton
-                    title="Send to channel"
-                    onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
-                />
-                {/* </KeyboardAvoidingView> */}
+                <KeyboardAvoidingView behavior="padding" enabled>
+                    <Input
+                        containerStyle={{ marginBottom: 5 }}
+                        placeholder='Your message'
+                        value={currentMsg}
+                        onChangeText={(value) => setCurrentMsg(value)}
+                    />
+                    <RedButton
+                        title="Send to channel"
+                        onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
+                    />
+                </KeyboardAvoidingView>
 
             </View>
 
@@ -186,13 +198,23 @@ function ChatScreen(props) {
     );
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        storeChat: function (newMsg, roomName) {
+            dispatch({ type: 'storeChat', newMsg, roomName })
+        }
+    }
+}
+
+
 function mapStateToProps(state) {
     return {
-        user: state.userConnected
+        user: state.userConnected,
+        chatHistory: state.chatHistory
     }
 }
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(ChatScreen);
