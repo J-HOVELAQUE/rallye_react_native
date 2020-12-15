@@ -58,7 +58,17 @@ function NewsScreen(props) {
                 <Body>
                   <Text><RallyeH3 text={news.title} /></Text>
                   <Text note>{news.description.slice(0, 100)} ...</Text>
-                  <Text><Text note style={{ color: redTa }} a href="#">Lire la suite </Text><Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' /></Text>
+                  <Text onPress={() => {
+                    props.navigation.navigate('Detail');
+                    props.recordClickedNews({
+                      title: news.title,
+                      description: news.description,
+                      image: news.image
+                    })
+                  }}>
+                    <Text note style={{ color: redTa }} a href="#">Lire la suite </Text>
+                    <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' />
+                  </Text>
                 </Body>
               </Left>
             </CardItem>
@@ -111,6 +121,12 @@ function mapDispatchToProps(dispatch) {
     resetUserConnected: function () {
       dispatch({
         type: 'reset'
+      })
+    },
+    recordClickedNews: function (news) {
+      dispatch({
+        type: 'record-news',
+        news: news
       })
     }
   }

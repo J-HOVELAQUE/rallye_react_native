@@ -6,9 +6,12 @@ import { AsyncStorage, Text } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+///// Screens components /////
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import TeamScreen from './screens/Team';
@@ -22,11 +25,14 @@ import MonCompte from './screens/monCompte';
 import Photos from './screens/Photos';
 import Video from './screens/Video';
 import SnapScreen from './screens/SnapScreen';
-
+import OneNewScreen from './screens/OneNewScreen';
 import NewsScreen from './screens/NewsScreen';
 
+/////  Reducers  //////
 import userConnected from './reducers/userConnected';
 import userFavorites from './reducers/userFavorites';
+import clickedNews from './reducers/clickedNews';
+
 
 // Fonts
 import { AppLoading } from 'expo';
@@ -39,13 +45,14 @@ import {
 } from '@expo-google-fonts/roboto';
 import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
+///// Disable Warnings //////
 import { LogBox } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
-const store = createStore(combineReducers({ userConnected, userFavorites }));
+const store = createStore(combineReducers({ userConnected, userFavorites, clickedNews }));
+
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
@@ -93,6 +100,10 @@ const StackForSnapScreen = createStackNavigator({
 })
 
 // Stack navigation for switch on a news in full screen
+const StackForNews = createStackNavigator({
+  'News': NewsScreen,
+  'Detail': OneNewScreen
+})
 
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
@@ -100,11 +111,10 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
-    News: NewsScreen,
-    'Mon compte': MonCompte,
+    News: StackForNews,
+    'Mon compte': StackForSnapScreen,
     Video: Video,
     Photos: Photos,
-    Snap: SnapScreen
   }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
@@ -116,7 +126,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     Login: LoginScreen,
     'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
-    News: NewsScreen,
+    News: StackForNews,
     'Mon compte': StackForSnapScreen,
     Video: Video,
     Photos: Photos,
@@ -131,7 +141,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     Menu: BottomNavigator,
     Login: LoginScreen,
     Programme: ProgrammeScreen,
-    News: NewsScreen,
+    News: StackForNews,
     Video: Video,
     Photos: Photos
   }

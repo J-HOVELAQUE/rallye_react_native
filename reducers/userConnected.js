@@ -17,8 +17,6 @@ export default function (userConnected = {}, action) {
     } else if (action.type === 'changeAvatar') {
         updatedUser = { ...userConnected };
         updatedUser.avatar = action.url;
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>> AVATAR!!!!', action.url);
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>> AVATAR!!!!', updatedUser);
         return updatedUser
 
     } else {
