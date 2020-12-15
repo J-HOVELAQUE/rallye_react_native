@@ -28,11 +28,6 @@ function NewsScreen(props) {
     getNews()
   }, [])
 
-  console.log('NEWS : ', newsList.length)
-
-  console.log('NEWS >>>>>>>>>>>>>>>>>>>>>>>>>>>', newsList);
-
-
   return (
     <Container>
 

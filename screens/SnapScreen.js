@@ -64,11 +64,6 @@ function SnapScreen(props) {
     return (
         <Container>
 
-            <Header>
-                <Button title="Retour"
-                    onPress={() => props.navigation.navigate('Mon compte')} />
-            </Header>
-
             <Overlay isVisible={visible} width="auto" height="auto">
                 <Text>Loading</Text>
             </Overlay>

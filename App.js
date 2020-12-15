@@ -86,6 +86,14 @@ var BottomNavigator = createBottomTabNavigator(
   }
 );
 
+// Stack navigation for the SnapScreen on MonCompte
+const StackForSnapScreen = createStackNavigator({
+  'Mon Compte': MonCompte,
+  'Snap': SnapScreen
+})
+
+// Stack navigation for switch on a news in full screen
+
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
   {
@@ -109,10 +117,10 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Infos pratiques': HebergementScreen,
     Programme: ProgrammeScreen,
     News: NewsScreen,
-    'Mon compte': MonCompte,
+    'Mon compte': StackForSnapScreen,
     Video: Video,
     Photos: Photos,
-    Snap: SnapScreen
+
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
@@ -130,11 +138,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
 
-// Stack navigation for the SnapScreen on MonCompte
-const StackForSnapScreen = createStackNavigator({
-  'Mon Compte': MonCompte,
-  'Snap': SnapScreen
-})
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function App() {
