@@ -10,7 +10,9 @@ import { greyDarkTa, RedButton, RedButtonOutline, whiteTa, icoWhite, RallyeH2, R
 import { connect } from 'react-redux';
 import socketIOClient from 'socket.io-client'
 
-var socket = socketIOClient('http://192.168.1.9:3000')
+// const serverUrl = 'http://192.168.1.9:3000';
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+var socket = socketIOClient(serverUrl)
 
 
 function ChatScreen(props) {
@@ -19,29 +21,53 @@ function ChatScreen(props) {
     // const [listMessages, setListMessages] = useState([])
     const [msgOfficiel, setMsgOfficiel] = useState([])
     const [msgRoom, setMsgRoom] = useState([])
-    // const [selectedIndex, setSelectedIndex] = useState(0)
+    const [selectedIndex, setSelectedIndex] = useState(0)
     // const buttons = ['Officiel', 'PiloteA', 'PiloteB']
-    const [room, setRoom]= useState('Officiel')
-
+    const [room, setRoom] = useState('Officiel')
 
     useEffect(() => {
-        console.log("DEPART ///////")
-        // socket.on('sendMessageToAll', (newMsg) => {
-        //     console.log('default: ', newMsg)
+        console.log('///// MONTAGE COMPOSANT //////')
+        async function getHistoryChat(roomName) {
+            const rawAnswer = await fetch(`${serverUrl}/chat/get-chat?room=${roomName}`, {
+                method: 'GET',
+            });
+            let chatInfo = (await rawAnswer.json()).roomInfo;
+            console.log(chatInfo)
+            if (roomName === 'Officiel') {
+                setMsgOfficiel(chatInfo.history)
+            } else if (roomName === 'RoomB') {
+                setMsgRoom(chatInfo.history)
+            }
+        }
+        getHistoryChat('Officiel')
+        getHistoryChat('RoomB')
+    }, [])
 
-        //     setListMessages([...listMessages, newMsg])
-        // })
+    async function updateHistoryChat(roomName, msg) {
+        const rawAnswer = await fetch(`${serverUrl}/chat/update-chat`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `room=${roomName}&newMsg=${JSON.stringify(msg)}`
+        })
+        const answer = await rawAnswer.json();
+        console.log('/////// RETOUR CHAT : ', answer)
+    }
 
+    useEffect(() => {
+
+        // When message received
         socket.on('messageFromChannel', (newMsg) => {
+
             console.log('CHANNEL : ', newMsg)
-            if(newMsg.room === 'Officiel'){
+            if (newMsg.room === 'Officiel') {
                 setMsgOfficiel([...msgOfficiel, newMsg.messageInfo])
             } else {
                 setMsgRoom([...msgRoom, newMsg.messageInfo])
             }
+            updateHistoryChat(newMsg.room, newMsg.messageInfo)
         })
 
-    }, [msgOfficiel, msgRoom])
+    }, [])
 
     var chatOfficiel = msgOfficiel.map((msg, i) => (
         <ListItem key={i} bottomDivider>
@@ -69,16 +95,16 @@ function ChatScreen(props) {
         // socket.emit('changeRoom', { newRoom: roomNumber.toString(), oldRoom: selectedIndex.toString() })
         setRoom(roomNumber)
         socket.emit('changeRoom', { newRoom: roomNumber.toString() })
-        
+
     }
-console.log('ROOM : ', room)
-console.log('MsgOFFICIEL : ', msgOfficiel)
-console.log('MshROOM : ', msgRoom)
+    console.log('ROOM : ', room)
+    console.log('MsgOFFICIEL : ', msgOfficiel)
+    console.log('MshROOM : ', msgRoom)
 
-// const room1 = () => {<ChatRoom room='Officiel' test={()=>handleChangeRoom('Officiel')}/>}
-//  const room2 = ()=> {<ChatRoom room='RoomB' test={()=>handleChangeRoom('RoomB')} />}   
+    // const room1 = () => { <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} /> }
+    // const room2 = () => { <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} /> }
 
-//  const buttons = [{element: room1}]
+    // const buttons = [room1 ,room2 ]
     return (
         <Container >
             <Header style={{ backgroundColor: greyDarkTa }}>
@@ -99,9 +125,13 @@ console.log('MshROOM : ', msgRoom)
                 </Right>
             </Header>
             <View style={{ flex: 1 }}>
-                {/* <ButtonGroup selectedIndex={selectedIndex} buttons={buttons} onPress={(num) => { console.log(num); handleChangeRoom(num) }} /> */}
-                    <ChatRoom room='Officiel' test={()=>handleChangeRoom('Officiel')}/>
-                    <ChatRoom room='RoomB' test={()=>handleChangeRoom('RoomB')} />
+                {/* <ButtonGroup selectedIndex={selectedIndex} buttons={buttons}
+                    onPress={(index) => {
+                        console.log(index);
+                        // handleChangeRoom(index)
+                    }} /> */}
+                <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} />
+                <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} />
 
                 <ScrollView style={{ flex: 1, marginTop: 15 }}>
                     <ListItem bottomDivider>
@@ -110,7 +140,7 @@ console.log('MshROOM : ', msgRoom)
                             <ListItem.Subtitle>Alex</ListItem.Subtitle>
                         </ListItem.Content>
                     </ListItem>
-                    {room==='Officiel' ? chatOfficiel : chatRoom}
+                    {room === 'Officiel' ? chatOfficiel : chatRoom}
                 </ScrollView >
 
                 {/* <KeyboardAvoidingView behavior="padding" enabled> */}
