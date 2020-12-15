@@ -18,7 +18,7 @@ import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
 import LibraryScreen from './screens/LibraryScreen';
-import MonCompte from './screens/MonCompte';
+import MonCompte from './screens/monCompte';
 import Photos from './screens/Photos';
 import Video from './screens/Video';
 import SnapScreen from './screens/SnapScreen';
