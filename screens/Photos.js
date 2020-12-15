@@ -43,7 +43,7 @@ var dataImage=[ 'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Cors
 
 var dataImage2 = dataImage.map((image,i)=>(
     
-        <Lightbox underlayColor="white"  useNativeDriver={false}>
+        <Lightbox underlayColor="white"  useNativeDriver={true}>
             <Image style={styles.imageThumbnail} source={ {uri: image} }key={i} />
         </Lightbox>
 

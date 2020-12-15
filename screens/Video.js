@@ -44,9 +44,9 @@ export default function App(props) {
   </Right>
 </Header>
 
-  <Content>
+  <Content style={{flex:1 ,backgroundColor:'#263238'}}>
 
-    <View>
+    <View >
       <YoutubePlayer
         height={300}
         play={playing}
@@ -55,11 +55,11 @@ export default function App(props) {
       />
       <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
     </View>
-    <View>
+    <View >
       <YoutubePlayer
         height={300}
         play={playing}
-        videoId={"cDRkHXMHqFo"}
+        videoId={"tBGzCdG3fhQ"}
         onChangeState={onStateChange}
       />
       <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
@@ -68,7 +68,7 @@ export default function App(props) {
       <YoutubePlayer
         height={300}
         play={playing}
-        videoId={"cDRkHXMHqFo"}
+        videoId={"6-bpeREC4RA"}
         onChangeState={onStateChange}
       />
       <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
