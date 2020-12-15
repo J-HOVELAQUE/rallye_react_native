@@ -22,6 +22,8 @@ const serverUrl = 'http://192.168.1.26:3000';
 
 function SnapScreen(props) {
 
+    console.log('USER', props.userConnected);
+
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.front);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
@@ -89,18 +91,19 @@ function SnapScreen(props) {
                         let photo = await camera.takePictureAsync({ quality: 0.2 });
 
                         let data = new FormData();
-                        data.append('photo', {
+                        data.append('avatar', {
                             uri: photo.uri,
                             type: 'image/jpeg',
-                            name: 'photo'
+                            name: 'user_avatar.jpg',
                         });
 
-                        const rawAnswer = await fetch(serverUrl + "/user/change-avatar", {
+                        const rawAnswer = await fetch(`${serverUrl}/user/change-avatar?token=${props.userConnected.token}`, {
                             method: 'post',
                             body: data
                         });
                         const answer = await rawAnswer.json();
                         console.log(answer);
+
                         props.addPhotoToGalery({
                             url: answer.info.url,
                             gender: answer.gender,
@@ -119,6 +122,11 @@ function SnapScreen(props) {
     );
 }
 
+function mapStateToProps(state) {
+    return {
+        userConnected: state.userConnected
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -132,7 +140,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const SnapAndRedux = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(SnapScreen);
 
