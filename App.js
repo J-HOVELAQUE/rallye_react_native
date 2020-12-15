@@ -21,12 +21,13 @@ import LoginScreen from './screens/Login';
 import MediaScreen from './screens/MediaScreen';
 import HebergementScreen from './screens/HebergementScreen';
 import ProgrammeScreen from './screens/ProgrammeScreen';
-import LibraryScreen from './screens/LibraryScreen';
 import MonCompte from './screens/monCompte';
 import Photos from './screens/Photos';
 import Video from './screens/Video';
 import SnapScreen from './screens/SnapScreen';
 import OneNewScreen from './screens/OneNewScreen';
+import ChatScreen from './screens/ChatScreen';
+
 import NewsScreen from './screens/NewsScreen';
 
 /////  Reducers  //////
@@ -131,7 +132,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     'Mon compte': StackForSnapScreen,
     Video: Video,
     Photos: Photos,
-
+    Chat: ChatScreen
   }
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
