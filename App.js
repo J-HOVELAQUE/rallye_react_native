@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { AsyncStorage, Text } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
