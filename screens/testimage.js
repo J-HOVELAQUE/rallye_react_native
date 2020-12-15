@@ -1,11 +1,8 @@
 import React, {useEffect,useState} from 'react';
 import {SafeAreaView,StyleSheet,View,FlatList,Image,ImageBackground ,ScrollView} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title,Card,CardItem,Content,Text } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title,Card,CardItem,Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-const App = (props) => {
+const App = () => {
 const [dataSource, setDataSource] = useState([
 
     
@@ -43,28 +40,28 @@ var dataImage=[ 'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Cors
 
 var dataImage2 = dataImage.map((image,i)=>(
     
-        <Lightbox underlayColor="white"  useNativeDriver={false}>
+        <Lightbox underlayColor="white" >
             <Image style={styles.imageThumbnail} source={ {uri: image} }key={i} />
         </Lightbox>
 
         ))
   return (
     <Container>
-     <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-        <Button transparent onPress={() => props.navigation.navigate('Medias')}>
-            <Icon name='arrow-left' size={20} style={{ color: whiteTa }} />  
-          </Button>
-        </Left>
-
-        <Body>
-          <Text style={{ color: whiteTa }}>VIDEO</Text>
-        </Body>
-
-        <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-        </Right>
-      </Header>
+    <Header style={{ backgroundColor: '#313131'}}>
+      <Left>
+        <Button transparent>
+          <Icon name='ios-people' />
+        </Button>
+      </Left>
+      <Body>
+        <Title>Programme</Title>
+      </Body>
+      <Right>
+        <Button transparent onPress={() => navigation.openDrawer()}>
+          <Icon name='menu' />
+        </Button>
+      </Right>
+    </Header>
     <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
     <Content>
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
   imageThumbnail: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 200,
+    height: 100,
   },
   
 });
