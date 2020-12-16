@@ -15,11 +15,11 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
 function Team(props) {
-  const [selectedValue, setSelectedValue] = useState("General");
+  // const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([]);
-  const [searchTeam, setSearchTeam] = useState([]);
+  // const [searchTeam, setSearchTeam] = useState([]);
   const [teamToDisplay, setTeamToDisplay] = useState([]);
-  const [displayButton, setDisplayButton] = useState('');
+  const [displayButton, setDisplayButton] = useState('Tous');
 
   useEffect(() => {
 
@@ -34,11 +34,8 @@ function Team(props) {
     getTeams()
   }, []);
 
-  // console.log('FAVORITES', props.userFavorites);
-
   const noFilter = () => {
     const filteredTeams = allTeams;
-    // console.log("TOUS", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Tous');
   }
@@ -47,19 +44,15 @@ function Team(props) {
 
   const filterRegularity = () => {
     const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
-    // console.log("REGULARITY", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Reg');
   }
 
   const filterCompetition = () => {
     const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
-    // console.log("COMPETITION", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Comp');
   }
-
-  // console.log('FAVORITES', props.userFavorites);
 
   let teams = teamToDisplay.map((team, i) => {
     return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
@@ -88,11 +81,7 @@ function Team(props) {
       </Header>
 
       <Content>
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: blackTa, color: whiteTa }}>
-          <SearchInput onChangeText={(val) => setSearchTeam(val)} placeholder='Rechercher...' />
-        </View>
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-
           <View style={{ flex: 1, flexDirection: 'row' }}>
             {
               displayButton == 'Tous' ?
@@ -113,21 +102,8 @@ function Team(props) {
                 <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
             }
           </View>
-
-          {/* <Picker
-            mode="dropdown"
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150, backgroundColor: "#E4E4E4" }}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item label="General" value="General" />
-            <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
-            <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
-            <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
-          </Picker> */}
-          {/* <searchInput onChangeText="Rechercher" /> */}
-
         </View>
+        
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
           {teams}
