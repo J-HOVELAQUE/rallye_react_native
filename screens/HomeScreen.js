@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, ImageBackground, Image } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import { connect } from 'react-redux';
-import { Text, Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right, Card, CardItem } from 'native-base';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import { View, Image } from 'react-native';
+import { Text, Container, Content } from 'native-base';
+import { Table, Row, Rows } from 'react-native-table-component';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+
+import { RedButton, RallyeH1, RallyeH2, greyDarkTa, blackTa, greyLightTa } from '../components/rallye-lib';
+import HeaderRally from '../components/HeaderRally';
+import { getData } from '../tools/toolkit';
 
 const HeadTable = ['Horaires', 'Itinéraires'];
 const DataTable = [
@@ -14,63 +16,34 @@ const DataTable = [
   ['07H05', 'Marcoussis', 'N118, N104'],
 ];
 
-const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.9:3000';
-
 function HomeScreen(props) {
 
   useEffect(() => {
-    const getData = async () => {
+
+    const connection = async () => {
 
       //// Getting data in local storage if existing ////
-      try {
-        const value = await AsyncStorage.getItem('token')
-        if (value !== null) {
+      const answer = await getData();
 
-          const rawAnswer = await fetch(`${serverUrl}/user/get-user?token=${value}`, {
-            method: 'GET',
-          });
-          const answer = await rawAnswer.json();
-
-          //// Record user connected on the reduce store /////
-          props.onRecordUserConnected(answer.user);
-
-          const favorite = answer.user.favorite.map(fav => {
-            const returnOb = {};
-            returnOb._id = fav._id;
-            returnOb.car_id = fav.car_id;
-            return returnOb;
-          })
-
-          props.retrieveFavoriteTeam(favorite);
-        }
-      } catch (e) {
-        console.log('ERROR', e);
-      }
+      //// Record user connected on the reduce store /////
+      props.onRecordUserConnected(answer.user);
+      const favorite = answer.user.favorite.map(fav => {
+        const returnOb = {};
+        returnOb._id = fav._id;
+        returnOb.car_id = fav.car_id;
+        return returnOb;
+      })
+      props.retrieveFavoriteTeam(favorite);
     }
-    getData();
+    connection();
   }, [])
 
   return (
     <Container>
 
-      <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
-        </Left>
-
-        <Body>
-          <Text style={{ color: whiteTa }}>HOME</Text>
-        </Body>
-
-        <Right>
-          {props.user.status === undefined ?
-            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-            :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
-          }
-        </Right>
-      </Header>
+      <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+        nav={props.navigation.navigate}
+        titleHeader="HOME" />
 
       <Content >
 
@@ -103,17 +76,6 @@ function HomeScreen(props) {
 
     </Container >
   );
-}
-
-const styles = {
-  container: {
-    borderWidth: 0, // Remove Border
-    shadowColor: 'rgba(0,0,0, 0.0)', // Remove Shadow IOS
-    shadowOffset: { height: 0, width: 0 },
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0 // This is for Android
-  }
 }
 
 function mapDispatchToProps(dispatch) {

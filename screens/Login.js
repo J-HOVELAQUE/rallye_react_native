@@ -12,6 +12,8 @@ import {
 } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { storeData } from '../tools/toolkit';
+
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
@@ -57,29 +59,9 @@ function LoginScreen(props) {
     ///// Recording in reduce store if answer is ok //////
     if (answer.recorded === true) {
       props.onRecordUserConnected(answer.data);
-      const storeData = async () => {
 
-        const dataToken = answer.data.token;
+      storeData(answer.data.token, answer.data.status)
 
-        try {
-          await AsyncStorage.setItem('token', dataToken)
-        } catch (e) {
-          // saving error
-          console.log('ERROR', e);
-        }
-
-        const dataStatus = answer.data.status
-        try {
-          await AsyncStorage.setItem('status', dataStatus)
-        } catch (e) {
-          // saving error
-          console.log('ERROR', e);
-        }
-      }
-
-      storeData();
-
-      // AsyncStorage.setItem("token", JSON.stringify(answer.data.token));
       props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);

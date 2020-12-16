@@ -15,7 +15,7 @@ function HeaderRally(props) {
             </Left>
 
             <Body>
-                <Text style={{ color: whiteTa }}>INFOS PRATIQUES</Text>
+                <Text style={{ color: whiteTa }}>{props.titleHeader}</Text>
             </Body>
             <Right>
 

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { connect } from 'react-redux';
 import { Container, Content, Footer, FooterTab, Button, Accordion } from 'native-base';
-import { greyDarkTa, whiteTa, RallyeH3 } from '../components/rallye-lib';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 
+import { RallyeH3 } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 
@@ -73,7 +72,9 @@ function HebergementScreen(props) {
   return (
     <Container >
       <HeaderRally openBurgerMenu={props.navigation.openDrawer}
-        nav={props.navigation.navigate} />
+        nav={props.navigation.navigate}
+        titleHeader="HEBERGEMENT" />
+
       <Content>
         <Accordion
           dataArray={dataArray}
@@ -83,7 +84,9 @@ function HebergementScreen(props) {
           expandedIconStyle={{ color: "red" }}
         />
       </Content>
+
       <FooterRally nav={props.navigation.navigate} />
+
     </Container>
   );
 }
