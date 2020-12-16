@@ -9,7 +9,7 @@ import { Input, Overlay } from 'react-native-elements'
 import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import CardTeam from '../components/CardClassement'
+import CardClassement from '../components/CardClassement'
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://localhost:3000';
@@ -20,6 +20,8 @@ function ClassementScreen(props) {
   const [searchTeam, setSearchTeam] = useState([]);
   const [teamToDisplay, setTeamToDisplay] = useState([]);
   const [displayButton, setDisplayButton] = useState('');
+  const [allResults, setAllResults] = useState([]);
+  const [resultToDisplay, setResultToDisplay] = useState([]);
 
   useEffect(() => {
 
@@ -30,8 +32,20 @@ function ClassementScreen(props) {
       let allTeamsInfos = await rawAnswer.json();
       setAllTeams(allTeamsInfos.teams);
       setTeamToDisplay(allTeamsInfos.teams);
+      //console.log("INFOS TEAMS ", allTeamsInfos.teams)
     }
     getTeams()
+
+    async function getResults() {
+      const rawAnswer = await fetch(`${serverUrl}/results/results`, {
+        method: 'GET',
+      });
+      let allResults = await rawAnswer.json();
+      setAllResults(allResults.results);
+      setResultToDisplay(allResults.results);
+      //console.log("INFOS RESULTATS ", allResults.results)
+    }
+    getResults()
   }, []);
 
   const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
@@ -52,11 +66,18 @@ function ClassementScreen(props) {
 
   // console.log('FAVORITES', props.userFavorites);
 
-  let teams = teamToDisplay.map((team, i) => {
-    return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
-
+  let teamResult = teamToDisplay.map((team, i) => {
+    var newResult = team;
+    resultToDisplay.map(result => {
+      if(result.team_id._id == team._id) {
+        newResult.result = result
+      }
+    })
+    console.log("RESULTATS !!!!!!!!!!!!!!!!!!!!", newResult)
+    return <CardClassement key={team._id} infoTeam={newResult} navigation={props.navigation} />
 
   })
+
 
   return (
     <Container>
@@ -80,9 +101,7 @@ function ClassementScreen(props) {
       </Header>
 
       <Content>
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: blackTa, color: whiteTa }}>
-          <SearchInput onChangeText={(val) => setSearchTeam(val)} placeholder='Rechercher...' />
-        </View>
+        
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -100,23 +119,10 @@ function ClassementScreen(props) {
             }
           </View>
 
-          {/* <Picker
-            mode="dropdown"
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150, backgroundColor: "#E4E4E4" }}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item label="General" value="General" />
-            <Picker.Item label="Moyenne Basse" value="Moyenne basse" />
-            <Picker.Item label="Moyenne Intermédiaire" value="Moyenne Intermédiaire" />
-            <Picker.Item label="Moyenne Haute" value="Moyenne Haute" />
-          </Picker> */}
-          {/* <searchInput onChangeText="Rechercher" /> */}
-
         </View>
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
-          {teams}
+          {teamResult}
 
         </View>
       </Content>

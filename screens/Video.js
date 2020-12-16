@@ -7,9 +7,6 @@ import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, wh
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-
-
-
 export default function App(props) {
   const [playing, setPlaying] = useState(false);
 
@@ -20,14 +17,9 @@ export default function App(props) {
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
-
   return (
 
     <Container >
-
 
 
       <Content style={{ flex: 1, backgroundColor: '#263238' }}>
@@ -39,7 +31,6 @@ export default function App(props) {
             videoId={"cDRkHXMHqFo"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
         <View >
           <YoutubePlayer
@@ -48,7 +39,6 @@ export default function App(props) {
             videoId={"tBGzCdG3fhQ"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
         <View>
           <YoutubePlayer
@@ -57,7 +47,6 @@ export default function App(props) {
             videoId={"6-bpeREC4RA"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
 
 
