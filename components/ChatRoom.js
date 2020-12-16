@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { greyDarkTa, RedButtonOutline, RedButton, whiteTa, icoWhite, RallyeH2, RallyeH3 } from '../components/rallye-lib';
+import { RedButtonOutline, RedButton} from '../components/rallye-lib';
 
 
 export default function ChatRoom(props) {
-    let actif = false
     return (
         <View>
-                <RedButton title={props.room} onPress={() => {props.test()}} />
-                {/* <RedButtonOutline title={props.room} onPress={() => {console.log(props.room)}} /> */}
+            {props.actif === true ?
+                <RedButton title={props.room} onPress={() => { props.test() }} />
+                : <RedButtonOutline title={props.room} onPress={() => { props.test() }} />
+            }
+
         </View>
     )
 }
