@@ -1,17 +1,10 @@
 import React from 'react';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Text, View } from 'react-native';
-
-
-import { connect } from 'react-redux';
-import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left, Title, Body, Right } from 'native-base';
+import { Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-
-
-
-
-import { greyDarkTa, whiteTa, icoWhite, RallyeH2, RallyeH3 } from '../components/rallye-lib';
+import { Header, Left, Body, Right } from 'native-base';
+import { connect } from 'react-redux';
+import { greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
 
 function HeaderRally(props) {
 
