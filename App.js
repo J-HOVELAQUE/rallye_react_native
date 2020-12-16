@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
+
+////// Menus //////
 import AppPilot from './navigation/AppPilot';
 import AppFan from './navigation/AppFan';
 import AppUnknown from './navigation/AppUnknown';
@@ -23,13 +25,11 @@ import {
   Roboto_700Bold,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
-import { greyDarkTa, redTa, whiteTa } from './components/rallye-lib';
 
 ///// Disable Warnings //////
 import { LogBox } from 'react-native';
-
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreLogs(['Warning: ...']);          // Ignore log notification by message
+LogBox.ignoreAllLogs();                     //Ignore all log notifications
 
 const store = createStore(combineReducers({ userConnected, userFavorites, clickedNews, chatHistory }));
 
