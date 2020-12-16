@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body, Title, Container, Row } from 'native-base';
-import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, Picker } from 'react-native';
-
-import AsyncStorage from '@react-native-community/async-storage';
-import { connect } from 'react-redux';
-import { Input, Overlay } from 'react-native-elements'
-
-import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
+import { View} from 'react-native';
+import { Header, Content, Text, Right, Left, Body, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import CardTeam from '../components/CardTeam'
+import { RedButtonOutline, RedButton,  greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
 function Team(props) {
-  // const [selectedValue, setSelectedValue] = useState("General");
   const [allTeams, setAllTeams] = useState([]);
-  // const [searchTeam, setSearchTeam] = useState([]);
   const [teamToDisplay, setTeamToDisplay] = useState([]);
   const [displayButton, setDisplayButton] = useState('Tous');
 
@@ -103,7 +98,7 @@ function Team(props) {
             }
           </View>
         </View>
-        
+
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
           {teams}
@@ -114,7 +109,6 @@ function Team(props) {
     </Container>
   );
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
