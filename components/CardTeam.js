@@ -23,7 +23,8 @@ function CardTeam(props) {
     const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
     const urlFlagWorld = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608020160/world_pxx0mb.png'
-    const team = props.infoTeam
+    const team = props.infoTeam;
+
 
     useEffect(() => {
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
@@ -33,7 +34,6 @@ function CardTeam(props) {
     }, [])
 
     const handleFavorite = async (numTeam, bib) => {
-        console.log('team cliquée', numTeam)
 
         const filteredFav = props.userFavorites.filter(fav => fav._id === numTeam);
 
@@ -69,11 +69,19 @@ function CardTeam(props) {
 
 
     function namePilot(firstName, lastName) {
-        return (firstName.substr(0, 1).toUpperCase() + '. ' + lastName.toUpperCase())
+        if (typeof firstName === "string" && typeof lastName === "string") {
+            return (firstName[0].toUpperCase() + '. ' + lastName.toUpperCase())
+        } else {
+            return ""
+        }
     }
 
     function fullNamePilot(firstName, lastName) {
-        return (firstName.substr(0, 1).toUpperCase() + firstName.substr(1) + ' ' + lastName.toUpperCase())
+        if (typeof firstName === "string" && typeof lastName === "string") {
+            return (firstName[0].toUpperCase() + firstName.substring(1) + ' ' + lastName.toUpperCase())
+        } else {
+            return ""
+        }
     }
 
     function flagNationality(nationality) {

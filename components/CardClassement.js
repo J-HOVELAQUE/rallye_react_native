@@ -67,11 +67,19 @@ function CardTeam(props) {
 
 
     function namePilot(firstName, lastName) {
-        return (firstName.substr(0, 1).toUpperCase() + '. ' + lastName.toUpperCase())
+        if (typeof firstName === "string" && typeof lastName === "string") {
+            return (firstName[0].toUpperCase() + '. ' + lastName.toUpperCase())
+        } else {
+            return ""
+        }
     }
 
     function fullNamePilot(firstName, lastName) {
-        return (firstName.substr(0, 1).toUpperCase() + firstName.substr(1) + ' ' + lastName.toUpperCase())
+        if (typeof firstName === "string" && typeof lastName === "string") {
+            return (firstName[0].toUpperCase() + firstName.substring(1) + ' ' + lastName.toUpperCase())
+        } else {
+            return ""
+        }
     }
 
     function flagNationality(nationality) {
