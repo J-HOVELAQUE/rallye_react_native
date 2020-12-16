@@ -8,8 +8,60 @@ import { connect } from 'react-redux';
 import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.9:3000';
 
 function ProgrammeScreen(props) {
+
+  const [program, setProgram] = useState([])
+
+  useEffect(() => {
+
+    async function getProgram() {
+      const rawAnswer = await fetch(`${serverUrl}/program/get-program`, {
+        method: 'GET',
+      });
+      let program = await rawAnswer.json();
+      console.log('IN EFFET : ', program.program)
+      setProgram(program.program);
+    }
+
+    getProgram()
+  }, []);
+
+  function schedule(dateString) {
+
+    let hours = new Date(dateString).getHours();
+    let minutes = new Date(dateString).getMinutes()
+
+    if (hours.toString().length === 1) {
+      hours = '0' + hours
+    }
+
+    if (minutes.toString().length === 1) {
+      minutes = '0' + minutes
+    }
+    return (hours + ':' + minutes)
+  }
+
+  let programGrid = program.map((planning, i) => (
+    <Card key={planning._id} style={{ width: "100%", flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+      <CardItem >
+
+        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
+
+        <View style={{ width: '75%' }}>
+          {planning.event.map((task, nTask)=>(
+            <Text key={task}>- {task}</Text>
+          ))}
+          
+        </View>
+
+      </CardItem>
+    </Card>
+  ))
+
+  console.log(program)
 
   return (
     <Container>
@@ -26,12 +78,16 @@ function ProgrammeScreen(props) {
           {props.user.status === undefined ?
             <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
             :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected() ; props.navigation.navigate('Home') }} />
+            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
           }
         </Right>
       </Header>
 
       <Content>
+        <RallyeH1 text='Vendredi 16 Décembre 2020'/>
+        <ScrollView>
+          {programGrid}
+        </ScrollView>
 
 
       </Content>

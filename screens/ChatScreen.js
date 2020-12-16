@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, KeyboardAvoidingView } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
-import { Container, Header, Button, Footer, FooterTab, Left, Body, Right } from 'native-base';
+import { Container, Content, Header, Button, Footer, FooterTab, Left, Body, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import socketIOClient from 'socket.io-client';
@@ -83,15 +83,14 @@ function ChatScreen(props) {
     }
 
     return (
-        <Container >
-
+        <Container>
             <Header style={{ backgroundColor: greyDarkTa }}>
                 <Left>
                     <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
                 </Left>
 
                 <Body>
-                    <Text style={{ color: whiteTa }}>MESSAGERIE INSTANTANEE</Text>
+                    <Text style={{ color: whiteTa }}>PROGRAMME - HORAIRES</Text>
                 </Body>
 
                 <Right>
@@ -103,31 +102,31 @@ function ChatScreen(props) {
                 </Right>
             </Header>
 
-            <View style={{ flex: 1 }}>
+            <Content>
+                <View >
 
-                <View style={{ flex: 0.5, flexDirection: 'row', justifyContent: 'center', marginBottom: -65 }}>
-                    <ChatRoom room='Officiel' buttonPress={() => handleChangeRoom('Officiel')} actif={room === 'Officiel' ? true : false} />
-                    <ChatRoom room='RoomB' buttonPress={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
-                </View>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+                        <ChatRoom room='Officiel' buttonPress={() => handleChangeRoom('Officiel')} actif={room === 'Officiel' ? true : false} />
+                        <ChatRoom room='RoomB' buttonPress={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
+                    </View>
 
-                <ScrollView style={{ flex: 1 }}>
-                    {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
-                </ScrollView >
+                    <ScrollView >
+                        {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
+                    </ScrollView >
 
-                <KeyboardAvoidingView behavior="padding" enabled>
-                    <Input
-                        containerStyle={{ marginBottom: -25, marginTop: 10 }}
-                        placeholder='Your message'
-                        value={currentMsg}
-                        onChangeText={(value) => setCurrentMsg(value)}
-                    />
                     <RedButton
                         title="Send to channel"
                         onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
                     />
-                </KeyboardAvoidingView>
+                    <Input
 
-            </View>
+                        placeholder='Your message'
+                        value={currentMsg}
+                        onChangeText={(value) => setCurrentMsg(value)}
+                    />
+
+                </View>
+            </Content>
 
             <Footer>
                 <FooterTab style={{ backgroundColor: greyDarkTa, }}>
@@ -153,11 +152,10 @@ function ChatScreen(props) {
                     </Button>
                 </FooterTab>
             </Footer>
-
         </Container>
+
     );
 }
-
 function mapDispatchToProps(dispatch) {
     return {
         storeChat: function (newMsg, roomName) {

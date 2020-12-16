@@ -11,9 +11,9 @@ import { getData } from '../tools/toolkit';
 
 const HeadTable = ['Horaires', 'Itinéraires'];
 const DataTable = [
-  ['06H15', 'Paris - Grand Palais', 'Cours la Reine, av Versailles'],
-  ['06H30', 'Boulogne Billancourt', 'av E.Vaillant, av G.Leclerc, Pont de Sèvres'],
-  ['07H05', 'Marcoussis', 'N118, N104'],
+  ['08:00', 'Vers-Pont-Du-Gard / Castillon-Du-Gard / Remoulins'],
+  ['08:10', 'Fournes / Roquemaure'],
+  ['08:35', 'Orange / Serignan-Du-Comtat'],
 ];
 
 function HomeScreen(props) {
