@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView, AsyncStorage, Divider } from 'react-native';
+import { Text, View, KeyboardAvoidingView } from 'react-native';
+import { Content, Button, Container } from 'native-base';
 import { Input, Overlay } from 'react-native-elements'
-import { Ionicons } from '@expo/vector-icons';
-// import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import { Header, Content, Button, Card, CardItem, Footer, FooterTab, Right, Left, Body, Title, Container } from 'native-base';
 
-// Importer la librairie de composants
-import {
-  redTa, whiteTa, icoWhite, blackTa, greyDarkTa, greyLightTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput
-} from '../components/rallye-lib';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { whiteTa, greyDarkTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput } from '../components/rallye-lib';
 
 import { storeData } from '../tools/toolkit';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.9:3000';
 
 function LoginScreen(props) {
 

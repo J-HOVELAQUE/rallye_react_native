@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { Container, Content, Footer, FooterTab, Button, Accordion } from 'native-base';
+import { Container, Content, Accordion } from 'native-base';
 import { connect } from 'react-redux';
 
 import { RallyeH3 } from '../components/rallye-lib';
