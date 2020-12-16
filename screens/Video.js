@@ -7,9 +7,6 @@ import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, wh
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-
-
-
 export default function App(props) {
   const [playing, setPlaying] = useState(false);
 
@@ -18,10 +15,6 @@ export default function App(props) {
       setPlaying(false);
       Alert.alert("video has finished playing!");
     }
-  }, []);
-
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
   }, []);
 
   return (
@@ -34,6 +27,10 @@ export default function App(props) {
             <Icon name='arrow-left' size={20} style={{ color: whiteTa }} />
           </Button>
         </Left>
+
+        <Button onPress={() => setPlaying(false)}>
+            <Icon name='arrow-left' size={20} style={{ color: whiteTa }} />
+          </Button>
 
         <Body>
           <Text style={{ color: whiteTa }}>VIDEO</Text>
@@ -53,7 +50,6 @@ export default function App(props) {
             videoId={"cDRkHXMHqFo"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
         <View >
           <YoutubePlayer
@@ -62,7 +58,6 @@ export default function App(props) {
             videoId={"tBGzCdG3fhQ"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
         <View>
           <YoutubePlayer
@@ -71,7 +66,6 @@ export default function App(props) {
             videoId={"6-bpeREC4RA"}
             onChangeState={onStateChange}
           />
-          <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
         </View>
 
 

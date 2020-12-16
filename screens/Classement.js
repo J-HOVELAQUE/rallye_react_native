@@ -32,18 +32,18 @@ function ClassementScreen(props) {
       let allTeamsInfos = await rawAnswer.json();
       setAllTeams(allTeamsInfos.teams);
       setTeamToDisplay(allTeamsInfos.teams);
+      //console.log("INFOS TEAMS ", allTeamsInfos.teams)
     }
     getTeams()
-  }, []);
-
-  useEffect(() => {
 
     async function getResults() {
       const rawAnswer = await fetch(`${serverUrl}/results/results`, {
         method: 'GET',
       });
       let allResults = await rawAnswer.json();
-      setAllResults(allResults.teams);
+      setAllResults(allResults.results);
+      setResultToDisplay(allResults.results);
+      //console.log("INFOS RESULTATS ", allResults.results)
     }
     getResults()
   }, []);
@@ -66,11 +66,18 @@ function ClassementScreen(props) {
 
   // console.log('FAVORITES', props.userFavorites);
 
-  let teams = teamToDisplay.map((team, i) => {
-    return <CardClassement key={team._id} infoTeam={team} navigation={props.navigation} />
-
+  let teamResult = teamToDisplay.map((team, i) => {
+    var newResult = team;
+    resultToDisplay.map(result => {
+      if(result.team_id._id == team._id) {
+        newResult.result = result
+      }
+    })
+    console.log("RESULTATS !!!!!!!!!!!!!!!!!!!!", newResult)
+    return <CardClassement key={team._id} infoTeam={newResult} navigation={props.navigation} />
 
   })
+
 
   return (
     <Container>
@@ -112,12 +119,10 @@ function ClassementScreen(props) {
             }
           </View>
 
-          
-
         </View>
         <View style={{ marginTop: 10, alignItems: "center" }}>
 
-          {teams}
+          {teamResult}
 
         </View>
       </Content>

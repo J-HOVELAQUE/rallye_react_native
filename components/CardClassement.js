@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Content, Button, Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { View, StyleSheet, ImageBackground, Image, TouchableHighlight, ScrollView, ScrollViewComponent, ScrollViewBase } from 'react-native';
-import { Overlay } from 'react-native-elements';
 import { connect } from 'react-redux'
 
 import { RedButtonOutline, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, redTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa, SearchInput, EmailInput } from '../components/rallye-lib';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -92,33 +90,11 @@ function CardClassement(props) {
         }
     }
 
-    // function msConversion(millis) {
-    //     let sec = Math.floor(millis / 1000);
-    //     let hrs = Math.floor(sec / 3600);
-    //     sec -= hrs * 3600;
-    //     let min = Math.floor(sec / 60);
-    //     sec -= min * 60;
-
-    //     sec = '' + sec;
-    //     sec = ('00' + sec).substring(sec.length);
-
-    //     if (hrs > 0) {
-    //       min = '' + min;
-    //       min = ('00' + min).substring(min.length);
-    //       return hrs + ":" + min + ":" + sec;
-    //     }
-    //     else {
-    //       return min + ":" + sec;
-    //     }
-    // }
-
-    // console.log('INFO //// : ', team)
-
     return (
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
                 <Left>
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>#{team.car_id}</Text>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>{team.result.position}</Text>
                 </Left>
                 <Body>
                     <Text style={{ fontSize: 10 }}>
@@ -129,13 +105,10 @@ function CardClassement(props) {
                         <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
-
-                
-
-                
+     
                 <Right style={{ alignItems: 'center' }}>
-                    <Text>2:15:51.0</Text>
-                    <Text note>+12</Text>
+                    <Text>{team.result.time}</Text>
+                    <Text note>{team.result.diff}</Text>
                 </Right>
             </CardItem>
         </Card>
