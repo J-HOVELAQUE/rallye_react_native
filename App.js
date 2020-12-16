@@ -12,6 +12,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import BottomNavigator from './navigation/BottomNavigator';
 
 import StackForNews from './navigation/StackForNews';
+import StackForSnapScreen from './navigation/StackForSnapScreen';
 
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -64,11 +65,7 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
 
-// Stack navigation for the SnapScreen on MonCompte
-const StackForSnapScreen = createStackNavigator({
-  'Mon Compte': MonCompte,
-  'Snap': SnapScreen
-})
+
 
 
 // Fan menu
