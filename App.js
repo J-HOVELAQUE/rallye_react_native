@@ -15,6 +15,7 @@ import StackForNews from './navigation/StackForNews';
 import StackForSnapScreen from './navigation/StackForSnapScreen';
 
 import AppPilot from './navigation/AppPilot';
+import AppFan from './navigation/AppFan';
 
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -65,22 +66,6 @@ const store = createStore(combineReducers({ userConnected, userFavorites, clicke
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
-
-
-
-// Fan menu
-const MyDrawerNavigatorFan = createDrawerNavigator(
-  {
-    Menu: BottomNavigator,
-    Login: LoginScreen,
-    Programme: ProgrammeScreen,
-    News: StackForNews,
-    'Mon compte': StackForSnapScreen,
-    Video: Video,
-    Photos: Photos,
-  }
-);
-const AppFan = createAppContainer(MyDrawerNavigatorFan);
 
 
 // Unknown user menu
