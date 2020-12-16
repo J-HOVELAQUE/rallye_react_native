@@ -20,6 +20,8 @@ function ClassementScreen(props) {
   const [searchTeam, setSearchTeam] = useState([]);
   const [teamToDisplay, setTeamToDisplay] = useState([]);
   const [displayButton, setDisplayButton] = useState('');
+  const [allResults, setAllResults] = useState([]);
+  const [resultToDisplay, setResultToDisplay] = useState([]);
 
   useEffect(() => {
 
@@ -32,6 +34,18 @@ function ClassementScreen(props) {
       setTeamToDisplay(allTeamsInfos.teams);
     }
     getTeams()
+  }, []);
+
+  useEffect(() => {
+
+    async function getResults() {
+      const rawAnswer = await fetch(`${serverUrl}/results/results`, {
+        method: 'GET',
+      });
+      let allResults = await rawAnswer.json();
+      setAllResults(allResults.teams);
+    }
+    getResults()
   }, []);
 
   const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
