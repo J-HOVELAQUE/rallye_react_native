@@ -9,6 +9,8 @@ import socketIOClient from "socket.io-client";
 import HeaderRally from '../components/HeaderRally';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.26:3000';
+
 
 const socket = socketIOClient(serverUrl);
 
@@ -23,6 +25,9 @@ function MapScreen(props) {
     }), []
   });
 
+  console.log('>>>>>>>>>>>>>>>FAVV', displayWithFavorite);
+
+
   ///// Update the marker list to display if favorites changes /////
   useEffect(() => {
     const favList = props.userFavorites.map(fav => fav.car_id);
@@ -30,7 +35,7 @@ function MapScreen(props) {
   }, [props.userFavorites]);
 
   ///// Filter the teams to display with favorites of the user connected /////
-  const displayWithFavorite = vehiculeToDisplay.filter(car => userFavorites.includes(car.idVehicule.toString()));
+  const displayWithFavorite = vehiculeToDisplay.filter(car => userFavorites.includes(car.idVehicule));
 
   ///// Build the array of marker /////
   const markerVehicules = displayWithFavorite.map((car, i) => {
