@@ -115,7 +115,6 @@ function CardClassement(props) {
     );
 }
 
-
 function mapDispatchToProps(dispatch) {
     return {
         addFavoriteTeam: function (numTeam) {
