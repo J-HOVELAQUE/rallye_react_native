@@ -25,57 +25,43 @@ function ClassementScreen(props) {
 
   useEffect(() => {
 
-    async function getTeams() {
-      const rawAnswer = await fetch(`${serverUrl}/teams/get-teams`, {
-        method: 'GET',
-      });
-      let allTeamsInfos = await rawAnswer.json();
-      setAllTeams(allTeamsInfos.teams);
-      setTeamToDisplay(allTeamsInfos.teams);
-      //console.log("INFOS TEAMS ", allTeamsInfos.teams)
-    }
-    getTeams()
-
     async function getResults() {
+      console.log('>>>>>>>>>>>>>>>>>URL', `${serverUrl}/results/results`);
       const rawAnswer = await fetch(`${serverUrl}/results/results`, {
         method: 'GET',
       });
       let allResults = await rawAnswer.json();
       setAllResults(allResults.results);
       setResultToDisplay(allResults.results);
-      //console.log("INFOS RESULTATS ", allResults.results)
     }
+
+    let filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
+    // console.log("REGULARITY", filteredTeams);
+    setTeamToDisplay(filteredTeams);
+    setDisplayButton('Reg');
+
     getResults()
   }, []);
 
   const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
 
-  const filterRegularity = () => {
-    const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
+  let filterRegularity = () => {
+    const filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
     // console.log("REGULARITY", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Reg');
   }
 
-  const filterCompetition = () => {
-    const filteredTeams = allTeams.filter(team => !categoryRegularity.includes(team.category));
+  let filterCompetition = () => {
+    const filteredTeams = allResults.filter(team => !categoryRegularity.includes(team.team_id.category));
     // console.log("COMPETITION", filteredTeams);
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Comp');
   }
 
-  // console.log('FAVORITES', props.userFavorites);
 
   let teamResult = teamToDisplay.map((team, i) => {
-    var newResult = team;
-    resultToDisplay.map(result => {
-      if(result.team_id._id == team._id) {
-        newResult.result = result
-      }
-    })
-    console.log("RESULTATS !!!!!!!!!!!!!!!!!!!!", newResult)
-    return <CardClassement key={team._id} infoTeam={newResult} navigation={props.navigation} />
-
+    return <CardClassement key={team._id} infoTeam={team.team_id} time={team.time} diff={team.diff} position={team.position} />
   })
 
 
@@ -101,7 +87,7 @@ function ClassementScreen(props) {
       </Header>
 
       <Content>
-        
+
         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
