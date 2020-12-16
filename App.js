@@ -1,49 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createStackNavigator } from 'react-navigation-stack';
-
-import BottomNavigator from './navigation/BottomNavigator';
-
-import StackForNews from './navigation/StackForNews';
-import StackForSnapScreen from './navigation/StackForSnapScreen';
-
 import AppPilot from './navigation/AppPilot';
 import AppFan from './navigation/AppFan';
+import AppUnknown from './navigation/AppUnknown';
 
-
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-///// Screens components /////
-import HomeScreen from './screens/HomeScreen';
-import MapScreen from './screens/MapScreen';
-import TeamScreen from './screens/Team';
-import ClassementScreen from './screens/Classement';
-import LoginScreen from './screens/Login';
-import MediaScreen from './screens/MediaScreen';
-import HebergementScreen from './screens/HebergementScreen';
-import ProgrammeScreen from './screens/ProgrammeScreen';
-import MonCompte from './screens/monCompte';
-import Photos from './screens/Photos';
-import Video from './screens/Video';
-import SnapScreen from './screens/SnapScreen';
-import OneNewScreen from './screens/OneNewScreen';
-import ChatScreen from './screens/ChatScreen';
-
-import NewsScreen from './screens/NewsScreen';
 
 /////  Reducers  //////
 import userConnected from './reducers/userConnected';
 import userFavorites from './reducers/userFavorites';
 import clickedNews from './reducers/clickedNews';
 import chatHistory from './reducers/chatHistory';
-
 
 // Fonts
 import { AppLoading } from 'expo';
@@ -67,23 +36,6 @@ const store = createStore(combineReducers({ userConnected, userFavorites, clicke
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
-
-// Unknown user menu
-const MyDrawerNavigatorUnknown = createDrawerNavigator(
-  {
-    Menu: BottomNavigator,
-    Login: LoginScreen,
-    Programme: ProgrammeScreen,
-    News: StackForNews,
-    Video: Video,
-    Photos: Photos
-  }
-);
-const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function App() {
 
   const [userStatus, setUserStatus] = useState('unknown')
