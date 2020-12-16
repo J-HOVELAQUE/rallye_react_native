@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import BottomNavigator from './navigation/BottomNavigator';
+
 import StackForNews from './navigation/StackForNews';
 
 
@@ -61,51 +63,12 @@ const store = createStore(combineReducers({ userConnected, userFavorites, clicke
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
-var BottomNavigator = createBottomTabNavigator(
-  {
-    Accueil: HomeScreen,
-    Pilotes: TeamScreen,
-    Classement: ClassementScreen,
-    Live: MapScreen,
-    Medias: MediaScreen
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ tintColor }) => {
-        var iconName;
-        if (navigation.state.routeName === 'Accueil') {
-          iconName = 'home';
-        } else if (navigation.state.routeName === 'Pilotes') {
-          iconName = 'car';
-        } else if (navigation.state.routeName === 'Classement') {
-          iconName = 'trophy';
-        } else if (navigation.state.routeName === 'Live') {
-          iconName = 'map';
-        } else if (navigation.state.routeName === 'Medias') {
-          iconName = 'image';
-        }
-
-        return <Icon name={iconName} size={20} color={tintColor} />;
-      },
-    }),
-    tabBarOptions: {
-      activeTintColor: redTa,
-      inactiveTintColor: whiteTa,
-      style: {
-        backgroundColor: greyDarkTa,
-      }
-    },
-  }
-);
 
 // Stack navigation for the SnapScreen on MonCompte
 const StackForSnapScreen = createStackNavigator({
   'Mon Compte': MonCompte,
   'Snap': SnapScreen
 })
-
-
-
 
 
 // Fan menu
