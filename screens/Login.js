@@ -12,7 +12,10 @@ import {
 } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 import { storeData } from '../tools/toolkit';
+import HeaderRally from '../components/HeaderRally';
+import FooterRally from '../components/FooterRally';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
@@ -34,7 +37,7 @@ function LoginScreen(props) {
     setVisible(!visible);
   };
 
-  // SIGN UP
+  /////////////// SIGN UP //////////////////////
   async function processSignUp() {
 
     const dataUser = {
@@ -56,13 +59,12 @@ function LoginScreen(props) {
     const answer = await rawAnswer.json();
     console.log(answer);
 
-    ///// Recording in reduce store if answer is ok //////
+    ///// Recording in reduce store and local if answer is ok //////
     if (answer.recorded === true) {
       props.onRecordUserConnected(answer.data);
+      storeData(answer.data.token, answer.data.status);
 
-      storeData(answer.data.token, answer.data.status)
-
-      props.navigation.navigate('Home');
+      props.navigation.navigate('News');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
@@ -70,7 +72,7 @@ function LoginScreen(props) {
     }
   }
 
-  // SIGN IN
+  /////////////// SIGN IN //////////////////////
   async function processSignIn() {
 
     const dataUser = {
@@ -88,21 +90,12 @@ function LoginScreen(props) {
       body: JSON.stringify(dataUser)
     });
     const answer = await rawAnswer.json();
-    console.log('ANSWER', answer);
 
     ///// Recording in reduce store and local storage if answer is ok //////
     if (answer.result === true) {
       props.onRecordUserConnected(answer.data);
-
-      const data = answer.data.token;
-
-      try {
-        await AsyncStorage.setItem('token', data)
-      } catch (e) {
-        // saving error
-        console.log('ERROR', e);
-      }
-      props.navigation.navigate('Home');
+      storeData(answer.data.token, answer.data.status);
+      props.navigation.navigate('News');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
@@ -113,23 +106,9 @@ function LoginScreen(props) {
 
   return (
     <Container>
-      <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
-        </Left>
-
-        <Body>
-          <Text style={{ color: whiteTa }}>INSCRIPTION / CONNECTION</Text>
-        </Body>
-
-        <Right>
-          {props.user.status === undefined ?
-            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-            :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
-          }
-        </Right>
-      </Header>
+      <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+        nav={props.navigation.navigate}
+        titleHeader="INSCRIPTION/CONNECTION" />
 
       <Content>
         <View style={{ flex: 1, backgroundColor: whiteTa, alignItems: "center", justifyContent: "center" }}>
@@ -145,7 +124,6 @@ function LoginScreen(props) {
             </View>
           </Overlay>
 
-          {/* <ScrollView> */}
           <RallyeH3 text="SE CONNECTER" />
 
           <View
@@ -159,20 +137,13 @@ function LoginScreen(props) {
               borderStyle: 'solid',
               borderWidth: 1,
               paddingLeft: 10,
-              // backgroundColor: redTa,
             }}>
 
-
-
-            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
-
-            <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
-
-            <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
-
-            <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
-
-            {/* </KeyboardAvoidingView> */}
+            <KeyboardAvoidingView behavior="padding" enabled style={{ width: '100%' }}>
+              <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
+              <PasswordInput onChangeText={(val) => setPasswordSignIn(val)} />
+              <RedButton onPress={() => { processSignIn() }} title="Se connecter" />
+            </KeyboardAvoidingView>
 
           </View>
 
@@ -193,50 +164,19 @@ function LoginScreen(props) {
             paddingLeft: 10,
           }}>
 
-            {/* <KeyboardAvoidingView behavior="padding" enabled> */}
-
-            <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
-
-            <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
-
-            <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
-
-            <PasswordInput onChangeText={(val) => setPassword(val)} />
-
-            <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
-
-            {/* </KeyboardAvoidingView> */}
+            <KeyboardAvoidingView behavior="padding" enabled style={{ width: '100%' }}>
+              <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
+              <UserInput placeholder='Nom' onChangeText={(val) => setName(val)} />
+              <EmailInput style={{ width: '100%', }} onChangeText={(val) => setEmail(val)} />
+              <PasswordInput onChangeText={(val) => setPassword(val)} />
+              <RedButton onPress={() => { processSignUp() }} title="S'inscrire" />
+            </KeyboardAvoidingView>
           </View>
-
-
-          {/* </ScrollView > */}
         </View>
       </Content>
 
-      <Footer>
-        <FooterTab style={{ backgroundColor: greyDarkTa, }}>
-          <Button onPress={() => props.navigation.navigate('Accueil')}>
-            <Icon name='home' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Accueil</Text>
-          </Button>
-          <Button onPress={() => props.navigation.navigate('Pilotes')} >
-            <Icon name='car' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
-          </Button>
-          <Button onPress={() => props.navigation.navigate('Classement')}>
-            <Icon name='trophy' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
-          </Button >
-          <Button onPress={() => props.navigation.navigate('Live')}>
-            <Icon name='map' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
-          </Button>
-          <Button onPress={() => props.navigation.navigate('Medias')}>
-            <Icon name='image' size={20} style={{ color: whiteTa }} />
-            <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
+      <FooterRally nav={props.navigation.navigate} />
+
     </Container>
   );
 }
