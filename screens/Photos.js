@@ -50,21 +50,7 @@ const PhotoScreen = (props) => {
   ))
   return (
     <Container>
-      <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-          <Button transparent onPress={() => props.navigation.navigate('Medias')}>
-            <Icon name='arrow-left' size={20} style={{ color: whiteTa }} />
-          </Button>
-        </Left>
 
-        <Body>
-          <Text style={{ color: whiteTa }}>VIDEO</Text>
-        </Body>
-
-        <Right>
-          <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-        </Right>
-      </Header>
       <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
         <Content>
