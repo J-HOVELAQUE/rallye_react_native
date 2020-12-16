@@ -19,7 +19,6 @@ function CardClassement(props) {
     const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png'
     const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png'
     const urlFlagWorld = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608020160/world_pxx0mb.png'
-    const team = props.infoTeam
 
     useEffect(() => {
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
@@ -27,41 +26,6 @@ function CardClassement(props) {
             setStyleHeart({ color: redTa })
         }
     }, [])
-
-    const handleFavorite = async (numTeam, bib) => {
-        console.log('team cliquée', numTeam)
-
-        const filteredFav = props.userFavorites.filter(fav => fav._id === numTeam);
-
-        // Add or Remove this team from my favorites
-        if (filteredFav.length < 1) {
-            props.addFavoriteTeam({
-                _id: numTeam,
-                car_id: bib
-            })
-            setStyleHeart({ color: redTa })
-
-            // Add new favorite in BDD
-            const rawAnswer = await fetch(`${serverUrl}/user/add-favorite`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `token=${props.userConnected.token}&newValue=${numTeam}`
-            })
-            const answer = await rawAnswer.json();
-            console.log(answer)
-
-        } else {
-            props.removeFavoriteTeam(numTeam)
-            setStyleHeart({ color: greyDarkTa })
-
-            // Remove favorite in BDD
-            const rawAnswer = await fetch(`${serverUrl}/user/remove-favorite`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `token=${props.userConnected.token}&valueToRemove=${numTeam}`
-            })
-        }
-    }
 
 
     function namePilot(firstName, lastName) {
@@ -93,22 +57,23 @@ function CardClassement(props) {
     return (
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
-                <Left>
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>{team.result.position}</Text>
+                <Left style={{marginHorizontal: -10}}>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', backgroundColor: redTa, paddingHorizontal: 10, paddingVertical: 5 }}>{props.position}</Text>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'right', paddingHorizontal: 10 }}>#{props.infoTeam.car_id}</Text>
                 </Left>
-                <Body>
-                    <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
-                        {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
-                    <Text></Text>
-                    <Text style={{ fontSize: 10 }}>
-                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
-                        {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
+                <Body style={{justifyContent: 'center', marginHorizontal: -30}}>
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
+                        <Image source={{ uri: flagNationality(props.infoTeam.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
+                        {namePilot(props.infoTeam.pilot_1.firstname, props.infoTeam.pilot_1.name)}</Text>
+
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
+                        <Image source={{ uri: flagNationality(props.infoTeam.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
+                        {namePilot(props.infoTeam.pilot_2.firstname, props.infoTeam.pilot_2.name)}</Text>
                 </Body>
-     
-                <Right style={{ alignItems: 'center' }}>
-                    <Text>{team.result.time}</Text>
-                    <Text note>{team.result.diff}</Text>
+
+                <Right style={{ alignItems: 'center', marginHorizontal: -25 }}>
+                    <Text>{props.time}</Text>
+                    <Text note>{props.diff}</Text>
                 </Right>
             </CardItem>
         </Card>

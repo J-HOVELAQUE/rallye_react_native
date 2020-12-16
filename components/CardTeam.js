@@ -97,16 +97,16 @@ function CardTeam(props) {
 
     return (
         <Card style={{ width: "100%", flex: 1 }}>
-            <CardItem >
-                <Left>
+            <CardItem>
+                <Left style={{marginHorizontal: -10}}>
                     <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>#{team.car_id}</Text>
                 </Left>
-                <Body>
-                    <Text style={{ fontSize: 10 }}>
+                <Body style={{justifyContent: 'center', marginHorizontal: 0}}>
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
                     <Text></Text>
-                    <Text style={{ fontSize: 10 }}>
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                 </Body>
@@ -146,7 +146,7 @@ function CardTeam(props) {
                 <TouchableHighlight onPress={() => { toggleOverlay() }}>
                     <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
                 </TouchableHighlight>
-                <Right style={{ alignItems: 'center' }}>
+                <Right style={{ alignItems: 'center', marginHorizontal: -20 }}>
                     {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
                 </Right>
             </CardItem>
