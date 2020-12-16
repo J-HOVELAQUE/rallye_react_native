@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import StackForNews from './navigation/StackForNews';
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -102,13 +104,9 @@ const StackForSnapScreen = createStackNavigator({
   'Snap': SnapScreen
 })
 
-// Stack navigation for switch on a news in full screen
-const StackForNews = createStackNavigator({
-  'News': NewsScreen,
-  'Detail': OneNewScreen
-},
 
-)
+
+
 
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
