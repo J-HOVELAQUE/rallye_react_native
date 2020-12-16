@@ -144,7 +144,7 @@ function CardTeam(props) {
                             <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                                 {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                             <ScrollView>
-                                <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
+                                
 
                                 <RallyeH2 text='Palmarés' />
                                 <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
