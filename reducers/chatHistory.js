@@ -8,8 +8,7 @@ export default function (chatHistory = [], action) {
                 room: action.roomName
             })
         })
-
-        console.log('REDUCER HISTORY : ', newHistory)
+        
         return newHistory
 
     } else {

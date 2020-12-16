@@ -6,7 +6,6 @@ import { Container, Header, Content, Button, Footer, FooterTab, Left, Body, Righ
 import ChatRoom from '../components/ChatRoom'
 import { greyDarkTa, RedButton, RedButtonOutline, whiteTa, icoWhite, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 
-
 import { connect } from 'react-redux';
 import socketIOClient from 'socket.io-client'
 
@@ -18,15 +17,9 @@ var socket = socketIOClient(serverUrl)
 function ChatScreen(props) {
 
     const [currentMsg, setCurrentMsg] = useState('')
-    // const [listMessages, setListMessages] = useState([])
-    const [msgOfficiel, setMsgOfficiel] = useState([])
-    const [msgRoom, setMsgRoom] = useState([])
-    const [selectedIndex, setSelectedIndex] = useState(0)
-    // const buttons = ['Officiel', 'PiloteA', 'PiloteB']
     const [room, setRoom] = useState('Officiel')
 
     useEffect(() => {
-        console.log('///// MONTAGE COMPOSANT //////')
 
         // Function to retrieve chat history
         async function getHistoryChat(roomName) {
@@ -34,12 +27,6 @@ function ChatScreen(props) {
                 method: 'GET',
             });
             let chatInfo = (await rawAnswer.json()).roomInfo;
-            console.log('HISTORY : ', chatInfo)
-            // if (roomName === 'Officiel') {
-            //     setMsgOfficiel(chatInfo.history)
-            // } else if (roomName === 'RoomB') {
-            //     setMsgRoom(chatInfo.history)
-            // }
             props.storeChat(chatInfo.history, chatInfo.roomName)
         }
 
@@ -47,11 +34,6 @@ function ChatScreen(props) {
         socket.on('messageFromChannel', (newMsg) => {
 
             console.log('CHANNEL : ', newMsg)
-            // if (newMsg.room === 'Officiel') {
-            //     setMsgOfficiel([...msgOfficiel, newMsg.messageInfo])
-            // } else {
-            //     setMsgRoom([...msgRoom, newMsg.messageInfo])
-            // }
 
             props.storeChat([newMsg.messageInfo], newMsg.room)
             updateHistoryChat(newMsg.room, newMsg.messageInfo)
@@ -69,7 +51,6 @@ function ChatScreen(props) {
             body: `room=${roomName}&newMsg=${JSON.stringify(msg)}`
         })
         const answer = await rawAnswer.json();
-        console.log('/////// RETOUR CHAT : ', answer)
     }
 
 
@@ -77,7 +58,6 @@ function ChatScreen(props) {
         if (msg.room === 'Officiel') {
             return (
                 <ListItem key={msg.msg._id} bottomDivider>
-                    {/* <Avatar source={{uri: l.avatar_url}} /> */}
                     <ListItem.Content>
                         <ListItem.Title>{msg.msg.msg}</ListItem.Title>
                         <ListItem.Subtitle>{msg.msg.sender} - {msg.msg.status}</ListItem.Subtitle>
@@ -91,7 +71,6 @@ function ChatScreen(props) {
         if (msg.room === "RoomB") {
             return (
                 <ListItem key={msg.msg._id} bottomDivider>
-                    {/* <Avatar source={{uri: l.avatar_url}} /> */}
                     <ListItem.Content>
                         <ListItem.Title>{msg.msg.msg}</ListItem.Title>
                         <ListItem.Subtitle>{msg.msg.sender} - {msg.msg.status}</ListItem.Subtitle>
@@ -103,20 +82,13 @@ function ChatScreen(props) {
     })
 
     var handleChangeRoom = (roomNumber) => {
-        console.log('NEW ROOM : ', roomNumber)
-        // setSelectedIndex(roomNumber)
-        // socket.emit('changeRoom', { newRoom: roomNumber.toString(), oldRoom: selectedIndex.toString() })
         setRoom(roomNumber)
         socket.emit('changeRoom', { newRoom: roomNumber.toString() })
 
     }
     console.log('ROOM : ', room)
-    
 
-    // const room1 = () => { <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} /> }
-    // const room2 = () => { <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} /> }
 
-    // const buttons = [room1 ,room2 ]
     return (
         <Container >
             <Header style={{ backgroundColor: greyDarkTa }}>
@@ -137,34 +109,25 @@ function ChatScreen(props) {
                 </Right>
             </Header>
             <View style={{ flex: 1 }}>
-                {/* <ButtonGroup selectedIndex={selectedIndex} buttons={buttons}
-                    onPress={(index) => {
-                        console.log(index);
-                        // handleChangeRoom(index)
-                    }} /> */}
-                <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} />
-                <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} />
 
-                <ScrollView style={{ flex: 1, marginTop: 15 }}>
-                    <ListItem bottomDivider>
-                        <ListItem.Content>
-                            <ListItem.Title>Parfait et toi ?</ListItem.Title>
-                            <ListItem.Subtitle>Alex</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                    {room === 'Officiel' ? chatOfficiel : chatRoom}
+                <View style={{ flex: 0.5, flexDirection: 'row', justifyContent: 'center', marginBottom: -65}}>
+                    <ChatRoom room='Officiel' test={() => handleChangeRoom('Officiel')} actif={room === 'Officiel' ? true : false} />
+                    <ChatRoom room='RoomB' test={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
+                </View>
+                <ScrollView style={{ flex: 1 }}>
+                    {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
                 </ScrollView >
 
                 <KeyboardAvoidingView behavior="padding" enabled>
                     <Input
-                        containerStyle={{ marginBottom: 5 }}
+                        containerStyle={{ marginBottom: -25, marginTop:10 }}
                         placeholder='Your message'
                         value={currentMsg}
                         onChangeText={(value) => setCurrentMsg(value)}
                     />
                     <RedButton
                         title="Send to channel"
-                        onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
+                        onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }) ; setCurrentMsg('') }}
                     />
                 </KeyboardAvoidingView>
 
