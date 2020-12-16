@@ -25,26 +25,27 @@ function ClassementScreen(props) {
 
   useEffect(() => {
 
+
+
     async function getResults() {
       console.log('>>>>>>>>>>>>>>>>>URL', `${serverUrl}/results/results`);
       const rawAnswer = await fetch(`${serverUrl}/results/results`, {
         method: 'GET',
       });
-      let allResults = await rawAnswer.json();
-      setAllResults(allResults.results);
-      setResultToDisplay(allResults.results);
+      let answer = await rawAnswer.json();
+      setAllResults(answer.results);
+      let filteredTeams = answer.results.filter(team => categoryRegularity.includes(team.team_id.category));
+      // console.log("REGULARITY", filteredTeams);
+      setTeamToDisplay(filteredTeams);
+      setDisplayButton('Reg');
     }
 
-    let filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
-    // console.log("REGULARITY", filteredTeams);
-    setTeamToDisplay(filteredTeams);
-    setDisplayButton('Reg');
+
 
     getResults()
   }, []);
 
   const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
-
   let filterRegularity = () => {
     const filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
     // console.log("REGULARITY", filteredTeams);
