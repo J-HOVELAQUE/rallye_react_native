@@ -14,6 +14,8 @@ import BottomNavigator from './navigation/BottomNavigator';
 import StackForNews from './navigation/StackForNews';
 import StackForSnapScreen from './navigation/StackForSnapScreen';
 
+import AppPilot from './navigation/AppPilot';
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -66,8 +68,6 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 
 
-
-
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
   {
@@ -82,21 +82,6 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
 
-// Pilote menu
-const MyDrawerNavigatorPilot = createDrawerNavigator(
-  {
-    Menu: BottomNavigator,
-    Login: LoginScreen,
-    'Infos pratiques': HebergementScreen,
-    Programme: ProgrammeScreen,
-    News: StackForNews,
-    'Mon compte': StackForSnapScreen,
-    Video: Video,
-    Photos: Photos,
-    Chat: ChatScreen
-  }
-);
-const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
 
 // Unknown user menu
 const MyDrawerNavigatorUnknown = createDrawerNavigator(
