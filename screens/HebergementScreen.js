@@ -8,6 +8,8 @@ import { Container, Header, Content, Footer, FooterTab, Button, Accordion, Left,
 import { greyDarkTa, whiteTa, icoWhite, RallyeH2, RallyeH3 } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import HeaderRally from '../components/HeaderRally';
+
 
 
 
@@ -78,28 +80,16 @@ function HebergementScreen(props) {
     , [])
 
 
+
   return (
 
     <Container >
-      <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
-        </Left>
 
-        <Body>
-          <Text style={{ color: whiteTa }}>INFOS PRATIQUES</Text>
-        </Body>
-
-        <Right>
-          {props.userConnected.status === undefined ?
-            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-            :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
-          }
-        </Right>
-      </Header>
+      <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+        nav={props.navigation.navigate} />
 
       <Content>
+
         <Accordion
           dataArray={dataArray}
           icon="add"
