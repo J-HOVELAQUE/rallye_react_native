@@ -1,37 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content } from 'native-base';
+import { View, StyleSheet, Image, ScrollView } from 'react-native';
+import { Container, Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
-import AsyncStorage from '@react-native-community/async-storage';
-import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
 
+import { RedButton } from '../components/rallye-lib';
+import HeaderRally from '../components/HeaderRally';
 
 function MediaScreen(props) {
   return (
-    <Container>
-      <Header style={{ backgroundColor: greyDarkTa }}>
-        <Left>
-          <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
-        </Left>
+    <Container >
+      <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+        nav={props.navigation.navigate}
+        titleHeader="MEDIA" />
 
-        <Body>
-          <Text style={{ color: whiteTa }}>MEDIAS</Text>
-        </Body>
-
-        <Right>
-          {props.user.status === undefined ?
-            <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-            :
-            <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
-          }
-        </Right>
-      </Header>
       <Content>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-
-
           <View style={{ marginHorizontal: 10 }}>
             <RedButton onPress={() => props.navigation.navigate('Photos')} title="Photos" style={{ flex: 1, alignItems: 'flex-end' }} />
           </View>
@@ -47,9 +30,11 @@ function MediaScreen(props) {
               </Lightbox>
             </ScrollView>
           </View>
+
           <View style={{ marginHorizontal: 10 }}>
             <RedButton onPress={() => props.navigation.navigate('Video')} title="Video" style={{ flex: 1, alignItems: 'flex-end' }} />
           </View>
+
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', margin: 5 }}>
             <ScrollView style={styles.container}>
               <Lightbox underlayColor="white">
@@ -60,7 +45,6 @@ function MediaScreen(props) {
               </Lightbox>
             </ScrollView>
           </View>
-
         </View>
       </Content>
     </Container>
@@ -69,24 +53,4 @@ function MediaScreen(props) {
 }
 const styles = StyleSheet.create({ contain: { flex: 1, height: 150, }, container: { flex: 1, } });
 
-
-function mapDispatchToProps(dispatch) {
-  return {
-    resetUserConnected: function () {
-      dispatch({
-        type: 'reset'
-      })
-    }
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    user: state.userConnected
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MediaScreen);
+export default MediaScreen

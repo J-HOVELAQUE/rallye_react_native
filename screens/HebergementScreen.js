@@ -9,7 +9,6 @@ import FooterRally from '../components/FooterRally';
 
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.26:3000';
 
 function HebergementScreen(props) {
 
@@ -17,9 +16,6 @@ function HebergementScreen(props) {
 
   useEffect(() => {
     const getData = async () => {
-
-      //// Getting the token from redux ////
-      console.log('Connected', props.userConnected);
 
       //// Getting data of accomodation and catering ////
       const rawAnswer = await fetch(`${serverUrl}/user/get-info?token=${props.userConnected.token}`, {
@@ -91,17 +87,6 @@ function HebergementScreen(props) {
   );
 }
 
-
-function mapDispatchToProps(dispatch) {
-  return {
-    resetUserConnected: function () {
-      dispatch({
-        type: 'reset'
-      })
-    }
-  }
-}
-
 function mapStateToProps(state) {
   return {
     userConnected: state.userConnected,
@@ -110,5 +95,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(HebergementScreen);
