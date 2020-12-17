@@ -12,8 +12,6 @@ import { RedButton } from '../components/rallye-lib';
 
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.26:3000';
-
 
 const socket = socketIOClient(serverUrl);
 
@@ -24,13 +22,25 @@ function MapScreen(props) {
   const [visibleLogin, setVisibleLogin] = useState(false);
   const [visibleFavorites, setVisibleFavorites] = useState(false);
 
-  const toggleOverlayLogin = () => {
-    setVisibleLogin(!visibleLogin);
-  };
+  //// Overlay if the user is not connected
+  const overlayLogin = (
+    <Overlay overlayStyle={{ width: '80%', height: '40%', justifyContent: 'center', alignItems: 'center' }} isVisible={visibleLogin} >
+      <View style={{ width: '90%' }}>
+        <Text style={{ textAlign: 'center' }}>Créez un compte ou connectez vous pour accéder à la carte</Text>
+        <RedButton onPress={() => { props.navigation.navigate('Login'); }} title="S'inscrire ou se connecter" />
+      </View>
+    </Overlay>
+  )
 
-  const toggleOverlayFavorites = () => {
-    setVisibleFavorites(!visibleFavorites);
-  };
+  //// Overlay if the user has no favorites
+  const overlayFavorites = (
+    <Overlay overlayStyle={{ width: '80%', height: '30%', justifyContent: 'center', alignItems: 'center' }} isVisible={visibleFavorites} onBackdropPress={() => setVisibleFavorites(!visibleFavorites)}>
+      <View style={{ width: '90%' }}>
+        <Text style={{ textAlign: 'center' }}>Ajoutez des favoris pour les suivre sur la carte</Text>
+        <RedButton onPress={() => { props.navigation.navigate('Pilotes'); }} title="Ajouter des favoris" />
+      </View>
+    </Overlay>
+  )
 
   useEffect(() => {
     socket.on('sendPositionToAll', (msg) => {
@@ -38,28 +48,11 @@ function MapScreen(props) {
     })
 
     if (props.user.token === undefined) {
-      toggleOverlayLogin();
-    } else if(props.userFavorites.length === 0){
-      toggleOverlayFavorites();
+      setVisibleLogin(!visibleLogin);
+    } else if (props.userFavorites.length === 0) {
+      setVisibleFavorites(!visibleFavorites);
     }
   }, []);
-
-  const overlayLogin = (
-    <Overlay overlayStyle={{width:'80%', height: '40%', justifyContent:'center', alignItems:'center'}} isVisible={visibleLogin} >
-      <View style={{ width: '90%'}}>
-        <Text style={{textAlign:'center'}}>Créez un compte ou connectez vous pour accéder à la carte</Text>
-        <RedButton onPress={() => {props.navigation.navigate('Login'); toggleOverlayLogin();}} title="S'inscrire ou se connecter" />
-      </View>
-    </Overlay>
-  )
-
-  const overlayFavorites = (
-    <Overlay overlayStyle={{width:'80%', height: '30%', justifyContent:'center', alignItems:'center'}} isVisible={visibleFavorites} onBackdropPress={()=>toggleOverlayFavorites()}>
-      <View style={{ width: '90%'}}>
-        <Text style={{textAlign:'center'}}>Ajoutez des favoris pour les suivre sur la carte</Text>
-      </View>
-    </Overlay>
-  )
 
   ///// Update the marker list to display if favorites changes /////
   useEffect(() => {

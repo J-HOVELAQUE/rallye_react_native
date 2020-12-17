@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Container, Card, CardItem, Content } from 'native-base';
+import { Container } from 'native-base';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
-import { RallyeH1, greyDarkTa } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
-import { schedule } from '../tools/toolkit';
+import ProgramGrid from '../components/ProgramGrid';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
@@ -24,22 +23,6 @@ function ProgrammeScreen(props) {
     getProgram()
   }, []);
 
-  ///// Building card news /////
-  let programGrid = program.map((planning, i) => (
-    <Card key={planning._id} style={{ width: "100%", flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-      <CardItem >
-
-        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
-
-        <View style={{ width: '75%' }}>
-          {planning.event.map((task)=>(
-            <Text key={task}>- {task}</Text>
-          ))}
-
-        </View>
-      </CardItem>
-    </Card>
-  ))
 
   return (
     <Container>
@@ -47,12 +30,17 @@ function ProgrammeScreen(props) {
         nav={props.navigation.navigate}
         titleHeader="PROGRAMME" />
 
-      <Content>
-        <RallyeH1 text='Vendredi 16 Décembre 2020' />
-        <ScrollView>
-          {programGrid}
-        </ScrollView>
-      </Content>
+      <ScrollableTabView
+        style={{ marginTop: 20 }}
+        initialPage={0}
+        renderTabBar={() => <ScrollableTabBar />}
+      >
+        {/* <ProgramGrid tabLabel='14/12/2020' day = '14/12/2020' program={program}/> */}
+        {/* <ProgramGrid tabLabel='15/12/2020' day = '15/12/2020' program={program} /> */}
+        {/* <ProgramGrid tabLabel='16/12/2020' day = '16/12/2020' program={program} /> */}
+        <ProgramGrid tabLabel='17/12/2020' day='17/12/2020' program={program} />
+        <ProgramGrid tabLabel='18/12/2020' day='18/12/2020' program={program} />
+      </ScrollableTabView>
 
       <FooterRally nav={props.navigation.navigate} />
 
