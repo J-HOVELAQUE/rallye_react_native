@@ -49,7 +49,7 @@ function Team(props) {
 
   //// Building card team /////
   let teams = teamToDisplay.map((team, i) => {
-    return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
+    return <CardTeam key={team._id} infoTeam={team} nav={props.navigation} />
   })
 
   return (

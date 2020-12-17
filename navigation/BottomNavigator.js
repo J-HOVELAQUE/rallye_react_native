@@ -8,16 +8,17 @@ import HomeScreen from '../screens/HomeScreen';
 import TeamScreen from '../screens/Team';
 import ClassementScreen from '../screens/Classement';
 import MapScreen from '../screens/MapScreen';
-import MediaScreen from '../screens/MediaScreen';
 
 import StackMedia from '../navigation/StackForPhoto';
+import StackForTeam from '../navigation/StackForTeam';
+
 
 import { greyDarkTa, redTa, whiteTa } from '../components/rallye-lib';
 
 const BottomNavigator = createBottomTabNavigator(
     {
         Accueil: HomeScreen,
-        Pilotes: TeamScreen,
+        Pilotes: StackForTeam,
         Classement: ClassementScreen,
         Live: MapScreen,
         Medias: StackMedia

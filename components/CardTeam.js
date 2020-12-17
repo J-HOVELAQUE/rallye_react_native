@@ -4,6 +4,8 @@ import { Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { connect } from 'react-redux';
+import { withNavigationFocus } from 'react-navigation';
+
 
 import { RedButton, RallyeH2, greyDarkTa, redTa } from '../components/rallye-lib';
 import { namePilot, fullNamePilot, flagNationality } from '../tools/toolkit';
@@ -11,6 +13,8 @@ import { namePilot, fullNamePilot, flagNationality } from '../tools/toolkit';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function CardTeam(props) {
+    console.log('>>>>>>>>>>>>>>>>>>>>REDUCE', props.userFavorites);
+
 
     const [styleHeart, setStyleHeart] = useState({ color: greyDarkTa })
     const [visible, setVisible] = useState(false);
@@ -25,8 +29,10 @@ function CardTeam(props) {
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
         if (inFavorites.length > 0) {
             setStyleHeart({ color: redTa })
+        } else {
+            setStyleHeart({ color: greyDarkTa })
         }
-    }, [])
+    }, [props.userFavorites])
 
     const handleFavorite = async (numTeam, bib) => {
 
@@ -109,7 +115,10 @@ function CardTeam(props) {
                     </View>
                 </Overlay>
 
-                <TouchableHighlight onPress={() => { toggleOverlay() }}>
+                <TouchableHighlight onPress={() => {
+                    props.nav.navigate('Detail');
+                    props.recordClickedTeam(props.infoTeam)
+                }}>
                     <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
                 </TouchableHighlight>
                 <Right style={{ alignItems: 'center', marginHorizontal: -20 }}>
@@ -135,6 +144,12 @@ function mapDispatchToProps(dispatch) {
                 type: 'removeFavoriteTeam',
                 numTeam
             })
+        },
+        recordClickedTeam: function (team) {
+            dispatch({
+                type: 'record-team',
+                team
+            })
         }
     }
 }
@@ -146,7 +161,9 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(
+const CardTeamAndRedux = connect(
     mapStateToProps,
     mapDispatchToProps
 )(CardTeam);
+
+export default withNavigationFocus(CardTeamAndRedux);
