@@ -56,7 +56,7 @@ function LoginScreen(props) {
       props.onRecordUserConnected(answer.data);
       storeData(answer.data.token, answer.data.status);
 
-      props.navigation.navigate('News');
+      props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
@@ -87,7 +87,7 @@ function LoginScreen(props) {
     if (answer.result === true) {
       props.onRecordUserConnected(answer.data);
       storeData(answer.data.token, answer.data.status);
-      props.navigation.navigate('News');
+      props.navigation.navigate('Home');
     } else {
       console.log('Access denied', answer.error);
       setErrors(answer.error);
