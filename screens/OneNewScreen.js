@@ -3,11 +3,7 @@ import { Content, Body, Container, Text, } from 'native-base';
 import { View, Image, } from 'react-native';
 import { connect } from 'react-redux';
 
-// Importer la librairie de composants
 import { RallyeH1, greyDarkTa } from '../components/rallye-lib';
-
-const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.14:3000';
 
 function NewsScreen(props) {
 
@@ -16,8 +12,8 @@ function NewsScreen(props) {
             <Content>
                 <View>
                     <Image source={{ uri: props.news.image }} style={{ height: 200, width: '100%', marginBottom: 10, flex: 1 }} />
-                    <Body style={{paddingHorizontal: 30}}>
-                        <RallyeH1 style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa}} text={props.news.title} />
+                    <Body style={{ paddingHorizontal: 30 }}>
+                        <RallyeH1 style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa }} text={props.news.title} />
                         <Text style={{ marginTop: 10 }}>{props.news.description}</Text>
                     </Body>
                 </View>
@@ -28,23 +24,11 @@ function NewsScreen(props) {
 
 function mapStateToProps(state) {
     return {
-        userFavorites: state.userFavorites,
-        user: state.userConnected,
         news: state.clickedNews
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        resetUserConnected: function () {
-            dispatch({
-                type: 'reset'
-            })
-        }
     }
 }
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(NewsScreen);

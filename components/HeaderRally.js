@@ -20,9 +20,20 @@ function HeaderRally(props) {
             <Right>
 
                 {props.userConnected.status === undefined ?
-                    <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.nav('Login') }} />
+                    <Icon name='user-circle'
+                        size={25}
+                        style={{ color: icoWhite, marginRight: 10 }}
+                        onPress={() => { props.nav('Login') }} />
                     :
-                    <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.nav('Home') }} />
+                    <Icon name='sign-out'
+                        size={25}
+                        style={{ color: icoWhite, marginRight: 10 }}
+                        onPress={() => {
+                            AsyncStorage.clear();
+                            props.resetUserConnected();
+                            props.resetFavorites();
+                            props.nav('News')
+                        }} />
                 }
             </Right>
         </Header>
@@ -34,6 +45,12 @@ function mapDispatchToProps(dispatch) {
         resetUserConnected: function () {
             dispatch({
                 type: 'reset'
+            })
+        },
+        resetFavorites: function () {
+            dispatch({
+                type: 'retrieveFavoriteTeam',
+                listFavorites: []
             })
         }
     }

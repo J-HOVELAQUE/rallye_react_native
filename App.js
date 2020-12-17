@@ -78,7 +78,7 @@ export default function App() {
     return (
       <Provider store={store}>
         {userStatus === 'fan' ? <AppFan /> :
-          userStatus === 'pilot' ? <AppPilot /> :
+          (userStatus === 'pilot' || userStatus === 'admin') ? <AppPilot /> :
             <AppUnknown />}
       </Provider>
     )
