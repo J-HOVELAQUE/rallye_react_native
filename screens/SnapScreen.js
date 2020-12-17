@@ -1,38 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Button } from 'react-native';
+import { View, Button } from 'react-native';
+import { Container, Text } from 'native-base';
 import { Overlay } from 'react-native-elements';
-// import { Button } from '../components/rallye-lib';
-
-
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
+import { withNavigationFocus } from 'react-navigation';
 import { Camera } from 'expo-camera';
 
-import { withNavigationFocus } from 'react-navigation';
-
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
-import IconIonic from 'react-native-vector-icons/Ionicons';
-
-// import { Button, Overlay } from 'react-native-elements';
-
-import { connect } from 'react-redux';
-import { Container, Header, Left, Body, Right, Text } from 'native-base';
-
-
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.26:3000';
 
 function SnapScreen(props) {
 
-    console.log('USER', props.userConnected);
-
     const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.front);
-    const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-
-    const [recordingVideo, setRecordingVideo] = useState(false);
-
-    var camera = useRef(null);
-
     const [visible, setVisible] = useState(false);
+
+    let camera = useRef(null);
 
     useEffect(() => {
         (async () => {
@@ -41,12 +23,12 @@ function SnapScreen(props) {
         })();
     }, []);
 
-    var cameraDisplay;
+    let cameraDisplay;
     if (hasPermission && props.isFocused) {
         cameraDisplay = <Camera
             style={{ flex: 1 }}
-            type={type}
-            flashMode={flash}
+            type={Camera.Constants.Type.front}
+            flashMode={Camera.Constants.FlashMode.off}
             ref={ref => (camera = ref)}
         >
             <View
@@ -69,6 +51,7 @@ function SnapScreen(props) {
             </Overlay>
 
             { cameraDisplay}
+
             <Button
                 icon={
                     <IconFontAwesome
