@@ -162,7 +162,7 @@ function LoginScreen(props) {
 
             <RallyeH1 text="CREER UN COMPTE" />
             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 15, color: redTa, textAlign: 'left'}} >Pourquoi me créer une compte ?</Text>
-            <Text style={{textAlign: 'center', marginVertical: 10}}>Vous pourrez ainsi débloquer des fonctionnalités en ajoutant des pilotes à vos favoris. Ce qui vous permettra de pouvoir les suivres en direct pendant le rallye !</Text>
+            <Text style={{textAlign: 'center', marginVertical: 10}}>Vous pourrez ainsi débloquer des fonctionnalités en ajoutant des pilotes à vos favoris. AInsi, vous pourrez les suivre en direct pendant le rallye !</Text>
 
             <KeyboardAvoidingView behavior="padding" enabled style={{ width: '100%' }}>
               <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
