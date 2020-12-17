@@ -27,6 +27,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
         'Mon compte': StackForSnapScreen,
         Chat: ChatScreen
     }
+
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
 

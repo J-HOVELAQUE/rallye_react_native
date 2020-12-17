@@ -4,7 +4,7 @@ import { Content, Button, Container } from 'native-base';
 import { Input, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux';
 
-import { whiteTa, greyDarkTa, RedButton, RallyeH3, EmailInput, PasswordInput, UserInput } from '../components/rallye-lib';
+import { whiteTa, greyDarkTa, RedButton, RallyeH1, RallyeH3, EmailInput, PasswordInput, UserInput, redTa } from '../components/rallye-lib';
 
 import { storeData } from '../tools/toolkit';
 import HeaderRally from '../components/HeaderRally';
@@ -103,7 +103,7 @@ function LoginScreen(props) {
         titleHeader="INSCRIPTION/CONNECTION" />
 
       <Content>
-        <View style={{ flex: 1, backgroundColor: whiteTa, alignItems: "center", justifyContent: "center" }}>
+        <View style={{ flex: 1, backgroundColor: greyDarkTa, alignItems: "center", justifyContent: "center" }}>
           <Overlay isVisible={visible} onBackdropPress={() => { toggleOverlay() }}>
             <View>
               {errors.map((err, i) => { return (<Text key={i}>{err}</Text>) })}
@@ -116,20 +116,24 @@ function LoginScreen(props) {
             </View>
           </Overlay>
 
-          <RallyeH3 text="SE CONNECTER" />
+
 
           <View
             style={{
               width: '90%',
               alignItems: "center",
               justifyContent: "center",
-              paddingBottom: 15,
+              paddingHorizontal: 15,
+              paddingVertical: 10,
               borderRadius: 5,
               borderColor: greyDarkTa,
               borderStyle: 'solid',
               borderWidth: 1,
               paddingLeft: 10,
+              backgroundColor: whiteTa,
+              marginVertical: 20
             }}>
+            <RallyeH1 text="SE CONNECTER" />
 
             <KeyboardAvoidingView behavior="padding" enabled style={{ width: '100%' }}>
               <EmailInput onChangeText={(val) => setEmailSignIn(val)} />
@@ -139,22 +143,26 @@ function LoginScreen(props) {
 
           </View>
 
-          <RallyeH3 text="CREER UN COMPTE" />
+
 
           <View style={{
             width: '90%',
-            borderStyle: 'solid',
-            borderColor: greyDarkTa,
-            marginTop: 10,
-            marginBottom: '5%',
-            borderColor: greyDarkTa,
-            borderRadius: 5,
-            borderWidth: 1,
             alignItems: "center",
-            justifyContent: 'center',
-            paddingTop: 15,
+            justifyContent: "center",
+            paddingHorizontal: 15,
+            paddingVertical: 10,
+            borderRadius: 5,
+            borderColor: greyDarkTa,
+            borderStyle: 'solid',
+            borderWidth: 1,
             paddingLeft: 10,
+            backgroundColor: whiteTa,
+            marginVertical: 20
           }}>
+
+            <RallyeH1 text="CREER UN COMPTE" />
+            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 15, color: redTa, textAlign: 'left'}} >Pourquoi me créer une compte ?</Text>
+            <Text style={{textAlign: 'center', marginVertical: 10}}>Vous pourrez ainsi débloquer des fonctionnalités en ajoutant des pilotes à vos favoris. Ce qui vous permettra de pouvoir les suivres en direct pendant le rallye !</Text>
 
             <KeyboardAvoidingView behavior="padding" enabled style={{ width: '100%' }}>
               <UserInput placeholder='Prénom' onChangeText={(val) => setFirstname(val)} />
