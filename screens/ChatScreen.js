@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView } from 'react-native';
+import { View, ScrollView, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
 import { Container, Content, Header, Button, Footer, FooterTab, Left, Body, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -110,9 +110,10 @@ function ChatScreen(props) {
                         <ChatRoom room='RoomB' buttonPress={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
                     </View>
 
-                    <ScrollView >
+                    <ScrollView style={{height:Dimensions.get('window').height /2 }}>
                         {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
                     </ScrollView >
+
 
                     <RedButton
                         title="Send to channel"
