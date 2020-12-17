@@ -64,6 +64,40 @@ const dataImage = ['https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-C
     'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Corse-historique.jpeg'
 ]
 
+//// Url for flags picto ////
+const urlFlagFRA = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/France_m9qlcw.png';
+const urlFlagCHE = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1607678236/Suisse_njyljk.png';
+const urlFlagWorld = 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608020160/world_pxx0mb.png';
+
+//// Formating name for display with only the first letter of firsname ////
+function namePilot(firstName, lastName) {
+    if (typeof firstName === "string" && typeof lastName === "string") {
+        return (firstName[0].toUpperCase() + '. ' + lastName.toUpperCase())
+    } else {
+        return ""
+    }
+}
+
+//// Formating name for display ////
+function fullNamePilot(firstName, lastName) {
+    if (typeof firstName === "string" && typeof lastName === "string") {
+        return (firstName[0].toUpperCase() + firstName.substring(1) + ' ' + lastName.toUpperCase())
+    } else {
+        return ""
+    }
+}
+
+//// Return a flag url depending of nationnality ////
+function flagNationality(nationality) {
+    if (nationality === 'fra') {
+        return urlFlagFRA
+    } else if (nationality === 'che') {
+        return urlFlagCHE
+    } else {
+        return urlFlagWorld
+    }
+}
+
 //// Formating a date wiith hour and minute for display ////
 function schedule(dateString) {
     let hours = new Date(dateString).getHours();
@@ -77,4 +111,4 @@ function schedule(dateString) {
     return (hours + ':' + minutes)
 }
 
-export { getData, storeData, genericAvatarUrl, dataImage, schedule }
+export { getData, storeData, genericAvatarUrl, dataImage, schedule, urlFlagFRA, urlFlagCHE, urlFlagWorld, namePilot, fullNamePilot, flagNationality }
