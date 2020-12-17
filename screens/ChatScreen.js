@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
@@ -9,6 +9,10 @@ import ChatRoom from '../components/ChatRoom';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 import { RedButton } from '../components/rallye-lib';
+import { greyDarkTa, RedButton, whiteTa, icoWhite } from '../components/rallye-lib';
+import { FlatList } from 'react-native-gesture-handler';
+
+
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 var socket = socketIOClient(serverUrl)
@@ -82,6 +86,7 @@ function ChatScreen(props) {
 
     }
 
+
     return (
         <Container>
             <HeaderRally openBurgerMenu={props.navigation.openDrawer}
@@ -96,9 +101,9 @@ function ChatScreen(props) {
                         <ChatRoom room='Public' buttonPress={() => handleChangeRoom('Public')} actif={room === 'Public' ? true : false} />
                     </View>
 
-                    <ScrollView style={{ height: Dimensions.get('window').height / 2 }} >
+                    <ScrollView style={{ height: Dimensions.get('window').height / 2 }}>
                         {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
-                    </ScrollView >
+                    </ScrollView>
 
                     <RedButton
                         title="Send to channel"
@@ -110,6 +115,7 @@ function ChatScreen(props) {
                         value={currentMsg}
                         onChangeText={(value) => setCurrentMsg(value)}
                     />
+
 
                 </View>
             </Content>
