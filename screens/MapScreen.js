@@ -27,45 +27,39 @@ function MapScreen(props) {
   const toggleOverlayLogin = () => {
     setVisibleLogin(!visibleLogin);
   };
-  
+
   const toggleOverlayFavorites = () => {
     setVisibleFavorites(!visibleFavorites);
   };
-
-  const connected = props.user.token
 
   useEffect(() => {
     socket.on('sendPositionToAll', (msg) => {
       setVehiculeToDisplay(msg.allPosition)
     })
 
-    if (connected === undefined) {
-      toggleOverlayLogin()
+    if (props.user.token === undefined) {
+      toggleOverlayLogin();
+    } else if(props.userFavorites.length === 0){
+      toggleOverlayFavorites();
     }
   }, []);
 
   const overlayLogin = (
-    <Overlay overlayStyle={{width:'80%', height: '50%', justifyContent:'center', alignItems:'center'}} isVisible={visibleLogin} >
+    <Overlay overlayStyle={{width:'80%', height: '40%', justifyContent:'center', alignItems:'center'}} isVisible={visibleLogin} >
       <View style={{ width: '90%'}}>
-        <Text>Créez un compte ou connectez vous pour accéder à la carte</Text>
+        <Text style={{textAlign:'center'}}>Créez un compte ou connectez vous pour accéder à la carte</Text>
         <RedButton onPress={() => {props.navigation.navigate('Login'); toggleOverlayLogin();}} title="S'inscrire ou se connecter" />
       </View>
     </Overlay>
   )
 
   const overlayFavorites = (
-    <Overlay overlayStyle={{width:'80%', height: '50%', justifyContent:'center', alignItems:'center'}} isVisible={visibleLogin} >
+    <Overlay overlayStyle={{width:'80%', height: '30%', justifyContent:'center', alignItems:'center'}} isVisible={visibleFavorites} onBackdropPress={()=>toggleOverlayFavorites()}>
       <View style={{ width: '90%'}}>
-        <Text>Créez un compte ou connectez vous pour accéder à la carte</Text>
-        <RedButton onPress={() => {props.navigation.navigate('Login'); toggleOverlayFavorites();}} title="S'inscrire ou se connecter" />
+        <Text style={{textAlign:'center'}}>Ajoutez des favoris pour les suivre sur la carte</Text>
       </View>
     </Overlay>
   )
-
-  // console.log('>>>>>>>>>>>>>>>FAVV', props.user.token);
-  // Si props.user.token is undefined alors overlay pour dire "Creez un compte ou connectez vous"
-  // Sinon si props.userFavorites.length === 0 alors overlay pour dire "Ajoutez des favoris pour les suivre sur la carte"
-
 
   ///// Update the marker list to display if favorites changes /////
   useEffect(() => {
@@ -95,6 +89,7 @@ function MapScreen(props) {
           titleHeader="LIVE" />
 
         {overlayLogin}
+        {overlayFavorites}
 
         < MapView style={{ flex: 1 }
         }
