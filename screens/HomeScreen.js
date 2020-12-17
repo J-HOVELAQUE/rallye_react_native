@@ -6,19 +6,20 @@ import { connect } from 'react-redux';
 
 import HeaderRally from '../components/HeaderRally';
 import { RedButton, RallyeH1, RallyeH2, greyDarkTa, blackTa, greyLightTa } from '../components/rallye-lib';
-import { getData } from '../tools/toolkit';
+import { getData, schedule } from '../tools/toolkit';
+
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 // const serverUrl = 'http://192.168.1.9:3000';
 
 function HomeScreen(props) {
 
-  const [program, setProgram] = useState([])
+  const [program, setProgram] = useState([]);
+  const [welcome, setWelcome] = useState('HOME');
 
   useEffect(() => {
-
+    console.log('>>>>>>>>>>>>>>>>>>', props.user);
     const connection = async () => {
-
       //// Getting data in local storage if existing ////
       const answer = await getData();
 
@@ -44,23 +45,10 @@ function HomeScreen(props) {
 
     connection();
     getProgram();
-  }, [])
-
-
-  function schedule(dateString) {
-
-    let hours = new Date(dateString).getHours();
-    let minutes = new Date(dateString).getMinutes()
-
-    if (hours.toString().length === 1) {
-      hours = '0' + hours
+    if (props.user.lastName !== null && props.user.lastName !== "" && props.user.lastName !== undefined) {
+      setWelcome("Bonjour " + props.user.lastName);
     }
-
-    if (minutes.toString().length === 1) {
-      minutes = '0' + minutes
-    }
-    return (hours + ':' + minutes)
-  }
+  }, [props.userConnected])
 
   let programGrid = program.map((planning, i) => (
     <Card key={planning._id} style={{ width: "100%", flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -69,10 +57,10 @@ function HomeScreen(props) {
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
 
         <View style={{ width: '75%' }}>
-          {planning.event.map((task)=>(
+          {planning.event.map((task) => (
             <Text key={task}>- {task}</Text>
           ))}
-          
+
         </View>
 
       </CardItem>
@@ -84,7 +72,7 @@ function HomeScreen(props) {
 
       <HeaderRally openBurgerMenu={props.navigation.openDrawer}
         nav={props.navigation.navigate}
-        titleHeader="HOME" />
+        titleHeader={welcome} />
 
       <Content >
 
