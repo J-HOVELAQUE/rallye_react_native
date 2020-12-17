@@ -17,7 +17,7 @@ const StackForSnapScreen = createStackNavigator({
         screen: SnapScreen,
 
     }
-}
-);
+});
+
 
 export default StackForSnapScreen;

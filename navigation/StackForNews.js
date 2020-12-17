@@ -3,6 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import NewsScreen from '../screens/NewsScreen';
 import OneNewScreen from '../screens/OneNewScreen';
 
+import { greyDarkTa, whiteTa } from '../components/rallye-lib';
+
+
 // Stack navigation for switch on a news in full screen //
 
 const StackForNews = createStackNavigator({
@@ -15,7 +18,18 @@ const StackForNews = createStackNavigator({
     Detail: {
         screen: OneNewScreen,
     }
-});
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: greyDarkTa,
+            },
+            headerTintColor: whiteTa,
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        },
+    });
 
 StackForNews.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true;
