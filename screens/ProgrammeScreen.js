@@ -32,7 +32,7 @@ function ProgrammeScreen(props) {
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
 
         <View style={{ width: '75%' }}>
-          {planning.event.map((task, nTask) => (
+          {planning.event.map((task) => (
             <Text key={task}>- {task}</Text>
           ))}
 
