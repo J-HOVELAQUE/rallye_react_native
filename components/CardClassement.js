@@ -57,20 +57,21 @@ function CardClassement(props) {
     return (
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem >
-                <Left>
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>{props.position}</Text>
+                <Left style={{ marginHorizontal: -10 }}>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', backgroundColor: redTa, paddingHorizontal: 10, paddingVertical: 5 }}>{props.position}</Text>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'right', paddingHorizontal: 10 }}>#{props.infoTeam.car_id}</Text>
                 </Left>
-                <Body>
-                    <Text style={{ fontSize: 10 }}>
+                <Body style={{ justifyContent: 'center', marginHorizontal: -30 }}>
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(props.infoTeam.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(props.infoTeam.pilot_1.firstname, props.infoTeam.pilot_1.name)}</Text>
-                    <Text></Text>
-                    <Text style={{ fontSize: 10 }}>
+
+                    <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(props.infoTeam.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(props.infoTeam.pilot_2.firstname, props.infoTeam.pilot_2.name)}</Text>
                 </Body>
 
-                <Right style={{ alignItems: 'center' }}>
+                <Right style={{ alignItems: 'center', marginHorizontal: -25 }}>
                     <Text>{props.time}</Text>
                     <Text note>{props.diff}</Text>
                 </Right>
@@ -78,7 +79,6 @@ function CardClassement(props) {
         </Card>
     );
 }
-
 
 function mapDispatchToProps(dispatch) {
     return {

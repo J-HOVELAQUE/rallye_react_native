@@ -71,7 +71,7 @@ function ProgrammeScreen(props) {
         </Left>
 
         <Body>
-          <Text style={{ color: whiteTa }}>PROGRAMME - HORAIRES</Text>
+          <Text style={{ color: whiteTa }}>PROGRAMME</Text>
         </Body>
 
         <Right>

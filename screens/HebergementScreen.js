@@ -69,7 +69,7 @@ function HebergementScreen(props) {
     <Container >
       <HeaderRally openBurgerMenu={props.navigation.openDrawer}
         nav={props.navigation.navigate}
-        titleHeader="HEBERGEMENT" />
+        titleHeader="INFOS PRATIQUES" />
 
       <Content>
         <Accordion
