@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
@@ -9,8 +9,6 @@ import ChatRoom from '../components/ChatRoom';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 import { RedButton } from '../components/rallye-lib';
-import { greyDarkTa, RedButton, whiteTa, icoWhite } from '../components/rallye-lib';
-import { FlatList } from 'react-native-gesture-handler';
 
 
 
