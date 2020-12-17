@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { TouchableHighlight, } from 'react-native';
+
 import { Content, Card, CardItem, Left, Body, Container, Thumbnail, Text, } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
@@ -34,26 +36,28 @@ function NewsScreen(props) {
       <Content>
         {newsList.map((news, i) => (
           <Card style={{ padding: 10 }} key={news._id}>
-            <CardItem cardBody>
-              <Left>
-                <Thumbnail square large source={{ uri: news.image }} />
-                <Body>
-                  <Text><RallyeH3 text={news.title} /></Text>
-                  <Text note>{news.description.slice(0, 100)} ...</Text>
-                  <Text onPress={() => {
-                    props.navigation.navigate('Detail');
-                    props.recordClickedNews({
-                      title: news.title,
-                      description: news.description,
-                      image: news.image
-                    })
-                  }}>
-                    <Text note style={{ color: redTa }} a href="#">Lire la suite </Text>
-                    <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' />
-                  </Text>
-                </Body>
-              </Left>
-            </CardItem>
+            <TouchableHighlight onPress={() => {
+              props.navigation.navigate('Detail');
+              props.recordClickedNews({
+                title: news.title,
+                description: news.description,
+                image: news.image
+              })
+            }}>
+              <CardItem cardBody>
+                <Left>
+                  <Thumbnail square large source={{ uri: news.image }} />
+                  <Body>
+                    <Text><RallyeH3 text={news.title} /></Text>
+                    <Text note>{news.description.slice(0, 100)} ...</Text>
+                    <Text>
+                      <Text note style={{ color: redTa }} a href="#">Lire la suite </Text>
+                      <Ionicons style={{ color: redTa }} name='ios-arrow-dropright-circle' />
+                    </Text>
+                  </Body>
+                </Left>
+              </CardItem>
+            </TouchableHighlight>
           </Card>
         ))}
 

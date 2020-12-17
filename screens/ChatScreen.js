@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
-import { Container, Content, Header, Button, Footer, FooterTab, Left, Body, Right } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
 import socketIOClient from 'socket.io-client';
 
 import ChatRoom from '../components/ChatRoom';
-import { greyDarkTa, RedButton, whiteTa, icoWhite } from '../components/rallye-lib';
+import HeaderRally from '../components/HeaderRally';
+import FooterRally from '../components/FooterRally';
+import { RedButton } from '../components/rallye-lib';
 
-// const serverUrl = 'http://192.168.1.9:3000';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 var socket = socketIOClient(serverUrl)
 
@@ -37,7 +37,7 @@ function ChatScreen(props) {
 
         // Call functions
         getHistoryChat('Officiel')
-        getHistoryChat('RoomB')
+        getHistoryChat('Public')
     }, [])
 
     async function updateHistoryChat(roomName, msg) {
@@ -63,7 +63,7 @@ function ChatScreen(props) {
     })
 
     var chatRoom = props.chatHistory.map((msg, i) => {
-        if (msg.room === "RoomB") {
+        if (msg.room === "Public") {
             return (
                 <ListItem key={msg.msg._id} bottomDivider>
                     <ListItem.Content>
@@ -84,33 +84,19 @@ function ChatScreen(props) {
 
     return (
         <Container>
-            <Header style={{ backgroundColor: greyDarkTa }}>
-                <Left>
-                    <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.navigation.openDrawer()} />
-                </Left>
-
-                <Body>
-                    <Text style={{ color: whiteTa }}>CHAT</Text>
-                </Body>
-
-                <Right>
-                    {props.user.status === undefined ?
-                        <Icon name='user-circle' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { props.navigation.navigate('Login') }} />
-                        :
-                        <Icon name='sign-out' size={25} style={{ color: icoWhite, marginRight: 10 }} onPress={() => { AsyncStorage.clear(); props.resetUserConnected(); props.navigation.navigate('Home') }} />
-                    }
-                </Right>
-            </Header>
+            <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+                nav={props.navigation.navigate}
+                titleHeader="MESSAGERIE INSTANTANEE" />
 
             <Content>
                 <View >
 
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                         <ChatRoom room='Officiel' buttonPress={() => handleChangeRoom('Officiel')} actif={room === 'Officiel' ? true : false} />
-                        <ChatRoom room='RoomB' buttonPress={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
+                        <ChatRoom room='Public' buttonPress={() => handleChangeRoom('Public')} actif={room === 'Public' ? true : false} />
                     </View>
 
-                    <ScrollView style={{height:Dimensions.get('window').height /2 }} >
+                    <ScrollView style={{ height: Dimensions.get('window').height / 2 }} >
                         {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
                     </ScrollView >
 
@@ -128,30 +114,8 @@ function ChatScreen(props) {
                 </View>
             </Content>
 
-            <Footer>
-                <FooterTab style={{ backgroundColor: greyDarkTa, }}>
-                    <Button onPress={() => props.navigation.navigate('Accueil')}>
-                        <Icon name='home' size={20} style={{ color: whiteTa }} />
-                        <Text style={{ color: whiteTa, fontSize: 9.5 }}>Accueil</Text>
-                    </Button>
-                    <Button onPress={() => props.navigation.navigate('Pilotes')} >
-                        <Icon name='car' size={20} style={{ color: whiteTa }} />
-                        <Text style={{ color: whiteTa, fontSize: 9.5 }}>Pilotes</Text>
-                    </Button>
-                    <Button onPress={() => props.navigation.navigate('Classement')}>
-                        <Icon name='trophy' size={20} style={{ color: whiteTa }} />
-                        <Text style={{ color: whiteTa, fontSize: 9.5 }}>Résultats</Text>
-                    </Button >
-                    <Button onPress={() => props.navigation.navigate('Live')}>
-                        <Icon name='map' size={20} style={{ color: whiteTa }} />
-                        <Text style={{ color: whiteTa, fontSize: 9.5 }}>Map</Text>
-                    </Button>
-                    <Button onPress={() => props.navigation.navigate('Medias')}>
-                        <Icon name='image' size={20} style={{ color: whiteTa }} />
-                        <Text style={{ color: whiteTa, fontSize: 9.5 }}>Medias</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <FooterRally nav={props.navigation.navigate} />
+
         </Container>
 
     );

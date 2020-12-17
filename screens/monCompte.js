@@ -55,7 +55,7 @@ function monCompteScreen(props) {
 
       <Text style={{ marginBottom: 20 }}><RallyeH1 text={firstName + " " + lastName} /></Text>
 
-      <Text style={{ marginBottom: 20 }}><Icon name='globe' size={15} style={{ color: greyDarkTa, marginRight: 10 }} /> {nationality !== undefined ? nationality : 'non renseignée'}</Text>
+      <Text style={{ marginBottom: 20 }}><Icon name='globe' size={15} style={{ color: greyDarkTa, marginRight: 10 }} /> {nationality !== undefined ? nationality.toUpperCase() : 'non renseignée'}</Text>
 
       <Text style={{ marginBottom: 40 }}><Icon name='envelope' size={15} style={{ color: greyDarkTa, marginRight: 10 }} /> {email}</Text>
 

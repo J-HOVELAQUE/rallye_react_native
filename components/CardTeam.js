@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableHighlight, ScrollView, } from 'react-native';
-import { Overlay } from 'react-native-elements';
+import { Image, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
-
-import { RedButton, RallyeH2, greyDarkTa, redTa } from '../components/rallye-lib';
-import { namePilot, fullNamePilot, flagNationality } from '../tools/toolkit';
+import { greyDarkTa, redTa } from '../components/rallye-lib';
+import { namePilot, flagNationality } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
@@ -92,7 +90,6 @@ function CardTeam(props) {
 
     );
 }
-
 
 function mapDispatchToProps(dispatch) {
     return {
