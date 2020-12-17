@@ -66,8 +66,8 @@ function CardTeam(props) {
             }}>
 
                 <CardItem >
-                    <Left style={{ marginHorizontal: -10 }}>
-                        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', width: 65, backgroundColor: redTa, paddingVertical: 5 }}>#{team.car_id}</Text>
+                    <Left style={{ marginHorizontal: -15 }}>
+                        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', width: 65, backgroundColor: redTa, paddingVertical: 5, marginLeft: 15 }}>#{team.car_id}</Text>
                     </Left>
                     <Body style={{ justifyContent: 'center', marginHorizontal: 0 }}>
                         <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
@@ -80,7 +80,7 @@ function CardTeam(props) {
                     </Body>
 
                     <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
-                    <Right style={{ alignItems: 'center', marginHorizontal: -20 }}>
+                    <Right style={{ alignItems: 'center', marginHorizontal: -25, paddingLeft: 5 }}>
                         {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
                     </Right>
                 </CardItem>

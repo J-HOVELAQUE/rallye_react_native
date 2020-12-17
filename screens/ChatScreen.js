@@ -103,14 +103,14 @@ function ChatScreen(props) {
                         {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
                     </ScrollView>
 
-
                     <RedButton
-                        title="Send to channel"
+                        title="Envoyer"
                         onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
                     />
+
                     <Input
 
-                        placeholder='Your message'
+                        placeholder='Votre message'
                         value={currentMsg}
                         onChangeText={(value) => setCurrentMsg(value)}
                     />

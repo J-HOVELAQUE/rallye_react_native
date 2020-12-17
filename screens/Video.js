@@ -3,6 +3,8 @@ import { Alert, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Container, Content } from 'native-base';
 
+import { greyDarkTa } from '../components/rallye-lib';
+
 
 export default function VideoScreen() {
 
@@ -11,7 +13,7 @@ export default function VideoScreen() {
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
+      //Alert.alert("video has finished playing!");
     }
   }, []);
 
@@ -19,10 +21,18 @@ export default function VideoScreen() {
 
     <Container >
 
-      <Content style={{ flex: 1, backgroundColor: '#263238' }}>
+      <Content style={{ flex: 1, backgroundColor: greyDarkTa }}>
+      <View >
+          <YoutubePlayer
+            height={230}
+            play={playing}
+            videoId={"oDN1ee_2HTI"}
+            onChangeState={onStateChange}
+          />
+        </View>
         <View >
           <YoutubePlayer
-            height={300}
+            height={230}
             play={playing}
             videoId={"cDRkHXMHqFo"}
             onChangeState={onStateChange}
@@ -30,7 +40,7 @@ export default function VideoScreen() {
         </View>
         <View >
           <YoutubePlayer
-            height={300}
+            height={230}
             play={playing}
             videoId={"tBGzCdG3fhQ"}
             onChangeState={onStateChange}

@@ -21,7 +21,7 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     {
         Menu: BottomNavigator,
         Home: HomeScreen,
-        Connection: LoginScreen,
+        Login: LoginScreen,
         'Infos pratiques': HebergementScreen,
         Programme: ProgrammeScreen,
         News: StackForNews,

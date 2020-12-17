@@ -42,7 +42,7 @@ function HebergementScreen(props) {
 
       const formatedShuttle =
         <View style={{marginTop: 10, fontFamily: "Roboto_400Regular", paddingHorizontal: 20, paddingVertical: 10}}>
-          <Text >Les navettes que nous vous proposons vous déposent à vos hôtels et aux Parcs Fermés. Les horaires affichés sont à titre indicatifs. Les rotations des navettes sont prévues toutes les 30 minutes jusqu'à 9h. Vous trouverez également à côté des points de navettes des Parcs fermés le camion à bagages.</Text>
+          <Text >Les navettes que nous vous proposons vous déposent à vos hôtels et aux Parcs Fermés. Les horaires affichés sont à titre indicatif. Les rotations des navettes sont prévues toutes les 30 minutes jusqu'à 9h.</Text>
           <Text></Text>
           <RallyeH3 text="Adresse du Parc Fermé" />
           <Text>{answer.accomodation[0].shuttle_point}</Text>
@@ -84,9 +84,8 @@ function HebergementScreen(props) {
 
       <RallyeH1 text="Hôtel, déjeuner et navettes du jour" />
       <Text style={{paddingTop: 20}}>{props.userConnected.firstName}, </Text>
-      <Text style={{paddingTop: 10}}>Vous trouverez ici, toutes les informations utiles pour votre hébergement, les points de restaurations ainsi que les horaires des navettes allant du Parc Fermé à votre hôtel. </Text>
-      <Text style={{paddingTop: 10}}>Si vous utilisez nos services de bagageries, n'oubliez pas de récupérer vos baggages avant de prendre la navette qui vous déposera à votre hôtel. </Text>
-      <Text style={{paddingTop: 10}}>Pour rappel, le camion bagages, se trouve à proximité du point de navettes du Parc Fermé.</Text>
+      <Text style={{paddingTop: 10}}>Vous trouverez ici, toutes les informations utiles pour votre hébergement, les points de restauration ainsi que les horaires des navettes allant du Parc Fermé à votre hôtel. </Text>
+      <Text style={{paddingTop: 10}}>Si vous utilisez nos services de bagageries, n'oubliez pas de récupérer vos bagages avant de prendre la navette qui vous déposera à votre hôtel. </Text>
       </View>
       <Content>
         <Accordion

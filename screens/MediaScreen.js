@@ -5,6 +5,7 @@ import { Container, Content } from 'native-base';
 import { RedButton, greyDarkTa, whiteTa, greyLightTa, redTa, blackTa } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
 import { Divider } from 'react-native-elements';
+import { pictoUrl } from '../tools/toolkit';
 
 function MediaScreen(props) {
   return (
