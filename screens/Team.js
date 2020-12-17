@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Header, Content, Text, Right, Left, Body, Container } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Content, Container } from 'native-base';
 import { connect } from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
 
-import CardTeam from '../components/CardTeam'
-import { RedButtonOutline, RedButton, greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
-
+import CardTeam from '../components/CardTeam';
+import { RedButtonOutline, RedButton } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
-import FooterRally from '../components/FooterRally';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.9:3000';
 
 function Team(props) {
   const [allTeams, setAllTeams] = useState([]);
@@ -20,7 +15,6 @@ function Team(props) {
   const [displayButton, setDisplayButton] = useState('Tous');
 
   useEffect(() => {
-
     async function getTeams() {
       const rawAnswer = await fetch(`${serverUrl}/teams/get-teams`, {
         method: 'GET',
@@ -32,13 +26,14 @@ function Team(props) {
     getTeams()
   }, []);
 
+  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+
+  //// Function for filterirng team with category ////
   const noFilter = () => {
     const filteredTeams = allTeams;
     setTeamToDisplay(filteredTeams);
     setDisplayButton('Tous');
   }
-
-  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
 
   const filterRegularity = () => {
     const filteredTeams = allTeams.filter(team => categoryRegularity.includes(team.category));
@@ -52,9 +47,9 @@ function Team(props) {
     setDisplayButton('Comp');
   }
 
+  //// Building card team /////
   let teams = teamToDisplay.map((team, i) => {
     return <CardTeam key={team._id} infoTeam={team} navigation={props.navigation} />
-
   })
 
   return (
@@ -89,10 +84,9 @@ function Team(props) {
         </View>
 
         <View style={{ marginTop: 10, alignItems: "center" }}>
-
           {teams}
-
         </View>
+
       </Content>
 
     </Container>
@@ -112,24 +106,11 @@ function mapDispatchToProps(dispatch) {
         type: 'removeFavoriteTeam',
         numTeam
       })
-    },
-    resetUserConnected: function () {
-      dispatch({
-        type: 'reset'
-      })
     }
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userFavorites: state.userFavorites,
-    userConnected: state.userConnected
-  }
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Team);
-
