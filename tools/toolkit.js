@@ -61,8 +61,20 @@ const dataImage = ['https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-C
     'https://www.rallye-sport.fr/wp-content/uploads/2016/09/Liste-engages-Tour-de-Corse-Historique-2016.jpg',
     'https://www.ardeche-actu.com/wp-content/uploads/2017/02/mini-rallye-monte-carlo-historique.jpg',
     'https://www.rallye-sport.fr/wp-content/uploads/2017/12/Calendrier-Epreuves-Historiques-2018.jpg',
-    'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Corse-historique.jpeg',
-
+    'https://www.sportmag.fr/wp-content/uploads/2020/08/Tour-de-Corse-historique.jpeg'
 ]
 
-export { getData, storeData, genericAvatarUrl, dataImage }
+//// Formating a date wiith hour and minute for display ////
+function schedule(dateString) {
+    let hours = new Date(dateString).getHours();
+    let minutes = new Date(dateString).getMinutes()
+    if (hours.toString().length === 1) {
+        hours = '0' + hours
+    }
+    if (minutes.toString().length === 1) {
+        minutes = '0' + minutes
+    }
+    return (hours + ':' + minutes)
+}
+
+export { getData, storeData, genericAvatarUrl, dataImage, schedule }
