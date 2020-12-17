@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Container, Content, Accordion } from 'native-base';
 import { connect } from 'react-redux';
 
-import { RallyeH3 } from '../components/rallye-lib';
+import { RallyeH1, RallyeH2, RallyeH3, redTa } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 
@@ -27,19 +27,27 @@ function HebergementScreen(props) {
 
       //// Format all content field of accordion menu ////
       const formatedAccomodation =
-        <View>
-          <RallyeH3 text={answer.accomodation[0].name} />
+        <View style={{marginTop: 10, fontFamily: "Roboto_400Regular", paddingHorizontal: 20, paddingVertical: 10}}>
+          <RallyeH3 text="Adresse de votre hôtel" />
+          <Text></Text>
+          <RallyeH3 text={answer.accomodation[0].name}/>
           <Text>{answer.accomodation[0].adress}</Text>
         </View>
 
       const formatedCatering =
-        <View>
-          <Text>{answer.catering[0].adress}</Text>
+        <View style={{marginTop: 10, fontFamily: "Roboto_400Regular", paddingHorizontal: 20, paddingVertical: 10}}>
+          <RallyeH3 text="Adresse du lieu de déjeuner" />
+          <Text style={{marginTop: 10}}>{answer.catering[0].adress}</Text>
         </View>
 
       const formatedShuttle =
-        <View>
-          <RallyeH3 text={answer.accomodation[0].shuttle_point} />
+        <View style={{marginTop: 10, fontFamily: "Roboto_400Regular", paddingHorizontal: 20, paddingVertical: 10}}>
+          <Text >Les navettes que nous vous proposons vous déposent à vos hôtels et aux Parcs Fermés. Les horaires affichés sont à titre indicatifs. Les rotations des navettes sont prévues toutes les 30 minutes jusqu'à 9h. Vous trouverez également à côté des points de navettes des Parcs fermés le camion à bagages.</Text>
+          <Text></Text>
+          <RallyeH3 text="Adresse du Parc Fermé" />
+          <Text>{answer.accomodation[0].shuttle_point}</Text>
+          <Text></Text>
+          <RallyeH3 text="Horaires des navettes" />
           <View>
             {answer.accomodation[0].shuttle_hours.map(shuttle => { return <Text key={shuttle}>{shuttle}</Text> })}
 
@@ -48,11 +56,11 @@ function HebergementScreen(props) {
 
       //// Building the accordion menu ////
       setDataArray([...dataArray, {
-        title: "Hebergement",
+        title: "Hébergement",
         content: formatedAccomodation
       },
       {
-        title: "Repas",
+        title: "Restauration",
         content: formatedCatering
       },
       {
@@ -66,11 +74,20 @@ function HebergementScreen(props) {
   }, [])
 
   return (
-    <Container >
+    <Container>
+
       <HeaderRally openBurgerMenu={props.navigation.openDrawer}
         nav={props.navigation.navigate}
         titleHeader="INFOS PRATIQUES" />
 
+        <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
+
+      <RallyeH1 text="Hôtel, déjeuner et navettes du jour" />
+      <Text style={{paddingTop: 20}}>{props.userConnected.firstName}, </Text>
+      <Text style={{paddingTop: 10}}>Vous trouverez ici, toutes les informations utiles pour votre hébergement, les points de restaurations ainsi que les horaires des navettes allant du Parc Fermé à votre hôtel. </Text>
+      <Text style={{paddingTop: 10}}>Si vous utilisez nos services de bagageries, n'oubliez pas de récupérer vos baggages avant de prendre la navette qui vous déposera à votre hôtel. </Text>
+      <Text style={{paddingTop: 10}}>Pour rappel, le camion bagages, se trouve à proximité du point de navettes du Parc Fermé.</Text>
+      </View>
       <Content>
         <Accordion
           dataArray={dataArray}
@@ -80,7 +97,7 @@ function HebergementScreen(props) {
           expandedIconStyle={{ color: "red" }}
         />
       </Content>
-
+      
       <FooterRally nav={props.navigation.navigate} />
 
     </Container>

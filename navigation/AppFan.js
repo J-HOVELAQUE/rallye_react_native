@@ -12,14 +12,14 @@ import HomeScreen from '../screens/HomeScreen2';
 
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
-    {
-        Menu: BottomNavigator,
-        Home: HomeScreen,
-        Login: LoginScreen,
-        Programme: ProgrammeScreen,
-        News: StackForNews,
-        'Mon compte': StackForSnapScreen,
-    }
+        {
+                Menu: BottomNavigator,
+                Home: HomeScreen,
+                Connection: LoginScreen,
+                Programme: ProgrammeScreen,
+                News: StackForNews,
+                'Mon compte': StackForSnapScreen,
+        }
 );
 const AppFan = createAppContainer(MyDrawerNavigatorFan);
 

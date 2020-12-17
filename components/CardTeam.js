@@ -5,7 +5,7 @@ import { Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
-import { greyDarkTa, redTa } from '../components/rallye-lib';
+import { greyDarkTa, redTa, whiteTa } from '../components/rallye-lib';
 import { namePilot, flagNationality } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -67,7 +67,7 @@ function CardTeam(props) {
 
                 <CardItem >
                     <Left style={{ marginHorizontal: -10 }}>
-                        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>#{team.car_id}</Text>
+                        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', width: 65, backgroundColor: redTa, paddingVertical: 5 }}>#{team.car_id}</Text>
                     </Left>
                     <Body style={{ justifyContent: 'center', marginHorizontal: 0 }}>
                         <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>

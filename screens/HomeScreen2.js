@@ -8,19 +8,18 @@ import HeaderRally from '../components/HeaderRally';
 import FooterRally from '../components/FooterRally';
 
 import { RedButton, RallyeH1, RallyeH2, greyDarkTa, blackTa, greyLightTa } from '../components/rallye-lib';
-import { getData } from '../tools/toolkit';
+import { getData, schedule } from '../tools/toolkit';
+
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.9:3000';
 
 function HomeScreen(props) {
 
-    const [program, setProgram] = useState([])
+    const [program, setProgram] = useState([]);
+    const [welcome, setWelcome] = useState('HOME');
 
     useEffect(() => {
-
         const connection = async () => {
-
             //// Getting data in local storage if existing ////
             const answer = await getData();
 
@@ -46,23 +45,10 @@ function HomeScreen(props) {
 
         connection();
         getProgram();
-    }, [])
-
-
-    function schedule(dateString) {
-
-        let hours = new Date(dateString).getHours();
-        let minutes = new Date(dateString).getMinutes()
-
-        if (hours.toString().length === 1) {
-            hours = '0' + hours
+        if (props.user.lastName !== null && props.user.lastName !== "" && props.user.lastName !== undefined) {
+            setWelcome("Bonjour " + props.user.lastName);
         }
-
-        if (minutes.toString().length === 1) {
-            minutes = '0' + minutes
-        }
-        return (hours + ':' + minutes)
-    }
+    }, [props.userConnected])
 
     let programGrid = program.map((planning, i) => (
         <Card key={planning._id} style={{ width: "100%", flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -86,15 +72,15 @@ function HomeScreen(props) {
 
             <HeaderRally openBurgerMenu={props.navigation.openDrawer}
                 nav={props.navigation.navigate}
-                titleHeader="HOME" />
+                titleHeader={welcome} />
 
             <Content >
 
                 <View style={{ marginLeft: 10 }}>
-                    <RallyeH1 text="ETAPE 1 : MARDI 1 SEPT." />
-                    <Text><Icon name='flag' /><RallyeH2 style={{ margin: 20 }} text="PARIS - GRAND PALAIS" /></Text>
-                    <Text><Icon name='flag-checkered' /><RallyeH2 text="CLERMONT-FERRAND" /></Text>
-                    <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui l'étape partira officiellement de l'autodrome de Linas-Montlhéry et arrivera à la Grande Halle de Clermont-Ferrand. Un parcours de plus de 350 km !</Text>
+                    <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
+                    <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="VERS-PONT-DU-GARD" /></Text>
+                    <Text><Icon name='flag-checkered' /> <RallyeH2 text="CIRCUIT PAUL RICARD" /></Text>
+                    <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui, avant dernière étape du rallye qui partira de Vers-Pont-du-Gard et se terminera au circuit Paul Ricard. Un parcours de plus de 350 km !</Text>
                 </View>
 
                 <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
@@ -113,9 +99,7 @@ function HomeScreen(props) {
                     <RedButton onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
                 </View>
             </Content>
-
-            <FooterRally nav={props.navigation.navigate} />
-
+            <FooterRally />
         </Container >
     );
 }

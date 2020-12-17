@@ -21,13 +21,14 @@ const MyDrawerNavigatorPilot = createDrawerNavigator(
     {
         Menu: BottomNavigator,
         Home: HomeScreen,
-        Login: LoginScreen,
+        Connection: LoginScreen,
         'Infos pratiques': HebergementScreen,
         Programme: ProgrammeScreen,
         News: StackForNews,
         'Mon compte': StackForSnapScreen,
         Chat: ChatScreen
     }
+
 );
 const AppPilot = createAppContainer(MyDrawerNavigatorPilot);
 

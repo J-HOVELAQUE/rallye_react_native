@@ -69,15 +69,6 @@ const PasswordInput = ({ onChangeText }) => {
       <FontAwesome name="unlock-alt" size={16} color={greyLightTa} />
     }
     onChangeText={onChangeText}
-    //onChangeText={value => this.setState({ comment: value })}
-    // Activer ou désactiver l'oeil pour voir le mot de passe tapé
-    rightIcon={
-      // Mot de passe invisble. Cliquer sur l'oeil ouvert pr le rendre visible
-      <FontAwesome name="eye" size={16} color={greyLightTa} />
-
-      // Mot de passe visble. Cliquer sur l'oeil fermé pr le rendre invisible
-      // <FontAwesome name="eye-slash" size={16} color="greyLightTa" />
-    }
   />;
 }
 const SearchInput = ({ placeholder, onChangeText }) => {
@@ -261,6 +252,7 @@ const styles = StyleSheet.create({
     borderColor: greyLightTa,
     borderWidth: 1,
     paddingHorizontal: 8,
+    paddingVertical: 0,
     alignItems: 'center',
   },
   legend: {

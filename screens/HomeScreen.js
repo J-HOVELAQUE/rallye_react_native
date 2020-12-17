@@ -10,7 +10,6 @@ import { getData, schedule } from '../tools/toolkit';
 
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
-// const serverUrl = 'http://192.168.1.9:3000';
 
 function HomeScreen(props) {
 
@@ -76,10 +75,10 @@ function HomeScreen(props) {
       <Content >
 
         <View style={{ marginLeft: 10 }}>
-          <RallyeH1 text="ETAPE 1 : MARDI 1 SEPT." />
-          <Text><Icon name='flag' /><RallyeH2 style={{ margin: 20 }} text="PARIS - GRAND PALAIS" /></Text>
-          <Text><Icon name='flag-checkered' /><RallyeH2 text="CLERMONT-FERRAND" /></Text>
-          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui l'étape partira officiellement de l'autodrome de Linas-Montlhéry et arrivera à la Grande Halle de Clermont-Ferrand. Un parcours de plus de 350 km !</Text>
+          <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
+          <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="VERS-PONT-DU-GARD" /></Text>
+          <Text><Icon name='flag-checkered' /> <RallyeH2 text="CIRCUIT PAUL RICARD" /></Text>
+          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui, avant dernière étape du rallye qui partira de Vers-Pont-du-Gard et se terminera au circuit Paul Ricard. Un parcours de plus de 350 km !</Text>
         </View>
 
         <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
@@ -95,7 +94,7 @@ function HomeScreen(props) {
         <View style={{ marginHorizontal: 10 }}>
           <RallyeH1 text="ITINERAIRE" />
           <Image source={require('../assets/testmap.jpg')} style={{ height: 180, borderColor: blackTa }} />
-          <RedButton onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
+          <RedButton onPress={() => props.navigation.navigate('Live')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
         </View>
       </Content>
 
