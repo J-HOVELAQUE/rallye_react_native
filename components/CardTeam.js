@@ -99,13 +99,13 @@ function CardTeam(props) {
         <Card style={{ width: "100%", flex: 1 }}>
             <CardItem>
                 <Left style={{marginHorizontal: -10}}>
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', }}>#{team.car_id}</Text>
+                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', width: 65,  backgroundColor: redTa,  paddingVertical: 5 }}>#{team.car_id}</Text>
                 </Left>
                 <Body style={{justifyContent: 'center', marginHorizontal: 0}}>
                     <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
-                    <Text></Text>
+                    
                     <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
                         <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
                         {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
@@ -119,17 +119,15 @@ function CardTeam(props) {
                             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.brand}</Text>
                             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.model} - {team.car.year}</Text>
 
-                            <Text><Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
-                                {fullNamePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
+                            <Text><Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} /> {fullNamePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
 
-                            <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
-                                {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
+                            <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} /> {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
                             <ScrollView>
                                 <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
 
 
-                                <RallyeH2 text='Palmarés' />
-                                <Text style={{ marginTop: 10 }}>Lorem ips ullamcorper lectus turpis, et lacinia arisi, in congue m</Text>
+                                <RallyeH1 text='Historique' />
+                                <Text style={{ marginTop: 10 }}>{team.car.description} </Text>
                                 <RedButton onPress={() => props.navigation.navigate('Classement')} title="Classement" style={{ flex: 1, alignItems: 'flex-end' }} />
 
 
