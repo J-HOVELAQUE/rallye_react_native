@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, KeyboardAvoidingView } from 'react-native';
+import { View, ScrollView, Text, KeyboardAvoidingView,Dimensions } from 'react-native';
 import { ListItem, Input } from 'react-native-elements';
 import { Container, Content, Header, Button, Footer, FooterTab, Left, Body, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,6 +8,9 @@ import socketIOClient from 'socket.io-client';
 
 import ChatRoom from '../components/ChatRoom';
 import { greyDarkTa, RedButton, whiteTa, icoWhite } from '../components/rallye-lib';
+import { FlatList } from 'react-native-gesture-handler';
+
+
 
 // const serverUrl = 'http://192.168.1.9:3000';
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -81,6 +84,7 @@ function ChatScreen(props) {
         socket.emit('changeRoom', { newRoom: roomNumber.toString() })
 
     }
+    
 
     return (
         <Container>
@@ -109,11 +113,11 @@ function ChatScreen(props) {
                         <ChatRoom room='Officiel' buttonPress={() => handleChangeRoom('Officiel')} actif={room === 'Officiel' ? true : false} />
                         <ChatRoom room='RoomB' buttonPress={() => handleChangeRoom('RoomB')} actif={room === 'RoomB' ? true : false} />
                     </View>
-
-                    <ScrollView >
-                        {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
-                    </ScrollView >
-
+                    
+                        <ScrollView style={{height:Dimensions.get('window').height /2 }}>
+                            {room === 'Officiel' ? chatOfficiel.reverse() : chatRoom.reverse()}
+                        </ScrollView>
+                    
                     <RedButton
                         title="Send to channel"
                         onPress={() => { socket.emit('messageToChannel', { msg: currentMsg, sender: props.user.firstName, status: props.user.status }); setCurrentMsg('') }}
@@ -124,6 +128,7 @@ function ChatScreen(props) {
                         value={currentMsg}
                         onChangeText={(value) => setCurrentMsg(value)}
                     />
+                    
 
                 </View>
             </Content>
