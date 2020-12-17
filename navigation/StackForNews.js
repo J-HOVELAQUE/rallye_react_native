@@ -14,9 +14,18 @@ const StackForNews = createStackNavigator({
     },
     Detail: {
         screen: OneNewScreen,
-
     }
-}
-);
+});
+
+StackForNews.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+
+    return {
+        tabBarVisible,
+    };
+};
 
 export default StackForNews;

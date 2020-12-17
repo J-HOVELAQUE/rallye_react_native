@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableHighlight, ScrollView, } from 'react-native';
-
-import { connect } from 'react-redux';
-import { Card, CardItem, Text, Right, Left, Body, Content, Container } from 'native-base';
+import { View, Image } from 'react-native';
+import { Text, Content, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 
 import { RedButton, RallyeH2, greyDarkTa, redTa } from '../components/rallye-lib';
-
-import { namePilot, fullNamePilot, flagNationality } from '../tools/toolkit';
+import { fullNamePilot, flagNationality } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
@@ -15,11 +13,9 @@ function DetailTeamScreen(props) {
 
     const team = props.clickedTeam;
     const [styleHeart, setStyleHeart] = useState({ color: greyDarkTa });
-    const [bibFavorites, setBibFavorites] = useState([]);
     const [displayLiveButton, setDisplayLiveButton] = useState(false);
 
     useEffect(() => {
-
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.clickedTeam._id);
         if (inFavorites.length > 0) {
             setStyleHeart({ color: redTa });
@@ -42,26 +38,24 @@ function DetailTeamScreen(props) {
             setStyleHeart({ color: redTa })
 
             // Add new favorite in BDD
-            const rawAnswer = await fetch(`${serverUrl}/user/add-favorite`, {
+            await fetch(`${serverUrl}/user/add-favorite`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `token=${props.userConnected.token}&newValue=${numTeam}`
             })
-            const answer = await rawAnswer.json();
+
 
         } else {
             props.removeFavoriteTeam(numTeam);
             setStyleHeart({ color: greyDarkTa });
-            const bibs = props.userFavorites.map(fav => { return (fav.car_id) });
-            setBibFavorites(bibs);
+
             // Remove favorite in BDD
-            const rawAnswer = await fetch(`${serverUrl}/user/remove-favorite`, {
+            await fetch(`${serverUrl}/user/remove-favorite`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `token=${props.userConnected.token}&valueToRemove=${numTeam}`
             })
         }
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>PRESSSSSSSS');
     }
 
 
