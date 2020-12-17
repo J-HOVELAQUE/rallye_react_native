@@ -10,6 +10,8 @@ import LoginScreen from '../screens/Login';
 import ProgrammeScreen from '../screens/ProgrammeScreen';
 import Video from '../screens/Video';
 import Photos from '../screens/Photos';
+import HomeScreen from '../screens/HomeScreen';
+
 
 // Unknown user menu
 const MyDrawerNavigatorUnknown = createDrawerNavigator(
@@ -17,9 +19,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
         Menu: BottomNavigator,
         Login: LoginScreen,
         Programme: ProgrammeScreen,
-        News: StackForNews,
-        Video: Video,
-        Photos: Photos
+        News: StackForNews
     }
 );
 const AppUnknown = createAppContainer(MyDrawerNavigatorUnknown);
