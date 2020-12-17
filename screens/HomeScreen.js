@@ -44,7 +44,7 @@ function HomeScreen(props) {
     connection();
     getProgram();
     if (props.user.lastName !== null && props.user.lastName !== "" && props.user.lastName !== undefined) {
-      setWelcome("Bonjour " + props.user.lastName);
+      setWelcome("Bonjour " + props.user.firstName);
     }
   }, [props.userConnected])
 
