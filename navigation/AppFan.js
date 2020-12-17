@@ -15,7 +15,7 @@ const MyDrawerNavigatorFan = createDrawerNavigator(
         {
                 Menu: BottomNavigator,
                 Home: HomeScreen,
-                Connection: LoginScreen,
+                Login: LoginScreen,
                 Programme: ProgrammeScreen,
                 News: StackForNews,
                 'Mon compte': StackForSnapScreen,

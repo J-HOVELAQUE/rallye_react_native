@@ -14,7 +14,7 @@ const MyDrawerNavigatorUnknown = createDrawerNavigator(
     {
         Menu: BottomNavigator,
         Home: HomeScreen,
-        Connection: LoginScreen,
+        Login: LoginScreen,
         Programme: ProgrammeScreen,
         News: StackForNews
     }
