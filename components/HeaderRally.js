@@ -32,7 +32,7 @@ function HeaderRally(props) {
                             AsyncStorage.clear();
                             props.resetUserConnected();
                             props.resetFavorites();
-                            props.nav('News')
+                            props.nav('Home')
                         }} />
                 }
             </Right>

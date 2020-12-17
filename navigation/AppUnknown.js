@@ -1,22 +1,19 @@
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 
-
 import BottomNavigator from './BottomNavigator';
 import StackForNews from './StackForNews';
 
-
 import LoginScreen from '../screens/Login';
 import ProgrammeScreen from '../screens/ProgrammeScreen';
-import Video from '../screens/Video';
-import Photos from '../screens/Photos';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen2';
 
 
 // Unknown user menu
 const MyDrawerNavigatorUnknown = createDrawerNavigator(
     {
         Menu: BottomNavigator,
+        Home: HomeScreen,
         Login: LoginScreen,
         Programme: ProgrammeScreen,
         News: StackForNews

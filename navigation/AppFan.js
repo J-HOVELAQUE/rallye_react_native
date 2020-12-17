@@ -7,11 +7,14 @@ import StackForSnapScreen from './StackForSnapScreen';
 
 import LoginScreen from '../screens/Login';
 import ProgrammeScreen from '../screens/ProgrammeScreen';
+import HomeScreen from '../screens/HomeScreen2';
+
 
 // Fan menu
 const MyDrawerNavigatorFan = createDrawerNavigator(
     {
         Menu: BottomNavigator,
+        Home: HomeScreen,
         Login: LoginScreen,
         Programme: ProgrammeScreen,
         News: StackForNews,
