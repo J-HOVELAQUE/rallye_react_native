@@ -82,7 +82,7 @@ function HebergementScreen(props) {
 
         <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
 
-      <RallyeH1 text="Informations pratiques" />
+      <RallyeH1 text="Hôtel, déjeuner et navettes du jour" />
       <Text style={{paddingTop: 20}}>{props.userConnected.firstName}, </Text>
       <Text style={{paddingTop: 10}}>Vous trouverez ici, toutes les informations utiles pour votre hébergement, les points de restaurations ainsi que les horaires des navettes allant du Parc Fermé à votre hôtel. </Text>
       <Text style={{paddingTop: 10}}>Si vous utilisez nos services de bagageries, n'oubliez pas de récupérer vos baggages avant de prendre la navette qui vous déposera à votre hôtel. </Text>
