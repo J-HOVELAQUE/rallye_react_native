@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, FlatList, Image, ImageBackground, ScrollView } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title, Card, CardItem, Content, Footer, FooterTab } from 'native-base';
+import { View, Text, ScrollView } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Card, CardItem, Content, Footer, FooterTab } from 'native-base';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 
-import { RedButtonLogin, RedButton, RallyeH1, RallyeH2, RallyeH3, greyDarkTa, whiteTa, icoWhite, blackTa, ProfilAvatar, greyLightTa } from '../components/rallye-lib';
+import {  RallyeH1,  greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
@@ -51,7 +51,7 @@ function ProgrammeScreen(props) {
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
 
         <View style={{ width: '75%' }}>
-          {planning.event.map((task, nTask)=>(
+          {planning.event.map((task)=>(
             <Text key={task}>- {task}</Text>
           ))}
           

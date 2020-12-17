@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
-import { Text, Container, Content } from 'native-base';
-import { Table, Row, Rows } from 'react-native-table-component';
+import { Text, Container, Content, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
-import { RedButton, RallyeH1, RallyeH2, greyDarkTa, blackTa, greyLightTa } from '../components/rallye-lib';
 import HeaderRally from '../components/HeaderRally';
+import { RedButton, RallyeH1, RallyeH2, greyDarkTa, blackTa, greyLightTa } from '../components/rallye-lib';
 import { getData } from '../tools/toolkit';
 
-const HeadTable = ['Horaires', 'Itinéraires'];
-const DataTable = [
-  ['08:00', 'Vers-Pont-Du-Gard / Castillon-Du-Gard / Remoulins'],
-  ['08:10', 'Fournes / Roquemaure'],
-  ['08:35', 'Orange / Serignan-Du-Comtat'],
-];
+const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
+// const serverUrl = 'http://192.168.1.9:3000';
 
 function HomeScreen(props) {
+
+  const [program, setProgram] = useState([])
 
   useEffect(() => {
 
@@ -35,8 +32,52 @@ function HomeScreen(props) {
       })
       props.retrieveFavoriteTeam(favorite);
     }
+
+    //// Retrieve program info from DB ////
+    async function getProgram() {
+      const rawAnswer = await fetch(`${serverUrl}/program/get-program`, {
+        method: 'GET',
+      });
+      let program = await rawAnswer.json();
+      setProgram([program.program[0], program.program[1], program.program[2]]);
+    }
+
     connection();
+    getProgram();
   }, [])
+
+
+  function schedule(dateString) {
+
+    let hours = new Date(dateString).getHours();
+    let minutes = new Date(dateString).getMinutes()
+
+    if (hours.toString().length === 1) {
+      hours = '0' + hours
+    }
+
+    if (minutes.toString().length === 1) {
+      minutes = '0' + minutes
+    }
+    return (hours + ':' + minutes)
+  }
+
+  let programGrid = program.map((planning, i) => (
+    <Card key={planning._id} style={{ width: "100%", flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+      <CardItem >
+
+        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
+
+        <View style={{ width: '75%' }}>
+          {planning.event.map((task)=>(
+            <Text key={task}>- {task}</Text>
+          ))}
+          
+        </View>
+
+      </CardItem>
+    </Card>
+  ))
 
   return (
     <Container>
@@ -57,10 +98,7 @@ function HomeScreen(props) {
         <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
           <RallyeH1 text="PROGRAMME DU JOUR" />
           <Text style={{ marginBottom: 10, color: greyLightTa }}>Horaires de départ des premières voitures</Text>
-          <Table borderStyle={{ borderWidth: 1, borderColor: greyDarkTa }}>
-            <Row data={HeadTable} />
-            <Rows data={DataTable} />
-          </Table>
+          {programGrid}
         </View>
 
         <View style={{ marginHorizontal: 10 }}>
