@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, CardItem, Text, Right, Left, Body } from 'native-base';
 import { connect } from 'react-redux';
 
-import { RedButton, RallyeH2, greyDarkTa, redTa } from '../components/rallye-lib';
+import { RedButton, RallyeH1, greyDarkTa, redTa, whiteTa } from '../components/rallye-lib';
 import { namePilot, fullNamePilot, flagNationality } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';

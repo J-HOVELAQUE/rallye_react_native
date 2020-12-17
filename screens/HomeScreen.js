@@ -48,18 +48,18 @@ function HomeScreen(props) {
       <Content >
 
         <View style={{ marginLeft: 10 }}>
-          <RallyeH1 text="ETAPE 1 : MARDI 1 SEPT." />
-          <Text><Icon name='flag' /><RallyeH2 style={{ margin: 20 }} text="PARIS - GRAND PALAIS" /></Text>
-          <Text><Icon name='flag-checkered' /><RallyeH2 text="CLERMONT-FERRAND" /></Text>
-          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui l'étape partira officiellement de l'autodrome de Linas-Montlhéry et arrivera à la Grande Halle de Clermont-Ferrand. Un parcours de plus de 350 km !</Text>
+          <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
+          <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="PONT-DU-GARS" /></Text>
+          <Text><Icon name='flag-checkered' /> <RallyeH2 text="CIRCUIT PAUL RICARD" /></Text>
+          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui, avant dernière étape du rallye qui du Pont-du-Gard et se terminera au circuit Paul Ricard. Un parcours de plus de 350 km !</Text>
         </View>
 
         <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
           <RallyeH1 text="PROGRAMME DU JOUR" />
           <Text style={{ marginBottom: 10, color: greyLightTa }}>Horaires de départ des premières voitures</Text>
-          <Table borderStyle={{ borderWidth: 1, borderColor: greyDarkTa }}>
-            <Row data={HeadTable} />
-            <Rows data={DataTable} />
+          <Table borderStyle={{ borderWidth: 1, borderColor: greyLightTa }}>
+            <Row data={HeadTable} style ={{marginHorizontal: 5}}/>
+            <Rows data={DataTable} style ={{marginHorizontal: 5, marginVertical:5, alignItems: 'top' }}/>
           </Table>
         </View>
 

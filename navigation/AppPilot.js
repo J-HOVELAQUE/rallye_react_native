@@ -20,7 +20,7 @@ import ChatScreen from '../screens/ChatScreen';
 const MyDrawerNavigatorPilot = createDrawerNavigator(
     {
         Menu: BottomNavigator,
-        Login: LoginScreen,
+        'Connection / Inscription': LoginScreen,
         'Infos pratiques': HebergementScreen,
         Programme: ProgrammeScreen,
         News: StackForNews,

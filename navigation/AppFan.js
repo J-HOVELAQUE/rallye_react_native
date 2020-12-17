@@ -12,7 +12,7 @@ import ProgrammeScreen from '../screens/ProgrammeScreen';
 const MyDrawerNavigatorFan = createDrawerNavigator(
     {
         Menu: BottomNavigator,
-        Login: LoginScreen,
+        'Connection / Inscription': LoginScreen,
         Programme: ProgrammeScreen,
         News: StackForNews,
         'Mon compte': StackForSnapScreen,

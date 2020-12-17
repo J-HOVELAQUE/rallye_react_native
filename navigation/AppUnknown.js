@@ -17,7 +17,7 @@ import HomeScreen from '../screens/HomeScreen';
 const MyDrawerNavigatorUnknown = createDrawerNavigator(
     {
         Menu: BottomNavigator,
-        Login: LoginScreen,
+        'Connection / Inscription': LoginScreen,
         Programme: ProgrammeScreen,
         News: StackForNews
     }
