@@ -18,7 +18,6 @@ function HomeScreen(props) {
   const [welcome, setWelcome] = useState('HOME');
 
   useEffect(() => {
-    console.log('>>>>>>>>>>>>>>>>>>', props.user);
     const connection = async () => {
       //// Getting data in local storage if existing ////
       const answer = await getData();
