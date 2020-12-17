@@ -35,9 +35,9 @@ function ProgrammeScreen(props) {
         initialPage={0}
         renderTabBar={() => <ScrollableTabBar />}
       >
-        {/* <ProgramGrid tabLabel='14/12/2020' day = '14/12/2020' program={program}/> */}
-        {/* <ProgramGrid tabLabel='15/12/2020' day = '15/12/2020' program={program} /> */}
-        {/* <ProgramGrid tabLabel='16/12/2020' day = '16/12/2020' program={program} /> */}
+        <ProgramGrid tabLabel='14/12/2020' day = '14/12/2020' program={program}/>
+        <ProgramGrid tabLabel='15/12/2020' day = '15/12/2020' program={program} />
+        <ProgramGrid tabLabel='16/12/2020' day = '16/12/2020' program={program} />
         <ProgramGrid tabLabel='17/12/2020' day='17/12/2020' program={program} />
         <ProgramGrid tabLabel='18/12/2020' day='18/12/2020' program={program} />
       </ScrollableTabView>
