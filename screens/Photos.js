@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, FlatList, Image, ImageBackground } from 'react-native';
+import { SafeAreaView, StyleSheet, View, FlatList, Image } from 'react-native';
 import { Container, Content } from 'native-base';
 import Lightbox from 'react-native-lightbox';
 
@@ -15,8 +15,6 @@ const PhotoScreen = () => {
 
   return (
     <Container>
-
-      <ImageBackground source={require('../assets/fondCarbon.jpg')} style={styles.container}>
 
         <Content>
           <SafeAreaView style={styles.container}>
@@ -40,7 +38,6 @@ const PhotoScreen = () => {
           </SafeAreaView>
         </Content>
 
-      </ImageBackground>
     </Container>
 
   );
