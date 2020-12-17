@@ -99,7 +99,7 @@ function HomeScreen(props) {
                     <RedButton onPress={() => props.navigation.navigate('Map')} title="Live" style={{ flex: 1, alignItems: 'flex-end' }} />
                 </View>
             </Content>
-            <FooterRally />
+            <FooterRally nav={props.navigation.navigate} />
         </Container >
     );
 }
