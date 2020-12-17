@@ -73,7 +73,7 @@ function HomeScreen(props) {
         titleHeader={welcome} />
 
       <Content >
-
+      <Image style={{ height: 150, borderColor: blackTa }} source={{uri: 'https://peterauto.peter.fr/wp-content/gallery/tour-auto-2020/146-tourauto2020-01902-copyright-Mathieu-Bonnevie-1920.jpg'}}/>
         <View style={{ marginLeft: 10 }}>
           <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
           <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="VERS-PONT-DU-GARD" /></Text>
