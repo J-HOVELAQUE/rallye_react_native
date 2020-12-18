@@ -146,7 +146,6 @@ function monCompteScreen(props) {
     })
     const answer = await rawAnswer.json();
     setPassword('')
-    console.log(answer)
   }
 
 
@@ -162,6 +161,20 @@ function monCompteScreen(props) {
       userAvatar: avatar
     }
 
+    // Create object for reducer
+    const newProfile = {
+      firstname: firstName,
+      lastname: lastName,
+      nationality: nationality,
+      email: email,
+      avatar: avatar,
+      token: props.userConnected.token,
+      status: props.userConnected.status
+    }
+
+    props.onRecordUserConnected(newProfile);
+
+
     const strUpdateFields = JSON.stringify(updateFields)
 
     // Modify user in BDD
@@ -171,7 +184,6 @@ function monCompteScreen(props) {
       body: `token=${props.userConnected.token}&newValue=${strUpdateFields}`
     })
     const answer = await rawAnswer.json();
-    console.log(answer)
   }
 
   return (
@@ -201,6 +213,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    onRecordUserConnected: function (user) {
+      dispatch({
+        type: 'record',
+        user: user
+      })
+    },
     resetUserConnected: function () {
       dispatch({
         type: 'reset'

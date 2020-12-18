@@ -75,6 +75,7 @@ function HomeScreen(props) {
                 titleHeader={welcome} />
 
             <Content >
+                <Image style={{ height: 150, borderColor: blackTa }} source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608240003/home_oiaf9t.jpg' }} />
 
                 <View style={{ marginLeft: 10 }}>
                     <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />

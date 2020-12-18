@@ -93,8 +93,8 @@ function MapScreen(props) {
         < MapView style={{ flex: 1 }
         }
           initialRegion={{
-            latitude: 48.866667,
-            longitude: 2.333333,
+            latitude: 48.847648,
+            longitude: 2.274218,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}

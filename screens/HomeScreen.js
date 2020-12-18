@@ -70,10 +70,10 @@ function HomeScreen(props) {
 
       <HeaderRally openBurgerMenu={props.navigation.openDrawer}
         nav={props.navigation.navigate}
-        titleHeader={welcome} />
+        titleHeader={"Bonjour " + props.user.firstName} />
 
       <Content >
-      <Image style={{ height: 150, borderColor: blackTa }} source={{uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608240003/home_oiaf9t.jpg'}}/>
+        <Image style={{ height: 150, borderColor: blackTa }} source={{ uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608240003/home_oiaf9t.jpg' }} />
         <View style={{ marginLeft: 10 }}>
           <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
           <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="VERS-PONT-DU-GARD" /></Text>
