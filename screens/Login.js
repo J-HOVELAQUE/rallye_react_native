@@ -49,7 +49,6 @@ function LoginScreen(props) {
       body: JSON.stringify(dataUser)
     });
     const answer = await rawAnswer.json();
-    console.log(answer);
 
     ///// Recording in reduce store and local if answer is ok //////
     if (answer.recorded === true) {
@@ -58,7 +57,6 @@ function LoginScreen(props) {
 
       props.navigation.navigate('Home');
     } else {
-      console.log('Access denied', answer.error);
       setErrors(answer.error);
       toggleOverlay();
     }
@@ -89,7 +87,6 @@ function LoginScreen(props) {
       storeData(answer.data.token, answer.data.status);
       props.navigation.navigate('Home');
     } else {
-      console.log('Access denied', answer.error);
       setErrors(answer.error);
       toggleOverlay();
 
