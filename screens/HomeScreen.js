@@ -73,12 +73,12 @@ function HomeScreen(props) {
         titleHeader={welcome} />
 
       <Content >
-
+      <Image style={{ height: 150, borderColor: blackTa }} source={{uri: 'https://res.cloudinary.com/dibl3ihpy/image/upload/v1608240003/home_oiaf9t.jpg'}}/>
         <View style={{ marginLeft: 10 }}>
           <RallyeH1 text="ETAPE 4 : VENDREDI 18 DEC." />
           <Text><Icon name='flag' /> <RallyeH2 style={{ margin: 20 }} text="VERS-PONT-DU-GARD" /></Text>
           <Text><Icon name='flag-checkered' /> <RallyeH2 text="CIRCUIT PAUL RICARD" /></Text>
-          <Text style={{ marginTop: 10, color: greyLightTa }}>Aujourd'hui, avant dernière étape du rallye qui partira de Vers-Pont-du-Gard et se terminera au circuit Paul Ricard. Un parcours de plus de 350 km !</Text>
+          <Text style={{ marginTop: 10, color: greyLightTa }}>Avant dernière étape du rallye qui partira de Vers-Pont-du-Gard et se terminera au circuit Paul Ricard. Un parcours de plus de 350 km !</Text>
         </View>
 
         <View style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
