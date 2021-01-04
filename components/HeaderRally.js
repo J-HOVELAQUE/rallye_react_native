@@ -1,15 +1,17 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Text } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Body, Right } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
+
 import { greyDarkTa, whiteTa, icoWhite } from '../components/rallye-lib';
 
 function HeaderRally(props) {
 
     return (
         <Header style={{ backgroundColor: greyDarkTa }}>
+
             <Left>
                 <Icon name='bars' size={25} style={{ color: icoWhite, marginLeft: 10 }} onPress={() => props.openBurgerMenu()} />
             </Left>
@@ -17,8 +19,8 @@ function HeaderRally(props) {
             <Body>
                 <Text style={{ color: whiteTa }}>{props.titleHeader}</Text>
             </Body>
-            <Right>
 
+            <Right>
                 {props.userConnected.status === undefined ?
                     <Icon name='user-circle'
                         size={25}

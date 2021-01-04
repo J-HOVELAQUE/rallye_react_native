@@ -175,7 +175,7 @@ function monCompteScreen(props) {
     props.onRecordUserConnected(newProfile);
 
 
-    const strUpdateFields = JSON.stringify(updateFields)
+    const strUpdateFields = JSON.stringify(updateFields);
 
     // Modify user in BDD
     const rawAnswer = await fetch(`${serverUrl}/user/update-user`, {

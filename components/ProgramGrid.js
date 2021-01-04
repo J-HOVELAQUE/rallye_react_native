@@ -5,10 +5,10 @@ import { Card, CardItem, Content } from 'native-base';
 import { greyDarkTa } from '../components/rallye-lib';
 import { schedule } from '../tools/toolkit';
 
-function ProgrammeGrid(props) {
+function ProgrammeGrid({ program, day }) {
 
-    let programOfDay = props.program.filter((plan) => (
-        (new Date(plan.date).getDate() + '/' + (new Date(plan.date).getMonth() + 1) + '/' + new Date(plan.date).getFullYear()) === props.day)
+    let programOfDay = program.filter((plan) => (
+        (new Date(plan.date).getDate() + '/' + (new Date(plan.date).getMonth() + 1) + '/' + new Date(plan.date).getFullYear()) === day)
     )
 
     ///// Building event card /////
@@ -18,8 +18,8 @@ function ProgrammeGrid(props) {
                 <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, textAlign: 'left', marginRight: 20 }}>{schedule(planning.date)}</Text>
 
                 <View style={{ width: '75%' }}>
-                    {planning.event.map((task) => (
-                        <Text key={task}>- {task}</Text>
+                    {planning.event.map((task, i) => (
+                        <Text key={task + i}>- {task}</Text>
                     ))}
                 </View>
             </CardItem>

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
-import { greyDarkTa, whiteTa, RallyeH3 } from '../components/rallye-lib';
-import { Text, View } from 'react-native';
-
-import { Container, Content, Footer, FooterTab, Button, Accordion } from 'native-base';
+import React from 'react';
+import { Text } from 'react-native';
+import { Footer, FooterTab, Button } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { greyDarkTa, whiteTa } from '../components/rallye-lib';
 
 function FooterRally(props) {
 

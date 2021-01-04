@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, TextInput, Header, View } from 'react-native';
-import { Avatar, Accessory, SocialIcon, Input, Icon } from 'react-native-elements';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Avatar, Accessory, SocialIcon, Input } from 'react-native-elements';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -123,9 +123,6 @@ const RallyeH3 = ({ text }) => {
 const ProfilAvatar = () => {
   return <Avatar
     rounded
-    // source={{
-    //   uri: 'https://media.istockphoto.com/photos/young-motorcyclist-with-vintage-helmet-picture-id157619003?k=6&m=157619003&s=170667a&w=0&h=-ZJnm31o78SHiEaP_vvud4tG5wDoyj7yDLGpdeRJ97U=',
-    // }}
     onPress={() => console.log("Afficher mon profil")}
     activeOpacity={0.7}
     containerStyle={{ marginHorizontal: 20 }}
@@ -266,7 +263,7 @@ const styles = StyleSheet.create({
 })
 
 export {
-  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa,icoWhite,
+  redTa, whiteTa, blackTa, greyDarkTa, greyLightTa, icoWhite,
   RedButtonLogin, RedButton, RedButtonOutline,
   GreyButton, GreyButtonOutline,
   RallyeH1, RallyeH2, RallyeH3,

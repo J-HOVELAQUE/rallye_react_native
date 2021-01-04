@@ -10,28 +10,37 @@ import { namePilot, flagNationality } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
-function CardTeam(props) {
+function CardTeam({
+    infoTeam,   /// with following attributes : {_id, car_id, pilot_1, pilot_2, car}
+    userFavorites,  /// with following attributes {token, status}
+    /// Redux
+    userConnected,
+    removeFavoriteTeam,
+    addFavoriteTeam,
+    recordClickedTeam,
+    ///
+    nav,
+}) {
 
     const [styleHeart, setStyleHeart] = useState({ color: greyDarkTa })
 
-    const team = props.infoTeam;
-
+    //// lighting the heart picto if this team is in favorites list of the user ////
     useEffect(() => {
-        const inFavorites = props.userFavorites.filter(fav => fav._id === props.infoTeam._id);
+        const inFavorites = userFavorites.filter(fav => fav._id === infoTeam._id);
         if (inFavorites.length > 0) {
             setStyleHeart({ color: redTa })
         } else {
             setStyleHeart({ color: greyDarkTa })
         }
-    }, [props.userFavorites])
+    }, [userFavorites])
 
     const handleFavorite = async (numTeam, bib) => {
 
-        const filteredFav = props.userFavorites.filter(fav => fav._id === numTeam);
+        const filteredFav = userFavorites.filter(fav => fav._id === numTeam);
 
-        // Add or Remove this team from my favorites
+        //// Add or Remove this team from my favorites ////
         if (filteredFav.length < 1) {
-            props.addFavoriteTeam({
+            addFavoriteTeam({
                 _id: numTeam,
                 car_id: bib
             })
@@ -41,19 +50,19 @@ function CardTeam(props) {
             await fetch(`${serverUrl}/user/add-favorite`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `token=${props.userConnected.token}&newValue=${numTeam}`
+                body: `token=${userConnected.token}&newValue=${numTeam}`
             })
 
 
         } else {
-            props.removeFavoriteTeam(numTeam)
+            removeFavoriteTeam(numTeam)
             setStyleHeart({ color: greyDarkTa })
 
             // Remove favorite in BDD
             await fetch(`${serverUrl}/user/remove-favorite`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `token=${props.userConnected.token}&valueToRemove=${numTeam}`
+                body: `token=${userConnected.token}&valueToRemove=${numTeam}`
             })
         }
     }
@@ -61,29 +70,62 @@ function CardTeam(props) {
     return (
         <Card style={{ width: "100%", flex: 1 }} >
             <TouchableHighlight onPress={() => {
-                props.nav.navigate('Detail');
-                props.recordClickedTeam(props.infoTeam)
+                nav.navigate('Detail');
+                recordClickedTeam(infoTeam)
             }}>
 
                 <CardItem >
                     <Left style={{ marginHorizontal: -15 }}>
-                        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: whiteTa, textAlign: 'center', width: 65, backgroundColor: redTa, paddingVertical: 5, marginLeft: 15 }}>#{team.car_id}</Text>
+                        <Text style={{
+                            fontFamily: 'Roboto_700Bold',
+                            fontSize: 20,
+                            color: whiteTa,
+                            textAlign: 'center',
+                            width: 65,
+                            backgroundColor: redTa,
+                            paddingVertical: 5,
+                            marginLeft: 15
+                        }}>
+                            #{infoTeam.car_id}
+                        </Text>
                     </Left>
+
+                    {/* //// PILOTS //// */}
                     <Body style={{ justifyContent: 'center', marginHorizontal: 0 }}>
+
                         <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
-                            <Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
-                            {namePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
+                            <Image source={{ uri: flagNationality(infoTeam.pilot_1.nationality) }}
+                                style={{ height: 10, width: 15 }} />
+                            {namePilot(infoTeam.pilot_1.firstname, infoTeam.pilot_1.name)}
+                        </Text>
+
                         <Text></Text>
+
                         <Text style={{ fontSize: 12, paddingHorizontal: 5 }}>
-                            <Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
-                            {namePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
+                            <Image source={{ uri: flagNationality(infoTeam.pilot_2.nationality) }}
+                                style={{ height: 10, width: 15 }} />
+                            {namePilot(infoTeam.pilot_2.firstname, infoTeam.pilot_2.name)}
+                        </Text>
+
                     </Body>
 
-                    <Image source={{ uri: team.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
-                    <Right style={{ alignItems: 'center', marginHorizontal: -25, paddingLeft: 5 }}>
-                        {props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => { handleFavorite(team._id, team.car_id) }} />}
+                    <Image source={{ uri: infoTeam.car.image }} style={{ height: 70, width: 90, flex: 1 }} />
+
+                    <Right style={{
+                        alignItems: 'center',
+                        marginHorizontal: -25,
+                        paddingLeft: 5
+                    }}>
+                        {userConnected.status === undefined ?
+                            <Icon /> :
+                            <Icon name="heart"
+                                size={25}
+                                style={styleHeart}
+                                onPress={() => { handleFavorite(infoTeam._id, infoTeam.car_id) }} />}
                     </Right>
+
                 </CardItem>
+
             </TouchableHighlight>
 
         </Card>
