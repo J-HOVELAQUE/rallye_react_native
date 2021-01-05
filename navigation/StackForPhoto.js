@@ -6,8 +6,6 @@ import VideoScreen from '../screens/Video';
 
 import { greyDarkTa, whiteTa } from '../components/rallye-lib';
 
-
-
 // Stack navigation for switch on a news in full screen //
 
 const StackForPhoto = createStackNavigator(

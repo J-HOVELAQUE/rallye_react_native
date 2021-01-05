@@ -5,7 +5,6 @@ import BottomNavigator from './BottomNavigator';
 import StackForNews from './StackForNews';
 import StackForSnapScreen from './StackForSnapScreen';
 
-import LoginScreen from '../screens/Login';
 import ProgrammeScreen from '../screens/ProgrammeScreen';
 import HomeScreen from '../screens/HomeScreen2';
 

@@ -16,6 +16,8 @@ function DetailTeamScreen(props) {
     const [displayLiveButton, setDisplayLiveButton] = useState(false);
 
     useEffect(() => {
+
+        /// Check if this team is in favories list of the user for ligthing the heart or not ///
         const inFavorites = props.userFavorites.filter(fav => fav._id === props.clickedTeam._id);
         if (inFavorites.length > 0) {
             setStyleHeart({ color: redTa });
@@ -31,6 +33,8 @@ function DetailTeamScreen(props) {
 
         // Add or Remove this team from my favorites
         if (filteredFav.length < 1) {
+
+            // Adding //
             props.addFavoriteTeam({
                 _id: numTeam,
                 car_id: bib
@@ -44,8 +48,8 @@ function DetailTeamScreen(props) {
                 body: `token=${props.userConnected.token}&newValue=${numTeam}`
             })
 
-
         } else {
+            // Remove //
             props.removeFavoriteTeam(numTeam);
             setStyleHeart({ color: greyDarkTa });
 
@@ -69,26 +73,58 @@ function DetailTeamScreen(props) {
                     alignItems: 'center'
                 }}>
 
-                    <Text >{props.userConnected.status === undefined ? <Icon /> : <Icon name="heart" size={25} style={styleHeart} onPress={() => {
-                        handleFavorite(team._id);
-                        setDisplayLiveButton(!displayLiveButton)
-                    }} />}</Text>
+                    <Text >{props.userConnected.status === undefined ?
+                        <Icon />
+                        :
+                        <Icon name="heart" size={25} style={styleHeart} onPress={() => {
+                            handleFavorite(team._id);
+                            setDisplayLiveButton(!displayLiveButton)
+                        }} />}
+                    </Text>
 
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 35, color: redTa, }}>#{team.car_id}</Text>
+                    <Text style={{
+                        fontFamily: 'Roboto_700Bold',
+                        fontSize: 35,
+                        color: redTa,
+                    }}>
+                        #{team.car_id}
+                    </Text>
 
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.brand}</Text>
+                    <Text style={{
+                        fontFamily: 'Roboto_700Bold',
+                        fontSize: 20,
+                        color: greyDarkTa,
+                    }}>
+                        {team.car.brand}
+                    </Text>
 
-                    <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, color: greyDarkTa, }}>{team.car.model} - {team.car.year}</Text>
+                    <Text style={{
+                        fontFamily: 'Roboto_700Bold',
+                        fontSize: 20,
+                        color: greyDarkTa,
+                    }}>
+                        {team.car.model} - {team.car.year}
+                    </Text>
 
-                    <Text><Image source={{ uri: flagNationality(team.pilot_1.nationality) }} style={{ height: 10, width: 15 }} />
-                        {fullNamePilot(team.pilot_1.firstname, team.pilot_1.name)}</Text>
+                    <Text>
+                        <Image source={{ uri: flagNationality(team.pilot_1.nationality) }}
+                            style={{ height: 10, width: 15 }} />
+                        {fullNamePilot(team.pilot_1.firstname, team.pilot_1.name)}
+                    </Text>
 
-                    <Text><Image source={{ uri: flagNationality(team.pilot_2.nationality) }} style={{ height: 10, width: 15 }} />
-                        {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}</Text>
-                    <Image source={{ uri: team.car.image }} style={{ height: 220, width: '100%', marginBottom: 10 }} />
+                    <Text>
+                        <Image source={{ uri: flagNationality(team.pilot_2.nationality) }}
+                            style={{ height: 10, width: 15 }} />
+                        {fullNamePilot(team.pilot_2.firstname, team.pilot_2.name)}
+                    </Text>
+
+                    <Image source={{ uri: team.car.image }}
+                        style={{ height: 220, width: '100%', marginBottom: 10 }} />
 
                     <RallyeH2 text='Historique' />
-                    <Text style={{ marginTop: 10, padding: 10 }}>{team.car.description}</Text>
+                    <Text style={{ marginTop: 10, padding: 10 }}>
+                        {team.car.description}
+                    </Text>
 
                     <RedButton
                         onPress={() => {

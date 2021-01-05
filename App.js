@@ -3,12 +3,10 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
 ////// Menus //////
 import AppPilot from './navigation/AppPilot';
 import AppFan from './navigation/AppFan';
 import AppUnknown from './navigation/AppUnknown';
-
 
 /////  Reducers  //////
 import userConnected from './reducers/userConnected';
@@ -48,7 +46,6 @@ export default function App() {
   });
 
   useEffect(() => {
-    // AsyncStorage.clear()
     const getData = async () => {
 
       //// Getting data in local storage if existing ////

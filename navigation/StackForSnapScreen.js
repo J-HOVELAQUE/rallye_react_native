@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import MonCompte from '../screens/monCompte';
 import SnapScreen from '../screens/SnapScreen';
 
-
 // Stack navigation for the SnapScreen on MonCompte
 
 const StackForSnapScreen = createStackNavigator({
@@ -18,6 +17,5 @@ const StackForSnapScreen = createStackNavigator({
 
     }
 });
-
 
 export default StackForSnapScreen;

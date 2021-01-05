@@ -10,78 +10,78 @@ const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
 function ClassementScreen(props) {
 
-  const [teamToDisplay, setTeamToDisplay] = useState([]);
-  const [displayButton, setDisplayButton] = useState('');
-  const [allResults, setAllResults] = useState([]);
+    const [teamToDisplay, setTeamToDisplay] = useState([]);
+    const [displayButton, setDisplayButton] = useState('');
+    const [allResults, setAllResults] = useState([]);
 
-  useEffect(() => {
-    async function getResults() {
-      const rawAnswer = await fetch(`${serverUrl}/results/results`, {
-        method: 'GET',
-      });
-      let answer = await rawAnswer.json();
-      setAllResults(answer.results);
+    useEffect(() => {
+        async function getResults() {
+            const rawAnswer = await fetch(`${serverUrl}/results/results`, {
+                method: 'GET',
+            });
+            let answer = await rawAnswer.json();
+            setAllResults(answer.results);
 
-      //// Setting displayed result on regularity ////
-      let filteredTeams = answer.results.filter(team => categoryRegularity.includes(team.team_id.category));
-      setTeamToDisplay(filteredTeams);
-      setDisplayButton('Reg');
+            //// Setting displayed result on regularity ////
+            let filteredTeams = answer.results.filter(team => categoryRegularity.includes(team.team_id.category));
+            setTeamToDisplay(filteredTeams);
+            setDisplayButton('Reg');
+        }
+        getResults()
+    }, []);
+
+    const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+
+    //// Functions for filtering results with category ////
+    let filterRegularity = () => {
+        const filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
+        setTeamToDisplay(filteredTeams);
+        setDisplayButton('Reg');
     }
-    getResults()
-  }, []);
 
-  const categoryRegularity = ['Basse', 'Intermédiaire', 'Haute'];
+    let filterCompetition = () => {
+        const filteredTeams = allResults.filter(team => !categoryRegularity.includes(team.team_id.category));
+        setTeamToDisplay(filteredTeams);
+        setDisplayButton('Comp');
+    }
 
-  //// Functions for filtering results with category ////
-  let filterRegularity = () => {
-    const filteredTeams = allResults.filter(team => categoryRegularity.includes(team.team_id.category));
-    setTeamToDisplay(filteredTeams);
-    setDisplayButton('Reg');
-  }
+    //// Building card result ////
+    let teamResult = teamToDisplay.map((team, i) => {
+        return <CardClassement key={team._id} infoTeam={team.team_id} time={team.time} diff={team.diff} position={team.position} />
+    })
 
-  let filterCompetition = () => {
-    const filteredTeams = allResults.filter(team => !categoryRegularity.includes(team.team_id.category));
-    setTeamToDisplay(filteredTeams);
-    setDisplayButton('Comp');
-  }
+    return (
+        <Container>
+            <HeaderRally openBurgerMenu={props.navigation.openDrawer}
+                nav={props.navigation.navigate}
+                titleHeader="CLASSEMENT" />
 
-  //// Building card result ////
-  let teamResult = teamToDisplay.map((team, i) => {
-    return <CardClassement key={team._id} infoTeam={team.team_id} time={team.time} diff={team.diff} position={team.position} />
-  })
+            <Content>
+                <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        {
+                            displayButton == 'Reg' ?
+                                <RedButton onPress={() => filterRegularity()} title="Régularité" />
+                                :
+                                <RedButtonOutline onPress={() => filterRegularity()} title="Régularité" />
+                        }
+                        {
+                            displayButton == 'Comp' ?
+                                <RedButton onPress={() => filterCompetition()} title="Compétition" />
+                                :
+                                <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
+                        }
+                    </View>
+                </View>
+                <View style={{ marginTop: 10, alignItems: "center" }}>
 
-  return (
-    <Container>
-      <HeaderRally openBurgerMenu={props.navigation.openDrawer}
-        nav={props.navigation.navigate}
-        titleHeader="CLASSEMENT" />
+                    {teamResult}
 
-      <Content>
-        <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            {
-              displayButton == 'Reg' ?
-                <RedButton onPress={() => filterRegularity()} title="Régularité" />
-                :
-                <RedButtonOutline onPress={() => filterRegularity()} title="Régularité" />
-            }
-            {
-              displayButton == 'Comp' ?
-                <RedButton onPress={() => filterCompetition()} title="Compétition" />
-                :
-                <RedButtonOutline onPress={() => filterCompetition()} title="Compétition" />
-            }
-          </View>
-        </View>
-        <View style={{ marginTop: 10, alignItems: "center" }}>
+                </View>
+            </Content>
 
-          {teamResult}
-
-        </View>
-      </Content>
-
-    </Container>
-  );
+        </Container>
+    );
 }
 
 export default ClassementScreen;

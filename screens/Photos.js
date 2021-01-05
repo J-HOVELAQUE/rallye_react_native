@@ -7,52 +7,52 @@ import { dataImage } from '../tools/toolkit';
 
 const PhotoScreen = () => {
 
-  const dataImage2 = dataImage.map((image, i) => (
-    <Lightbox underlayColor="white" useNativeDriver={true}>
-      <Image style={styles.imageThumbnail} source={{ uri: image }} key={i} />
-    </Lightbox>
-  ))
+    const dataImage2 = dataImage.map((image, i) => (
+        <Lightbox underlayColor="white" useNativeDriver={true}>
+            <Image style={styles.imageThumbnail} source={{ uri: image }} key={i} />
+        </Lightbox>
+    ))
 
-  return (
-    <Container>
+    return (
+        <Container>
 
-        <Content>
-          <SafeAreaView style={styles.container}>
-            <FlatList
-              data={dataImage2}
-              renderItem={({ item }) => (
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    margin: 1
-                  }}>
-                  {item}
-                </View>
-              )}
-              //Setting the number of column
-              numColumns={2
-              }
-              keyExtractor={(item, index) => index}
-            />
-          </SafeAreaView>
-        </Content>
+            <Content>
+                <SafeAreaView style={styles.container}>
+                    <FlatList
+                        data={dataImage2}
+                        renderItem={({ item }) => (
+                            <View
+                                style={{
+                                    flex: 1,
+                                    flexDirection: 'column',
+                                    margin: 1
+                                }}>
+                                {item}
+                            </View>
+                        )}
+                        //Setting the number of column
+                        numColumns={2
+                        }
+                        keyExtractor={(item, index) => index}
+                    />
+                </SafeAreaView>
+            </Content>
 
-    </Container>
+        </Container>
 
-  );
+    );
 };
 export default PhotoScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'black',
-  },
-  imageThumbnail: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'black',
+    },
+    imageThumbnail: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 200,
+    },
 });

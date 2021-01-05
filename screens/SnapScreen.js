@@ -18,6 +18,7 @@ function SnapScreen(props) {
 
     useEffect(() => {
         (async () => {
+            //// Ask permission for using the camera ////
             const { status } = await Camera.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();

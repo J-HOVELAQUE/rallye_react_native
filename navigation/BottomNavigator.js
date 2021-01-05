@@ -1,11 +1,8 @@
 import React from 'react';
-
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from '../screens/HomeScreen';
-import TeamScreen from '../screens/Team';
 import ClassementScreen from '../screens/Classement';
 import MapScreen from '../screens/MapScreen';
 

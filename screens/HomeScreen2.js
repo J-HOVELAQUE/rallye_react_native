@@ -13,6 +13,9 @@ import { getData, schedule } from '../tools/toolkit';
 
 const serverUrl = 'https://powerful-earth-91256.herokuapp.com';
 
+//// This screen is a copy of the HomeScreen ////
+//// It's an hack for having this screen available for redirection toward the drawer menu ////
+
 function HomeScreen(props) {
 
     const [program, setProgram] = useState([]);
